@@ -1,15 +1,16 @@
 F  10, 10, 10
 C  10, 10, 10
 
-W1      textures/wolfenstein/grey_stone.xpm
+W1     	textures/simonkraft/bookshelf_02.xpm
 W2      textures/wolfenstein/red_brick.xpm
 W3 		textures/blue-wall.xpm
 W4 		textures/blue-wall-skeleton.xpm
 W5      textures/bookshelf.xpm
 W6      textures/simonkraft/respawn_anchor_side3.xpm
-W7      textures/simonkraft/bookshelf_01.xpm
-W8      textures/simonkraft/bookshelf_02.xpm
-W9      textures/wolfenstein/wood.xpm     
+W7      textures/wolfenstein/mossy.xpm
+W8      textures/simonkraft/bookshelf_01.xpm
+W9      textures/wolfenstein/grey_stone.xpm
+
 
 111166111111111111111111111111111111111111111111111
 1      1343434116666666615555555   1              1
@@ -25,6 +26,6 @@ W9      textures/wolfenstein/wood.xpm
 1      1111111         111111     11              1
 1               t      a    a      1              1
 99-999999999999999999999999999999999999999999999-99
-9                                                 9 
+9                                                 9
 9                                                 9
 999999999999999999999999999999999999999999999999999

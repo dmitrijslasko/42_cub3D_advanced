@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_keypresses.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:04:00 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/02 00:04:01 by fvargas          ###   ########.fr       */
+/*   Updated: 2025/07/12 19:52:29 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,24 @@ void	process_keypresses(t_data *dt)
 		move_sideways(dt, 1);
 		is_moving_now = 1;
 	}
+
+	if (dt->keys[XK_f])
+		dt->test_value_1 -= 0.001f;
+	if (dt->keys[XK_g])
+		dt->test_value_1 += 0.001f;
+	if (dt->keys[XK_v])
+		dt->test_value_2 -= 0.001f;
+	if (dt->keys[XK_b])
+		dt->test_value_2 += 0.001f;
+	if (dt->keys[XK_h])
+		dt->test_value_3 -= 0.001f;
+	if (dt->keys[XK_j])
+		dt->test_value_3 += 0.001f;
+	if (dt->keys[XK_n])
+		dt->test_value_4 -= 0.001f;
+	if (dt->keys[XK_m])
+		dt->test_value_4 += 0.001f;
+
 
 	dt->player.is_moving = is_moving_now;
 

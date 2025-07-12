@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:33:06 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/11 17:45:56 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/12 16:45:21 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,21 @@ void	print_time_stats(t_data *dt, void *mlx, void *win, int *y)
 	f(mlx, win, DBG_2_X, *y, UI_CLR_2, ft_itoa(dt->frames_drawn_count));
 }
 
+void	print_plane_stats(t_data *dt, void *mlx, void *win, int *y)
+{
+	char	buffer[32];
+	int		(*f)(void*, void*, int, int, int, char*);
+
+	f = mlx_string_put;
+	snprintf(buffer, sizeof(buffer), "%.4f", dt->player.plane_x);
+	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Plane X:");
+	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
+	f = mlx_string_put;
+	snprintf(buffer, sizeof(buffer), "%.4f", dt->player.plane_y);
+	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Plane Y:");
+	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
+}
+
 void	show_debug_info(t_data *dt)
 {
 	int		y;
@@ -93,12 +108,14 @@ void	show_debug_info(t_data *dt)
 	void	*win;
 	int		(*f)(void*, void*, int, int, int, char*);
 
+	if (!dt->view->show_debug_info)
+		return ;
 	f = mlx_string_put;
 	y = DBG_FIELD_OFFST_Y;
 	mlx = dt->mlx_ptr;
 	win = dt->win_ptr;
-
-	print_window_info(dt, mlx, win, &y);
+	//print_window_info(dt, mlx, win, &y);
+	print_plane_stats(dt, mlx, win, &y);
 	print_player_position(dt, mlx, win, &y);
 	print_obstacle_info(dt, mlx, win, &y);
 	print_cell_info(dt, mlx, win, &y);

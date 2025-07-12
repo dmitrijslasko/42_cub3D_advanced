@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_pos_render_sprites.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:08:36 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/02 00:08:37 by fvargas          ###   ########.fr       */
+/*   Updated: 2025/07/12 20:20:38 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	get_position_and_render_sprite(t_data *dt, t_sprite *sprite)
 					dt->player.direction_vector.y * dist.y);
 	if (transform.y <= 0.4f)
 		return (EXIT_SUCCESS);
+
 	transform.x = (-1.0f / FIELD_OF_VIEW_SCALE) * \
 					(dt->player.direction_vector.y * dist.x - \
 								dt->player.direction_vector.x * dist.y);

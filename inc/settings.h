@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:39:14 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/12 16:17:49 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/12 20:28:02 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SETTINGS_H
 
 # ifndef M_PI
-#  define M_PI 3.14
+#  define M_PI 3.141592
 # endif
 
 # ifndef BONUS
@@ -23,7 +23,7 @@
 
 // window name
 # define WINDOW_NAME       "cub3D - fvargas & dmlasko @ 42Berlin"
-# define VERSION_INFO      "cub3D project - 42 Berlin - fvargas & dmlasko, v1.0"
+# define VERSION_INFO      "cub3D project - 42 Berlin - dmlasko, v2.0"
 
 # define SHOW_CALCULATION_LOGS				1
 # define SHOW_DEBUG_INFO 					0
@@ -92,7 +92,7 @@
 
 // gameplay
 # define FIELD_OF_VIEW_DEG					60.0f
-# define FIELD_OF_VIEW_SCALE				0.577 //tan(FIELD_OF_VIEW_DEG / 2)
+# define FIELD_OF_VIEW_SCALE				0.5774f //tan(FIELD_OF_VIEW_DEG / 2)
 
 # define DEF_DOOR_OFFSET_X					0.5f
 # define DEF_DOOR_OFFSET_Y					0.5f

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculate_ray_distance.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:07:32 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/02 00:07:33 by fvargas          ###   ########.fr       */
+/*   Updated: 2025/07/12 20:26:24 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@ void	calculate_ray_distance(t_data *dt, t_ray *ray,
 	door_hit = run_dda_loop(dt, ray, &info);
 	finish_ray_casting(dt, ray, &map_coor, door_hit);
 	ray->corrected_distance_to_wall = fix_fish_eye(ray, &dt->player);
+	//ray->corrected_distance_to_wall = ray->distance_to_wall;
 }

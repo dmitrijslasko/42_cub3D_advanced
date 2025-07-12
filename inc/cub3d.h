@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:35:51 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/11 18:51:57 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/12 19:50:48 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,8 @@ typedef struct s_player
 	t_x_y	pos;
 	t_x_y	direction_vector;
 	float	direction_vector_deg;
+	float	plane_x;
+	float	plane_y;
 	char	cell_type_ahead;
 	float	move_speed_multiplier;
 	bool	can_move;
@@ -328,6 +330,10 @@ typedef struct s_data
 	int					weapon_current_frame;
 	int 				weapon_is_animating;
 	long					weapon_last_frame_time;
+	float	test_value_1;
+	float	test_value_2;
+	float	test_value_3;
+	float	test_value_4;
 }	t_data;
 
 static inline int	pixel_is_in_window(int x, int y)
@@ -517,6 +523,7 @@ void		render_3d_scene(t_data *dt);
 int			draw_ceiling(t_data *dt);
 int			draw_floor(t_data *dt);
 int	draw_textured_floor(t_data *dt);
+int draw_textured_ceiling(t_data *dt);
 int			render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset,
 						t_coor *sprite_size);
 float		fix_fish_eye(t_ray *ray, t_player *player);

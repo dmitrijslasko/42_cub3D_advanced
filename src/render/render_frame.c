@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:21 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/11 18:16:46 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/12 19:37:27 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,26 @@ void	bob_walls(t_data *dt)
 
 }
 
+int	bob_weapon(t_data *dt)
+{
+	float speed;
+	int amplitude;
+	int y_offset;
+
+	speed = 0.004f; // higher = faster oscillation (tweak to taste)
+	if (dt->player.move_speed_multiplier == 1)
+		amplitude = 10;
+	else
+		amplitude = 2;
+	y_offset = amplitude * sin((dt->time.last_time - dt->time.start_time) * speed); // total_time in seconds, or use a step counter;
+	return (y_offset);
+}
+
 int	render_frame(void *param)
 {
 	t_data		*dt;
 	long		current_time;
+	int 		y_offset;
 
 	dt = (t_data *)param;
 	current_time = get_current_time_in_ms();
@@ -62,7 +78,6 @@ int	render_frame(void *param)
 		return (0);
 	}
 	dt->time.last_time = current_time;
-	//if (BONUS)
 	if (dt->weapon_is_animating == 1)
 	{
 		long now = get_current_time_in_ms();
@@ -90,26 +105,18 @@ int	render_frame(void *param)
 	// put_img_to_img(dt->final_frame_img, dt->ui_img, 100, 100);
 	render_minimap_and_ui(dt);
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr,dt->final_frame_img->mlx_img, 0, 0);
-	if (dt->view->show_debug_info)
-		 show_debug_info(dt);
+
+	show_debug_info(dt);
  	show_player_info(dt);
 	if (dt->view->show_door_open_message)
 	{
 		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press [ / ] to open the door");
 		// render_ui_message(dt);
 	}
-		float speed;
-		speed = 0.004f; // higher = faster oscillation (tweak to taste)
-		int amplitude;
-		if (dt->player.move_speed_multiplier == 1)
-			amplitude = 10;
-		else
-			amplitude = 2;
-		int y_offset = amplitude * sin((dt->time.last_time - dt->time.start_time) * speed); // total_time in seconds, or use a step counter
-		// dt->view->screen_center_y += y_offset;
-		// if (dt->player.is_moving == 1)
-		bob_walls(dt);
-		put_img_to_img(dt->final_frame_img, &dt->weapon_img[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
+	bob_walls(dt);
+	//y_offset = bob_weapon(dt);
+	// render weapon
+	put_img_to_img(dt->final_frame_img, &dt->weapon_img[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
 	dt->frames_drawn_count++;
 	return (EXIT_SUCCESS);
 }

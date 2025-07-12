@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:18 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/11 18:16:50 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/12 20:40:07 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ static int	render_floor_and_ceiling(t_data *dt)
 {
 	// (void) dt;
 	if (BONUS)
-		draw_sky(dt);
+	{
+		draw_textured_ceiling(dt);
+		//draw_sky(dt);
+	}
 	else
 		draw_ceiling(dt);
 	// draw_floor(dt);
@@ -37,6 +40,7 @@ void	render_3d_scene(t_data *dt)
 	while (i < CASTED_RAYS_COUNT)
 	{
 		dt->rays[i].id = i;
-		render_3d_each_ray(dt, &dt->rays[i++], screen_slice_width);
+		render_3d_each_ray(dt, &dt->rays[i], screen_slice_width);
+		i++;
 	}
 }
