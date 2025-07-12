@@ -1,0 +1,8 @@
+*.o
+cub3D
+.pdf
+#README.md
+
+# ⛳ Keep local SDL builds
+!lib/SDL2/build/**
+!lib/SDL2_mixer/build/**
