@@ -1,0 +1,102 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_mouse_hooks.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/02 00:04:29 by fvargas           #+#    #+#             */
+/*   Updated: 2025/07/10 20:26:40 by dmlasko          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+int	fire_gun(t_data *dt)
+{
+	dt->weapon_current_frame = 1;
+}
+
+// Handle mouse press
+// Currently only works for LMB
+int	mouse_press(int button, int x, int y, t_data *dt)
+{
+	(void) x;
+	(void) y;
+	if (button == MOUSE_LEFT_BUTTON)
+	{
+		dt->mouse.lmb_is_pressed = 1;
+		dt->mouse.lmb_press_count++;
+		if (dt->player.ammo_level > 0)
+		{
+			system("aplay sounds/shot.wav &");
+		}
+		else
+			system("aplay sounds/empty-gun.wav &");
+		printf("🖱️  LMB is pressed! Total press count: %zu\n", \
+			dt->mouse.lmb_press_count);
+		dt->player.ammo_level = ft_max(0, --dt->player.ammo_level);
+		if (dt->player.ammo_level > 0)
+		{
+			// fire_gun(dt);
+			dt->weapon_is_animating = 1;
+		}
+	}
+	return (EXIT_SUCCESS);
+}
+
+// Handle mouse release
+// Currently only works for LMB
+int	mouse_release(int button, int x, int y, t_data *dt)
+{
+	(void) x;
+	(void) y;
+	if (button == MOUSE_LEFT_BUTTON)
+	{
+		dt->mouse.lmb_is_pressed = 0;
+		printf("LMB released!\n");
+		// dt->weapon_current_frame = 0;
+	}
+	return (0);
+}
+
+// Handle mouse move
+int	mouse_move(int x, int y, t_data *dt)
+{
+	dt->mouse.prev_x = dt->mouse.x;
+	dt->mouse.prev_y = dt->mouse.y;
+	dt->mouse.x = x;
+	dt->mouse.y = y;
+	if (x > dt->mouse.prev_x)
+		rotate_player(dt, MOUSE_SENS_ROTATE, -1);
+	else if (x < dt->mouse.prev_x)
+		rotate_player(dt, MOUSE_SENS_ROTATE, 1);
+	if (ENABLE_VERTICAL_LOOK)
+	{
+		if (y > dt->mouse.prev_y)
+			dt->view->screen_center_y = ft_max(
+					dt->view->screen_center_y - \
+					KEYBOARD_VERTICAL_LOOK_STEP,
+					WINDOW_H / 2 - VERTICAL_LOOK_LOCK_DOWN);
+		if (y < dt->mouse.prev_y)
+			dt->view->screen_center_y = ft_min(
+					dt->view->screen_center_y + \
+					KEYBOARD_VERTICAL_LOOK_STEP,
+					WINDOW_H / 2 + VERTICAL_LOOK_LOCK_UP);
+	}
+	return (0);
+}
+
+void	setup_mouse_hooks(t_data *dt)
+{
+	printf("Setting up mouse hooks...");
+	mlx_hook(dt->win_ptr, 4, 1L << 2, mouse_press, dt);
+	mlx_hook(dt->win_ptr, 5, 1L << 3, mouse_release, dt);
+	mlx_hook(dt->win_ptr, 6, 1L << 6, mouse_move, dt);
+	dt->mouse.lmb_is_pressed = 0;
+	dt->mouse.rmb_is_pressed = 0;
+	// set_mouse_to_screen_center(dt);
+	reset_mouse_position(dt);
+	dt->mouse.prev_y = 0;
+	printf(" Done!\n");
+}
