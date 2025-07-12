@@ -29,7 +29,7 @@ int	load_weapon_frame(t_data *dt, int i, const char* filename)
 	dt->weapon_img[i].addr = mlx_get_data_addr(dt->weapon_img[i].mlx_img,
 			&dt->weapon_img[i].bpp, &dt->weapon_img[i].line_len,
 			&dt->weapon_img[i].endian);
-	printf(TXT_GREEN "Done!\n" TXT_RESET);
+	printf(TXT_GREEN "Loaded frame: %s\n" TXT_RESET, filename);
 }
 
 int	load_weapons(t_data *dt)
@@ -38,7 +38,7 @@ int	load_weapons(t_data *dt)
 	size_t	i;
 
 	print_separator_default();
-	printf(TXT_YELLOW ">>> LOADING UI MESSAGES\n" TXT_RESET);
+	printf(TXT_YELLOW ">>> LOADING WEAPONS\n" TXT_RESET);
 	dt->weapon_img = protected_malloc(sizeof(t_img) * 5, dt);
 	i = 0;
 	while (i < 5)
@@ -48,5 +48,6 @@ int	load_weapons(t_data *dt)
 		load_weapon_frame(dt, i, path);
 		i++;
 	}
+	printf(TXT_GREEN "Done!\n" TXT_RESET);
 	return (EXIT_SUCCESS);
 }

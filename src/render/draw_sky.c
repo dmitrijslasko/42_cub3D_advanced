@@ -50,30 +50,6 @@ uint32_t	get_pixel_color_from_img(t_img *tex, int x, int y)
 	pixel = tex->addr + y * tex->line_len + x * (tex->bpp / 8);
 	return (*(uint32_t *)pixel);
 }
-// int	render_sky(t_data *dt, float angle_offset, int texture_start_y)
-// {
-// 	t_coor		screen;
-// 	int			texture_x;
-// 	uint32_t	color;
-// 	int			max_sky_y;
-
-// 	screen.y = 0;
-// 	while (screen.y < dt->view->screen_center_y)
-// 	{
-// 		screen.x = 0;
-// 		// max_sky_y = dt->view->screen_center_y - dt->rays[screen.x * (WINDOW_W / CASTED_RAYS_COUNT)].wall_height / 2;
-// 		// if (max_sky_y > screen.y)
-// 		while (screen.x < WINDOW_W)
-// 		{
-// 			ft_texture_coor(dt, screen.x, &texture_x, angle_offset);
-// 			color = get_pixel_color_from_img(dt->sky_image, texture_x, screen.y + texture_start_y);
-// 			img_pix_put(dt->raycasting_scene_img, screen.x, screen.y, color);
-// 			screen.x++;
-// 		}
-// 		screen.y++;
-// 	}
-// 	return (EXIT_SUCCESS);
-// }
 
 int	ft_max_float(float num1, float num2)
 {
@@ -101,11 +77,8 @@ int	render_sky(t_data *dt, float angle_offset, int texture_start_y)
 	screen.x = 0;
 	while (screen.x < WINDOW_W)
 	{
-		// printf("%d\n", screen.x * CASTED_RAYS_COUNT / WINDOW_W);
 		wall_height = ft_min_float(dt->rays[screen.x * CASTED_RAYS_COUNT / WINDOW_W].wall_height, (float)WINDOW_H);
 		max_sky_y = dt->view->screen_center_y - (int)wall_height / 2;
-		// if (screen.x == 0 || screen.x == WINDOW_W / 2 || screen.x == WINDOW_W - 1)
-		// 	printf("%d %d\n", screen.x * CASTED_RAYS_COUNT / WINDOW_W, max_sky_y);
 		screen.y = 0;
 		while (screen.y < max_sky_y)
 		{

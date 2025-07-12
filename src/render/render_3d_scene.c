@@ -17,8 +17,8 @@ static int	render_floor_and_ceiling(t_data *dt)
 	// (void) dt;
 	if (BONUS)
 	{
+		draw_sky(dt);
 		draw_textured_ceiling(dt);
-		//draw_sky(dt);
 	}
 	else
 		draw_ceiling(dt);

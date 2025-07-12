@@ -32,9 +32,9 @@ void	rotate_player(t_data *dt, float d_angle, int direction)
 	dt->player.plane_x = dt->player.direction_vector.y * (FIELD_OF_VIEW_SCALE);
 	dt->player.plane_y = dt->player.direction_vector.x * (FIELD_OF_VIEW_SCALE);
 
-	//dt->player.direction_vector_deg += d_angle * -direction;
-	//if (dt->player.direction_vector_deg >= 360.0f)
-	//	dt->player.direction_vector_deg -= 360.0f;
-	//else if (dt->player.direction_vector_deg < 0.0f)
-	//	dt->player.direction_vector_deg += 360.0f;
+	dt->player.direction_vector_deg += d_angle * -direction;
+	if (dt->player.direction_vector_deg >= 360.0f)
+		dt->player.direction_vector_deg -= 360.0f;
+	else if (dt->player.direction_vector_deg < 0.0f)
+		dt->player.direction_vector_deg += 360.0f;
 }

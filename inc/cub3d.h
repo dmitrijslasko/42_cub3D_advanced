@@ -213,12 +213,12 @@ typedef struct s_player
 	float	plane_x;
 	float	plane_y;
 	char	cell_type_ahead;
-	float	move_speed_multiplier;
 	bool	can_move;
 	bool	is_moving;
+	float	move_speed_multiplier;
 	int		health_level;
-	int		selected_weapon;
 	int		ammo_level;
+	int		selected_weapon;
 
 }	t_player;
 
@@ -329,11 +329,11 @@ typedef struct s_data
 	int					frames_drawn_count;
 	int					weapon_current_frame;
 	int 				weapon_is_animating;
-	long					weapon_last_frame_time;
-	float	test_value_1;
-	float	test_value_2;
-	float	test_value_3;
-	float	test_value_4;
+	long				weapon_last_frame_time;
+	float				test_value_1;
+	float				test_value_2;
+	float				test_value_3;
+	float				test_value_4;
 }	t_data;
 
 static inline int	pixel_is_in_window(int x, int y)

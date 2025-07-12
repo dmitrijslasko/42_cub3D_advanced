@@ -62,27 +62,29 @@ int	apply_distance_shadow_floor(int distance, int *color)
 int draw_textured_floor(t_data *dt)
 {
     t_texture texture = dt->map.wall_tile[8].texture;
-    const int TILE_SIZE = 64;
     int x, y;
 
     y = dt->view->screen_center_y;
 
+    float plane_x = dt->player.plane_x;
+    float plane_y = dt->player.plane_y;
+
+    // Calculate ray position relative to camera plane
+    float rayDirX0 = dt->player.direction_vector.x + plane_x;
+    float rayDirY0 = dt->player.direction_vector.y - plane_y;
+    float rayDirX1 = dt->player.direction_vector.x - plane_x;
+    float rayDirY1 = dt->player.direction_vector.y + plane_y;
+
     while (y < WINDOW_H)
     {
-		float fov_factor = tanf((FIELD_OF_VIEW_DEG * 0.635f) * (M_PI / 180.0f));
-
-		float plane_x = dt->player.plane_x;
-		float plane_y = dt->player.plane_y;
-
-        // Calculate ray position relative to camera plane
-        float rayDirX0 = dt->player.direction_vector.x + plane_x;
-        float rayDirY0 = dt->player.direction_vector.y - plane_y;
-        float rayDirX1 = dt->player.direction_vector.x - plane_x;
-        float rayDirY1 = dt->player.direction_vector.y + plane_y;
-
+        float adjustment;
+        
+        adjustment = 0.635f;
+		float fov_factor = tanf((FIELD_OF_VIEW_DEG * adjustment) * (M_PI / 180.0f));
+        
         int p = y - dt->view->screen_center_y;
+        printf("%f\n", fov_factor);
         float rowDistance = ((0.5f * WINDOW_H) / p) / fov_factor;
-
 
         // Calculate step size for each screen pixel
         float floorStepX = rowDistance * (rayDirX1 - rayDirX0) / WINDOW_W;
@@ -90,9 +92,8 @@ int draw_textured_floor(t_data *dt)
 
         // Calculate initial floor intersection
         float floorX = dt->player.pos.x + rowDistance * rayDirX0;
-        float floorY = dt->player.pos.y + rowDistance * rayDirY0 ;
+        float floorY = dt->player.pos.y + rowDistance * rayDirY0;
 
-		float dot = dt->player.direction_vector.x * dt->player.plane_x + dt->player.direction_vector.y * dt->player.plane_y;
         x = 0;
         while (x < WINDOW_W)
         {
@@ -106,7 +107,7 @@ int draw_textured_floor(t_data *dt)
 
             // Get color and draw pixel
             uint32_t color = texture.texture_data[TILE_SIZE * texY + texX];
-			apply_distance_shadow_floor(100, &color);
+			// apply_distance_shadow_floor(100, &color);
             img_pix_put(dt->raycasting_scene_img, x, y, color);
 
             floorX += floorStepX;
@@ -120,13 +121,12 @@ int draw_textured_floor(t_data *dt)
 
 int draw_textured_ceiling(t_data *dt)
 {
-    t_texture texture = dt->map.wall_tile[8].texture;
-    const int TILE_SIZE = 64;
+    t_texture texture = dt->map.wall_tile[6].texture;
     int x, y;
 
     y = dt->view->screen_center_y;
 
-    while (y > 0)
+    while (y >= 0)
     {
 		float fov_factor = tanf((FIELD_OF_VIEW_DEG * 0.635f) * (M_PI / 180.0f));
 
@@ -164,7 +164,7 @@ int draw_textured_ceiling(t_data *dt)
 
             // Get color and draw pixel
             uint32_t color = texture.texture_data[TILE_SIZE * texY + texX];
-			apply_distance_shadow_floor(20, &color);
+			// apply_distance_shadow_floor(20, &color);
             img_pix_put(dt->raycasting_scene_img, x, y, color);
 
             floorX += floorStepX;

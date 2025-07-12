@@ -13,9 +13,10 @@
 #ifndef SETTINGS_H
 # define SETTINGS_H
 
-# ifndef M_PI
-#  define M_PI 3.141592
-# endif
+// # ifndef M_PI
+// #  define M_PI 3.141592
+// # endif
+#define M_PI 3.14159265358979323846
 
 # ifndef BONUS
 #  define BONUS 0
@@ -28,7 +29,7 @@
 # define SHOW_CALCULATION_LOGS				1
 # define SHOW_DEBUG_INFO 					0
 
-# define GRID_SIZE  						64
+# define TILE_SIZE  						64
 
 // bonus part
 # define SKY_TXT_PATHFILE	"./textures/sky_1.xpm"
@@ -40,7 +41,7 @@
 # define FPS								60
 # define SCALING				            250
 # define MIMIC_FULLSCREEN                   1
-# define LINUX_22                           1
+# define LINUX_22                           0
 
 # define STARTING_AMMO_LEVEL				9
 // constants.h or at the top of your .c file
