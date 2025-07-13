@@ -2,7 +2,7 @@
 
 int draw_textured_ceiling(t_data *dt)
 {
-    t_texture texture = dt->map.wall_tile[6].texture;
+    t_texture texture = dt->map.textures[6].texture;
     int x, y;
 
     y = dt->view->screen_center_y;

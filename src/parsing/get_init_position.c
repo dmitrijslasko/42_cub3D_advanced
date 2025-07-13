@@ -54,7 +54,7 @@ void	get_init_position(t_map *map, t_player *player)
 		while (col < map->map_size_cols)
 		{
 			c = map->map_data[row][col];
-			if (ft_strchr("NSWE", c))
+			if (ft_strchr(PLAYER_SPAWN_POINT_TYPES, c))
 			{
 				find_position(player, col, row, c);
 				return ;

@@ -39,8 +39,8 @@ void	init_map(t_map	*map)
 	i = 0;
 	while (i < NUMBER_TEXTURES)
 	{
-		init_texture(&map->wall_tile[i].texture);
-		map->wall_tile[i++].is_color = 0;
+		init_texture(&map->textures[i].texture);
+		map->textures[i++].is_color = 0;
 	}
 	init_texture(&map->door.texture);
 }

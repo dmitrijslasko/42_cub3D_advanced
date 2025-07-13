@@ -23,10 +23,13 @@ bool	check_valid_texture(char **value)
 		return (0);
 	len = ft_strlen(value[0]);
 	if (ft_strncmp(&(value[0])[len - 4], ".xpm", 4))
+	{
+		return (error_message2("Error: Improper texture file extension. Should be .xpm", value[0], 0));
 		return (0);
+	}
 	fd_texture_file = open(value[0], O_RDONLY);
 	if (fd_texture_file < 0)
-		return (error_message2("Error: Opening texture", value[0], 0));
+		return (error_message2("Error: Error opening texture", value[0], 0));
 	close(fd_texture_file);
 	return (1);
 }

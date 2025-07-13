@@ -18,7 +18,7 @@ bool	check_single_line_wall_tile(char *line)
 	size_t	size;
 	int		ret;
 
-	array = ft_split_special(line, WHITE_SPACE);
+	array = ft_split_special(line, WHITESPACE);
 	size = size_array(array);
 	if (size < 2)
 		return (error_message_free("Not valid input!", array, 0));

@@ -19,12 +19,12 @@ bool	is_valid_line_texture(char *line)
 
 	i = 0;
 	j = 0;
-	while (line[j] && ft_strchr(WHITE_SPACE, line[j]))
+	while (line[j] && ft_strchr(WHITESPACE, line[j]))
 		j++;
 	while (g_texture_lookup[i].str)
 	{
 		if (!ft_strncmp(&line[j], g_texture_lookup[i].str, g_texture_lookup[i].length) \
-			&& ft_strchr(WHITE_SPACE, line[j + g_texture_lookup[i].length]))
+			&& ft_strchr(WHITESPACE, line[j + g_texture_lookup[i].length]))
 			return (1);
 		i++;
 	}

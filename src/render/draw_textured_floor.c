@@ -48,7 +48,7 @@ int draw_textured_floor(t_data *dt)
             int texX = (int)(TILE_SIZE * (floorX - cellX)) & (TILE_SIZE - 1);
             int texY = (int)(TILE_SIZE * (floorY - cellY)) & (TILE_SIZE - 1);
 
-            texture = dt->map.wall_tile[3].texture;
+            texture = dt->map.textures[6].texture;
             
             // Get color and draw pixel
             color = texture.texture_data[TILE_SIZE * texY + texX];

@@ -18,7 +18,7 @@ void	calc_texture_coor(t_data *dt, int *texture_y, \
 	float	wall_height;
 	t_coor	tex_size;
 
-	tex_size.y = dt->map.wall_tile->texture.height;
+	tex_size.y = dt->map.textures->texture.height;
 	wall_height = 1.0f / *distance_to_wall * SCALING;
 	*texture_y = (d * tex_size.y) / (2 * wall_height);
 	if (*texture_y >= tex_size.y)

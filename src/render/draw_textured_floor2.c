@@ -57,7 +57,7 @@ int draw_textured_floor2(t_data *dt)
         uint32_t color;
 
         // floor
-        color = dt->map.wall_tile[3].texture.texture_data[64 * ty + tx];
+        color = dt->map.textures[3].texture.texture_data[64 * ty + tx];
         // color = (color >> 1) & 8355711; // make a bit darker
         img_pix_put(dt->raycasting_scene_img, x, y, color);
 

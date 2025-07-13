@@ -17,6 +17,8 @@ void	put_pix_img(t_data *dt, t_ray *ray, t_coor *texture, t_coor *coor)
 	int		color;
 
 	color = get_color_render3d(dt, ray, texture);
+	if (ray->wall_orientation == EAST || ray->wall_orientation == WEST)
+		apply_shadow(ray, &color, 0.5f);
 	img_pix_put(dt->raycasting_scene_img, coor->x, coor->y, color);
 }
 

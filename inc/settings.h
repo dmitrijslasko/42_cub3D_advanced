@@ -125,7 +125,7 @@
 # define MOUSE_SENS_ROTATE 					2.0f
 //# define MOUSE_SENS_DRAG					0.05f
 # define MOUSE_SENS_SCROLL 					0.1f
-# define MOUSE_CENTER_TOLERANCE_PX			0
+# define MOUSE_CENTER_TOLERANCE_PX			20
 
 # define ENABLE_CROSSHAIR					1
 # define DEFAULT_CROSSHAIR_COLOR			WHITE
@@ -157,7 +157,7 @@
 // four walls + celling + floor even if is a color
 # define NUMBER_TEXTURES    	            11
 
-# define WHITE_SPACE        	            " \a\b\t\n\v\f\r"
+# define WHITESPACE        	            " \a\b\t\n\v\f\r"
 
 # define PLAYER_SPAWN_POINT_TYPES			"NSWE"
 # define SPRITE_TYPES     	 	            "abcdefghijklmnopqrstuvwxyz"

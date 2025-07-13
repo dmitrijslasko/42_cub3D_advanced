@@ -22,7 +22,8 @@ bool	get_value_textures(t_map *map, int fd, char **str)
 	{
 		if (is_valid_line_texture(line))
 		{
-			array = ft_split_special(line, WHITE_SPACE);
+			array = ft_split_special(line, WHITESPACE);
+			printf("%s: %s\n", array[0], array[1]);
 			if (set_color_or_texture(map, array[0], &array[1]))
 			{
 				free_line_get_next(line, -1);
@@ -39,24 +40,24 @@ bool	get_value_textures(t_map *map, int fd, char **str)
 bool	get_value_file1(t_map *map, int fd)
 {
 	char	*line;
-	bool	ret;
+	bool	result;
 
 	line = free_line_get_next(NULL, fd);
-	ret = get_value_textures(map, fd, &line);
-	if (ret == Success)
+	result = get_value_textures(map, fd, &line);
+	if (result == Success)
 		get_value_map(line, fd, map);
-	return (ret);
+	return (result);
 }
 
 bool	get_value_file(t_map *map, char *file)
 {
 	int	fd;
-	int	ret;
+	int	result;
 
 	fd = ft_open(file);
 	if (fd < 0)
 		return (1);
-	ret = get_value_file1(map, fd);
+	result = get_value_file1(map, fd);
 	close (fd);
-	return (ret);
+	return (result);
 }

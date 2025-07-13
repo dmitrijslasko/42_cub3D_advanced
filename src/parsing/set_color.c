@@ -51,11 +51,11 @@ bool	set_color(char *identifier, char **color, t_map *map)
 	t_wall_orientation	wall_orientation;
 
 	wall_orientation = check_valid_identifier_texture_wall(identifier);
-	if (map->wall_tile[wall_orientation].wall_orientation != DEFAULT_WALL)
+	if (map->textures[wall_orientation].wall_orientation != DEFAULT_WALL)
 		return (error_msg("Error: set color: duplicated wall/door/floor.", 1));
-	map->wall_tile[wall_orientation].wall_orientation = wall_orientation;
-	map->wall_tile[wall_orientation].is_color = true;
-	if (get_color(&map->wall_tile[wall_orientation].color, color))
+	map->textures[wall_orientation].wall_orientation = wall_orientation;
+	map->textures[wall_orientation].is_color = true;
+	if (get_color(&map->textures[wall_orientation].color, color))
 		return (error_message2("Error: Format/color of ", identifier, 1));
 	return (0);
 }

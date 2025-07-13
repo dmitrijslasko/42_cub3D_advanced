@@ -53,13 +53,13 @@ int	load_textures(t_data *dt)
 	i = 0;
 	while (i < NUMBER_TEXTURES)
 	{
-		if (dt->map.wall_tile[i].is_color)
+		if (dt->map.textures[i].is_color)
 		{
 			printf("Texture [%zu] is color...\n", i);
 			i++;
 			continue ;
 		}
-		texture = &dt->map.wall_tile[i].texture;
+		texture = &dt->map.textures[i].texture;
 		if (!load_texture(dt, texture, NULL))
 			printf("Texture [%zu]: %s loaded!\n", i, texture->file);
 		i++;

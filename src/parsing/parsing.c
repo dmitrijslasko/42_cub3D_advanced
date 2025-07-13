@@ -14,7 +14,6 @@
 
 bool	parse_map_file(t_data *dt, char *file)
 {
-	init_dt(dt);
 	if (!check_type_file(file, REQUIRED_MAP_EXTENSION))
 		return (1);
 	if (!check_valid_wall_tile_file(file))
@@ -23,7 +22,7 @@ bool	parse_map_file(t_data *dt, char *file)
 		return (1);
 	if (init_value_player(&dt->map, &dt->player))
 		return (1);
-	if (!check_valid_map(&dt->map, &dt->player, dt))
+	if (!map_is_closed(&dt->map, &dt->player, dt))
 		return (1);
 	return (0);
 }

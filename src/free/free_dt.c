@@ -20,6 +20,7 @@ void	free_dt(t_data *dt)
 	ft_free(dt->view);
 	free_texture_sprite(dt);
 	free_wall_tile_texture(dt);
+	// free(dt->map.malloc_textures);
 	ft_free(dt->sprites);
 	free_graphic(dt);
 	// free_audio(dt->background_music);

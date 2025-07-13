@@ -103,6 +103,9 @@ static const t_texture_match	g_texture_lookup[] = {
 {"W8", 2, WALL_8, '8'},
 {"W9", 2, WALL_9, '9'},
 {"DV1", 3, DOOR_VERTICAL_1, '|'},
+{"DH1", 3, DOOR_HORIZONTAL_1, '-'},
+{"EH1", 3, ELEVATOR_HORIZONTAL_1, '*'},
+{"EV1", 3, ELEVATOR_VERTICAL_1, '^'},
 {NULL, -1, -1, 0}
 };
 
@@ -202,7 +205,9 @@ typedef struct s_map
 	char		**map_data;
 	int			map_size_rows;
 	int			map_size_cols;
-	t_wall_tile	wall_tile[NUMBER_TEXTURES];
+	int			number_of_textures;
+	t_wall_tile	textures[NUMBER_TEXTURES];
+	t_wall_tile	*m_textures;
 	t_wall_tile	door;
 }	t_map;
 
@@ -243,6 +248,7 @@ typedef struct s_view
 	// int		minimap_color;
 	char	show_debug_info;
 	char	show_door_open_message;
+	int		active_prompt_message;
 	float	door_open;
 	float	crouch;
 }	t_view;
@@ -401,7 +407,7 @@ void		get_init_position(t_map *map, t_player *player);
 bool		set_color_or_texture(t_map *map, char *identifier, char **value);
 bool		set_texture(char *identifier, char *file_texture, t_map *map);
 bool		set_color(char *identifier, char **color, t_map *map);
-bool		check_valid_map(t_map *map, t_player *player, t_data *dt);
+bool		map_is_closed(t_map *map, t_player *player, t_data *dt);
 char		get_cell_type(t_map *map, t_coor *coord);
 char		get_cell_type_by_coordinates(t_map *map, size_t y, size_t x);
 char		**ft_split_special(const char *s, char *c);
@@ -539,6 +545,7 @@ int			render_all_sprites(t_data *dt);
 void		render_3d_each_ray(t_data *dt, t_ray *ray, int screen_slice_width);
 
 int			apply_distance_shadow(t_ray *ray, int *color);
+int			apply_shadow(t_ray *ray, int *color, float strength);
 
 int			reset_mouse_position(t_data *dt);
 void		process_keypresses(t_data *dt);
@@ -638,5 +645,9 @@ int			load_weapons(t_data *dt);
 void		show_player_info(t_data *dt);
 
 int	apply_distance_shadow_distance(int distance, int *color);
+
+int	mimic_fullscreen(void);
+
+void	check_and_parse_args(t_data *dt, int argc, char **argv);
 
 #endif

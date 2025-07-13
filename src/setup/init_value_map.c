@@ -20,6 +20,8 @@ bool	init_value_map_data(char *file, t_data *dt)
 		return (1);
 	if (create_map_data(&dt->map, dt))
 		return (1);
+	dt->map.number_of_textures = NUMBER_TEXTURES;
+	dt->map.m_textures = protected_malloc(dt->map.number_of_textures, dt);
 	if (get_value_file(&dt->map, file))
 		return (1);
 	if (!check_valid_player(&dt->map))

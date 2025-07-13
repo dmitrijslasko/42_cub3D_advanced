@@ -18,7 +18,7 @@ int	get_color_render3d(t_data *dt, t_ray *ray, t_coor *tex_coor)
 	int			tex_index;
 	t_texture	texture;
 
-	texture = dt->map.wall_tile[ray->cell_type].texture;
+	texture = dt->map.textures[ray->cell_type].texture;
 	tex_coor->x = (texture.width * ray->percentage_of_image);
 	tex_index = texture.width * tex_coor->y + tex_coor->x;
 	// TODO DL: but both door types together

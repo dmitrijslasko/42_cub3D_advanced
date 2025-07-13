@@ -14,7 +14,7 @@
 
 bool	check_valid_caracter_map(char c)
 {
-	if (!ft_strchr("01", c) || !ft_strchr(WHITE_SPACE, c))
+	if (!ft_strchr("01", c) || !ft_strchr(WHITESPACE, c))
 		return (1);
 	if (!ft_strchr(SPRITE_TYPES, c))
 		return (1);
