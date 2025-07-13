@@ -370,7 +370,7 @@ void		put_img_to_img(t_img *dest, t_img *src, int dx, int dy);
 void		put_img_to_img_circle(t_img *dest, t_img *src, int dx, int dy);
 //parsing
 char		*free_line_get_next(char *line, int fd);
-bool		parsing(t_data *dt, char *file);
+bool		parse_map_file(t_data *dt, char *file);
 bool		check_valid_identifier_texture(char *identifier);
 bool		check_color(char *one_color);
 bool		check_valid_color(char **color);

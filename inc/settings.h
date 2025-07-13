@@ -160,7 +160,7 @@
 # define WHITE_SPACE        	            " \a\b\t\n\v\f\r"
 
 # define PLAYER_SPAWN_POINT_TYPES			"NSWE"
-# define SPRITE_TYPES     	 	            "dcspqha"
+# define SPRITE_TYPES     	 	            "abcdefghijklmnopqrstuvwxyz"
 # define SPRITE_FRAMES						2
 # define WALL_TYPES							"123456789"
 # define VERTICAL_WALL_TYPES				"v"

@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-bool	parsing(t_data *dt, char *file)
+bool	parse_map_file(t_data *dt, char *file)
 {
 	init_dt(dt);
 	if (!check_type_file(file, REQUIRED_MAP_EXTENSION))

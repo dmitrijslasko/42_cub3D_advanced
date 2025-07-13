@@ -20,7 +20,7 @@ static void	check_and_parse_args(t_data *dt, int argc, char **argv)
 		error_msg("Try again! Format ./cub3D <name_file>.cub\n", 1);
 		exit(1);
 	}
-	if (parsing(dt, argv[1]))
+	if (parse_map_file(dt, argv[1]))
 	{
 		free_dt(dt);
 		exit(1);
