@@ -25,7 +25,7 @@ int	draw_minimap_wall_cell(t_data *dt, size_t curr_col, size_t curr_row)
 	return (EXIT_SUCCESS);
 }
 
-int	draw_minimap_thin_wall_vertical(t_data *dt, size_t curr_col, \
+int	draw_minimap_THIN_WALL_VERTICAL_1(t_data *dt, size_t curr_col, \
 															size_t curr_row)
 {
 	t_coor	top_left;

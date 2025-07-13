@@ -86,12 +86,12 @@ void	process_keypresses(t_data *dt)
 
 	if (dt->keys[XK_f])
 	{
-		dt->test_value_1 -= 0.01f;
+		dt->test_value_1 -= 0.001f;
 		printf("%f\n", dt->test_value_1);
 	}
 	if (dt->keys[XK_g])
 	{
-		dt->test_value_1 += 0.01f;
+		dt->test_value_1 += 0.001f;
 		printf("%f\n", dt->test_value_1);
 	}
 	if (dt->keys[XK_v])

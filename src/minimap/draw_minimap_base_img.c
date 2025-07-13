@@ -17,7 +17,7 @@ typedef int	(*t_draw_func)(t_data *, size_t, size_t);
 t_draw_func	get_draw_func_for_tile(char tile)
 {
 	if (ft_strchr(VERTICAL_WALL_TYPES, tile))
-		return (draw_minimap_thin_wall_vertical);
+		return (draw_minimap_THIN_WALL_VERTICAL_1);
 	if (ft_strchr(VERTICAL_DOOR_TYPES, tile))
 		return (draw_minimap_door_vertical);
 	if (ft_strchr(WALL_TYPES, tile))

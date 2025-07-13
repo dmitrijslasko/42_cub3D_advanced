@@ -22,14 +22,14 @@ int	render_all_sprites(t_data *dt)
 	set_texture_sprites(dt);
 	while (i < dt->sprite_count)
 	{
-		if (dt->player.pos.x - dt->sprites[i].pos.x > 0.01)
-			dt->sprites[i].pos.x += 0.01f;
-		else if (dt->player.pos.x - dt->sprites[i].pos.x < 0.01)
-			dt->sprites[i].pos.x -= 0.01f;
-		if (dt->player.pos.y - dt->sprites[i].pos.y > 0.01)
-			dt->sprites[i].pos.y += 0.01f;
-		else if (dt->player.pos.x - dt->sprites[i].pos.x < 0.01)
-			dt->sprites[i].pos.y -= 0.01f;
+		// if (dt->player.pos.x - dt->sprites[i].pos.x > 0.01)
+		// 	dt->sprites[i].pos.x += 0.01f;
+		// else if (dt->player.pos.x - dt->sprites[i].pos.x < 0.01)
+		// 	dt->sprites[i].pos.x -= 0.01f;
+		// if (dt->player.pos.y - dt->sprites[i].pos.y > 0.01)
+		// 	dt->sprites[i].pos.y += 0.01f;
+		// else if (dt->player.pos.x - dt->sprites[i].pos.x < 0.01)
+		// 	dt->sprites[i].pos.y -= 0.01f;
 		get_position_and_render_sprite(dt, &dt->sprites[i]);
 		i++;
 	}

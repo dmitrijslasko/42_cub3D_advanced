@@ -27,7 +27,7 @@
 # define VERSION_INFO      "cub3D project - 42 Berlin - dmlasko, v2.0"
 
 # define SHOW_CALCULATION_LOGS				1
-# define SHOW_DEBUG_INFO 					0
+# define SHOW_DEBUG_INFO 					1
 
 # define TILE_SIZE  						64
 
@@ -122,7 +122,7 @@
 
 // mouse sensitivity
 # define ENABLE_MOUSE       				1
-# define MOUSE_SENS_ROTATE 					1.5f
+# define MOUSE_SENS_ROTATE 					2.0f
 //# define MOUSE_SENS_DRAG					0.05f
 # define MOUSE_SENS_SCROLL 					0.1f
 # define MOUSE_CENTER_TOLERANCE_PX			0
@@ -160,13 +160,13 @@
 # define WHITE_SPACE        	            " \a\b\t\n\v\f\r"
 
 # define PLAYER_SPAWN_POINT_TYPES			"NSWE"
-# define SPRITE_TYPES     	 	            "spqha"
+# define SPRITE_TYPES     	 	            "dcspqha"
 # define SPRITE_FRAMES						2
 # define WALL_TYPES							"123456789"
 # define VERTICAL_WALL_TYPES				"v"
 # define HORIZONTAL_WALL_TYPES				"h"
-# define DOOR_TYPES							"|-"
-# define VERTICAL_DOOR_TYPES				"|"
+# define DOOR_TYPES							"|-*"
+# define VERTICAL_DOOR_TYPES				"|*"
 # define HORIZONTAL_DOOR_TYPES				"-"
 
 // shaders
@@ -175,6 +175,7 @@
 
 # define ENABLE_MOVING_SKY					1
 # define ROTATION_SCALE					    1
+# define ENABLE_BOBBING                     1
 
-# define RENDER_SPRITES                     0
+# define RENDER_SPRITES                     1
 #endif

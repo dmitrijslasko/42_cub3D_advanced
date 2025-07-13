@@ -69,6 +69,7 @@ int	render_frame(void *param)
 	long		current_time;
 	int 		y_offset;
 
+	y_offset = 0;
 	dt = (t_data *)param;
 	current_time = get_current_time_in_ms();
 	dt->time.delta_time = current_time - dt->time.last_time;
@@ -113,8 +114,11 @@ int	render_frame(void *param)
 		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press [ / ] to open the door");
 		// render_ui_message(dt);
 	}
-	bob_walls(dt);
-	y_offset = bob_weapon(dt);
+	if (ENABLE_BOBBING)
+	{
+		bob_walls(dt);
+		y_offset = bob_weapon(dt);
+	}
 	// render weapon
 	put_img_to_img(dt->final_frame_img, &dt->weapon_img[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
 	// put_img_to_img(dt->final_frame_img, &dt->weapon_img[dt->weapon_current_frame], 0, 0);

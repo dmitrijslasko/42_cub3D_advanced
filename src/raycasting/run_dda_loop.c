@@ -14,8 +14,7 @@
 
 int	check_hit_door_cell(t_coor *coor, t_data *dt)
 {
-	return (dt->map.map_data[coor->y][coor->x] == '|' ||
-		dt->map.map_data[coor->y][coor->x] == '-');
+	return (ft_strchr(DOOR_TYPES, dt->map.map_data[coor->y][coor->x]));
 }
 
 int	run_dda_loop(t_data *dt, t_ray *ray, t_dda_info *info)

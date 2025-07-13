@@ -24,7 +24,7 @@ static void	init_a_door(t_data *dt, t_door **door_ptr, \
 	door_ptr_ref->pos_x = DEF_DOOR_OFFSET_X;
 	door_ptr_ref->pos_y = DEF_DOOR_OFFSET_Y;
 	door_ptr_ref->open_progress = 0.0f;
-	if (get_cell_type_by_coordinates(&dt->map, curr_row, curr_col) == '|')
+	if (ft_strchr(VERTICAL_DOOR_TYPES, dt->map.map_data[curr_row][curr_col]))
 		door_ptr_ref->orientation = 1;
 	else
 		door_ptr_ref->orientation = 0;

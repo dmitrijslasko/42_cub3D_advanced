@@ -37,14 +37,16 @@ void	set_cell_type(t_data *dt, t_ray *ray, t_coor *map_coor)
 		ray->cell_type = WALL_9;
 	else if (cell_type == '|')
 		ray->cell_type = DOOR_VERTICAL_1;
+	else if (cell_type == '*')
+		ray->cell_type = DOOR_VERTICAL_1;
 	else if (cell_type == '-')
 		ray->cell_type = DOOR_HORIZONTAL_1;
 	else if (cell_type == 'v')
-		ray->cell_type = THIN_WALL_VERTICAL;
+		ray->cell_type = THIN_WALL_VERTICAL_1;
 	else if (cell_type == 'h')
-		ray->cell_type = THIN_WALL_HORIZONTAL;
+		ray->cell_type = THIN_WALL_HORIZONTAL_1;
 	else
-		ray->cell_type = -1;
+		ray->cell_type = 0;
 }
 
 void	update_ray_distance_to_cell_edge(t_data *dt, t_ray *ray,

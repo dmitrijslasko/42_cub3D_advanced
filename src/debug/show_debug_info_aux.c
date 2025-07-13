@@ -60,7 +60,7 @@ void	print_obstacle_info(t_data *dt, void *mlx, void *win, int *y)
 	snprintf(buffer, sizeof(buffer), "%.2f", dt->rays[i].distance_to_wall);
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL_2, UI_CLR_1, "Distance to obstacle:");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
-	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Obstacle type:");
+	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Cell type:");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, ft_itoa(dt->rays[i].cell_type + 1));
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Wall orientation:");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, ft_itoa(dt->rays[i].wall_orientation));

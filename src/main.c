@@ -63,9 +63,11 @@ static int	setup_dt(t_data *dt)
 	dt->weapon_last_frame_time = 0;
 	dt->player.is_moving = 0;
 	dt->player.plane_x = 0;
-	dt->player.plane_x = 0;
+	dt->player.plane_y = 0;
 	dt->test_value_1 = 0.0f;
 	dt->test_value_2 = 0.0f;
+	dt->test_value_3 = 0.0f;
+	dt->test_value_4 = 0.0f;
 	// if (BONUS)
 	// 	dt->background_music = init_audio();
 	return (EXIT_SUCCESS);

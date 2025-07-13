@@ -58,7 +58,6 @@ typedef enum e_wall_orientation
 	W_9,
 	FLOOR,
 	CEILING,
-	DOOR,
 }	t_wall_orientation;
 
 typedef enum e_cell_type
@@ -73,14 +72,14 @@ typedef enum e_cell_type
 	WALL_7,
 	WALL_8,
 	WALL_9,
-	WALL_10,
-	THIN_WALL_VERTICAL,
-	THIN_WALL_HORIZONTAL,
+	THIN_WALL_VERTICAL_1,
+	THIN_WALL_HORIZONTAL_1,
 	DOOR_VERTICAL_1,
 	DOOR_VERTICAL_2,
 	DOOR_HORIZONTAL_1,
-	ELEVATOR_VERTICAL,
-	ELEVATOR_HORIZONTAL,
+	DOOR_HORIZONTAL_2,
+	ELEVATOR_VERTICAL_1,
+	ELEVATOR_HORIZONTAL_1,
 }	t_cell_type;
 
 typedef struct s_texture_match
@@ -88,21 +87,23 @@ typedef struct s_texture_match
 	const char				*str;
 	const size_t			length;
 	const int				wall_orientation;
+	const char				map_file_repr;
 }							t_texture_match;
 
-static const t_texture_match	g_txt_lookup[] = {
-{"W1", 2, WALL_1},
-{"W2", 2, WALL_2},
-{"W3", 2, WALL_3},
-{"W4", 2, WALL_4},
-{"W5", 2, WALL_5},
-{"W6", 2, WALL_6},
-{"W7", 2, WALL_7},
-{"W8", 2, WALL_8},
-{"W9", 2, WALL_9},
-{"F", 1, FLOOR},
-{"C", 1, CEILING},
-{NULL, -1, -1}
+static const t_texture_match	g_texture_lookup[] = {
+{"F", 1, FLOOR, ' '},
+{"C", 1, CEILING, ' '},
+{"W1", 2, WALL_1, '1'},
+{"W2", 2, WALL_2, '2'},
+{"W3", 2, WALL_3, '3'},
+{"W4", 2, WALL_4, '4'},
+{"W5", 2, WALL_5, '5'},
+{"W6", 2, WALL_6, '6'},
+{"W7", 2, WALL_7, '7'},
+{"W8", 2, WALL_8, '8'},
+{"W9", 2, WALL_9, '9'},
+{"DV1", 3, DOOR_VERTICAL_1, '|'},
+{NULL, -1, -1, 0}
 };
 
 typedef enum e_active_message
@@ -508,7 +509,7 @@ void		draw_minimap_grid(t_data *dt);
 int			draw_minimap_player(t_data *dt);
 void		draw_minimap_ray(t_data *dt, t_coor origin, t_x_y dir, int color);
 int			draw_minimap_rays(t_data *dt, int is_direction_vector);
-int			draw_minimap_thin_wall_vertical(t_data *dt,
+int			draw_minimap_THIN_WALL_VERTICAL_1(t_data *dt,
 						size_t curr_col, size_t curr_row);
 int			draw_minimap_door_vertical(t_data *dt,
 						size_t curr_col, size_t curr_row);
@@ -523,6 +524,7 @@ void		render_3d_scene(t_data *dt);
 int			draw_ceiling(t_data *dt);
 int			draw_floor(t_data *dt);
 int	draw_textured_floor(t_data *dt);
+int	draw_textured_floor2(t_data *dt);
 int draw_textured_ceiling(t_data *dt);
 int			render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset,
 						t_coor *sprite_size);
@@ -634,5 +636,7 @@ int			load_sprite_images(t_data *dt);
 int			load_weapons(t_data *dt);
 
 void		show_player_info(t_data *dt);
+
+int	apply_distance_shadow_distance(int distance, int *color);
 
 #endif

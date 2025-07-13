@@ -55,7 +55,6 @@ int	ray_hits_door(t_data *dt, t_coor *map_coor, t_ray *ray)
 		ray->distance_to_door = dist_to_door;
 		ray->door_hit_coor.x = door_hit_coor.x;
 		ray->door_hit_coor.y = door_hit_coor.y;
-		// printf("Ray hits door! ");
 		return (1);
 	}
 	return (0);
