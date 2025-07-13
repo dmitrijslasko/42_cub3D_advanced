@@ -33,7 +33,6 @@ int	load_texture(t_data *dt, t_texture *texture, char *file)
 			&texture->bpp,
 			&texture->size_line,
 			&texture->endian);
-	// printf(TXT_GREEN ">>> Texture loaded! %s\n" TXT_RESET, texture_file);
 	return (EXIT_SUCCESS);
 }
 
@@ -48,14 +47,14 @@ int	load_textures(t_data *dt)
 	{
 		texture = &dt->map.door.texture;
 		if (!load_texture(dt, texture, DOOR_TEXTURE_PATHFILE))
-			printf("Door texture loaded!\n");
+			printf(">>> Door texture loaded!\n");
 	}
 	i = 0;
-	while (i < NUMBER_TEXTURES)
+	while (i < dt->map.number_of_textures)
 	{
 		if (dt->map.textures[i].is_color)
 		{
-			printf("Texture [%zu] is color...\n", i);
+			printf("Texture [%zu]: texture is color...\n", i);
 			i++;
 			continue ;
 		}
@@ -65,5 +64,6 @@ int	load_textures(t_data *dt)
 		i++;
 	}
 	printf(TXT_GREEN "Done!\n" TXT_RESET);
+	// exit (1);
 	return (EXIT_SUCCESS);
 }

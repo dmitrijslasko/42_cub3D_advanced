@@ -30,7 +30,7 @@ static void	init_a_door(t_data *dt, t_door **door_ptr, \
 		door_ptr_ref->orientation = 0;
 	door_ptr_ref->speed = 0.05f;
 	door_ptr_ref->state = 0;
-	printf("Door [%zu] at X Y (%d, %d) added with id:\t%zu\n",
+	printf("Door [%2zu] at X Y (%3d, %3d) added with id:%3zu\n",
 		door_ptr_ref->id, curr_col, curr_row, door_ptr_ref->id);
 	(*door_ptr)++;
 }

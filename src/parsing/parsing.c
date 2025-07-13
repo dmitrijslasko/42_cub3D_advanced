@@ -14,15 +14,15 @@
 
 bool	parse_map_file(t_data *dt, char *file)
 {
-	if (!check_type_file(file, REQUIRED_MAP_EXTENSION))
-		return (1);
-	if (!check_valid_wall_tile_file(file))
-		return (1);
+	// if (!check_type_file(file, REQUIRED_MAP_EXTENSION))
+	// 	return (1);
+	// if (!check_valid_wall_tile_file(file))
+	// 	return (1);
 	if (init_value_map_data(file, dt))
 		return (1);
 	if (init_value_player(&dt->map, &dt->player))
 		return (1);
-	if (!map_is_closed(&dt->map, &dt->player, dt))
-		return (1);
+	// if (!map_is_closed(&dt->map, &dt->player, dt))
+	// 	return (1);
 	return (0);
 }
