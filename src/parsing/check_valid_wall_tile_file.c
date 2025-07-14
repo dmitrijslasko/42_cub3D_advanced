@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_valid_wall_tile_file.c                       :+:      :+:    :+:   */
+/*   check_textures_are_valid.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -46,7 +46,7 @@ bool	check_valid_wall_tile_file1(int fd)
 		if (!check_single_line_wall_tile(line))
 		{
 			free_line_get_next(line, -1);
-			return (error_msg("Error: Reading textures/colors.", 0));
+			return (error_msg("Error: Reading textures / colors.", 0));
 		}
 		line = free_line_get_next(line, fd);
 	}
@@ -54,7 +54,7 @@ bool	check_valid_wall_tile_file1(int fd)
 	return (free_array_return(array, 1));
 }
 
-bool	check_valid_wall_tile_file(char *file)
+bool	check_textures_are_valid(char *file)
 {
 	int	fd;
 	int	ret;

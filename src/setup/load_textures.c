@@ -19,7 +19,7 @@ int	load_texture(t_data *dt, t_texture *texture, char *file)
 	if (file != NULL)
 		texture_file = file;
 	else
-		texture_file = texture->file;
+		texture_file = texture->xpm_file;
 		
 	printf("Trying to load file... %s\n", file);
 	texture->texture_img = mlx_xpm_file_to_image(dt->mlx_ptr,
@@ -56,7 +56,7 @@ int	load_textures(t_data *dt)
 	{
 		texture = &dt->map.textures[i].texture;
 		if (!load_texture(dt, texture, DOOR_TEXTURE_PATHFILE))
-			printf(TXT_GREEN"Texture [%2zu]: %s loaded!\n"TXT_RESET, i, texture->file);
+			printf(TXT_GREEN"Texture [%2zu]: %s loaded!\n"TXT_RESET, i, texture->xpm_file);
 		i++;
 	}
 	printf(TXT_GREEN "Done!\n" TXT_RESET);

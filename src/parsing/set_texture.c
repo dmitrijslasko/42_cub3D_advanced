@@ -21,6 +21,6 @@ bool	set_texture(t_map *map, char *identifier, char *texture_file)
 	// if (map->textures[wall_orientation].wall_orientation != DEFAULT_WALL)
 	// 	return (error_msg("Error: set texture: duplicated wall/door/floor.", 1));
 	map->textures[wall_orientation].wall_orientation = wall_orientation;
-	map->textures[wall_orientation].texture.file = ft_substr(texture_file, 0, ft_strlen(texture_file));
+	map->textures[wall_orientation].texture.xpm_file = ft_substr(texture_file, 0, ft_strlen(texture_file));
 	return (0);
 }

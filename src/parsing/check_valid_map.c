@@ -42,7 +42,7 @@ bool	is_open_map(char **map, char **visited, int row, int col)
 	return (0);
 }
 
-bool	map_is_closed(t_map *map, t_player *player, t_data *dt)
+bool	check_map_is_closed(t_map *map, t_player *player, t_data *dt)
 {
 	char	**visited;
 

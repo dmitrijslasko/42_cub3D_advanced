@@ -34,14 +34,14 @@ int		init_textures(t_texture *textures, int len)
 	i = 0;
 	while (i < len)
 	{
-		textures[i].file = NULL;
+		textures[i].xpm_file = NULL;
 		textures[i].type = g_texture_lookup[i].mapfile_identificator;
 		i++;
 	}
 	return (EXIT_SUCCESS);
 }
 
-bool	parse_map_file(char *file, t_data *dt)
+bool	parse_mapfile(char *file, t_data *dt)
 {
 	int	possible_textures;
 	
@@ -50,6 +50,7 @@ bool	parse_map_file(char *file, t_data *dt)
 	dt->map.number_of_textures = possible_textures;
 	dt->map.m_textures = protected_malloc(dt->map.number_of_textures, dt);
 	printf("Malloced an array of %d elements!\n", dt->map.number_of_textures);
+
 	if (init_default_map(&dt->map))
 		return (1);
 	// Sets the map size

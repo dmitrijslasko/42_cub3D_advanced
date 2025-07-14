@@ -28,7 +28,7 @@ void	init_texture(t_texture *texture)
 		return ;
 	texture->texture_img = NULL;
 	texture->texture_data = NULL;
-	texture->file = NULL;
+	texture->xpm_file = NULL;
 }
 
 void	init_map(t_map	*map)

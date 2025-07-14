@@ -121,10 +121,26 @@ int move_active_window_to_mouse_position_with_xdotool() {
 	return result == 0 ? 0 : 1;
 }
 
+int print_out_texture_lookup_table(void)
+{
+	int	i;
+
+	i = 0;
+	printf("Printing out the texture lookup table!\n");
+	while (g_texture_lookup[i].mapfile_identificator)
+	{
+		printf("%s: %s\n", g_texture_lookup[i].mapfile_identificator, g_texture_lookup[i].texture.xpm_file);
+		i++;
+	}
+	print_separator_default();
+	return (EXIT_SUCCESS);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	dt;
 
+	print_out_texture_lookup_table();
 	check_and_parse_args(&dt, argc, argv);
 	
 	print_level_map(&dt.map);

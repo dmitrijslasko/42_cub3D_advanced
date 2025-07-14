@@ -43,6 +43,13 @@
 //# include "sound.h"
 
 // structs
+typedef struct s_color
+{
+	int		r;
+	int		g;
+	int		b;
+	int		a;
+}	t_color;
 
 typedef enum e_wall_orientation
 {
@@ -52,6 +59,27 @@ typedef enum e_wall_orientation
 	SOUTH,
 	EAST,
 }	t_wall_orientation;
+
+typedef struct s_texture
+{
+	char		*xpm_file;
+	void		*texture_img;
+	int			*texture_data;
+	int			width;
+	int			height;
+	int			bpp;
+	int			size_line;
+	int			endian;
+	int			type;
+}	t_texture;
+
+typedef struct s_wall_tile
+{
+	int			wall_orientation;
+	t_texture	texture;
+	t_color		color;
+	bool		is_color;
+}	t_wall_tile;
 
 typedef enum e_texture_type
 {
@@ -80,9 +108,10 @@ typedef enum e_texture_type
 typedef struct s_texture_match
 {
 	const char				*mapfile_identificator;
-	const size_t			length;
-	const int				wall_orientation;
+	const size_t			mapfile_len;
+	const int				texture_type;
 	const char				map_repr;
+	t_texture				texture;
 }							t_texture_match;
 
 static const t_texture_match	g_texture_lookup[] = {
@@ -112,14 +141,6 @@ typedef enum e_active_message
 	BE_KIND,
 	ENJOY_THE_GAME,
 }	t_active_message;
-
-typedef struct s_color
-{
-	int		r;
-	int		g;
-	int		b;
-	int		a;
-}	t_color;
 
 // Door structure with animation info
 typedef struct s_door
@@ -175,27 +196,6 @@ typedef struct s_ray
 	t_x_y		door_hit_coor;
 	float		distance_to_door;
 }	t_ray;
-
-typedef struct s_texture
-{
-	void		*texture_img;
-	int			*texture_data;
-	int			width;
-	int			height;
-	int			bpp;
-	int			size_line;
-	int			endian;
-	char		*file;
-	int			type;
-}	t_texture;
-
-typedef struct s_wall_tile
-{
-	int			wall_orientation;
-	t_texture	texture;
-	t_color		color;
-	bool		is_color;
-}	t_wall_tile;
 
 typedef struct s_map
 {
@@ -384,14 +384,14 @@ bool		is_empty_line(char *line);
 void		init_dt(t_data *dt);
 bool		is_valid_line_texture(char *line);
 bool		set_map_size_data(t_map *map, char *file);
-bool		check_valid_wall_tile_file(char *file);
+bool		check_textures_are_valid(char *file);
 bool		init_map_data(t_map *map, t_data *dt);
 bool		init_2d_map(char ***array, size_t max_row,
 						size_t max_col, t_data *dt);
-bool		check_type_file(char *file, char *type);
+bool		check_mapfile_extension(char *file, char *type);
 void		remove_new_line(char *str);
 char		*remove_space_beginner(char *str);
-bool		parse_map_file(char *file, t_data *dt);
+bool		parse_mapfile(char *file, t_data *dt);
 bool		init_default_map(t_map *map);
 bool		init_player(t_map *map, t_player *player);
 int			ft_open(char *file);
@@ -404,7 +404,7 @@ void		get_init_player_position(t_map *map, t_player *player);
 bool		set_color_or_texture(t_map *map, char *identifier, char **value);
 bool	set_texture(t_map *map, char *identifier, char *texture_file);
 bool		set_color(char *identifier, char **color, t_map *map);
-bool		map_is_closed(t_map *map, t_player *player, t_data *dt);
+bool		check_map_is_closed(t_map *map, t_player *player, t_data *dt);
 char		get_cell_type(t_map *map, t_coor *coord);
 char		get_cell_type_by_coordinates(t_map *map, size_t y, size_t x);
 char		**ft_split_special(const char *s, char *c);

@@ -22,7 +22,7 @@ void	init_default_color(t_color *color)
 
 void	init_default_texture(t_texture *texture)
 {
-	texture->file = NULL;
+	texture->xpm_file = NULL;
 	texture->texture_img = NULL;
 	texture->texture_data = NULL;
 }

@@ -14,20 +14,20 @@
 
 bool	check_and_parse_map_file(t_data *dt, char *map_file)
 {
-	if (!check_type_file(map_file, REQUIRED_MAP_EXTENSION))
-		return (1);
+	if (!check_mapfile_extension(map_file, REQUIRED_MAP_EXTENSION))
+		return (EXIT_FAILURE);
 
-	if (!check_valid_wall_tile_file(map_file))
-		return (1);
+	if (!check_textures_are_valid(map_file))
+		return (EXIT_FAILURE);
 
-	if (parse_map_file(map_file, dt))
-		return (1);
+	if (parse_mapfile(map_file, dt))
+		return (EXIT_FAILURE);
 
 	if (init_player(&dt->map, &dt->player))
-		return (1);
+		return (EXIT_FAILURE);
 
-	// if (map_is_closed(&dt->map, &dt->player, dt) == False)
+	// if (check_map_is_closed(&dt->map, &dt->player, dt) == False)
 	// 	return (1);
 
-	return (0);
+	return (EXIT_SUCCESS);
 }
