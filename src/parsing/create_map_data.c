@@ -20,6 +20,7 @@ bool	init_2d_map(char ***array, size_t size_row,
 	char	**new;
 	int		cell_count;
 
+	print_separator_default();
 	printf("Initiliazing empty map cells... ");
 	cell_count = 0;
 	curr_row = 0;

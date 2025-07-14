@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:12:07 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/12 19:36:39 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 17:58:52 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,18 +121,20 @@ int move_active_window_to_mouse_position_with_xdotool() {
 	return result == 0 ? 0 : 1;
 }
 
-int print_out_texture_lookup_table(void)
+int print_out_texture_lookup_table(t_data *dt)
 {
 	int	i;
 
 	i = 0;
-	printf("Printing out the texture lookup table!\n");
-	while (g_texture_lookup[i].mapfile_identificator)
+	printf(TXT_CYAN">>> Printing out the texture lookup table!\n"TXT_RESET);
+	while (g_texture_lookup[i].mapfile_id)
 	{
-		printf("[%s]: %s: %s\n", 
-			g_texture_lookup[i].description, 
-			g_texture_lookup[i].mapfile_identificator, 
-			g_texture_lookup[i].texture.xpm_file);
+		printf("%25s [%4s, %2d] : %s\n",
+			g_texture_lookup[i].description,
+			g_texture_lookup[i].mapfile_id,
+			g_texture_lookup[i].texture_type,
+			dt->map.textures[i].texture.xpm_file
+			);
 		i++;
 	}
 	print_separator_default();
@@ -143,9 +145,9 @@ int	main(int argc, char **argv)
 {
 	t_data	dt;
 
-	print_out_texture_lookup_table();
 	check_and_parse_args(&dt, argc, argv);
-	
+	for (int i; i < 53; i++)
+		dt.map.map_data[0][i] = '1';
 	print_level_map(&dt.map);
 	precalculate_trig_tables(&dt);
 	if (setup_mlx_and_win(&dt))
@@ -157,6 +159,8 @@ int	main(int argc, char **argv)
 	printf("Starting game!\n");
 	system("gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false");
 	// mimic_fullscreen();
+	dt.player.pos.x = 2.5;
+	dt.player.pos.y = 2.5;
 	mlx_loop_hook(dt.mlx_ptr, &render_frame, &dt);
 	mlx_loop(dt.mlx_ptr);
 	free_dt(&dt);

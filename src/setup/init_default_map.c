@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:39 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/11 16:04:03 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 14:15:53 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int		init_default_textures(t_map *map)
 
 bool	init_default_map(t_map *map)
 {
+	print_separator_default();
 	printf("Initiliazing default map... ");
 	map->map_data = NULL;
 	map->map_size_cols = 0;

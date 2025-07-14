@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_color_or_texture.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:07:13 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/02 00:07:14 by fvargas          ###   ########.fr       */
+/*   Updated: 2025/07/14 17:37:24 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,17 @@ bool	check_valid_texture(char **value)
 	return (1);
 }
 
-bool	set_color_or_texture(t_map *map, char *identifier, char **value)
+bool	set_color_or_texture(t_map *map, char *identifier, char **xpm_filename)
 {
-	// if (!identifier || !*value)
+	int	cell_type;
+	// if (!identifier || !*xpm_filename)
 	// 	return (error_msg("Error: Split failed.", 1));
-	set_texture(map, identifier, *value);
+
+	cell_type = check_valid_texture_identifier(identifier);
+	// if (map->textures[wall_orientation].wall_orientation != DEFAULT_WALL)
+	// 	return (error_msg("Error: set texture: duplicated wall/door/floor.", 1));
+	map->textures[cell_type].wall_orientation = cell_type;
+	map->textures[cell_type].texture.xpm_file = ft_strdup(*xpm_filename);
+	map->textures[cell_type].texture.mapfile_repr = ft_strdup(identifier);
 	return (EXIT_SUCCESS);
 }

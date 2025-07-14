@@ -1,16 +1,16 @@
+DEF     textures/wolf44.xpm
 F1      textures/test_floor.xpm
 C1      textures/test_floor.xpm
 W1     	textures/simonkraft/bookshelf_02.xpm
 W2      textures/wolfenstein/red_brick.xpm
 W3 		textures/blue-wall.xpm
-W4 		textures/blue-wall-skeleton.xpm
+W4 		textures/ceiling.xpm
 W5      textures/bookshelf.xpm
 W6      textures/simonkraft/respawn_anchor_side3.xpm
 W7      textures/ceiling.xpm
 W8      textures/simonkraft/bookshelf_01.xpm
 W9      textures/test_floor.xpm
-DV1     textures/test_floor.xpm
-
+D1     	textures/wolf37.xpm
 
 111166111111111111111111111111111111111111111111111
 1p     1343434116666666615555555   1             p1

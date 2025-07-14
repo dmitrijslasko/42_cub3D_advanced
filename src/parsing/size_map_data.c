@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:07:21 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/11 18:14:46 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 14:16:24 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ bool	set_size_map_data1(t_map *map, int fd)
 	int		count_col;
 	int		ret;
 
+	print_separator_default();
 	printf("Setting map size... ");
 	count_col = 0;
 	count_row = 0;

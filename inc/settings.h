@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:39:14 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/12 20:28:02 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 17:39:14 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,8 +154,8 @@
 
 # define PUT_DOOR				            1
 # define DOOR_TEXTURE_PATHFILE				"./textures/wolf37.xpm"
-// four walls + celling + floor even if is a color
-# define NUMBER_TEXTURES    	            11
+// all printable ASCII characters + fallback texture
+# define NUMBER_TEXTURES    	            20
 
 # define WHITESPACE        	            " \a\b\t\n\v\f\r"
 

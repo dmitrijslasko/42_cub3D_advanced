@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:21 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/12 19:37:27 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 17:57:00 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int	render_frame(void *param)
 	long		current_time;
 	int 		y_offset;
 
-	y_offset = 0;
 	dt = (t_data *)param;
+	y_offset = 0;
 	current_time = get_current_time_in_ms();
 	dt->time.delta_time = current_time - dt->time.last_time;
 	if (dt->time.delta_time < (1000 / FPS))

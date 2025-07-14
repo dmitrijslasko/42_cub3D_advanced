@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:35:51 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/12 19:50:48 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 17:32:37 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,10 @@
 # include "errors.h"
 # include "keys.h"
 # include "settings.h"
+# include "texture_lookup.h"
 //# include "sound.h"
 
 // structs
-typedef struct s_color
-{
-	int		r;
-	int		g;
-	int		b;
-	int		a;
-}	t_color;
 
 typedef enum e_wall_orientation
 {
@@ -59,81 +53,6 @@ typedef enum e_wall_orientation
 	SOUTH,
 	EAST,
 }	t_wall_orientation;
-
-typedef struct s_texture
-{
-	char		*xpm_file;
-	void		*texture_img;
-	int			*texture_data;
-	int			width;
-	int			height;
-	int			bpp;
-	int			size_line;
-	int			endian;
-	int			type;
-}	t_texture;
-
-typedef struct s_wall_tile
-{
-	int			wall_orientation;
-	t_texture	texture;
-	t_color		color;
-	bool		is_color;
-}	t_wall_tile;
-
-typedef enum e_texture_type
-{
-	DEFAULT = -1,
-	FLOOR,
-	CEILING,
-	WALL_1,
-	WALL_2,
-	WALL_3,
-	WALL_4,
-	WALL_5,
-	WALL_6,
-	WALL_7,
-	WALL_8,
-	WALL_9,
-	THIN_WALL_VERTICAL_1,
-	THIN_WALL_HORIZONTAL_1,
-	DOOR_VERTICAL_1,
-	DOOR_VERTICAL_2,
-	DOOR_HORIZONTAL_1,
-	DOOR_HORIZONTAL_2,
-	ELEVATOR_VERTICAL_1,
-	ELEVATOR_HORIZONTAL_1,
-}	t_texture_type;
-
-typedef struct s_texture_match
-{
-	const char				*mapfile_identificator;
-	const char				*description;
-	const size_t			mapfile_len;
-	const int				texture_type;
-	const char				map_repr;
-	t_texture				texture;
-}							t_texture_match;
-
-static const t_texture_match	g_texture_lookup[] = {
-{"DEF", "default fallback texture", 3, DEFAULT, 0},
-{"F1", "floor 1 texture", 2, FLOOR, ' '},
-{"C1", "ceiling 1 texture", 2, CEILING, ' '},
-{"W1", "wall 1 texture", 2, WALL_1, '1'},
-{"W2", "wall 2 texture", 2, WALL_2, '2'},
-{"W3", "wall 3 texture", 2, WALL_3, '3'},
-{"W4", "wall 4 texture", 2, WALL_4, '4'},
-{"W5", "wall 5 texture", 2, WALL_5, '5'},
-{"W6", "wall 6 texture", 2, WALL_6, '6'},
-{"W7", "wall 7 texture", 2, WALL_7, '7'},
-{"W8", "wall 8 texture", 2, WALL_8, '8'},
-{"W9", "wall 9 texture", 2, WALL_9, '9'},
-{"DV1", "door 1 (v) texture",  3, DOOR_VERTICAL_1, '|'},
-{"DH1", "door 1 (h) texture", 3, DOOR_HORIZONTAL_1, '-'},
-{"EV1", "elevator 1 (v) texture", 3, ELEVATOR_VERTICAL_1, '^'},
-{"EH1", "elevator 1 (h) texture", 3, ELEVATOR_HORIZONTAL_1, '*'},
-{NULL, NULL, -1, -1, 0}
-};
 
 typedef enum e_active_message
 {
@@ -205,7 +124,7 @@ typedef struct s_map
 	int			map_size_cols;
 	int			number_of_textures;
 	t_wall_tile	textures[NUMBER_TEXTURES];
-	t_wall_tile	*m_textures;
+	//t_wall_tile	*m_textures;
 	t_wall_tile	door;
 }	t_map;
 
@@ -374,7 +293,7 @@ void		put_img_to_img(t_img *dest, t_img *src, int dx, int dy);
 void		put_img_to_img_circle(t_img *dest, t_img *src, int dx, int dy);
 //parsing
 char		*free_line_get_next(char *line, int fd);
-bool		check_and_parse_map_file(t_data *dt, char *file);
+bool		check_and_parse_mapfile(t_data *dt, char *file);
 bool		check_valid_identifier_texture(char *identifier);
 bool		check_color(char *one_color);
 bool		check_valid_color(char **color);
@@ -399,11 +318,10 @@ int			ft_open(char *file);
 t_wall_orientation	check_valid_texture_identifier(char *identifier);
 bool		check_all_textures(t_map *map);
 bool		parse_mapfile_values(t_map *map, char *file);
-bool		parse_mapfile_values(t_map *map, char *file);
 void		get_map_data_values(char *line, int fd, t_map *map);
 void		get_init_player_position(t_map *map, t_player *player);
 bool		set_color_or_texture(t_map *map, char *identifier, char **value);
-bool	set_texture(t_map *map, char *identifier, char *texture_file);
+//bool		set_texture(t_map *map, char *identifier, char *texture_file);
 bool		set_color(char *identifier, char **color, t_map *map);
 bool		check_map_is_closed(t_map *map, t_player *player, t_data *dt);
 char		get_cell_type(t_map *map, t_coor *coord);
@@ -465,7 +383,6 @@ void		draw_square_from_center(t_img *img, t_coor *coor,
 void		draw_square_from_top_left(t_img *img, t_coor coor,
 						int size, int clr);
 
-t_map		*load_dummy_map(void);
 void		print_level_map(t_map *map);
 
 int			render_frame(void *param);
@@ -648,5 +565,9 @@ int	mimic_fullscreen(void);
 void	check_and_parse_args(t_data *dt, int argc, char **argv);
 
 int		init_default_textures(t_map *map);
+
+int print_out_texture_lookup_table(t_data *dt);
+
+int		get_lookup_table_index(char *str);
 
 #endif

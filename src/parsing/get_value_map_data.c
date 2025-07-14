@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_value_map_data.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:06:54 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/02 00:06:55 by fvargas          ###   ########.fr       */
+/*   Updated: 2025/07/14 17:42:58 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ bool	copy_map_row(t_map *map, int row, char *line)
 	while (line && line[col])
 	{
 		c = line[col];
-		// if (!check_valid_character_map(c))
-		// 	return (EXIT_FAILURE);
+		 if (!check_valid_character_map(c))
+		 	return (EXIT_FAILURE);
 		map->map_data[row][col] = c;
 		col++;
 	}

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parse_map_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:07:08 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/11 18:14:17 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 17:55:47 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	check_and_parse_map_file(t_data *dt, char *map_file)
+bool	check_and_parse_mapfile(t_data *dt, char *map_file)
 {
 	if (!check_mapfile_extension(map_file, REQUIRED_MAP_EXTENSION))
 		return (EXIT_FAILURE);
