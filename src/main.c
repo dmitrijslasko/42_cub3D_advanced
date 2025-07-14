@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:12:07 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 19:26:02 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 19:40:40 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ int	main(int argc, char **argv)
 	print_separator(3, DEF_SEPARATOR_CHAR);
 	printf("Starting game!\n");
 	system("gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false");
-	// mimic_fullscreen();
+	mimic_fullscreen();
 	dt.player.pos.x = 2.5;
 	dt.player.pos.y = 2.5;
 	mlx_loop_hook(dt.mlx_ptr, &render_frame, &dt);

@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:21 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 18:42:16 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 19:38:56 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	render_frame(void *param)
 
 	dt = (t_data *)param;
 	y_offset = 0;
+	reset_mouse_position(dt);
 	current_time = get_current_time_in_ms();
 	dt->time.delta_time = current_time - dt->time.last_time;
 	if (dt->time.delta_time < (1000 / FPS))
@@ -93,7 +94,7 @@ int	render_frame(void *param)
 			}
 		}
 	}
-	reset_mouse_position(dt);
+
 	process_keypresses(dt);
 	calculate_all_rays(dt);
 	render_3d_scene(dt);

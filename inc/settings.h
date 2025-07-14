@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:39:14 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 18:41:35 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 19:37:01 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define FPS								60
 # define SCALING				            250
 # define MIMIC_FULLSCREEN                   1
-# define LINUX_22                           0
+# define LINUX_22                           1
 
 # define STARTING_AMMO_LEVEL				9
 // constants.h or at the top of your .c file
@@ -147,7 +147,7 @@
 # define UI_MESSAGE_OFFSET_Y			700
 
 // welcome screens
-# define REQUIRED_MAP_EXTENSION			".cub"
+# define REQUIRED_MAP_EXTENSION				".cub"
 
 # define WELCOME_IMAGE       				"./assets/images/intro.xpm"
 # define SHOW_WELCOME_IMAGE  				0
