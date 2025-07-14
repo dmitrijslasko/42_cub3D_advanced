@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:10:01 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 17:58:52 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 19:19:41 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ bool	parse_mapfile(char *file, t_data *dt)
 	// Initiliazes the map with empty cell values
 	if (init_map_data(&dt->map, dt))
 		return (1);
-	// parses mapfile values
+	// Parses mapfile values
 	if (parse_mapfile_values(&dt->map, file))
 		return (1);
 	print_out_texture_lookup_table(dt);

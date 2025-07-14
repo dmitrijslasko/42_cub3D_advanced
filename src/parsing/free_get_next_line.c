@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:06:41 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 17:42:47 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 19:25:05 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char	*free_line_get_next(char *line, int fd)
 	//if (line)
 	//	free(line);
 	line = NULL;
-
 	str_new = get_next_line(fd);
 	remove_new_line(str_new);
 	line = str_new;

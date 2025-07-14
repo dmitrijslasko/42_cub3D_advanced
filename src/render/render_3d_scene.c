@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:18 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/12 20:40:07 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 19:31:40 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int	render_floor_and_ceiling(t_data *dt)
 {
-	// (void) dt;
 	if (BONUS)
 	{
 		draw_sky(dt);

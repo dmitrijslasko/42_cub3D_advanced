@@ -36,7 +36,7 @@ bool	check_valid_wall_tile_file1(int fd)
 	line = free_line_get_next(NULL, fd);
 	while (line)
 	{
-		if (is_empty_line(line))
+		if (line_is_empty(line))
 		{
 			line = free_line_get_next(line, fd);
 			continue ;

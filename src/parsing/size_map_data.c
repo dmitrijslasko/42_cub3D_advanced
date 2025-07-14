@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:07:21 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 14:16:24 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 19:16:47 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	check_empty_line_end_file(char *line, int fd)
 {
-	while (line && is_empty_line(line))
+	while (line && line_is_empty(line))
 		line = free_line_get_next(line, fd);
 	if (line)
 		return (error_free_char_return("Error: unexpected line after map.", \
@@ -29,7 +29,7 @@ char	*get_first_line_map(int fd)
 	line = free_line_get_next(NULL, fd);
 	while (line)
 	{
-		if (!is_empty_line(line) && !is_valid_line_texture(line))
+		if (!line_is_empty(line) && !is_valid_line_texture(line))
 			break ;
 		line = free_line_get_next(line, fd);
 	}
@@ -52,7 +52,7 @@ bool	set_size_map_data1(t_map *map, int fd)
 		return (error_msg("Error: map not found.", 1));
 	while (line)
 	{
-		if (is_empty_line(line))
+		if (line_is_empty(line))
 			break ;
 		count_row++;
 		update_value_max(&count_col, line);

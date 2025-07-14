@@ -1,5 +1,5 @@
 DEF     textures/wolf44.xpm
-F1      textures/ceiling.xpm
+F1      textures/wolfenstein/color_stone.xpm
 C1      textures/ceiling.xpm
 W01     textures/simonkraft/bookshelf_02.xpm
 W02     textures/wolfenstein/red_brick.xpm
@@ -9,8 +9,8 @@ W05     textures/bookshelf.xpm
 W06     textures/simonkraft/respawn_anchor_side3.xpm
 W07     textures/ceiling.xpm
 W08     textures/simonkraft/bookshelf_01.xpm
-W09     textures/test_floor.xpm
-D01    	textures/ceiling.xpm
+W09     textures/wolfenstein/purple_stone.xpm
+D01    	textures/wolf37.xpm
 ED1    	textures/wolf44.xpm
 
 111166111111111111111111111111111111111111111111111

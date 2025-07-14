@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   is_empty_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:06:58 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/02 00:06:59 by fvargas          ###   ########.fr       */
+/*   Updated: 2025/07/14 19:23:45 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	is_empty_line(char *line)
+bool	line_is_empty(char *line)
 {
 	int	i;
 

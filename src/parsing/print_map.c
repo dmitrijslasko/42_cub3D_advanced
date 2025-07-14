@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:07:05 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/02 00:07:06 by fvargas          ###   ########.fr       */
+/*   Updated: 2025/07/14 19:25:14 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_level_map(t_map *map)
 		col = 0;
 		while (col < map->map_size_cols)
 		{
-			printf("%c ", map->map_data[row][col]);
+			printf("%c", map->map_data[row][col]);
 			col++;
 		}
 		printf("\n");

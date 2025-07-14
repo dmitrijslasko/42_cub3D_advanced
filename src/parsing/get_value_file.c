@@ -33,16 +33,16 @@ bool	get_texture_filenames(t_map *map, int fd, char **str)
 	int 	index;
 
 	line = *str;
-	//i = 0;
 	print_separator_default();
 	printf(TXT_CYAN"FOUND THESE TEXTURES IN THE MAP FILE:\n"TXT_RESET);
-	while (line && (is_empty_line(line) || is_valid_line_texture(line)))
+	while (line && (line_is_empty(line) || is_valid_line_texture(line)))
 	{
 		if (is_valid_line_texture(line))
 		{
 			array = ft_split_special(line, WHITESPACE);
 			printf("%s: %s\n", array[0], array[1]);
 			index = get_lookup_table_index(array[0]);
+			// NOTE DL: Look into this
 			//if (index == -1)
 			//{
 			//	printf(TXT_YELLOW">>>Key not found in the lookup table: %s\n"TXT_RESET, array[0]);
@@ -78,8 +78,8 @@ bool	parse_mapfile_values(t_map *map, char *mapfile)
 
 	if (result == 0)
 	{
-		printf(" >>> Parsing the map now...\n");
-		get_map_data_values(line, fd, map);
+		printf(">>> Parsing the map now...\n");
+		get_map_data_values(fd, line, map);
 	}
 	close(fd);
 	return (result);

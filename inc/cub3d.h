@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:35:51 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 18:53:02 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 19:17:51 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,7 +300,7 @@ bool		check_valid_color(char **color);
 bool		check_only_number(char *str);
 bool		check_valid_player(t_map *map);
 bool		check_valid_color_or_texture(char **info);
-bool		is_empty_line(char *line);
+bool		line_is_empty(char *line);
 void		init_dt(t_data *dt);
 bool		is_valid_line_texture(char *line);
 bool		set_map_size_data(t_map *map, char *file);
@@ -318,7 +318,7 @@ int			ft_open(char *file);
 t_wall_orientation	check_valid_texture_identifier(char *identifier);
 bool		check_all_textures(t_map *map);
 bool		parse_mapfile_values(t_map *map, char *file);
-void		get_map_data_values(char *line, int fd, t_map *map);
+void		get_map_data_values(int fd, char *line, t_map *map);
 void		get_init_player_position(t_map *map, t_player *player);
 bool		set_color_or_texture(t_map *map, char *identifier, char **value);
 //bool		set_texture(t_map *map, char *identifier, char *texture_file);
