@@ -43,6 +43,7 @@ bool	set_size_map_data1(t_map *map, int fd)
 	int		count_col;
 	int		ret;
 
+	printf("Setting map size... ");
 	count_col = 0;
 	count_row = 0;
 	line = get_first_line_map(fd);
@@ -61,15 +62,16 @@ bool	set_size_map_data1(t_map *map, int fd)
 	if (ret == Success)
 		set_values_size_t(&map->map_size_cols, &map->map_size_rows, \
 							count_col, count_row);
+	printf("%dx%d\n", count_col, count_row);
 	return (ret);
 }
 
-bool	set_size_map_data(t_map *map, char *file)
+bool	set_map_size_data(t_map *map, char *map_file)
 {
 	int	fd;
 	int	ret;
 
-	fd = ft_open(file);
+	fd = ft_open(map_file);
 	if (fd < 0)
 		return (1);
 	ret = set_size_map_data1(map, fd);

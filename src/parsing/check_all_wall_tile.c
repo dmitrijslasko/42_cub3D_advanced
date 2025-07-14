@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_all_wall_tile.c                              :+:      :+:    :+:   */
+/*   check_all_textures.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,15 +12,15 @@
 
 #include "cub3d.h"
 
-bool	check_all_wall_tile(t_map *map)
+bool	check_all_textures(t_map *map)
 {
 	int	i;
 
 	i = 0;
 	while (i < NUMBER_TEXTURES)
 	{
-		if (map->textures[i].wall_orientation == DEFAULT_WALL)
-			return (error_msg("Error: Wall, floor or ceiling NOT DEFINED.", 0));
+		// if (map->textures[i].wall_orientation == DEFAULT_WALL)
+		// 	return (error_msg("Error: Wall, floor or ceiling NOT DEFINED.", 0));
 		if (i < NUMBER_TEXTURES - 2)
 		{
 			if (map->textures[i].is_color)
@@ -36,5 +36,5 @@ bool	check_all_wall_tile(t_map *map)
 		}
 		i++;
 	}
-	return (1);
+	return (EXIT_SUCCESS);
 }

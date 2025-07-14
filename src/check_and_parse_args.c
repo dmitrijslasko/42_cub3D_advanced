@@ -8,7 +8,7 @@ void	check_and_parse_args(t_data *dt, int argc, char **argv)
 		exit(1);
 	}
 	init_dt(dt);
-	if (parse_map_file(dt, argv[1]))
+	if (check_and_parse_map_file(dt, argv[1]))
 	{
 		free_dt(dt);
 		exit(1);

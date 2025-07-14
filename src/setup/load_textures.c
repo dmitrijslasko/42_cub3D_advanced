@@ -20,6 +20,8 @@ int	load_texture(t_data *dt, t_texture *texture, char *file)
 		texture_file = file;
 	else
 		texture_file = texture->file;
+		
+	printf("Trying to load file... %s\n", file);
 	texture->texture_img = mlx_xpm_file_to_image(dt->mlx_ptr,
 			texture_file,
 			&texture->width,
@@ -47,23 +49,16 @@ int	load_textures(t_data *dt)
 	{
 		texture = &dt->map.door.texture;
 		if (!load_texture(dt, texture, DOOR_TEXTURE_PATHFILE))
-			printf(">>> Door texture loaded!\n");
+			printf(TXT_GREEN">>> Door texture loaded!\n"TXT_RESET);
 	}
 	i = 0;
-	while (i < dt->map.number_of_textures)
+	while (i < NUMBER_TEXTURES)
 	{
-		if (dt->map.textures[i].is_color)
-		{
-			printf("Texture [%zu]: texture is color...\n", i);
-			i++;
-			continue ;
-		}
 		texture = &dt->map.textures[i].texture;
-		if (!load_texture(dt, texture, NULL))
-			printf("Texture [%zu]: %s loaded!\n", i, texture->file);
+		if (!load_texture(dt, texture, DOOR_TEXTURE_PATHFILE))
+			printf(TXT_GREEN"Texture [%2zu]: %s loaded!\n"TXT_RESET, i, texture->file);
 		i++;
 	}
 	printf(TXT_GREEN "Done!\n" TXT_RESET);
-	// exit (1);
 	return (EXIT_SUCCESS);
 }

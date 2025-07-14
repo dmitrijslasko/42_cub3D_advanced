@@ -24,7 +24,7 @@ bool	check_valid_texture(char **value)
 	len = ft_strlen(value[0]);
 	if (ft_strncmp(&(value[0])[len - 4], ".xpm", 4))
 	{
-		return (error_message2("Error: Improper texture file extension. Should be .xpm", value[0], 0));
+		return (error_message2("Error: Improper texture file extension. Should be .xpm\n", value[0], 0));
 		return (0);
 	}
 	fd_texture_file = open(value[0], O_RDONLY);
@@ -36,9 +36,8 @@ bool	check_valid_texture(char **value)
 
 bool	set_color_or_texture(t_map *map, char *identifier, char **value)
 {
-	if (!identifier || !*value)
-		return (error_msg("Error: Split.", 1));
-	if (check_valid_texture(value))
-		return (set_texture(identifier, *value, map));
-	return (set_color(identifier, value, map));
+	// if (!identifier || !*value)
+	// 	return (error_msg("Error: Split failed.", 1));
+	set_texture(map, identifier, *value);
+	return (EXIT_SUCCESS);
 }

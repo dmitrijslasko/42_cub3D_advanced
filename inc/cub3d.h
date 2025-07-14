@@ -51,18 +51,13 @@ typedef enum e_wall_orientation
 	WEST,
 	SOUTH,
 	EAST,
-	W_5,
-	W_6,
-	W_7,
-	W_8,
-	W_9,
-	FLOOR,
-	CEILING,
 }	t_wall_orientation;
 
-typedef enum e_cell_type
+typedef enum e_texture_type
 {
-	EMPTY_CELL = -1,
+	DEFAULT = -1,
+	FLOOR,
+	CEILING,
 	WALL_1,
 	WALL_2,
 	WALL_3,
@@ -80,19 +75,20 @@ typedef enum e_cell_type
 	DOOR_HORIZONTAL_2,
 	ELEVATOR_VERTICAL_1,
 	ELEVATOR_HORIZONTAL_1,
-}	t_cell_type;
+}	t_texture_type;
 
 typedef struct s_texture_match
 {
-	const char				*str;
+	const char				*mapfile_identificator;
 	const size_t			length;
 	const int				wall_orientation;
-	const char				map_file_repr;
+	const char				map_repr;
 }							t_texture_match;
 
 static const t_texture_match	g_texture_lookup[] = {
-{"F", 1, FLOOR, ' '},
-{"C", 1, CEILING, ' '},
+{"DEF", 3, DEFAULT, 0},
+{"F1", 2, FLOOR, ' '},
+{"C1", 2, CEILING, ' '},
 {"W1", 2, WALL_1, '1'},
 {"W2", 2, WALL_2, '2'},
 {"W3", 2, WALL_3, '3'},
@@ -190,6 +186,7 @@ typedef struct s_texture
 	int			size_line;
 	int			endian;
 	char		*file;
+	int			type;
 }	t_texture;
 
 typedef struct s_wall_tile
@@ -376,7 +373,7 @@ void		put_img_to_img(t_img *dest, t_img *src, int dx, int dy);
 void		put_img_to_img_circle(t_img *dest, t_img *src, int dx, int dy);
 //parsing
 char		*free_line_get_next(char *line, int fd);
-bool		parse_map_file(t_data *dt, char *file);
+bool		check_and_parse_map_file(t_data *dt, char *file);
 bool		check_valid_identifier_texture(char *identifier);
 bool		check_color(char *one_color);
 bool		check_valid_color(char **color);
@@ -386,26 +383,26 @@ bool		check_valid_color_or_texture(char **info);
 bool		is_empty_line(char *line);
 void		init_dt(t_data *dt);
 bool		is_valid_line_texture(char *line);
-bool		set_size_map_data(t_map *map, char *file);
+bool		set_map_size_data(t_map *map, char *file);
 bool		check_valid_wall_tile_file(char *file);
-bool		create_map_data(t_map *map, t_data *dt);
-bool		create_double_array(char ***array, size_t max_row,
+bool		init_map_data(t_map *map, t_data *dt);
+bool		init_2d_map(char ***array, size_t max_row,
 						size_t max_col, t_data *dt);
 bool		check_type_file(char *file, char *type);
 void		remove_new_line(char *str);
 char		*remove_space_beginner(char *str);
-bool		init_value_map_data(char *file, t_data *dt);
+bool		parse_map_file(char *file, t_data *dt);
 bool		init_default_map(t_map *map);
-bool		init_value_player(t_map *map, t_player *player);
+bool		init_player(t_map *map, t_player *player);
 int			ft_open(char *file);
-t_wall_orientation	check_valid_identifier_texture_wall(char *identifier);
-bool		check_all_wall_tile(t_map *map);
-bool		get_value_file(t_map *map, char *file);
-bool		get_value_file(t_map *map, char *file);
-void		get_value_map(char *line, int fd, t_map *map);
-void		get_init_position(t_map *map, t_player *player);
+t_wall_orientation	check_valid_texture_identifier(char *identifier);
+bool		check_all_textures(t_map *map);
+bool		parse_mapfile_values(t_map *map, char *file);
+bool		parse_mapfile_values(t_map *map, char *file);
+void		get_map_data_values(char *line, int fd, t_map *map);
+void		get_init_player_position(t_map *map, t_player *player);
 bool		set_color_or_texture(t_map *map, char *identifier, char **value);
-bool		set_texture(char *identifier, char *file_texture, t_map *map);
+bool	set_texture(t_map *map, char *identifier, char *texture_file);
 bool		set_color(char *identifier, char **color, t_map *map);
 bool		map_is_closed(t_map *map, t_player *player, t_data *dt);
 char		get_cell_type(t_map *map, t_coor *coord);
@@ -472,8 +469,6 @@ void		print_level_map(t_map *map);
 
 int			render_frame(void *param);
 void		render_ui(t_data *dt);
-
-int			init_player(t_data *dt);
 
 int			calculate_all_rays(t_data *dt);
 
@@ -649,5 +644,7 @@ int	apply_distance_shadow_distance(int distance, int *color);
 int	mimic_fullscreen(void);
 
 void	check_and_parse_args(t_data *dt, int argc, char **argv);
+
+int		init_default_textures(t_map *map);
 
 #endif

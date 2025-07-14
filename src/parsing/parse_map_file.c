@@ -12,17 +12,22 @@
 
 #include "cub3d.h"
 
-bool	parse_map_file(t_data *dt, char *file)
+bool	check_and_parse_map_file(t_data *dt, char *map_file)
 {
-	// if (!check_type_file(file, REQUIRED_MAP_EXTENSION))
-	// 	return (1);
-	// if (!check_valid_wall_tile_file(file))
-	// 	return (1);
-	if (init_value_map_data(file, dt))
+	if (!check_type_file(map_file, REQUIRED_MAP_EXTENSION))
 		return (1);
-	if (init_value_player(&dt->map, &dt->player))
+
+	if (!check_valid_wall_tile_file(map_file))
 		return (1);
-	// if (!map_is_closed(&dt->map, &dt->player, dt))
+
+	if (parse_map_file(map_file, dt))
+		return (1);
+
+	if (init_player(&dt->map, &dt->player))
+		return (1);
+
+	// if (map_is_closed(&dt->map, &dt->player, dt) == False)
 	// 	return (1);
+
 	return (0);
 }

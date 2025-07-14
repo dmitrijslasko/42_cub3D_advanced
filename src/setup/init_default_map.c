@@ -35,15 +35,23 @@ void	init_default_wall_tile(t_wall_tile *wall_tile)
 	init_default_color(&wall_tile->color);
 }
 
-bool	init_default_map(t_map *map)
+int		init_default_textures(t_map *map)
 {
-	int		i;
+	int i;
 
-	map->map_data = NULL;
-	map->map_size_cols = 0;
-	map->map_size_rows = 0;
 	i = 0;
 	while (i < NUMBER_TEXTURES)
 		init_default_wall_tile(&map->textures[i++]);
-	return (0);
+	return (EXIT_SUCCESS);
+}
+
+bool	init_default_map(t_map *map)
+{
+	printf("Initiliazing default map... ");
+	map->map_data = NULL;
+	map->map_size_cols = 0;
+	map->map_size_rows = 0;
+	init_default_textures(map);
+	printf("Done!\n");
+	return (EXIT_SUCCESS);
 }

@@ -12,19 +12,58 @@
 
 #include "cub3d.h"
 
-bool	init_value_map_data(char *file, t_data *dt)
+int		count_possible_textures(void)
 {
-	dt->map.number_of_textures = NUMBER_TEXTURES;
+	int	result;
+	int i;
+
+	result = 0;
+	i = 0;
+	while(g_texture_lookup[i].mapfile_identificator)
+	{
+		result++;
+		i++;
+	}
+	return (result);
+}
+
+int		init_textures(t_texture *textures, int len)
+{
+	int i;
+
+	i = 0;
+	while (i < len)
+	{
+		textures[i].file = NULL;
+		textures[i].type = g_texture_lookup[i].mapfile_identificator;
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+bool	parse_map_file(char *file, t_data *dt)
+{
+	int	possible_textures;
+	
+	possible_textures = count_possible_textures();
+	printf("Possible textures (based on the texture lookup table): %d\n", possible_textures);
+	dt->map.number_of_textures = possible_textures;
 	dt->map.m_textures = protected_malloc(dt->map.number_of_textures, dt);
+	printf("Malloced an array of %d elements!\n", dt->map.number_of_textures);
 	if (init_default_map(&dt->map))
 		return (1);
-	if (set_size_map_data(&dt->map, file))
+	// Sets the map size
+	if (set_map_size_data(&dt->map, file))
 		return (1);
-	if (create_map_data(&dt->map, dt))
+	// Initiliazes the map with empty cell values
+	if (init_map_data(&dt->map, dt))
 		return (1);
-	if (get_value_file(&dt->map, file))
+	// parses mapfile values
+	if (parse_mapfile_values(&dt->map, file))
 		return (1);
 	// if (!check_valid_player(&dt->map))
 	// 	return (1);
-	return (!check_all_wall_tile(&dt->map));
+	// NOTE DL: Probably can be removed for advanced part since we don't care about color / texture checks
+	// if (check_all_textures(&dt->map))
+	// 	return (1);
 }

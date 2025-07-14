@@ -12,15 +12,15 @@
 
 #include "cub3d.h"
 
-bool	set_texture(char *identifier, char *file_texture, t_map *map)
+bool	set_texture(t_map *map, char *identifier, char *texture_file)
 {
 	t_wall_orientation	wall_orientation;
 
-	wall_orientation = check_valid_identifier_texture_wall(identifier);
+	wall_orientation = check_valid_texture_identifier(identifier);
+	printf("%d\n", wall_orientation);
 	// if (map->textures[wall_orientation].wall_orientation != DEFAULT_WALL)
 	// 	return (error_msg("Error: set texture: duplicated wall/door/floor.", 1));
 	map->textures[wall_orientation].wall_orientation = wall_orientation;
-	map->textures[wall_orientation].texture.file = ft_substr(file_texture, 0, \
-												ft_strlen(file_texture));
+	map->textures[wall_orientation].texture.file = ft_substr(texture_file, 0, ft_strlen(texture_file));
 	return (0);
 }

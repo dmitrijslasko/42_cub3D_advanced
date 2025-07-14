@@ -50,7 +50,7 @@ bool	set_color(char *identifier, char **color, t_map *map)
 {
 	t_wall_orientation	wall_orientation;
 
-	wall_orientation = check_valid_identifier_texture_wall(identifier);
+	wall_orientation = check_valid_texture_identifier(identifier);
 	if (map->textures[wall_orientation].wall_orientation != DEFAULT_WALL)
 		return (error_msg("Error: set color: duplicated wall/door/floor.", 1));
 	map->textures[wall_orientation].wall_orientation = wall_orientation;

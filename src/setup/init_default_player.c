@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_default_player.c                              :+:      :+:    :+:   */
+/*   init_default_player_values.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,7 +15,7 @@
 /**
  * Initiliaze player starting values.
  */
-bool	init_default_player(t_player *player)
+bool	init_default_player_values(t_player *player)
 {
 	player->can_move = true;
 	player->is_moving = 0;
@@ -28,10 +28,10 @@ bool	init_default_player(t_player *player)
 	return (0);
 }
 
-bool	init_value_player(t_map *map, t_player *player)
+bool	init_player(t_map *map, t_player *player)
 {
-	if (init_default_player(player))
+	if (init_default_player_values(player))
 		return (1);
-	get_init_position(map, player);
+	get_init_player_position(map, player);
 	return (0);
 }

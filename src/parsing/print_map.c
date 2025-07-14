@@ -18,7 +18,7 @@ void	print_level_map(t_map *map)
 	int	col;
 
 	row = 0;
-	printf(TXT_YELLOW "Printing out the level map->..\n" TXT_RESET);
+	printf(TXT_YELLOW "Printing out the level map:\n" TXT_RESET);
 	print_separator(1, DEF_SEPARATOR_CHAR);
 	if (!map || !map->map_data || !map->map_data[0] || !map->map_data[0][0])
 		return ;

@@ -16,10 +16,10 @@ bool	check_valid_player(t_map *map)
 {
 	int		count;
 
-	count = count_elements_in_the_map(map, "NSWE");
+	count = count_elements_in_the_map(map, PLAYER_SPAWN_POINT_TYPES);
 	if (count == 0)
 		return (error_msg("Error: Player not found.", 0));
 	else if (count > 1)
-		return (error_msg("Error: Multi player.", 0));
+		return (error_msg("Error: Multiple player spawn points found.", 0));
 	return (1);
 }

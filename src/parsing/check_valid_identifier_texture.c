@@ -21,9 +21,9 @@ bool	is_valid_line_texture(char *line)
 	j = 0;
 	while (line[j] && ft_strchr(WHITESPACE, line[j]))
 		j++;
-	while (g_texture_lookup[i].str)
+	while (g_texture_lookup[i].mapfile_identificator)
 	{
-		if (!ft_strncmp(&line[j], g_texture_lookup[i].str, g_texture_lookup[i].length) \
+		if (!ft_strncmp(&line[j], g_texture_lookup[i].mapfile_identificator, g_texture_lookup[i].length) \
 			&& ft_strchr(WHITESPACE, line[j + g_texture_lookup[i].length]))
 			return (1);
 		i++;
@@ -31,14 +31,14 @@ bool	is_valid_line_texture(char *line)
 	return (0);
 }
 
-t_wall_orientation	check_valid_identifier_texture_wall(char *identifier)
+t_wall_orientation	check_valid_texture_identifier(char *identifier)
 {
 	size_t	i;
 
 	i = 0;
-	while (g_texture_lookup[i].str)
+	while (g_texture_lookup[i].mapfile_identificator)
 	{
-		if (!ft_strncmp(identifier, g_texture_lookup[i].str, ft_strlen(identifier)))
+		if (!ft_strncmp(identifier, g_texture_lookup[i].mapfile_identificator, ft_strlen(identifier)))
 			return (g_texture_lookup[i].wall_orientation);
 		i++;
 	}
