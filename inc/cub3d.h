@@ -108,6 +108,7 @@ typedef enum e_texture_type
 typedef struct s_texture_match
 {
 	const char				*mapfile_identificator;
+	const char				*description;
 	const size_t			mapfile_len;
 	const int				texture_type;
 	const char				map_repr;
@@ -115,23 +116,23 @@ typedef struct s_texture_match
 }							t_texture_match;
 
 static const t_texture_match	g_texture_lookup[] = {
-{"DEF", 3, DEFAULT, 0},
-{"F1", 2, FLOOR, ' '},
-{"C1", 2, CEILING, ' '},
-{"W1", 2, WALL_1, '1'},
-{"W2", 2, WALL_2, '2'},
-{"W3", 2, WALL_3, '3'},
-{"W4", 2, WALL_4, '4'},
-{"W5", 2, WALL_5, '5'},
-{"W6", 2, WALL_6, '6'},
-{"W7", 2, WALL_7, '7'},
-{"W8", 2, WALL_8, '8'},
-{"W9", 2, WALL_9, '9'},
-{"DV1", 3, DOOR_VERTICAL_1, '|'},
-{"DH1", 3, DOOR_HORIZONTAL_1, '-'},
-{"EH1", 3, ELEVATOR_HORIZONTAL_1, '*'},
-{"EV1", 3, ELEVATOR_VERTICAL_1, '^'},
-{NULL, -1, -1, 0}
+{"DEF", "default fallback texture", 3, DEFAULT, 0},
+{"F1", "floor 1 texture", 2, FLOOR, ' '},
+{"C1", "ceiling 1 texture", 2, CEILING, ' '},
+{"W1", "wall 1 texture", 2, WALL_1, '1'},
+{"W2", "wall 2 texture", 2, WALL_2, '2'},
+{"W3", "wall 3 texture", 2, WALL_3, '3'},
+{"W4", "wall 4 texture", 2, WALL_4, '4'},
+{"W5", "wall 5 texture", 2, WALL_5, '5'},
+{"W6", "wall 6 texture", 2, WALL_6, '6'},
+{"W7", "wall 7 texture", 2, WALL_7, '7'},
+{"W8", "wall 8 texture", 2, WALL_8, '8'},
+{"W9", "wall 9 texture", 2, WALL_9, '9'},
+{"DV1", "door 1 (v) texture",  3, DOOR_VERTICAL_1, '|'},
+{"DH1", "door 1 (h) texture", 3, DOOR_HORIZONTAL_1, '-'},
+{"EV1", "elevator 1 (v) texture", 3, ELEVATOR_VERTICAL_1, '^'},
+{"EH1", "elevator 1 (h) texture", 3, ELEVATOR_HORIZONTAL_1, '*'},
+{NULL, NULL, -1, -1, 0}
 };
 
 typedef enum e_active_message
@@ -601,10 +602,11 @@ int			map_position_is_walkable(t_data *dt, float *new_x, float *new_y);
 
 int			render_ui_message(t_data *dt);
 void		free_graphic(t_data *dt);
+void	free_mlx(t_data *dt);
 void		free_wall_tile_texture(t_data *dt);
 void		free_texture(t_data *dt, t_texture *texture);
 void		free_img(t_img *img, void *mlx_ptr);
-void		free_texture_sprite(t_data *dt);
+void		free_sprites(t_data *dt);
 void		ft_free(void *ptr);
 int			count_sprite_textures(t_data *dt);
 size_t		count_if_there_is_others_elements(t_map *map, char *element);

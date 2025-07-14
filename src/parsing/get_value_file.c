@@ -43,8 +43,8 @@ bool	get_texture_filenames(t_map *map, int fd, char **str)
 			printf("%s: %s\n", array[0], array[1]);
 			int index = get_lookup_table_index(array[0]);
 			printf(TXT_YELLOW"Index in lookup table: %d\n"TXT_RESET, index);
-			map->m_textures[index].texture.xpm_file = ft_strdup(array[1]);
-			printf(">>> %s\n", map->m_textures[index].texture.xpm_file);
+			// map->m_textures[index].texture.xpm_file = ft_strdup(array[1]);
+			// printf(">>> %s\n", map->m_textures[index].texture.xpm_file);
 			if (set_color_or_texture(map, array[0], &array[1]))
 			{
 				free_line_get_next(line, -1);

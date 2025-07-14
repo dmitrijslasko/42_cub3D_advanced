@@ -49,7 +49,7 @@ bool	parse_mapfile(char *file, t_data *dt)
 	printf("Possible textures (based on the texture lookup table): %d\n", possible_textures);
 	dt->map.number_of_textures = possible_textures;
 	dt->map.m_textures = protected_malloc(dt->map.number_of_textures, dt);
-	printf("Malloced an array of %d elements!\n", dt->map.number_of_textures);
+	printf("Malloc'ed an array of %d elements!\n", dt->map.number_of_textures);
 
 	if (init_default_map(&dt->map))
 		return (1);

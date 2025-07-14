@@ -129,7 +129,10 @@ int print_out_texture_lookup_table(void)
 	printf("Printing out the texture lookup table!\n");
 	while (g_texture_lookup[i].mapfile_identificator)
 	{
-		printf("%s: %s\n", g_texture_lookup[i].mapfile_identificator, g_texture_lookup[i].texture.xpm_file);
+		printf("[%s]: %s: %s\n", 
+			g_texture_lookup[i].description, 
+			g_texture_lookup[i].mapfile_identificator, 
+			g_texture_lookup[i].texture.xpm_file);
 		i++;
 	}
 	print_separator_default();
