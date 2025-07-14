@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:35:51 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 17:32:37 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 18:53:02 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -428,10 +428,11 @@ void		draw_minimap_grid(t_data *dt);
 int			draw_minimap_player(t_data *dt);
 void		draw_minimap_ray(t_data *dt, t_coor origin, t_x_y dir, int color);
 int			draw_minimap_rays(t_data *dt, int is_direction_vector);
-int			draw_minimap_THIN_WALL_VERTICAL_1(t_data *dt,
+int			draw_minimap_thin_wall_vertical(t_data *dt,
 						size_t curr_col, size_t curr_row);
 int			draw_minimap_door_vertical(t_data *dt,
 						size_t curr_col, size_t curr_row);
+int	draw_minimap_door_horizontal(t_data *dt, size_t curr_col, size_t curr_row);
 int			draw_minimap_sprite(t_data *dt, size_t curr_col, size_t curr_row);
 int			draw_minimap_wall_cell(t_data *dt, size_t curr_col,
 						size_t curr_row);
@@ -442,9 +443,9 @@ int			draw_sky(t_data *dt);
 void		render_3d_scene(t_data *dt);
 int			draw_ceiling(t_data *dt);
 int			draw_floor(t_data *dt);
-int	draw_textured_floor(t_data *dt);
-int	draw_textured_floor2(t_data *dt);
-int draw_textured_ceiling(t_data *dt);
+int			draw_textured_floor(t_data *dt);
+int			draw_textured_floor2(t_data *dt);
+int 		draw_textured_ceiling(t_data *dt);
 int			render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset,
 						t_coor *sprite_size);
 float		fix_fish_eye(t_ray *ray, t_player *player);

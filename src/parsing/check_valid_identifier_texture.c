@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:06:19 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 17:58:52 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 19:08:55 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ bool	is_valid_line_texture(char *line)
 {
 	size_t	i;
 	size_t	j;
+	size_t	len;
 
 	i = 0;
 	j = 0;
@@ -23,8 +24,9 @@ bool	is_valid_line_texture(char *line)
 		j++;
 	while (g_texture_lookup[i].mapfile_id)
 	{
-		if (!ft_strncmp(&line[j], g_texture_lookup[i].mapfile_id, g_texture_lookup[i].mapfile_len) \
-			&& ft_strchr(WHITESPACE, line[j + g_texture_lookup[i].mapfile_len]))
+		len = ft_strlen(g_texture_lookup[i].mapfile_id);
+		if (!ft_strncmp(&line[j], g_texture_lookup[i].mapfile_id, len) \
+			&& ft_strchr(WHITESPACE, line[j + len]))
 			return (1);
 		i++;
 	}

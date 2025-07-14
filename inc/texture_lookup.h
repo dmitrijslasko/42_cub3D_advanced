@@ -52,6 +52,7 @@ typedef enum e_texture_type
 	DOOR_1,
 	DOOR_VERTICAL_1,
 	DOOR_VERTICAL_2,
+	ELEVATOR_DOOR_1,
 	DOOR_HORIZONTAL_1,
 	DOOR_HORIZONTAL_2,
 	ELEVATOR_VERTICAL_1,
@@ -64,28 +65,27 @@ typedef struct s_texture_match
 	const int				texture_id;
 	const char				*mapfile_id;
 	const char				*description;
-	const size_t			mapfile_len;
 	const int				texture_type;
 	const char				map_repr;
 }							t_texture_match;
 
 static const t_texture_match	g_texture_lookup[] = {
-{0, "DEF", "default fallback texture", 3, DEFAULT, 0},
-{1, "F1", "floor 1 texture", 2, FLOOR, ' '},
-{2, "C1", "ceiling 1 texture", 2, CEILING, ' '},
-{3, "W1", "wall 1 texture", 2, WALL_1, '1'},
-{4, "W2", "wall 2 texture", 2, WALL_2, '2'},
-{5, "W3", "wall 3 texture", 2, WALL_3, '3'},
-{6, "W4", "wall 4 texture", 2, WALL_4, '4'},
-{7, "W5", "wall 5 texture", 2, WALL_5, '5'},
-{8, "W6", "wall 6 texture", 2, WALL_6, '6'},
-{9, "W7", "wall 7 texture", 2, WALL_7, '7'},
-{10, "W8", "wall 8 texture", 2, WALL_8, '8'},
-{11, "W9", "wall 9 texture", 2, WALL_9, '9'},
-{12, "D1", "door 1 texture", 2, DOOR_1, '|'},
-{14, "EV1", "elevator 1 (v) texture", 3, ELEVATOR_VERTICAL_1, '^'},
-{15, "EH1", "elevator 1 (h) texture", 3, ELEVATOR_HORIZONTAL_1, '*'},
-{-1, NULL, NULL, -1, -1, 0}
+{0, "DEF", "default fallback texture", DEFAULT, 0},
+{1, "F1", "floor 1 texture", FLOOR, ' '},
+{2, "C1", "ceiling 1 texture", CEILING, ' '},
+{3, "W01", "wall 1 texture", WALL_1, '1'},
+{4, "W02", "wall 2 texture", WALL_2, '2'},
+{5, "W03", "wall 3 texture", WALL_3, '3'},
+{6, "W04", "wall 4 texture", WALL_4, '4'},
+{7, "W05", "wall 5 texture", WALL_5, '5'},
+{8, "W06", "wall 6 texture", WALL_6, '6'},
+{9, "W07", "wall 7 texture", WALL_7, '7'},
+{10, "W08", "wall 8 texture", WALL_8, '8'},
+{11, "W09", "wall 9 texture", WALL_9, '9'},
+{12, "D01", "door 1 texture", DOOR_1, '|'},
+{14, "ED1", "elevator door 1 texture", ELEVATOR_DOOR_1, '*'},
+{15, "EH1", "elevator 1 (h) texture", ELEVATOR_HORIZONTAL_1, '*'},
+{-1, NULL, NULL, -1, 0}
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:39:14 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 17:39:14 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 18:41:35 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@
 
 # define MINIMAP_WALL_CELL_COLOR			DARKGREY
 # define MINIMAP_PLAYER_SPAWN_CELL_COLOR	0xFFBB00
-# define MINIMAP_DOOR_COLOR					GREY
+# define MINIMAP_DOOR_COLOR					BLACK
 # define MINIMAP_THIN_WALL_COLOR			BLACK
 # define MINIMAP_SPRITE_COLOR				RED
 
@@ -152,12 +152,10 @@
 # define WELCOME_IMAGE       				"./assets/images/intro.xpm"
 # define SHOW_WELCOME_IMAGE  				0
 
-# define PUT_DOOR				            1
-# define DOOR_TEXTURE_PATHFILE				"./textures/wolf37.xpm"
 // all printable ASCII characters + fallback texture
 # define NUMBER_TEXTURES    	            20
 
-# define WHITESPACE        	            " \a\b\t\n\v\f\r"
+# define WHITESPACE        	            	" \a\b\t\n\v\f\r"
 
 # define PLAYER_SPAWN_POINT_TYPES			"NSWE"
 # define SPRITE_TYPES     	 	            "abcdefghijklmnopqrstuvwxyz"
@@ -165,9 +163,9 @@
 # define WALL_TYPES							"123456789"
 # define VERTICAL_WALL_TYPES				"v"
 # define HORIZONTAL_WALL_TYPES				"h"
-# define DOOR_TYPES							"|-*"
-# define VERTICAL_DOOR_TYPES				"|*"
-# define HORIZONTAL_DOOR_TYPES				"-"
+# define DOOR_TYPES							"|-"
+# define VERTICAL_DOOR_TYPES				"|"
+# define HORIZONTAL_DOOR_TYPES				"--"
 
 // shaders
 # define ENABLE_SHADERS						1

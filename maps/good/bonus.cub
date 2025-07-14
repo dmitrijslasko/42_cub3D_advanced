@@ -1,24 +1,25 @@
 DEF     textures/wolf44.xpm
-F1      textures/test_floor.xpm
-C1      textures/test_floor.xpm
-W1     	textures/simonkraft/bookshelf_02.xpm
-W2      textures/wolfenstein/red_brick.xpm
-W3 		textures/blue-wall.xpm
-W4 		textures/ceiling.xpm
-W5      textures/bookshelf.xpm
-W6      textures/simonkraft/respawn_anchor_side3.xpm
-W7      textures/ceiling.xpm
-W8      textures/simonkraft/bookshelf_01.xpm
-W9      textures/test_floor.xpm
-D1     	textures/wolf37.xpm
+F1      textures/ceiling.xpm
+C1      textures/ceiling.xpm
+W01     textures/simonkraft/bookshelf_02.xpm
+W02     textures/wolfenstein/red_brick.xpm
+W03 	textures/blue-wall.xpm
+W04 	textures/blue-wall-skeleton.xpm
+W05     textures/bookshelf.xpm
+W06     textures/simonkraft/respawn_anchor_side3.xpm
+W07     textures/ceiling.xpm
+W08     textures/simonkraft/bookshelf_01.xpm
+W09     textures/test_floor.xpm
+D01    	textures/ceiling.xpm
+ED1    	textures/wolf44.xpm
 
 111166111111111111111111111111111111111111111111111
-1p     1343434116666666615555555   1             p1
-1      |      |p   s  p1      5    1              1
+1p     1343434116666666615555555   1              1
+1      |      | p  s  p1      5    1  2 2 2 2 2 2 1
 1      13434341        |      5    1              1
-111-1221  1   2        1      5   11              1
-1      1   1           15555555   11        p     1
-1      1111111         11111111    1              1
+111-1221  1   2        1      5   11  2 2 2 2 2 2 1
+1      1   1           15555555   11              1
+1      1111111         11111111    |  2 2 2 2 2 2 1
 1 s          1         |    1     p1              1
 1    999     1      s  1    1     d1              1
 1     p1     1         1    1     11              12
@@ -30,8 +31,8 @@ D1     	textures/wolf37.xpm
 9             7   7   7                           9
 999999999999999999999999999999999999999-99-99-99-99
 1p     1343434116666666615555555   1p            p1
-1      |      |p   s  p1      5    1p             1
-1      13434341        |      5    1p             1
+1      |      | p   s  p1      5    1p           p1
+1      13434341        |      5    1p            p1
 111-1221  1   2        1      5   11        s     1
 1      1   1           15555555   11        p     1
 1      1111111         11111111    |        d     1

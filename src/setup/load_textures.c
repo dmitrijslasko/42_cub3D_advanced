@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:10:23 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 18:03:29 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 18:40:03 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,6 @@ int	load_textures(t_data *dt)
 
 	print_separator_default();
 	printf(TXT_YELLOW ">>> LOADING TEXTURES\n" TXT_RESET);
-	if (PUT_DOOR)
-	{
-		texture = &dt->map.door.texture;
-		if (!load_texture(dt, texture, DOOR_TEXTURE_PATHFILE))
-			printf(TXT_GREEN">>> Door texture loaded!\n"TXT_RESET);
-	}
 	i = 0;
 	//int index;
 	while (i < NUMBER_TEXTURES)

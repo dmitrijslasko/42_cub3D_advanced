@@ -22,10 +22,10 @@ int draw_textured_floor(t_data *dt)
     while (current_row < WINDOW_H)
     {
         float adjustment;
-        
+
         adjustment = 0.6354f;
 		float fov_factor = tanf((FIELD_OF_VIEW_DEG * adjustment) * (M_PI / 180.0f));
-        
+
         int p = current_row - dt->view->screen_center_y;
         float rowDistance = ((0.5f * WINDOW_H) / p) / fov_factor;
 
@@ -48,8 +48,8 @@ int draw_textured_floor(t_data *dt)
             int texX = (int)(TILE_SIZE * (floorX - cellX)) & (TILE_SIZE - 1);
             int texY = (int)(TILE_SIZE * (floorY - cellY)) & (TILE_SIZE - 1);
 
-            texture = dt->map.textures[6].texture;
-            
+            texture = dt->map.textures[FLOOR].texture;
+
             // Get color and draw pixel
             color = texture.texture_data[TILE_SIZE * texY + texX];
 			// apply_distance_shadow_floor(100, &color);
