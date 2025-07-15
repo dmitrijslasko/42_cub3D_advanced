@@ -6,12 +6,24 @@
 #    By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/02 14:55:41 by fvargas           #+#    #+#              #
-#    Updated: 2025/07/09 19:06:38 by dmlasko          ###   ########.fr        #
+#    Updated: 2025/07/15 13:24:55 by dmlasko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 include config.mk
 include colors.mk
+
+UBUNTU_VERSION := $(shell . /etc/os-release && echo $$VERSION_ID)
+
+ifeq ($(UBUNTU_VERSION), "22.04")
+	OS_FLAGS += -DLINUX_22=1
+    OS_VERSION_TAG := ubuntu22
+else ifeq ($(UBUNTU_VERSION), "24.04")
+	OS_FLAGS += -DLINUX_22=0
+    OS_VERSION_TAG := ubuntu24
+else
+    OS_VERSION_TAG := unknown
+endif
 
 # PROJECT NAME
 NAME = cub3D
@@ -25,6 +37,8 @@ INC_DIR = ./inc
 SRC_DIR = ./src
 OBJ_DIR = ./obj
 OBJ_DIR_BONUS = ./obj_bonus
+
+
 
 # LIBRARIES
 LIBDIRS = ./lib
@@ -237,7 +251,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 bonus: $(NAME_BONUS) $(HEADER_FILE_B)
 
 $(NAME_BONUS): $(OBJ_BONUS)
-	@$(CC) $(CFLAGS) $(BONUSFLAGS) $(OBJ_BONUS) $(LDFLAGS) -o $@
+	@$(CC) $(CFLAGS) $(BONUSFLAGS) $(OBJ_BONUS) $(LDFLAGS) $(OS_FLAGS) -o $@
 	@echo "$(B_MAGENTA)✅ $@ successfully compiled.$(RST)"
 	@echo "🚩 $(MAGENTA)Bonus Flags:\n$(CFLAGS)\n$(LDFLAGS)\n$(BONUSFLAGS)$(RST)"
 
@@ -273,6 +287,10 @@ re: fclean all
 
 $(MINILIBX):
 	$(MAKE) -C $(MINILIBX_DIR)
+
+ubuntu:
+	@echo Detected Ubuntu version: $(UBUNTU_VERSION)
+	@echo Using OS tag: $(OS_VERSION_TAG)
 
 # ------------------------------------------------------------------------------
 

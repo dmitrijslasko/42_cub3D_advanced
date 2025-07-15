@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:39:14 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 19:37:01 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/15 13:26:02 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 
 # ifndef BONUS
 #  define BONUS 0
+# endif
+
+# ifndef LINUX_22
+# 	define LINUX_22 1
 # endif
 
 // window name
@@ -41,7 +45,6 @@
 # define FPS								60
 # define SCALING				            250
 # define MIMIC_FULLSCREEN                   1
-# define LINUX_22                           0
 
 # define STARTING_AMMO_LEVEL				9
 // constants.h or at the top of your .c file

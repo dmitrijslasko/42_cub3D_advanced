@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:07:08 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 17:55:47 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/15 14:43:14 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ bool	check_and_parse_mapfile(t_data *dt, char *map_file)
 	if (init_player(&dt->map, &dt->player))
 		return (EXIT_FAILURE);
 
-	// if (check_map_is_closed(&dt->map, &dt->player, dt) == False)
-	// 	return (1);
+	 if (check_map_is_closed(&dt->map, &dt->player, dt) == False)
+	 	return (EXIT_FAILURE);
 
 	return (EXIT_SUCCESS);
 }

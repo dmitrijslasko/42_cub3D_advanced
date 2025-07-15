@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:12:07 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 19:40:40 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/15 14:43:01 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,10 +146,9 @@ int	main(int argc, char **argv)
 	t_data	dt;
 
 	check_and_parse_args(&dt, argc, argv);
-	for (int i; i < dt.map.map_size_cols; i++)
-		dt.map.map_data[0][i] = '1';
+	//for (int i; i < dt.map.map_size_cols; i++)
+	//	dt.map.map_data[0][i] = '1';
 	print_level_map(&dt.map);
-	//exit (1);
 	precalculate_trig_tables(&dt);
 	if (setup_mlx_and_win(&dt))
 		return (MLX_ERROR);
@@ -157,11 +156,11 @@ int	main(int argc, char **argv)
 	draw_minimap_base_img(&dt);
 	setup_keyboard_and_mouse_controls(&dt);
 	print_separator(3, DEF_SEPARATOR_CHAR);
-	printf("Starting game!\n");
+	printf("🎮 Starting game!\n");
 	system("gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false");
-	mimic_fullscreen();
-	dt.player.pos.x = 2.5;
-	dt.player.pos.y = 2.5;
+	//mimic_fullscreen();
+	//dt.player.pos.x = 2.5;
+	//dt.player.pos.y = 2.5;
 	mlx_loop_hook(dt.mlx_ptr, &render_frame, &dt);
 	mlx_loop(dt.mlx_ptr);
 	free_dt(&dt);

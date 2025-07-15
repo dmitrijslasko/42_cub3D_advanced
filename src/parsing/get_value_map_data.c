@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:06:54 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 19:31:47 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/15 14:42:37 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,18 @@ bool	copy_map_row(t_map *map, int row, char *line)
 	return (EXIT_SUCCESS);
 }
 
-void	get_map_data_values(int fd, char *line, t_map *map)
+void	parse_map(t_map *map, int fd, char **line)
 {
 	size_t	count_row;
 
 	count_row = 0;
-	//line = free_line_get_next(line, fd); // Skip the first (already read) line
-	while (line && line_is_empty(line) == false)
+	printf("NEXT LINE: %s\n", *line);
+	while (*line && line_is_empty(*line) == false)
 	{
-		copy_map_row(map, count_row, line);
-		line = free_line_get_next(line, fd);
+		copy_map_row(map, count_row, *line);
+		*line = free_line_get_next(*line, fd);
+		printf("NEXT LINE: %s\n", *line);
 		count_row++;
 	}
-	free_line_get_next(line, -1);
+	free_line_get_next(*line, -1);
 }

@@ -26,7 +26,7 @@ int		get_lookup_table_index(char *str)
 	return (-1);
 }
 
-bool	get_texture_filenames(t_map *map, int fd, char **str)
+bool	parse_textures(t_map *map, int fd, char **str)
 {
 	char	**array;
 	char	*line;
@@ -34,12 +34,14 @@ bool	get_texture_filenames(t_map *map, int fd, char **str)
 
 	line = *str;
 	print_separator_default();
-	printf(TXT_CYAN"FOUND THESE TEXTURES IN THE MAP FILE:\n"TXT_RESET);
-	while (line && (line_is_empty(line) || is_valid_line_texture(line)))
+	printf(TXT_CYAN"Parsing textures in the mapfile:\n"TXT_RESET);
+	// Parse textures till there is something to parse...
+	while (line && is_valid_line_texture(line) || (line_is_empty(line)))
 	{
+		printf("[TEXTURE] current line: \"%s\"\n", line);
 		if (is_valid_line_texture(line))
 		{
-			array = ft_split_special(line, WHITESPACE);
+			array = ft_split_by_multiple_delimiters(line, WHITESPACE);
 			printf("%s: %s\n", array[0], array[1]);
 			index = get_lookup_table_index(array[0]);
 			// NOTE DL: Look into this
@@ -48,7 +50,7 @@ bool	get_texture_filenames(t_map *map, int fd, char **str)
 			//	printf(TXT_YELLOW">>>Key not found in the lookup table: %s\n"TXT_RESET, array[0]);
 			//	continue;
 			//}
-			printf(TXT_YELLOW">>> Index in the lookup table: %d\n"TXT_RESET, index);
+			printf(TXT_YELLOW">>> Index in the texture lookup table: %d\n---\n"TXT_RESET, index);
 			if (set_color_or_texture(map, array[0], &array[1]))
 			{
 				free_line_get_next(line, -1);
@@ -56,8 +58,12 @@ bool	get_texture_filenames(t_map *map, int fd, char **str)
 			}
 			free_array(array);
 		}
+		printf("Line: %s\n", line);
+		printf(">>> Cleaning........\n", line);
 		line = free_line_get_next(line, fd);
 	}
+	printf("[TEXTURE] last line returned: \"%s\"\n", line);
+	*str = line;
 	print_separator_default();
 	return (EXIT_SUCCESS);
 }
@@ -67,19 +73,21 @@ bool	parse_mapfile_values(t_map *map, char *mapfile)
 	int		result;
 	char	*line;
 
+	// Open file
 	fd = ft_open(mapfile);
 	if (fd < 0)
 		return (EXIT_FAILURE);
-	line = free_line_get_next(NULL, fd);
 
+	//line = free_line_get_next(NULL, fd);
+	line = get_next_line(fd);
+	printf("NEXT LINE: %s\n", line);
 	// parse textures
-	result = get_texture_filenames(map, fd, &line);
-	printf("Done...\n");
-
+	result = parse_textures(map, fd, &line);
+	printf("[TEXTURE] last line returned: \"%s\"\n", line);
 	if (result == 0)
 	{
 		printf(">>> Parsing the map now...\n");
-		get_map_data_values(fd, line, map);
+		parse_map(map, fd, &line);
 	}
 	close(fd);
 	return (result);

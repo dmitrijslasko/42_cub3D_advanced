@@ -26,7 +26,7 @@ char	*extract_line(char *stash)
 	line[i] = '\0';
 	return (line);
 }
-char	*read_buffer_util_find_newline(int fd, char *stash)
+char	*read_buffer_until_find_newline(int fd, char *stash)
 {
 	int		bytes_read;
 	char	*buffer;
@@ -92,7 +92,7 @@ char	*get_next_line(int fd)
 		}
 		return (0);
 	}
-	stash = read_buffer_util_find_newline(fd, stash);
+	stash = read_buffer_until_find_newline(fd, stash);
 	if (!stash)
 		return (0);
 	line = extract_line(stash);

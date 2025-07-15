@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:10:01 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 19:19:41 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/15 14:04:48 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ bool	parse_mapfile(char *file, t_data *dt)
 	// Initiliazes the map with empty cell values
 	if (init_map_data(&dt->map, dt))
 		return (1);
-	// Parses mapfile values
+	// Parses mapfile values - textures and the map itself
 	if (parse_mapfile_values(&dt->map, file))
 		return (1);
-	print_out_texture_lookup_table(dt);
+	//print_out_texture_lookup_table(dt);
 	// if (!check_valid_player(&dt->map))
 	// 	return (1);
 	// NOTE DL: Probably can be removed for advanced part since we don't care about color / texture checks

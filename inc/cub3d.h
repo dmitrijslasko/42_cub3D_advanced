@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:35:51 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 19:17:51 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/15 14:21:35 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -318,7 +318,7 @@ int			ft_open(char *file);
 t_wall_orientation	check_valid_texture_identifier(char *identifier);
 bool		check_all_textures(t_map *map);
 bool		parse_mapfile_values(t_map *map, char *file);
-void		get_map_data_values(int fd, char *line, t_map *map);
+void		parse_map(t_map *map, int fd, char **line);
 void		get_init_player_position(t_map *map, t_player *player);
 bool		set_color_or_texture(t_map *map, char *identifier, char **value);
 //bool		set_texture(t_map *map, char *identifier, char *texture_file);
@@ -326,11 +326,11 @@ bool		set_color(char *identifier, char **color, t_map *map);
 bool		check_map_is_closed(t_map *map, t_player *player, t_data *dt);
 char		get_cell_type(t_map *map, t_coor *coord);
 char		get_cell_type_by_coordinates(t_map *map, size_t y, size_t x);
-char		**ft_split_special(const char *s, char *c);
+char		**ft_split_by_multiple_delimiters(const char *s, char *c);
 
 // player movements
-int			move_sideways(t_data *dt, int is_to_the_right);
 int			move_forward_backward(t_data *dt, int direction);
+int			move_sideways(t_data *dt, int is_to_the_right);
 void		rotate_player(t_data *dt, float d_angle, int direction);
 
 //ray
