@@ -37,8 +37,8 @@ void	set_cell_type(t_data *dt, t_ray *ray, t_coor *map_coor)
 		ray->cell_type = WALL_9;
 	else if (cell_type == '|')
 		ray->cell_type = DOOR_VERTICAL_1;
-	else if (cell_type == '*')
-		ray->cell_type = DOOR_VERTICAL_1;
+	else if (cell_type == '[')
+		ray->cell_type = DOOR_2;
 	else if (cell_type == '-')
 		ray->cell_type = DOOR_HORIZONTAL_1;
 	else if (cell_type == 'v')

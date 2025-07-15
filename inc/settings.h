@@ -41,7 +41,7 @@
 # define FPS								60
 # define SCALING				            250
 # define MIMIC_FULLSCREEN                   1
-# define LINUX_22                           1
+# define LINUX_22                           0
 
 # define STARTING_AMMO_LEVEL				9
 // constants.h or at the top of your .c file
@@ -163,7 +163,7 @@
 # define WALL_TYPES							"123456789"
 # define VERTICAL_WALL_TYPES				"v"
 # define HORIZONTAL_WALL_TYPES				"h"
-# define DOOR_TYPES							"|-"
+# define DOOR_TYPES							"|-[]"
 # define VERTICAL_DOOR_TYPES				"|"
 # define HORIZONTAL_DOOR_TYPES				"--"
 
