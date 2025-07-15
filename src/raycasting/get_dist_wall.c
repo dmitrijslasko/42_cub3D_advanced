@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:07:45 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/11 18:34:21 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/15 14:46:42 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	set_cell_type(t_data *dt, t_ray *ray, t_coor *map_coor)
 {
 	char	cell_type;
 
+	// TODO DL: This needs to be redone ASAP
 	cell_type = get_cell_type(&dt->map, map_coor);
 	if (cell_type == '1')
 		ray->cell_type = WALL_1;

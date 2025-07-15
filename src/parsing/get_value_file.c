@@ -26,6 +26,23 @@ int		get_lookup_table_index(char *str)
 	return (-1);
 }
 
+int		get_lookup_table_index_cell_type(int cell_type)
+{
+	int i;
+
+	i = 0;
+	while (g_texture_lookup[i].mapfile_id)
+	{
+		printf("%d\n", g_texture_lookup[i].texture_type);
+		if (g_texture_lookup[i].texture_type == cell_type)
+		{
+			return (i);
+		}
+		i++;
+	}
+	return (-1);
+}
+
 bool	parse_textures(t_map *map, int fd, char **str)
 {
 	char	**array;

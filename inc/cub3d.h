@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:35:51 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/15 14:21:35 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/15 14:53:21 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -570,5 +570,6 @@ int		init_default_textures(t_map *map);
 int print_out_texture_lookup_table(t_data *dt);
 
 int		get_lookup_table_index(char *str);
+int		get_lookup_table_index_cell_type(int cell_type);
 
 #endif
