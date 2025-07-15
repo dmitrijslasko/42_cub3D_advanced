@@ -12,6 +12,10 @@ W08     textures/simonkraft/bookshelf_01.xpm
 W09     textures/wolfenstein/purple_stone.xpm
 D01    	textures/wolf37.xpm
 D02     textures/door-red.xpm
+D03    	textures/wolf37.xpm
+D04     textures/door-red.xpm
+D05    	textures/wolf37.xpm
+D06     textures/door-red.xpm
 ED1    	textures/wolf44.xpm
 
 
@@ -23,9 +27,9 @@ ED1    	textures/wolf44.xpm
 99999999  1   2        1      5   11  2 2 2 2 2 2 1
 1      1   1           15555555   11              1
 1      1111111         11111111    |  2 2 2 2 2 2 1
-1 s          1         |    1     p1              1
+1 s          |         |    1     p1              1
 1    999     1      s  1    1     d1              1
-1     p1     1         1    1     11              12
+1     p1     [         1    1     11              12
 1      1     1    h    1    1   . p1             * 2
 1      1111111         111111     11              12
 1d p                              p1             p1
