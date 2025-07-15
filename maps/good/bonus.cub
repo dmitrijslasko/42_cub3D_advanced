@@ -11,14 +11,14 @@ W07     textures/ceiling.xpm
 W08     textures/simonkraft/bookshelf_01.xpm
 W09     textures/wolfenstein/purple_stone.xpm
 D01    	textures/wolf37.xpm
-D02    	textures/wolf44.xpm
+D02     textures/door-red.xpm
 ED1    	textures/wolf44.xpm
 
 
 
 111166111111111111111111111111111111111111111111111
 9p     9343434116666666615555555   1              1
-9    E |      [ p  s  p1      5    1  2 2 2 2 2 2 1
+9     E[      | p  s  p1      5    1  2 2 2 2 2 2 1
 9      93434341        |      5    1              1
 99999999  1   2        1      5   11  2 2 2 2 2 2 1
 1      1   1           15555555   11              1

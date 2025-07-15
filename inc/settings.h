@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:39:14 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/15 13:26:02 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/15 16:51:35 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,8 +166,8 @@
 # define WALL_TYPES							"123456789"
 # define VERTICAL_WALL_TYPES				"v"
 # define HORIZONTAL_WALL_TYPES				"h"
-# define DOOR_TYPES							"|-[]"
-# define VERTICAL_DOOR_TYPES				"|"
+# define DOOR_TYPES							"|[-!"
+# define VERTICAL_DOOR_TYPES				"|["
 # define HORIZONTAL_DOOR_TYPES				"--"
 
 // shaders

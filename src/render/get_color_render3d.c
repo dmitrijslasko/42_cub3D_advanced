@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:12 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 18:54:10 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/15 17:18:45 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ static void	handle_door(int *tex_index, t_ray *ray, t_texture *texture, t_coor *
 {
 	float 		side;
 
-	if (ray->cell_type == DOOR_VERTICAL_1)
+	if (ray->cell_type == DOOR_VERTICAL_1 || ray->cell_type == DOOR_2)
 		side = ray->vector.x;
-	else if (ray->cell_type == DOOR_HORIZONTAL_1)
+	else if (ray->cell_type == DOOR_HORIZONTAL_1 )
 		side = -ray->vector.y;
-	*texture = dt->map.textures[DOOR_1].texture;
+	if (ray->cell_type == DOOR_2)
+		*texture = dt->map.textures[DOOR_2].texture;
+	else
+		*texture = dt->map.textures[DOOR_1].texture;
 	if (side > 0)
 		*tex_index = (texture->width * (tex_coor->y + (ray->percentage_of_image - ray->door->open_progress)));
 	else
@@ -32,7 +35,6 @@ int	get_color_render3d(t_data *dt, t_ray *ray, t_coor *tex_coor)
 	int			color;
 	int			tex_index;
 	t_texture	texture;
-
 
 	texture = dt->map.textures[ray->cell_type].texture;
 	tex_coor->x = (texture.width * ray->percentage_of_image);

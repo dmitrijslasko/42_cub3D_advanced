@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:15 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 18:54:12 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/15 16:58:08 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	render_3d_each_ray(t_data *dt, t_ray *ray, int screen_slice_width)
 	t_coor	texture;
 	size_t	bottom_y;
 
+	texture.x = 0;
+	texture.y = 0;
 	// NOTE DL: manipulating 1.0f here can be used to simulate water level
 	wall_height = 1.0f / ray->corrected_distance_to_wall * SCALING;
 	ray->wall_height = (int)wall_height;

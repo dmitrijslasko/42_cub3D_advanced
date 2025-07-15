@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:12:07 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/15 14:44:38 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/15 16:42:47 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,6 @@ int	main(int argc, char **argv)
 	t_data	dt;
 
 	check_and_parse_args(&dt, argc, argv);
-	//for (int i; i < dt.map.map_size_cols; i++)
-	//	dt.map.map_data[0][i] = '1';
 	print_level_map(&dt.map);
 	precalculate_trig_tables(&dt);
 	if (setup_mlx_and_win(&dt))

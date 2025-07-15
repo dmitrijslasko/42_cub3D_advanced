@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_doors.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:43 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/02 00:09:44 by fvargas          ###   ########.fr       */
+/*   Updated: 2025/07/15 16:56:30 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void	init_a_door(t_data *dt, t_door **door_ptr, \
 		door_ptr_ref->orientation = 0;
 	door_ptr_ref->speed = 0.05f;
 	door_ptr_ref->state = 0;
-	printf("Door [%2zu] at X Y (%3d, %3d) added with id:%3zu\n",
-		door_ptr_ref->id, curr_col, curr_row, door_ptr_ref->id);
+	printf("Door [%2zu] at X Y (%3d, %3d) added. Orientation: %d\n",
+		door_ptr_ref->id, curr_col, curr_row, door_ptr_ref->orientation);
 	(*door_ptr)++;
 }
 
