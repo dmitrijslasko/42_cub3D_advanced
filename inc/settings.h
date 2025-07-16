@@ -31,7 +31,7 @@
 # define VERSION_INFO      "cub3D project - 42 Berlin - dmlasko, v2.0"
 
 # define SHOW_CALCULATION_LOGS				1
-# define SHOW_DEBUG_INFO 					1
+# define SHOW_DEBUG_INFO 					0
 
 # define TILE_SIZE  						64
 
@@ -171,7 +171,7 @@
 # define HORIZONTAL_DOOR_TYPES				"--"
 
 // shaders
-# define ENABLE_SHADERS						1
+# define ENABLE_SHADERS						0
 # define DISTANCE_SHADOW_STRENGTH 			0.2f
 
 # define ENABLE_MOVING_SKY					1
