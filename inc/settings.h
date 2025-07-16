@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:39:14 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/15 17:24:45 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/16 19:13:25 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # endif
 
 # ifndef LINUX_22
-# 	define LINUX_22 0
+# 	define LINUX_22 1
 # endif
 
 // window name

@@ -6,7 +6,7 @@
 #    By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/02 14:55:41 by fvargas           #+#    #+#              #
-#    Updated: 2025/07/15 13:24:55 by dmlasko          ###   ########.fr        #
+#    Updated: 2025/07/16 19:12:59 by dmlasko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -248,7 +248,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 # ------------------------------------------------------------------------------
 
-bonus: $(NAME_BONUS) $(HEADER_FILE_B)
+bonus: $(LIBFT) $(NAME_BONUS) $(HEADER_FILE_B)
 
 $(NAME_BONUS): $(OBJ_BONUS)
 	@$(CC) $(CFLAGS) $(BONUSFLAGS) $(OBJ_BONUS) $(LDFLAGS) $(OS_FLAGS) -o $@
@@ -262,7 +262,7 @@ $(OBJ_DIR_BONUS)/%.o: $(SRC_DIR)/%.c
 
 # ------------------------------------------------------------------------------
 
-libft:
+$(LIBFT):
 	@$(MAKE) -s -C $(LIBFT_DIR)
 
 clean:
@@ -294,4 +294,4 @@ ubuntu:
 
 # ------------------------------------------------------------------------------
 
-.PHONY: all bonus clean fclean re libft minilibx %
+.PHONY: all bonus clean fclean re minilibx %

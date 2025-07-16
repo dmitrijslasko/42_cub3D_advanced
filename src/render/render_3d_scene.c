@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:18 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 19:31:40 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/16 19:14:33 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 static int	render_floor_and_ceiling(t_data *dt)
 {
-	// if (BONUS)
-	// {
-	// 	draw_sky(dt);
-	// 	// draw_textured_ceiling(dt);
-	// }
-	// else
+	 if (BONUS)
+	 {
+	 	draw_sky(dt);
+	 	 draw_textured_ceiling(dt);
+	 }
+	 else
 		draw_ceiling(dt);
-	draw_floor(dt);
-	// draw_textured_floor(dt);
+	//draw_floor(dt);
+	 draw_textured_floor(dt);
 	return (EXIT_SUCCESS);
 }
 
