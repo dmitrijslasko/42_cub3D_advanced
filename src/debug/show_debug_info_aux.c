@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:33:03 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/11 18:14:50 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/15 16:36:00 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	print_obstacle_info(t_data *dt, void *mlx, void *win, int *y)
 {
 	char	buffer[32];
 	size_t	i;
+	int		index;
 	int		(*f)(void*, void*, int, int, int, char*);
 
 	f = mlx_string_put;
@@ -61,7 +62,8 @@ void	print_obstacle_info(t_data *dt, void *mlx, void *win, int *y)
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL_2, UI_CLR_1, "Distance to obstacle:");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Cell type:");
-	f(mlx, win, DBG_2_X, *y, UI_CLR_1, ft_itoa(dt->rays[i].cell_type + 1));
+	index = get_lookup_table_index_cell_type(dt->rays[i].cell_type);
+	f(mlx, win, DBG_2_X, *y, UI_CLR_1, g_texture_lookup[index].mapfile_key);
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Wall orientation:");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, ft_itoa(dt->rays[i].wall_orientation));
 }

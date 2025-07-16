@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_valid_wall_tile_file.c                       :+:      :+:    :+:   */
+/*   check_textures_are_valid.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -18,7 +18,7 @@ bool	check_single_line_wall_tile(char *line)
 	size_t	size;
 	int		ret;
 
-	array = ft_split_special(line, WHITE_SPACE);
+	array = ft_split_by_multiple_delimiters(line, WHITESPACE);
 	size = size_array(array);
 	if (size < 2)
 		return (error_message_free("Not valid input!", array, 0));
@@ -36,7 +36,7 @@ bool	check_valid_wall_tile_file1(int fd)
 	line = free_line_get_next(NULL, fd);
 	while (line)
 	{
-		if (is_empty_line(line))
+		if (line_is_empty(line))
 		{
 			line = free_line_get_next(line, fd);
 			continue ;
@@ -46,7 +46,7 @@ bool	check_valid_wall_tile_file1(int fd)
 		if (!check_single_line_wall_tile(line))
 		{
 			free_line_get_next(line, -1);
-			return (error_msg("Error: Reading textures/colors.", 0));
+			return (error_msg("Error: Reading textures / colors.", 0));
 		}
 		line = free_line_get_next(line, fd);
 	}
@@ -54,7 +54,7 @@ bool	check_valid_wall_tile_file1(int fd)
 	return (free_array_return(array, 1));
 }
 
-bool	check_valid_wall_tile_file(char *file)
+bool	check_textures_are_valid(char *file)
 {
 	int	fd;
 	int	ret;

@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:06:19 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/11 18:43:31 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/15 16:41:49 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,32 @@ bool	is_valid_line_texture(char *line)
 {
 	size_t	i;
 	size_t	j;
+	size_t	len;
 
 	i = 0;
 	j = 0;
-	while (line[j] && ft_strchr(WHITE_SPACE, line[j]))
+	while (line[j] && ft_strchr(WHITESPACE, line[j]))
 		j++;
-	while (g_texture_lookup[i].str)
+	while (g_texture_lookup[i].mapfile_key)
 	{
-		if (!ft_strncmp(&line[j], g_texture_lookup[i].str, g_texture_lookup[i].length) \
-			&& ft_strchr(WHITE_SPACE, line[j + g_texture_lookup[i].length]))
+		len = ft_strlen(g_texture_lookup[i].mapfile_key);
+		if (!ft_strncmp(&line[j], g_texture_lookup[i].mapfile_key, len) \
+			&& ft_strchr(WHITESPACE, line[j + len]))
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-t_wall_orientation	check_valid_identifier_texture_wall(char *identifier)
+t_wall_orientation	check_valid_texture_identifier(char *identifier)
 {
 	size_t	i;
 
 	i = 0;
-	while (g_texture_lookup[i].str)
+	while (g_texture_lookup[i].mapfile_key)
 	{
-		if (!ft_strncmp(identifier, g_texture_lookup[i].str, ft_strlen(identifier)))
-			return (g_texture_lookup[i].wall_orientation);
+		if (!ft_strncmp(identifier, g_texture_lookup[i].mapfile_key, ft_strlen(identifier)))
+			return (g_texture_lookup[i].texture_type);
 		i++;
 	}
 	return (DEFAULT_WALL);

@@ -21,9 +21,9 @@ void	free_texture(t_data *dt, t_texture *texture)
 		mlx_destroy_image(dt->mlx_ptr, texture->texture_img);
 		texture->texture_img = NULL;
 	}
-	if (texture->file)
+	if (texture->xpm_file)
 	{
-		free(texture->file);
-		texture->file = NULL;
+		free(texture->xpm_file);
+		texture->xpm_file = NULL;
 	}
 }

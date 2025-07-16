@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_dt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:46 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/02 00:09:47 by fvargas          ###   ########.fr       */
+/*   Updated: 2025/07/14 16:51:17 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init_texture(t_texture *texture)
 		return ;
 	texture->texture_img = NULL;
 	texture->texture_data = NULL;
-	texture->file = NULL;
+	texture->xpm_file = NULL;
 }
 
 void	init_map(t_map	*map)
@@ -39,10 +39,9 @@ void	init_map(t_map	*map)
 	i = 0;
 	while (i < NUMBER_TEXTURES)
 	{
-		init_texture(&map->wall_tile[i].texture);
-		map->wall_tile[i++].is_color = 0;
+		init_texture(&map->textures[i].texture);
+		map->textures[i++].is_color = 0;
 	}
-	init_texture(&map->door.texture);
 }
 
 void	init_img(t_img *img)

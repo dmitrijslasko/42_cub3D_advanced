@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    config.mk                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+         #
+#    By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/02 14:55:36 by fvargas           #+#    #+#              #
-#    Updated: 2025/07/02 14:55:37 by fvargas          ###   ########.fr        #
+#    Updated: 2025/07/15 17:24:53 by dmlasko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # PROJECT NAME
 NAME = cub3D
 
-AUTHORS = "fvargas & dmlasko"
+AUTHORS = "dmlasko"
 INFO1 = $(B_CYAN)42 Berlin Core Curriculum – $(AUTHOR)$(RST)
 INFO_M = "$(B_CYAN)42 Berlin Core Curriculum – Mandatory part$(RST)"
 INFO2_M = "$(YELLOW)Run ./$(NAME) with a map file to launch$(RST)"

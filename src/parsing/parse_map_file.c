@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parse_map_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:07:08 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/11 18:14:17 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/15 14:44:25 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	parse_map_file(t_data *dt, char *file)
+bool	check_and_parse_mapfile(t_data *dt, char *map_file)
 {
-	init_dt(dt);
-	if (!check_type_file(file, REQUIRED_MAP_EXTENSION))
-		return (1);
-	if (!check_valid_wall_tile_file(file))
-		return (1);
-	if (init_value_map_data(file, dt))
-		return (1);
-	if (init_value_player(&dt->map, &dt->player))
-		return (1);
-	if (!check_valid_map(&dt->map, &dt->player, dt))
-		return (1);
-	return (0);
+	if (!check_mapfile_extension(map_file, REQUIRED_MAP_EXTENSION))
+		return (EXIT_FAILURE);
+
+	if (!check_textures_are_valid(map_file))
+		return (EXIT_FAILURE);
+
+	if (parse_mapfile(map_file, dt))
+		return (EXIT_FAILURE);
+
+	if (init_player(&dt->map, &dt->player))
+		return (EXIT_FAILURE);
+
+	 if (check_map_is_closed(&dt->map, &dt->player, dt) == False)
+	 	return (EXIT_FAILURE);
+
+	return (EXIT_SUCCESS);
 }

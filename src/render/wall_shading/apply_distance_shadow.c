@@ -28,3 +28,22 @@ int	apply_distance_shadow(t_ray *ray, int *color)
 	*color = (r << 16) | (g << 8) | (b << 0);
 	return (EXIT_SUCCESS);
 }
+
+int	apply_shadow(t_ray *ray, int *color, float strength)
+{
+	float	shade;
+	int		r;
+	int		g;
+	int		b;
+
+	if (!ft_strchr(WALL_TYPES, ray->cell_type))
+		return (EXIT_SUCCESS);
+	shade = 1.0f / (1.0f + strength);
+	if (shade < 0.1f)
+		shade = 0.1f;
+	r = ((*color >> 16) & 0xFF) * shade;
+	g = ((*color >> 8) & 0xFF) * shade;
+	b = ((*color >> 0) & 0xFF) * shade;
+	*color = (r << 16) | (g << 8) | (b << 0);
+	return (EXIT_SUCCESS);
+}

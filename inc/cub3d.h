@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:35:51 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/12 19:50:48 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/15 14:53:21 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # include "errors.h"
 # include "keys.h"
 # include "settings.h"
+# include "texture_lookup.h"
 //# include "sound.h"
 
 // structs
@@ -51,60 +52,7 @@ typedef enum e_wall_orientation
 	WEST,
 	SOUTH,
 	EAST,
-	W_5,
-	W_6,
-	W_7,
-	W_8,
-	W_9,
-	FLOOR,
-	CEILING,
 }	t_wall_orientation;
-
-typedef enum e_cell_type
-{
-	EMPTY_CELL = -1,
-	WALL_1,
-	WALL_2,
-	WALL_3,
-	WALL_4,
-	WALL_5,
-	WALL_6,
-	WALL_7,
-	WALL_8,
-	WALL_9,
-	THIN_WALL_VERTICAL_1,
-	THIN_WALL_HORIZONTAL_1,
-	DOOR_VERTICAL_1,
-	DOOR_VERTICAL_2,
-	DOOR_HORIZONTAL_1,
-	DOOR_HORIZONTAL_2,
-	ELEVATOR_VERTICAL_1,
-	ELEVATOR_HORIZONTAL_1,
-}	t_cell_type;
-
-typedef struct s_texture_match
-{
-	const char				*str;
-	const size_t			length;
-	const int				wall_orientation;
-	const char				map_file_repr;
-}							t_texture_match;
-
-static const t_texture_match	g_texture_lookup[] = {
-{"F", 1, FLOOR, ' '},
-{"C", 1, CEILING, ' '},
-{"W1", 2, WALL_1, '1'},
-{"W2", 2, WALL_2, '2'},
-{"W3", 2, WALL_3, '3'},
-{"W4", 2, WALL_4, '4'},
-{"W5", 2, WALL_5, '5'},
-{"W6", 2, WALL_6, '6'},
-{"W7", 2, WALL_7, '7'},
-{"W8", 2, WALL_8, '8'},
-{"W9", 2, WALL_9, '9'},
-{"DV1", 3, DOOR_VERTICAL_1, '|'},
-{NULL, -1, -1, 0}
-};
 
 typedef enum e_active_message
 {
@@ -113,14 +61,6 @@ typedef enum e_active_message
 	BE_KIND,
 	ENJOY_THE_GAME,
 }	t_active_message;
-
-typedef struct s_color
-{
-	int		r;
-	int		g;
-	int		b;
-	int		a;
-}	t_color;
 
 // Door structure with animation info
 typedef struct s_door
@@ -177,33 +117,13 @@ typedef struct s_ray
 	float		distance_to_door;
 }	t_ray;
 
-typedef struct s_texture
-{
-	void		*texture_img;
-	int			*texture_data;
-	int			width;
-	int			height;
-	int			bpp;
-	int			size_line;
-	int			endian;
-	char		*file;
-}	t_texture;
-
-typedef struct s_wall_tile
-{
-	int			wall_orientation;
-	t_texture	texture;
-	t_color		color;
-	bool		is_color;
-}	t_wall_tile;
-
 typedef struct s_map
 {
 	char		**map_data;
 	int			map_size_rows;
 	int			map_size_cols;
-	t_wall_tile	wall_tile[NUMBER_TEXTURES];
-	t_wall_tile	door;
+	int			number_of_textures;
+	t_wall_tile	textures[NUMBER_TEXTURES];
 }	t_map;
 
 typedef struct s_player
@@ -243,6 +163,7 @@ typedef struct s_view
 	// int		minimap_color;
 	char	show_debug_info;
 	char	show_door_open_message;
+	int		active_prompt_message;
 	float	door_open;
 	float	crouch;
 }	t_view;
@@ -272,14 +193,25 @@ typedef struct s_sprite_texture
 	char	*filepath;
 }	t_sprite_texture;
 
+typedef enum e_sprite_type
+{
+	STATIC,
+	DYNAMIC
+}	t_sprite_type;
+
 typedef struct s_sprite
 {
-	size_t				id;
+	char				id;
+	t_sprite_type		type;
+	char				*path;
+	float				width;
+	float				height;
+	int					frame_count;
+	t_sprite_texture	*texture;
 	t_x_y				pos;
 	float				distance_to_player;
-	char				type;
+	// char				type;
 	int					time;
-	t_sprite_texture	*texture;
 }	t_sprite;
 
 typedef struct s_gametime
@@ -370,45 +302,44 @@ void		put_img_to_img(t_img *dest, t_img *src, int dx, int dy);
 void		put_img_to_img_circle(t_img *dest, t_img *src, int dx, int dy);
 //parsing
 char		*free_line_get_next(char *line, int fd);
-bool		parse_map_file(t_data *dt, char *file);
+bool		check_and_parse_mapfile(t_data *dt, char *file);
 bool		check_valid_identifier_texture(char *identifier);
 bool		check_color(char *one_color);
 bool		check_valid_color(char **color);
 bool		check_only_number(char *str);
 bool		check_valid_player(t_map *map);
 bool		check_valid_color_or_texture(char **info);
-bool		is_empty_line(char *line);
+bool		line_is_empty(char *line);
 void		init_dt(t_data *dt);
 bool		is_valid_line_texture(char *line);
-bool		set_size_map_data(t_map *map, char *file);
-bool		check_valid_wall_tile_file(char *file);
-bool		create_map_data(t_map *map, t_data *dt);
-bool		create_double_array(char ***array, size_t max_row,
+bool		set_map_size_data(t_map *map, char *file);
+bool		check_textures_are_valid(char *file);
+bool		init_map_data(t_map *map, t_data *dt);
+bool		init_2d_map(char ***array, size_t max_row,
 						size_t max_col, t_data *dt);
-bool		check_type_file(char *file, char *type);
+bool		check_mapfile_extension(char *file, char *type);
 void		remove_new_line(char *str);
 char		*remove_space_beginner(char *str);
-bool		init_value_map_data(char *file, t_data *dt);
+bool		parse_mapfile(char *file, t_data *dt);
 bool		init_default_map(t_map *map);
-bool		init_value_player(t_map *map, t_player *player);
+bool		init_player(t_map *map, t_player *player);
 int			ft_open(char *file);
-t_wall_orientation	check_valid_identifier_texture_wall(char *identifier);
-bool		check_all_wall_tile(t_map *map);
-bool		get_value_file(t_map *map, char *file);
-bool		get_value_file(t_map *map, char *file);
-void		get_value_map(char *line, int fd, t_map *map);
-void		get_init_position(t_map *map, t_player *player);
+t_wall_orientation	check_valid_texture_identifier(char *identifier);
+bool		check_all_textures(t_map *map);
+bool		parse_mapfile_values(t_map *map, char *file);
+void		parse_map(t_map *map, int fd, char **line);
+void		get_init_player_position(t_map *map, t_player *player);
 bool		set_color_or_texture(t_map *map, char *identifier, char **value);
-bool		set_texture(char *identifier, char *file_texture, t_map *map);
+//bool		set_texture(t_map *map, char *identifier, char *texture_file);
 bool		set_color(char *identifier, char **color, t_map *map);
-bool		check_valid_map(t_map *map, t_player *player, t_data *dt);
+bool		check_map_is_closed(t_map *map, t_player *player, t_data *dt);
 char		get_cell_type(t_map *map, t_coor *coord);
 char		get_cell_type_by_coordinates(t_map *map, size_t y, size_t x);
-char		**ft_split_special(const char *s, char *c);
+char		**ft_split_by_multiple_delimiters(const char *s, char *c);
 
 // player movements
-int			move_sideways(t_data *dt, int is_to_the_right);
 int			move_forward_backward(t_data *dt, int direction);
+int			move_sideways(t_data *dt, int is_to_the_right);
 void		rotate_player(t_data *dt, float d_angle, int direction);
 
 //ray
@@ -461,13 +392,10 @@ void		draw_square_from_center(t_img *img, t_coor *coor,
 void		draw_square_from_top_left(t_img *img, t_coor coor,
 						int size, int clr);
 
-t_map		*load_dummy_map(void);
 void		print_level_map(t_map *map);
 
 int			render_frame(void *param);
 void		render_ui(t_data *dt);
-
-int			init_player(t_data *dt);
 
 int			calculate_all_rays(t_data *dt);
 
@@ -509,10 +437,11 @@ void		draw_minimap_grid(t_data *dt);
 int			draw_minimap_player(t_data *dt);
 void		draw_minimap_ray(t_data *dt, t_coor origin, t_x_y dir, int color);
 int			draw_minimap_rays(t_data *dt, int is_direction_vector);
-int			draw_minimap_THIN_WALL_VERTICAL_1(t_data *dt,
+int			draw_minimap_thin_wall_vertical(t_data *dt,
 						size_t curr_col, size_t curr_row);
 int			draw_minimap_door_vertical(t_data *dt,
 						size_t curr_col, size_t curr_row);
+int			draw_minimap_door_horizontal(t_data *dt, size_t curr_col, size_t curr_row);
 int			draw_minimap_sprite(t_data *dt, size_t curr_col, size_t curr_row);
 int			draw_minimap_wall_cell(t_data *dt, size_t curr_col,
 						size_t curr_row);
@@ -523,9 +452,9 @@ int			draw_sky(t_data *dt);
 void		render_3d_scene(t_data *dt);
 int			draw_ceiling(t_data *dt);
 int			draw_floor(t_data *dt);
-int	draw_textured_floor(t_data *dt);
-int	draw_textured_floor2(t_data *dt);
-int draw_textured_ceiling(t_data *dt);
+int			draw_textured_floor(t_data *dt);
+int			draw_textured_floor2(t_data *dt);
+int 		draw_textured_ceiling(t_data *dt);
 int			render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset,
 						t_coor *sprite_size);
 float		fix_fish_eye(t_ray *ray, t_player *player);
@@ -539,6 +468,7 @@ int			render_all_sprites(t_data *dt);
 void		render_3d_each_ray(t_data *dt, t_ray *ray, int screen_slice_width);
 
 int			apply_distance_shadow(t_ray *ray, int *color);
+int			apply_shadow(t_ray *ray, int *color, float strength);
 
 int			reset_mouse_position(t_data *dt);
 void		process_keypresses(t_data *dt);
@@ -599,10 +529,11 @@ int			map_position_is_walkable(t_data *dt, float *new_x, float *new_y);
 
 int			render_ui_message(t_data *dt);
 void		free_graphic(t_data *dt);
+void	free_mlx(t_data *dt);
 void		free_wall_tile_texture(t_data *dt);
 void		free_texture(t_data *dt, t_texture *texture);
 void		free_img(t_img *img, void *mlx_ptr);
-void		free_texture_sprite(t_data *dt);
+void		free_sprites(t_data *dt);
 void		ft_free(void *ptr);
 int			count_sprite_textures(t_data *dt);
 size_t		count_if_there_is_others_elements(t_map *map, char *element);
@@ -638,5 +569,16 @@ int			load_weapons(t_data *dt);
 void		show_player_info(t_data *dt);
 
 int	apply_distance_shadow_distance(int distance, int *color);
+
+int	mimic_fullscreen(void);
+
+void	check_and_parse_args(t_data *dt, int argc, char **argv);
+
+int		init_default_textures(t_map *map);
+
+int print_out_texture_lookup_table(t_data *dt);
+
+int		get_lookup_table_index(char *str);
+int		get_lookup_table_index_cell_type(int cell_type);
 
 #endif

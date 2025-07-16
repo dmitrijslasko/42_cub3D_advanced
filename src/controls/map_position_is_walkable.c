@@ -71,6 +71,23 @@ static int	handle_wall(t_data *dt, float *new_x, float *new_y)
 //	return (1);
 //}
 
+static int	handle_sprites(t_data *dt, float *new_x, float *new_y)
+{
+	t_coor	min;
+	t_coor	max;
+
+	min.x = (int)(*new_x - MIN_DISTANCE_TO_WALL / 2);
+	max.x = (int)(*new_x + MIN_DISTANCE_TO_WALL / 2);
+	min.y = (int)(*new_y - MIN_DISTANCE_TO_WALL / 2);
+	max.y = (int)(*new_y + MIN_DISTANCE_TO_WALL / 2);
+	if (ft_strchr(SPRITE_TYPES, dt->map.map_data[min.y][min.x]) ||
+	ft_strchr(SPRITE_TYPES, dt->map.map_data[min.y][max.x]) ||
+	ft_strchr(SPRITE_TYPES, dt->map.map_data[max.y][min.x]) ||
+	ft_strchr(SPRITE_TYPES, dt->map.map_data[max.y][max.x]))
+		return (0);
+	return (1);
+}
+
 static int	handle_door2(t_data *dt, float *new_x, float *new_y)
 {
 	t_coor	min;
@@ -101,6 +118,8 @@ static int	handle_door2(t_data *dt, float *new_x, float *new_y)
 int	map_position_is_walkable(t_data *dt, float *new_x, float *new_y)
 {
 	if (!handle_wall(dt, new_x, new_y))
+		return (0);
+	if (!handle_sprites(dt, new_x, new_y))
 		return (0);
 	if (!handle_door2(dt, new_x, new_y))
 		return (0);

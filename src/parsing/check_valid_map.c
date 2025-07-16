@@ -42,13 +42,13 @@ bool	is_open_map(char **map, char **visited, int row, int col)
 	return (0);
 }
 
-bool	check_valid_map(t_map *map, t_player *player, t_data *dt)
+bool	check_map_is_closed(t_map *map, t_player *player, t_data *dt)
 {
 	char	**visited;
 
-	create_double_array(&visited, map->map_size_rows, map->map_size_cols, dt);
+	init_2d_map(&visited, map->map_size_rows, map->map_size_cols, dt);
 	if (is_open_map(map->map_data, visited, (int)player->pos.y, \
 					(int)player->pos.x) || is_invalid_map(map))
-		return (error_message_free("Error: Invalid map.", visited, 0));
+		return (error_message_free(TXT_RED"Error: Invalid map."TXT_RESET, visited, 0));
 	return (free_array_return(visited, 1));
 }

@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:21 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/12 19:37:27 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/15 16:30:27 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ int	render_frame(void *param)
 	long		current_time;
 	int 		y_offset;
 
-	y_offset = 0;
 	dt = (t_data *)param;
+	y_offset = 0;
+	reset_mouse_position(dt);
 	current_time = get_current_time_in_ms();
 	dt->time.delta_time = current_time - dt->time.last_time;
 	if (dt->time.delta_time < (1000 / FPS))
@@ -93,7 +94,7 @@ int	render_frame(void *param)
 			}
 		}
 	}
-	reset_mouse_position(dt);
+
 	process_keypresses(dt);
 	calculate_all_rays(dt);
 	render_3d_scene(dt);
@@ -106,7 +107,6 @@ int	render_frame(void *param)
 	// put_img_to_img(dt->final_frame_img, dt->ui_img, 100, 100);
 	render_minimap_and_ui(dt);
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr,dt->final_frame_img->mlx_img, 0, 0);
-
 	show_debug_info(dt);
  	show_player_info(dt);
 	if (dt->view->show_door_open_message)

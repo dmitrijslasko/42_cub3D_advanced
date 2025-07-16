@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_type_file.c                                  :+:      :+:    :+:   */
+/*   check_mapfile_extension.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,15 +12,15 @@
 
 #include "cub3d.h"
 
-bool	check_type_file(char *file, char *type)
+bool	check_mapfile_extension(char *file, char *file_type)
 {
 	size_t	len_file;
 	size_t	len_type;
 
 	len_file = ft_strlen(file);
-	len_type = ft_strlen(type);
+	len_type = ft_strlen(file_type);
 	if (len_file < len_type || \
-		ft_strncmp(file + len_file - len_type, type, len_type))
-		return (error_msg("Error type file.", 0));
+		ft_strncmp(file + len_file - len_type, file_type, len_type))
+		return (error_msg("Error: Wrong file type (extension).", 0));
 	return (1);
 }

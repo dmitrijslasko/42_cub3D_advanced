@@ -102,8 +102,8 @@ void	setup_mouse_hooks(t_data *dt)
 
 	mlx_hook(dt->win_ptr, 4, 1L << 2, mouse_press, dt);
 	mlx_hook(dt->win_ptr, 5, 1L << 3, mouse_release, dt);
-	// mlx_hook(dt->win_ptr, 6, 1L << 6, mouse_move, dt);ww
-	// set_mouse_to_screen_center(dt);
-	// reset_mouse_position(dt);
+	mlx_hook(dt->win_ptr, 6, 1L << 6, mouse_move, dt);
+	set_mouse_to_screen_center(dt);
+	reset_mouse_position(dt);
 	printf(" Done!\n");
 }

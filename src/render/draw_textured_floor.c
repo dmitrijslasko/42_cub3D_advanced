@@ -14,20 +14,20 @@ int draw_textured_floor(t_data *dt)
     float plane_y = dt->player.plane_y;
 
     // Calculate ray position relative to camera plane
-    float rayDirX0 = dt->player.direction_vector.x + plane_x + dt->test_value_1;
-    float rayDirY0 = dt->player.direction_vector.y - plane_y - dt->test_value_2;
-    float rayDirX1 = dt->player.direction_vector.x - plane_x - dt->test_value_3;
-    float rayDirY1 = dt->player.direction_vector.y + plane_y + dt->test_value_4;
+    float rayDirX0 = dt->player.direction_vector.x + plane_x;
+    float rayDirY0 = dt->player.direction_vector.y - plane_y;
+    float rayDirX1 = dt->player.direction_vector.x - plane_x;
+    float rayDirY1 = dt->player.direction_vector.y + plane_y;
 
     while (current_row < WINDOW_H)
     {
         float adjustment;
-        
+
         adjustment = 0.6354f;
 		float fov_factor = tanf((FIELD_OF_VIEW_DEG * adjustment) * (M_PI / 180.0f));
-        
+
         int p = current_row - dt->view->screen_center_y;
-        float rowDistance = ((0.5f * WINDOW_H) / p) / fov_factor;
+        float rowDistance = ((0.5f * WINDOW_H) / p) / fov_factor - dt->test_value_2;
 
         // Calculate step size for each screen pixel
         float floorStepX = rowDistance * (rayDirX1 - rayDirX0) / WINDOW_W;
@@ -48,8 +48,8 @@ int draw_textured_floor(t_data *dt)
             int texX = (int)(TILE_SIZE * (floorX - cellX)) & (TILE_SIZE - 1);
             int texY = (int)(TILE_SIZE * (floorY - cellY)) & (TILE_SIZE - 1);
 
-            texture = dt->map.wall_tile[3].texture;
-            
+            texture = dt->map.textures[FLOOR].texture;
+
             // Get color and draw pixel
             color = texture.texture_data[TILE_SIZE * texY + texX];
 			// apply_distance_shadow_floor(100, &color);
