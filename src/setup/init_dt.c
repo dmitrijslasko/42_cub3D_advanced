@@ -42,7 +42,6 @@ void	init_map(t_map	*map)
 		init_texture(&map->textures[i].texture);
 		map->textures[i++].is_color = 0;
 	}
-	init_texture(&map->door.texture);
 }
 
 void	init_img(t_img *img)

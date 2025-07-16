@@ -14,40 +14,23 @@
 
 void	set_cell_type(t_data *dt, t_ray *ray, t_coor *map_coor)
 {
-	char	cell_type;
+	char	map_cell_char;
+	int		cell_type;
+	size_t	i;
 
-	// TODO DL: This needs to be redone ASAP
-	cell_type = get_cell_type(&dt->map, map_coor);
-	if (cell_type == '1')
-		ray->cell_type = WALL_1;
-	else if (cell_type == '2')
-		ray->cell_type = WALL_2;
-	else if (cell_type == '3')
-		ray->cell_type = WALL_3;
-	else if (cell_type == '4')
-		ray->cell_type = WALL_4;
-	else if (cell_type == '5')
-		ray->cell_type = WALL_5;
-	else if (cell_type == '6')
-		ray->cell_type = WALL_6;
-	else if (cell_type == '7')
-		ray->cell_type = WALL_7;
-	else if (cell_type == '8')
-		ray->cell_type = WALL_8;
-	else if (cell_type == '9')
-		ray->cell_type = WALL_9;
-	else if (cell_type == '|')
-		ray->cell_type = DOOR_VERTICAL_1;
-	else if (cell_type == '[')
-		ray->cell_type = DOOR_2;
-	else if (cell_type == '-')
-		ray->cell_type = DOOR_HORIZONTAL_1;
-	else if (cell_type == 'v')
-		ray->cell_type = THIN_WALL_VERTICAL_1;
-	else if (cell_type == 'h')
-		ray->cell_type = THIN_WALL_HORIZONTAL_1;
-	else
-		ray->cell_type = 0;
+	map_cell_char = get_cell_type(&dt->map, map_coor);
+	cell_type = 0;
+	i = 0;
+	while (g_texture_lookup[i].mapfile_key)
+	{
+		if (g_texture_lookup[i].map_char == map_cell_char)
+		{
+			cell_type = g_texture_lookup[i].texture_type;
+			break ;
+		}
+		i++;
+	}
+	ray->cell_type = cell_type;
 }
 
 void	update_ray_distance_to_cell_edge(t_data *dt, t_ray *ray,

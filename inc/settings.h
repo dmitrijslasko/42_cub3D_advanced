@@ -23,7 +23,7 @@
 # endif
 
 # ifndef LINUX_22
-# 	define LINUX_22 1
+# 	define LINUX_22 0
 # endif
 
 // window name
@@ -166,8 +166,8 @@
 # define WALL_TYPES							"123456789"
 # define VERTICAL_WALL_TYPES				"v"
 # define HORIZONTAL_WALL_TYPES				"h"
-# define DOOR_TYPES							"|[-!"
-# define VERTICAL_DOOR_TYPES				"|["
+# define DOOR_TYPES							"|[]-!"
+# define VERTICAL_DOOR_TYPES				"|[]"
 # define HORIZONTAL_DOOR_TYPES				"--"
 
 // shaders

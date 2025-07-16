@@ -52,11 +52,12 @@ typedef enum e_texture_type
 	DOOR_1,
 	DOOR_2,
 	DOOR_3,
+	DOOR_1_SIDES,
+	DOOR_2_SIDES,
+	DOOR_3_SIDES,
 	DOOR_4,
 	DOOR_5,
 	DOOR_6,
-	DOOR_VERTICAL_1,
-	DOOR_VERTICAL_2,
 	ELEVATOR_DOOR_1,
 	DOOR_HORIZONTAL_1,
 	DOOR_HORIZONTAL_2,
@@ -67,36 +68,49 @@ typedef enum e_texture_type
 
 typedef struct s_texture_match
 {
-	const int				texture_id;
-	const char				*mapfile_id;
+	const char				*mapfile_key;
 	const char				*description;
 	const int				texture_type;
-	const char				map_repr;
+	const char				map_char;
 }							t_texture_match;
 
 static const t_texture_match	g_texture_lookup[] = {
-{0, "DEF", "default fallback texture", DEFAULT, 0},
-{1, "F1", "floor 1 texture", FLOOR, ' '},
-{2, "C1", "ceiling 1 texture", CEILING, ' '},
-{3, "W01", "wall 1 texture", WALL_1, '1'},
-{4, "W02", "wall 2 texture", WALL_2, '2'},
-{5, "W03", "wall 3 texture", WALL_3, '3'},
-{6, "W04", "wall 4 texture", WALL_4, '4'},
-{7, "W05", "wall 5 texture", WALL_5, '5'},
-{8, "W06", "wall 6 texture", WALL_6, '6'},
-{9, "W07", "wall 7 texture", WALL_7, '7'},
-{10, "W08", "wall 8 texture", WALL_8, '8'},
-{11, "W09", "wall 9 texture", WALL_9, '9'},
-{12, "D01", "door 1 texture", DOOR_1, '|'},
-{12, "D02", "door 2 texture", DOOR_2, '['},
-{12, "D03", "door 3 texture", DOOR_3, '|'},
-{12, "D04", "door 4 texture", DOOR_4, '['},
-{12, "D05", "door 5 texture", DOOR_5, '|'},
-{12, "D06", "door 6 texture", DOOR_6, '['},
-{12, "D01", "door 1 texture", DOOR_VERTICAL_1, '|'},
-{14, "ED1", "elevator door 1 texture", ELEVATOR_DOOR_1, '*'},
-{15, "EH1", "elevator 1 (h) texture", ELEVATOR_HORIZONTAL_1, '*'},
-{-1, NULL, NULL, -1, 0}
+{"DEF", "default fallback texture", DEFAULT, 0},
+{"F1", "floor 1 texture", FLOOR, ' '},
+{"C1", "ceiling 1 texture", CEILING, ' '},
+{"W01", "wall 1 texture", WALL_1, '1'},
+{"W02", "wall 2 texture", WALL_2, '2'},
+{"W03", "wall 3 texture", WALL_3, '3'},
+{"W04", "wall 4 texture", WALL_4, '4'},
+{"W05", "wall 5 texture", WALL_5, '5'},
+{"W06", "wall 6 texture", WALL_6, '6'},
+{"W07", "wall 7 texture", WALL_7, '7'},
+{"W08", "wall 8 texture", WALL_8, '8'},
+{"W09", "wall 9 texture", WALL_9, '9'},
+{"DOOR_01", "door 1 texture", DOOR_1, '|'},
+{"DOOR_02", "door 2 texture", DOOR_2, '['},
+{"DOOR_03", "door 3 texture", DOOR_3, ']'},
+{"DOOR_01_S", "door 1 texture sides", DOOR_1_SIDES, 0},
+{"DOOR_02_S", "door 2 texture sides", DOOR_2_SIDES, 0},
+{"DOOR_03_S", "door 3 texture sides ", DOOR_3_SIDES, 0},
+{"ED1", "elevator door 1 texture", ELEVATOR_DOOR_1, '*'},
+{"EH1", "elevator 1 (h) texture", ELEVATOR_HORIZONTAL_1, '*'},
+{ NULL, NULL, -1, 0}
+};
+
+typedef struct s_sprite_file
+{
+	const char	map_char;
+	const char	*mapfile_key;
+	char		*filepath[2];
+}				t_sprite_file;
+
+static const t_sprite_file	g_sprites[] = {
+{'s', "SPRITE_01", {"./sprites/heart.xpm", "./sprites/heart.xpm"}},
+{'d', "SPRITE_02", {"./sprites/chain-link.xpm", "./sprites/chain-link.xpm"}},
+{'p', "SPRITE_03", {"./sprites/plant-2-128x128.xpm", "./sprites/plant-2-128x128.xpm"}},
+{'h', "SPRITE_04", {"./sprites/sammy1.xpm", "./sprites/sammy2.xpm"}},
+{'a', "SPRITE_05", {"./sprites/tommy1.xpm", "./sprites/tommy2.xpm"}},
 };
 
 #endif

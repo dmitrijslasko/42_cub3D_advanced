@@ -124,8 +124,6 @@ typedef struct s_map
 	int			map_size_cols;
 	int			number_of_textures;
 	t_wall_tile	textures[NUMBER_TEXTURES];
-	//t_wall_tile	*m_textures;
-	t_wall_tile	door;
 }	t_map;
 
 typedef struct s_player
@@ -195,14 +193,25 @@ typedef struct s_sprite_texture
 	char	*filepath;
 }	t_sprite_texture;
 
+typedef enum e_sprite_type
+{
+	STATIC,
+	DYNAMIC
+}	t_sprite_type;
+
 typedef struct s_sprite
 {
-	size_t				id;
+	char				id;
+	t_sprite_type		type;
+	char				*path;
+	float				width;
+	float				height;
+	int					frame_count;
+	t_sprite_texture	*texture;
 	t_x_y				pos;
 	float				distance_to_player;
-	char				type;
+	// char				type;
 	int					time;
-	t_sprite_texture	*texture;
 }	t_sprite;
 
 typedef struct s_gametime
@@ -432,7 +441,7 @@ int			draw_minimap_thin_wall_vertical(t_data *dt,
 						size_t curr_col, size_t curr_row);
 int			draw_minimap_door_vertical(t_data *dt,
 						size_t curr_col, size_t curr_row);
-int	draw_minimap_door_horizontal(t_data *dt, size_t curr_col, size_t curr_row);
+int			draw_minimap_door_horizontal(t_data *dt, size_t curr_col, size_t curr_row);
 int			draw_minimap_sprite(t_data *dt, size_t curr_col, size_t curr_row);
 int			draw_minimap_wall_cell(t_data *dt, size_t curr_col,
 						size_t curr_row);

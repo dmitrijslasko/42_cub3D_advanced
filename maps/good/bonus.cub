@@ -1,39 +1,39 @@
-DEF     textures/wolf44.xpm
-F1      textures/wolfenstein/color_stone.xpm
-C1      textures/ceiling.xpm
-W01     textures/simonkraft/bookshelf_02.xpm
-W02     textures/wolfenstein/red_brick.xpm
-W03 	textures/ceiling.xpm
-W04 	textures/ceiling.xpm
-W05     textures/bookshelf.xpm
-W06     textures/simonkraft/respawn_anchor_side3.xpm
-W07     textures/ceiling.xpm
-W08     textures/simonkraft/bookshelf_01.xpm
-W09     textures/wolfenstein/purple_stone.xpm
-D01    	textures/wolf37.xpm
-D02     textures/door-red.xpm
-D03    	textures/wolf37.xpm
-D04     textures/door-red.xpm
-D05    	textures/wolf37.xpm
-D06     textures/door-red.xpm
-ED1    	textures/wolf44.xpm
+DEF         textures/default-fallback-texture.xpm
+F1          textures/floor-grey-noise.xpm
+C1          textures/floor-grey-noise.xpm
+W01         textures/simonkraft/bookshelf_02.xpm
+W02         textures/wolfenstein/red_brick.xpm
+W03 	    textures/ceiling.xpm
+W04 	    textures/ceiling.xpm
+W05         textures/bookshelf.xpm
+W06         textures/simonkraft/respawn_anchor_side3.xpm
+W07         textures/ceiling.xpm
+W08         textures/car.xpm
+W09         textures/wolfenstein/purple_stone.xpm
+DOOR_01    	textures/wolf37.xpm
+DOOR_01_S   textures/wolf44.xpm
+DOOR_02     textures/door-red.xpm
+DOOR_02_S   textures/wolf44.xpm
+DOOR_03     textures/wolf44.xpm
+DOOR_03_S   textures/wolf44.xpm
+ED1    	    textures/wolf44.xpm
 
 
 
 111166111111111111111111111111111111111111111111111
 9p     9343434116666666615555555   1              1
-9     E[      | p  s  p1      5    1  2 2 2 2 2 2 1
-9      93434341        |      5    1              1
-99999999  1   2        1      5   11  2 2 2 2 2 2 1
+9     E[   ]  | pppppppp      5    1  2 2 2 2 2 2 1
+9      93434341               [    2              1
+99-99999  1   2 pppppppp      1    1              1
 1      1   1           15555555   11              1
-1      1111111         11111111    |  2 2 2 2 2 2 1
+1      1111111dddddddd 11111111    |  2 2 2 2 2 2 1
 1 s          |         |    1     p1              1
 1    999     1      s  1    1     d1              1
 1     p1     [         1    1     11              12
 1      1     1    h    1    1   . p1             * 2
 1      1111111         111111     11              12
 1d p                              p1             p1
-99-999999999999999999999999999999999999999999999-99
+99-999999999998888888888888888888899999999999999-99
 9           7   7   7                             9
 9             7   7   7                           9
 999999999999999999999999999999999999999-99-99-99-99

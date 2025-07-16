@@ -17,25 +17,25 @@ int	check_hit_door_cell(t_coor *coor, t_data *dt)
 	return (ft_strchr(DOOR_TYPES, dt->map.map_data[coor->y][coor->x]));
 }
 
-int	run_dda_loop(t_data *dt, t_ray *ray, t_dda_info *info)
+int	run_dda_loop(t_data *dt, t_ray *ray, t_dda_info *dda_info)
 {
 	int	door_hit;
 
 	door_hit = 0;
-	while (info->map->x < dt->map.map_size_cols
-		&& info->map->y < dt->map.map_size_rows)
+	while (dda_info->map->x < dt->map.map_size_cols
+		&& dda_info->map->y < dt->map.map_size_rows)
 	{
-		step_and_set_side(info);
-		ray->hit_side = *(info->hit_side);
-		update_ray_distance_to_cell_edge(dt, ray, info->map);
+		step_and_set_side(dda_info);
+		ray->hit_side = *(dda_info->hit_side);
+		update_ray_distance_to_cell_edge(dt, ray, dda_info->map);
 		update_ray_hit_point(dt, ray);
-		if (check_hit_door_cell(info->map, dt))
+		if (check_hit_door_cell(dda_info->map, dt))
 		{
-			door_hit = check_door_hit(dt, ray, info->map);
+			door_hit = check_door_hit(dt, ray, dda_info->map);
 			if (door_hit)
 				break ;
 		}
-		if (check_hit_wall(info->map, &dt->map, ray, *(info->hit_side)))
+		if (check_hit_wall(dda_info->map, &dt->map, ray, *(dda_info->hit_side)))
 			break ;
 	}
 	return (door_hit);

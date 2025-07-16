@@ -23,5 +23,4 @@ void	free_wall_tile_texture(t_data *dt)
 			free_texture(dt, &dt->map.textures[i].texture);
 		i++;
 	}
-	free_texture(dt, &dt->map.door.texture);
 }

@@ -19,7 +19,7 @@ int		count_possible_textures(void)
 
 	result = 0;
 	i = 0;
-	while(g_texture_lookup[i].mapfile_id)
+	while(g_texture_lookup[i].mapfile_key)
 	{
 		result++;
 		i++;
@@ -35,7 +35,7 @@ int		init_textures(t_texture *textures, int len)
 	while (i < len)
 	{
 		textures[i].xpm_file = NULL;
-		textures[i].type = g_texture_lookup[i].mapfile_id;
+		textures[i].type = g_texture_lookup[i].mapfile_key;
 		i++;
 	}
 	return (EXIT_SUCCESS);

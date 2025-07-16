@@ -17,9 +17,9 @@ int		get_lookup_table_index(char *str)
 	int i;
 
 	i = 0;
-	while (g_texture_lookup[i].mapfile_id)
+	while (g_texture_lookup[i].mapfile_key)
 	{
-		if (ft_strncmp(g_texture_lookup[i].mapfile_id, str, strlen(str)) == 0)
+		if (ft_strncmp(g_texture_lookup[i].mapfile_key, str, strlen(str)) == 0)
 			return (i);
 		i++;
 	}
@@ -31,12 +31,10 @@ int		get_lookup_table_index_cell_type(int cell_type)
 	int i;
 
 	i = 0;
-	while (g_texture_lookup[i].mapfile_id)
+	while (g_texture_lookup[i].mapfile_key)
 	{
 		if (g_texture_lookup[i].texture_type == cell_type)
-		{
 			return (i);
-		}
 		i++;
 	}
 	return (-1);

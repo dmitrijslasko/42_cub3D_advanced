@@ -127,11 +127,11 @@ int print_out_texture_lookup_table(t_data *dt)
 
 	i = 0;
 	printf(TXT_CYAN">>> Printing out the texture lookup table!\n"TXT_RESET);
-	while (g_texture_lookup[i].mapfile_id)
+	while (g_texture_lookup[i].mapfile_key)
 	{
 		printf("%25s [%4s, %2d] : %s\n",
 			g_texture_lookup[i].description,
-			g_texture_lookup[i].mapfile_id,
+			g_texture_lookup[i].mapfile_key,
 			g_texture_lookup[i].texture_type,
 			dt->map.textures[i].texture.xpm_file
 			);
@@ -156,7 +156,7 @@ int	main(int argc, char **argv)
 	print_separator(3, DEF_SEPARATOR_CHAR);
 	printf("🎮 Starting game!\n");
 	system("gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false");
-	//mimic_fullscreen();
+	mimic_fullscreen();
 	mlx_loop_hook(dt.mlx_ptr, &render_frame, &dt);
 	mlx_loop(dt.mlx_ptr);
 	free_dt(&dt);

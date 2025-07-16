@@ -63,7 +63,7 @@ void	print_obstacle_info(t_data *dt, void *mlx, void *win, int *y)
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Cell type:");
 	index = get_lookup_table_index_cell_type(dt->rays[i].cell_type);
-	f(mlx, win, DBG_2_X, *y, UI_CLR_1, g_texture_lookup[index].mapfile_id);
+	f(mlx, win, DBG_2_X, *y, UI_CLR_1, g_texture_lookup[index].mapfile_key);
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Wall orientation:");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, ft_itoa(dt->rays[i].wall_orientation));
 }
