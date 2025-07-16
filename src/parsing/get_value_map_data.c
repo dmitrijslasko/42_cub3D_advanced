@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:06:54 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/15 14:42:37 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/16 19:17:55 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	copy_map_row(t_map *map, int row, char *line)
 		c = line[col];
 		 if (!check_valid_character_map(c))
 		 	return (EXIT_FAILURE);
-		map->map_data[row][col] = c;
+		map->map_data[row][col].cell_char = c;
 		col++;
 	}
 	return (EXIT_SUCCESS);

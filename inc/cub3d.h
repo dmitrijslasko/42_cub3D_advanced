@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:35:51 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/15 14:53:21 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/16 19:41:17 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,16 @@ typedef struct s_ray
 	float		distance_to_door;
 }	t_ray;
 
+typedef struct s_mapcell
+{
+	char		cell_char;
+	int			is_near_door;
+}	t_mapcell;
+
 typedef struct s_map
 {
-	char		**map_data;
+	//char		**map_data;
+	t_mapcell	**map_data;
 	int			map_size_rows;
 	int			map_size_cols;
 	int			number_of_textures;
@@ -335,6 +342,7 @@ bool		set_color(char *identifier, char **color, t_map *map);
 bool		check_map_is_closed(t_map *map, t_player *player, t_data *dt);
 char		get_cell_type(t_map *map, t_coor *coord);
 char		get_cell_type_by_coordinates(t_map *map, size_t y, size_t x);
+t_mapcell	get_cell_by_coordinates(t_map *map, size_t y, size_t x);
 char		**ft_split_by_multiple_delimiters(const char *s, char *c);
 
 // player movements

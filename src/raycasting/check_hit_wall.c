@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:07:34 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/11 18:15:04 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/16 19:41:19 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 char	get_cell_type(t_map *map, t_coor *map_coor)
 {
-	return (map->map_data[map_coor->y][map_coor->x]);
+	return (map->map_data[map_coor->y][map_coor->x].cell_char);
 }
 
 char	get_cell_type_by_coordinates(t_map *map, size_t y, size_t x)
+{
+	return (map->map_data[y][x].cell_char);
+}
+
+t_mapcell	get_cell_by_coordinates(t_map *map, size_t y, size_t x)
 {
 	return (map->map_data[y][x]);
 }
