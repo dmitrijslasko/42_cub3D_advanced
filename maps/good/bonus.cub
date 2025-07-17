@@ -1,5 +1,5 @@
 DEF         textures/default-fallback-texture.xpm
-F1          textures/floor-grey-noise.xpm
+F1          textures/wolfenstein/color_stone.xpm
 C1          textures/floor-grey-noise.xpm
 W01         textures/simonkraft/bookshelf_02.xpm
 W02         textures/wolfenstein/red_brick.xpm

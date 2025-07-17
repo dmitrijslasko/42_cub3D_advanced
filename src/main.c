@@ -35,6 +35,7 @@ static int	setup_dt(t_data *dt)
 	load_messages(dt);
 	load_weapons(dt);
 	init_doors(dt);
+	mark_all_cells_that_neighbour_doors(dt);
 	load_sprites(dt);
 	setup_view(dt);
 	dt->player.ammo_level = STARTING_AMMO_LEVEL;

@@ -62,6 +62,16 @@ typedef enum e_active_message
 	ENJOY_THE_GAME,
 }	t_active_message;
 
+typedef enum e_active_item
+{
+	NO_WEAPON = 0,
+	KNIFE,
+	PISTOL,
+	AUTOMATIC_GUN,
+	MACHINE_GUN
+
+}	t_active_item;
+
 // Door structure with animation info
 typedef struct s_door
 {
@@ -217,7 +227,6 @@ typedef struct s_sprite
 	t_sprite_texture	*texture;
 	t_x_y				pos;
 	float				distance_to_player;
-	// char				type;
 	int					time;
 }	t_sprite;
 
@@ -588,5 +597,7 @@ int print_out_texture_lookup_table(t_data *dt);
 
 int		get_lookup_table_index(char *str);
 int		get_lookup_table_index_cell_type(int cell_type);
+
+int mark_all_cells_that_neighbour_doors(t_data *dt);
 
 #endif
