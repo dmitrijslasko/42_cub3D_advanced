@@ -41,7 +41,7 @@
 // window size
 # define WINDOW_W							640
 # define WINDOW_H							360
-# define CASTED_RAYS_COUNT					640
+# define CASTED_RAYS_COUNT					320
 # define FPS								60
 # define SCALING				            250
 # define MIMIC_FULLSCREEN                   1

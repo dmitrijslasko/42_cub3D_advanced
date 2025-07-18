@@ -86,7 +86,7 @@ int	get_color_render3d(t_data *dt, t_ray *ray, t_coor *tex_coor)
 
 	if (ray->hit_cell->is_near_door && ray->hit_side == 'y')
 	{
-		texture = dt->map.textures[ray->door->texture_index + 3].texture;
+		texture = dt->map.textures[ray->door->texture_index].texture;
 	}
 	color = texture.texture_data[tex_index];
 	return (color);

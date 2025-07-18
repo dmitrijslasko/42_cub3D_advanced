@@ -7,9 +7,9 @@ W03 	    textures/ceiling.xpm
 W04 	    textures/ceiling.xpm
 W05         textures/bookshelf.xpm
 W06         textures/simonkraft/respawn_anchor_side3.xpm
-W07         textures/ceiling.xpm
-W08         textures/car.xpm
-W09         textures/wolfenstein/purple_stone.xpm
+W07         textures/curtain-1.xpm
+W08         textures/curtain-2.xpm
+W09         textures/curtain-3.xpm
 DOOR_01    	textures/wolf37.xpm
 DOOR_01_S   textures/wolf44.xpm
 DOOR_02     textures/door-red.xpm
@@ -33,7 +33,7 @@ ED1    	    textures/wolf44.xpm
 1      1     1    h    1    1   . p1             * 2
 1      1111111         111111     11              12
 1d p                              p1             p1
-99-999999999998888888888888888888899999999999999-99
+99-987987987987987987987987987987987987987987987-99
 9                                                 9
 9                                                 9
 999999999999999999999999999999999999999-99-99-99-99
