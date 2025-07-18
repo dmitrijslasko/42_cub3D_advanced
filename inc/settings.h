@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:39:14 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/16 19:13:25 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/18 15:35:01 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # endif
 
 # ifndef LINUX_22
-# 	define LINUX_22 0
+# 	define LINUX_22 1
 # endif
 
 // window name
@@ -41,7 +41,7 @@
 // window size
 # define WINDOW_W							640
 # define WINDOW_H							360
-# define CASTED_RAYS_COUNT					320
+# define CASTED_RAYS_COUNT					640
 # define FPS								60
 # define SCALING				            250
 # define MIMIC_FULLSCREEN                   1

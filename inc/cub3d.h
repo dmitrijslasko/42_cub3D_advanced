@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:35:51 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/16 19:41:17 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/18 17:28:33 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef enum e_active_item
 typedef struct s_door
 {
 	size_t	id;
-	int		texture_index;
+	int		side_texture_index;
 	float	pos_x;
 	float	pos_y;
 	int		cell_x;
@@ -101,7 +101,7 @@ typedef struct s_x_y
 
 typedef struct s_dda_info
 {
-	t_coor	*map;
+	t_coor	*map_coor;
 	t_coor	*step;
 	t_x_y	*delta;
 	t_x_y	*side;
@@ -601,5 +601,7 @@ int		get_lookup_table_index_cell_type(int cell_type);
 int		get_lookup_table_index_cell_type_by_map_char(int map_char);
 
 int mark_all_cells_that_neighbour_doors(t_data *dt);
+
+int is_in_list(char *str, char *list);
 
 #endif
