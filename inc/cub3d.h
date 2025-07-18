@@ -76,12 +76,11 @@ typedef enum e_active_item
 typedef struct s_door
 {
 	size_t	id;
+	int		texture_index;
 	float	pos_x;
 	float	pos_y;
-	// float	width;
 	int		cell_x;
 	int		cell_y;
-	int		tex_id;
 	int		state;
 	int		orientation;
 	float	open_progress;
@@ -109,6 +108,13 @@ typedef struct s_dda_info
 	char	*hit_side;
 }	t_dda_info;
 
+typedef struct s_mapcell
+{
+	char		cell_char;
+	int			is_near_door;
+	t_door		*door;
+}	t_mapcell;
+
 typedef struct s_ray
 {
 	int			id;
@@ -116,6 +122,7 @@ typedef struct s_ray
 	float		corrected_distance_to_wall;
 	int			wall_height;
 	float		percentage_of_image;
+	t_mapcell	*hit_cell;
 	int			cell_type;
 	int			wall_orientation;
 	t_x_y		vector;
@@ -126,12 +133,6 @@ typedef struct s_ray
 	t_x_y		door_hit_coor;
 	float		distance_to_door;
 }	t_ray;
-
-typedef struct s_mapcell
-{
-	char		cell_char;
-	int			is_near_door;
-}	t_mapcell;
 
 typedef struct s_map
 {
@@ -351,7 +352,7 @@ bool		set_color(char *identifier, char **color, t_map *map);
 bool		check_map_is_closed(t_map *map, t_player *player, t_data *dt);
 char		get_cell_type(t_map *map, t_coor *coord);
 char		get_cell_type_by_coordinates(t_map *map, size_t y, size_t x);
-t_mapcell	get_cell_by_coordinates(t_map *map, size_t y, size_t x);
+t_mapcell	*get_cell_by_coordinates(t_map *map, size_t y, size_t x);
 char		**ft_split_by_multiple_delimiters(const char *s, char *c);
 
 // player movements
@@ -597,6 +598,7 @@ int print_out_texture_lookup_table(t_data *dt);
 
 int		get_lookup_table_index(char *str);
 int		get_lookup_table_index_cell_type(int cell_type);
+int		get_lookup_table_index_cell_type_by_map_char(int map_char);
 
 int mark_all_cells_that_neighbour_doors(t_data *dt);
 

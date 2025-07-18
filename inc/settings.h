@@ -100,6 +100,7 @@
 
 # define DEF_DOOR_OFFSET_X					0.5f
 # define DEF_DOOR_OFFSET_Y					0.5f
+# define DEF_DOOR_SPEED                 0.05f
 
 // colors
 # define DEF_BG_COLOR			    		BLACK
@@ -171,8 +172,9 @@
 # define HORIZONTAL_DOOR_TYPES				"--"
 
 // shaders
-# define ENABLE_SHADERS						0
-# define DISTANCE_SHADOW_STRENGTH 			0.2f
+# define ENABLE_SHADERS						1
+# define DISTANCE_SHADOW_STRENGTH 			0.4f
+# define WALL_ORIENTATION_SHADOW_STRENGTH   0.4f
 
 # define ENABLE_MOVING_SKY					1
 # define ROTATION_SCALE					    1

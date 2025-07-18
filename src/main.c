@@ -152,12 +152,16 @@ int	main(int argc, char **argv)
 	if (setup_mlx_and_win(&dt))
 		return (MLX_ERROR);
 	setup_dt(&dt);
+
 	draw_minimap_base_img(&dt);
 	setup_keyboard_and_mouse_controls(&dt);
 	print_separator(3, DEF_SEPARATOR_CHAR);
-	printf("🎮 Starting game!\n");
+	
 	system("gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false");
 	mimic_fullscreen();
+	
+	printf("🎮 Starting game!\n");
+
 	mlx_loop_hook(dt.mlx_ptr, &render_frame, &dt);
 	mlx_loop(dt.mlx_ptr);
 	free_dt(&dt);

@@ -30,6 +30,9 @@ void	print_cell_info(t_data *dt, void *mlx, void *win, int *y)
 	snprintf(buffer, sizeof(buffer), "%.2f", dt->rays[i].wall_hit.y);
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Cell hit point Y:");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
+	snprintf(buffer, sizeof(buffer), "%d", dt->rays[i].hit_cell->is_near_door);
+	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Is near door:");
+	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
 	snprintf(buffer, sizeof(buffer), "%.2f", dt->rays[i].percentage_of_image);
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL_2, UI_CLR_1, "Percentage of image:");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
@@ -54,6 +57,8 @@ void	print_door_hit_stats(t_data *dt, void *mlx, void *win, int *y)
 	{
 		f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Door ID:");
 		f(mlx, win, DBG_2_X, *y, UI_CLR_1, ft_itoa(dt->rays[i].door->id));
+		f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Door texture:");
+		f(mlx, win, DBG_2_X, *y, UI_CLR_1, ft_itoa(dt->rays[i].door->texture_index));
 		snprintf(buffer, sizeof(buffer), "%.2f", dt->rays[i].door_hit_coor.x);
 		f(mlx, win, DBG_1_X, *y += DBG_MN_NL_2, UI_CLR_1, "Door hit point X:");
 		f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);

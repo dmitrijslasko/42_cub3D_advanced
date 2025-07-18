@@ -22,9 +22,9 @@ char	get_cell_type_by_coordinates(t_map *map, size_t y, size_t x)
 	return (map->map_data[y][x].cell_char);
 }
 
-t_mapcell	get_cell_by_coordinates(t_map *map, size_t y, size_t x)
+t_mapcell	*get_cell_by_coordinates(t_map *map, size_t y, size_t x)
 {
-	return (map->map_data[y][x]);
+	return (&map->map_data[y][x]);
 }
 
 // NOTE DL: should we remove the first if?

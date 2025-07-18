@@ -41,11 +41,18 @@ int	ray_hits_door(t_data *dt, t_coor *map_coor, t_ray *ray)
 	t_door	*door;
 	t_x_y	door_hit_coor;
 	float	dist_to_door;
+	int		door_char;
 
 	door = find_door_at(dt, map_coor->x, map_coor->y);
 	if (!door)
 		return (0);
 	ray->door = door;
+	
+	door_char = get_cell_by_coordinates(&dt->map, map_coor->y, map_coor->x)->cell_char;
+
+	// TODO DL: this +2 is some crap happening due to wrong texture indexing... take a look into this
+	ray->door->texture_index = get_lookup_table_index_cell_type_by_map_char(door_char) + 2;
+
 	calculate_distance_to_door(door, ray, &dist_to_door);
 	door_hit_coor.x = ray->wall_hit.x + ray->vector.x * dist_to_door;
 	door_hit_coor.y = ray->wall_hit.y + ray->vector.y * dist_to_door;

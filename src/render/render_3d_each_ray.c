@@ -12,15 +12,26 @@
 
 #include "cub3d.h"
 
+// NOTE DL: For some reason, does not seems to work? :(
+void	apply_wall_orientation_shading(t_ray *ray, int *color)
+{
+	if (ray->wall_orientation == EAST || ray->wall_orientation == WEST)
+	{
+		apply_shadow(ray, &color, WALL_ORIENTATION_SHADOW_STRENGTH);
+		// *color = YELLOW;
+	}
+}
 void	put_pix_img(t_data *dt, t_ray *ray, t_coor *texture, t_coor *coor)
 {
 	int		color;
 
 	color = get_color_render3d(dt, ray, texture);
-	if (ray->wall_orientation == EAST || ray->wall_orientation == WEST)
-		apply_shadow(ray, &color, 0.5f);
-	if (color != BLACK)
-		img_pix_put(dt->raycasting_scene_img, coor->x, coor->y, color);
+	if (ENABLE_SHADERS)
+	{
+		apply_wall_orientation_shading(ray, &color);
+		apply_distance_shadow(ray, &color);
+	}
+	img_pix_put(dt->raycasting_scene_img, coor->x, coor->y, color);
 }
 
 void	render_3d_each_ray(t_data *dt, t_ray *ray, int screen_slice_width)
