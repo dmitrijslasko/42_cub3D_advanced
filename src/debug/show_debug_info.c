@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:33:06 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/15 14:51:53 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/18 16:46:47 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	print_door_hit_stats(t_data *dt, void *mlx, void *win, int *y)
 	{
 		f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Door ID:");
 		f(mlx, win, DBG_2_X, *y, UI_CLR_1, ft_itoa(dt->rays[i].door->id));
-		f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Door texture:");
-		f(mlx, win, DBG_2_X, *y, UI_CLR_1, ft_itoa(dt->rays[i].door->texture_index));
+		f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Door side texture:");
+		f(mlx, win, DBG_2_X, *y, UI_CLR_1, ft_itoa(dt->rays[i].door->side_texture_index));
 		snprintf(buffer, sizeof(buffer), "%.2f", dt->rays[i].door_hit_coor.x);
 		f(mlx, win, DBG_1_X, *y += DBG_MN_NL_2, UI_CLR_1, "Door hit point X:");
 		f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);

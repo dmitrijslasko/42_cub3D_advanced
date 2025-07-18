@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:43 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/16 19:17:18 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/18 16:03:34 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,14 @@ static void	init_a_door(t_data *dt, t_door **door_ptr, \
 						int curr_row, int curr_col)
 {
 	t_door	*door_ptr_ref;
+	char 	door_type;
+
+	door_type =  get_cell_type_by_coordinates(&dt->map,
+						curr_row, curr_col);
 
 	door_ptr_ref = *door_ptr;
 	door_ptr_ref->id = door_ptr_ref - dt->doors;
+	door_ptr_ref->side_texture_index = get_lookup_table_index_cell_type_by_map_char(door_type) + 1;
 	door_ptr_ref->cell_x = curr_col;
 	door_ptr_ref->cell_y = curr_row;
 	door_ptr_ref->pos_x = DEF_DOOR_OFFSET_X;
@@ -32,6 +37,8 @@ static void	init_a_door(t_data *dt, t_door **door_ptr, \
 	door_ptr_ref->state = 0;
 	printf("Door [%2zu] at X Y (%3d, %3d) added. Orientation: %d\n",
 		door_ptr_ref->id, curr_col, curr_row, door_ptr_ref->orientation);
+	printf("Door side texture for door [%2zu] added: %d\n",
+		door_ptr_ref->id, door_ptr_ref->side_texture_index);
 	(*door_ptr)++;
 }
 
@@ -40,6 +47,7 @@ void	init_doors(t_data *dt)
 	t_door	*door_ptr;
 	int		curr_row;
 	int		curr_col;
+	char	door_type;
 
 	print_separator_default();
 	printf(TXT_YELLOW ">>> INITIALISING DOORS\n" TXT_RESET);
@@ -53,8 +61,9 @@ void	init_doors(t_data *dt)
 		curr_col = 0;
 		while (curr_col < dt->map.map_size_cols)
 		{
-			if (ft_strchr(DOOR_TYPES, get_cell_type_by_coordinates(&dt->map,
-						curr_row, curr_col)))
+			door_type =  get_cell_type_by_coordinates(&dt->map,
+						curr_row, curr_col);
+			if (ft_strchr(DOOR_TYPES, door_type))
 				init_a_door(dt, &door_ptr, curr_row, curr_col);
 			curr_col++;
 		}
