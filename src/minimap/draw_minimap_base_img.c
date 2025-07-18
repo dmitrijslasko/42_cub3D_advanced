@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:05:46 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/14 18:32:47 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/16 19:19:13 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	draw_minimap_elements(t_data *dt)
 		col = 0;
 		while (col < dt->map.map_size_cols)
 		{
-			tile = dt->map.map_data[row][col];
+			tile = dt->map.map_data[row][col].cell_char;
 			draw = get_draw_func_for_tile(tile);
 			if (draw)
 				draw(dt, col, row);

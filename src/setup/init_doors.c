@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:43 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/15 16:56:30 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/16 19:17:18 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ static void	init_a_door(t_data *dt, t_door **door_ptr, \
 	door_ptr_ref->pos_x = DEF_DOOR_OFFSET_X;
 	door_ptr_ref->pos_y = DEF_DOOR_OFFSET_Y;
 	door_ptr_ref->open_progress = 0.0f;
-	if (ft_strchr(VERTICAL_DOOR_TYPES, dt->map.map_data[curr_row][curr_col]))
+	if (ft_strchr(VERTICAL_DOOR_TYPES, dt->map.map_data[curr_row][curr_col].cell_char))
 		door_ptr_ref->orientation = 1;
 	else
 		door_ptr_ref->orientation = 0;
-	door_ptr_ref->speed = 0.05f;
+	door_ptr_ref->speed = DEF_DOOR_SPEED;
 	door_ptr_ref->state = 0;
 	printf("Door [%2zu] at X Y (%3d, %3d) added. Orientation: %d\n",
 		door_ptr_ref->id, curr_col, curr_row, door_ptr_ref->orientation);

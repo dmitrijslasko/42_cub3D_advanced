@@ -25,6 +25,7 @@ void	set_cell_type(t_data *dt, t_ray *ray, t_coor *map_coor)
 	{
 		if (g_texture_lookup[i].map_char == map_cell_char)
 		{
+			ray->hit_content = map_cell_char;
 			cell_type = g_texture_lookup[i].texture_type;
 			break ;
 		}

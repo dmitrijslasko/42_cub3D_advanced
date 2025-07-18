@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:39:14 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/15 17:24:45 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/16 19:13:25 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define VERSION_INFO      "cub3D project - 42 Berlin - dmlasko, v2.0"
 
 # define SHOW_CALCULATION_LOGS				1
-# define SHOW_DEBUG_INFO 					1
+# define SHOW_DEBUG_INFO 					0
 
 # define TILE_SIZE  						64
 
@@ -100,6 +100,7 @@
 
 # define DEF_DOOR_OFFSET_X					0.5f
 # define DEF_DOOR_OFFSET_Y					0.5f
+# define DEF_DOOR_SPEED                 0.05f
 
 // colors
 # define DEF_BG_COLOR			    		BLACK
@@ -172,7 +173,8 @@
 
 // shaders
 # define ENABLE_SHADERS						1
-# define DISTANCE_SHADOW_STRENGTH 			0.2f
+# define DISTANCE_SHADOW_STRENGTH 			0.4f
+# define WALL_ORIENTATION_SHADOW_STRENGTH   0.4f
 
 # define ENABLE_MOVING_SKY					1
 # define ROTATION_SCALE					    1

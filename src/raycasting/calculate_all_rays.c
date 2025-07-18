@@ -18,8 +18,6 @@ int	calculate_all_rays(t_data *dt)
 	t_x_y	vector;
 	double	angle;
 
-	if (dt->has_changed == 0)
-		return (0);
 	if (CASTED_RAYS_COUNT == 1)
 		angle = 0.0f;
 	else

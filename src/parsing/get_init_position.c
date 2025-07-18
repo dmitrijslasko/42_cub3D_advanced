@@ -53,7 +53,7 @@ void	get_init_player_position(t_map *map, t_player *player)
 		col = 0;
 		while (col < map->map_size_cols)
 		{
-			c = map->map_data[row][col];
+			c = map->map_data[row][col].cell_char;
 			if (ft_strchr(PLAYER_SPAWN_POINT_TYPES, c))
 			{
 				find_position(player, col, row, c);

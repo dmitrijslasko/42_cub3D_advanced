@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:10:01 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/15 14:04:48 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/16 19:25:10 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ bool	parse_mapfile(char *file, t_data *dt)
 	if (parse_mapfile_values(&dt->map, file))
 		return (1);
 	//print_out_texture_lookup_table(dt);
-	// if (!check_valid_player(&dt->map))
-	// 	return (1);
+	 if (!check_valid_player(&dt->map))
+	 	return (1);
 	// NOTE DL: Probably can be removed for advanced part since we don't care about color / texture checks
 	// if (check_all_textures(&dt->map))
 	// 	return (1);

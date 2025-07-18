@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:08:02 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/15 16:34:55 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/16 19:17:23 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_hit_door_cell(t_coor *coor, t_data *dt)
 {
-	return (ft_strchr(DOOR_TYPES, dt->map.map_data[coor->y][coor->x]));
+	return (ft_strchr(DOOR_TYPES, dt->map.map_data[coor->y][coor->x].cell_char));
 }
 
 int	run_dda_loop(t_data *dt, t_ray *ray, t_dda_info *dda_info)

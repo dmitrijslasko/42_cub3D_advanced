@@ -17,23 +17,25 @@ bool	init_2d_map(char ***array, size_t size_row,
 {
 	size_t	curr_col;
 	size_t	curr_row;
-	char	**new;
+	t_mapcell	**new;
 	int		cell_count;
 
 	print_separator_default();
 	printf("Initiliazing empty map cells... ");
 	cell_count = 0;
 	curr_row = 0;
-	new = protected_malloc((size_row + 1) * sizeof(char *), dt);
+	new = protected_malloc((size_row + 1) * sizeof(t_mapcell *), dt);
 	new[size_row] = NULL;
 	while (curr_row < size_row)
 	{
-		new[curr_row] = protected_malloc((size_col + 1) * sizeof(char), dt);
-		new[curr_row][size_col] = '\0';
+		new[curr_row] = protected_malloc((size_col + 1) * sizeof(t_mapcell), dt);
+		new[curr_row][size_col].cell_char = '\0';
+		new[curr_row][size_col].is_near_door = 0;
 		curr_col = 0;
 		while (curr_col < size_col)
 		{
-			new[curr_row][curr_col++] = ' ';
+			new[curr_row][curr_col].cell_char = ' ';
+			new[curr_row][curr_col++].is_near_door = 0;
 			cell_count++;
 		}
 		curr_row++;

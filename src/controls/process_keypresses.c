@@ -99,9 +99,9 @@ void	process_keypresses(t_data *dt)
 	if (dt->keys[XK_b])
 		dt->test_value_2 += 0.001f;
 	if (dt->keys[XK_h])
-		dt->test_value_3 -= 0.001f;
+		dt->test_value_3 -= 0.1f;
 	if (dt->keys[XK_j])
-		dt->test_value_3 += 0.001f;
+		dt->test_value_3 += 0.1f;
 	if (dt->keys[XK_n])
 		dt->test_value_4 -= 0.001f;
 	if (dt->keys[XK_m])
