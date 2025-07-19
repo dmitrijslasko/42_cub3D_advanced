@@ -69,8 +69,19 @@ typedef enum e_active_item
 	PISTOL,
 	AUTOMATIC_GUN,
 	MACHINE_GUN
-
 }	t_active_item;
+
+typedef struct s_weapon
+{
+	const int 	type;
+	int		total_ammo_count;
+	int		bullets_in_clip;
+	const int		clip_size;
+	
+	const float	shot_speed;
+	const float	reload_speed;
+	const float	weight;
+}	t_weapon;
 
 // Door structure with animation info
 typedef struct s_door
