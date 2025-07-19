@@ -17,6 +17,8 @@ void	calculate_distance_to_door(t_door *door, t_ray *ray, \
 {
 	float	step;
 
+	if (door == NULL)
+		return ;
 	*distance_to_door = 0.0f;
 	if (ray->hit_side == 'x')
 	{
@@ -57,7 +59,6 @@ int	ray_hits_door(t_data *dt, t_coor *map_coor, t_ray *ray)
 		ray->distance_to_door = dist_to_door;
 		ray->door_hit_coor.x = door_hit_coor.x;
 		ray->door_hit_coor.y = door_hit_coor.y;
-		ray->door = door;
 		return (1);
 	}
 	return (0);

@@ -36,4 +36,6 @@ void	update_ray_hit_point(t_data *dt, t_ray *ray)
 
 	cell = get_cell_by_coordinates(&dt->map, map_y, map_x);
 	ray->hit_cell = cell;
+	if (cell->is_near_door)
+		ray->door = cell->door;
 }

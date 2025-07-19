@@ -53,7 +53,7 @@ void	print_door_hit_stats(t_data *dt, void *mlx, void *win, int *y)
 		i = 0;
 	else
 		i = CASTED_RAYS_COUNT / 2;
-	if (dt->door_count > 0 && dt->rays[i].door_hit_coor.x)
+	if (dt->rays[i].door && dt->door_count > 0 && dt->rays[i].door_hit_coor.x)
 	{
 		f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Door ID:");
 		f(mlx, win, DBG_2_X, *y, UI_CLR_1, ft_itoa(dt->rays[i].door->id));
@@ -141,7 +141,7 @@ void	show_player_info(t_data *dt)
 	mlx = dt->mlx_ptr;
 	win = dt->win_ptr;
 	mlx_string_put(mlx, win, x, WINDOW_H - 20, GOLD, "Health: ");
-	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, "100");
+	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->player.health_level));
 
 	mlx_string_put(mlx, win, x += 100, WINDOW_H - 20, GOLD, "Weapon: ");
 	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, "PISTOL");

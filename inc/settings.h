@@ -31,7 +31,7 @@
 # define VERSION_INFO      "cub3D project - 42 Berlin - dmlasko, v2.0"
 
 # define SHOW_CALCULATION_LOGS				1
-# define SHOW_DEBUG_INFO 					1
+# define SHOW_DEBUG_INFO 					0
 
 # define TILE_SIZE  						64
 
@@ -44,9 +44,10 @@
 # define CASTED_RAYS_COUNT					640
 # define FPS								60
 # define SCALING				            250
-# define MIMIC_FULLSCREEN                   0
+# define MIMIC_FULLSCREEN                   1
 
 # define STARTING_AMMO_LEVEL				9
+# define STARTING_HEALTH_LEVEL              50
 // constants.h or at the top of your .c file
 // 10 samples per degree
 # define TRIG_PRECISION                      20
@@ -181,5 +182,5 @@
 # define ROTATION_SCALE					    1
 # define ENABLE_BOBBING                     1
 
-# define RENDER_SPRITES                     0
+# define RENDER_SPRITES                     1
 #endif

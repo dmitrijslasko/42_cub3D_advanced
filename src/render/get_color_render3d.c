@@ -23,7 +23,10 @@ int is_in_list(char *str, char *list)
 t_texture *handle_door(int *tex_index, t_ray *ray, t_coor *tex_coor, t_data *dt)
 {
     float side;
-    int index = get_lookup_table_index_cell_type(ray->cell_type);
+	t_texture *texture;
+	int index;
+
+    index = get_lookup_table_index_cell_type(ray->cell_type);
 
     if (index == -1)
         return NULL;
@@ -35,13 +38,13 @@ t_texture *handle_door(int *tex_index, t_ray *ray, t_coor *tex_coor, t_data *dt)
     else
         return NULL;
 
-    t_texture *texture = &dt->map.textures[ray->cell_type].texture;
+    texture = &dt->map.textures[ray->cell_type].texture;
 
     if (side > 0)
         *tex_index = texture->width * (tex_coor->y + (ray->percentage_of_image - ray->door->open_progress));
     else
         *tex_index = texture->width * (tex_coor->y + (1.0f - ray->percentage_of_image - ray->door->open_progress));
-	*tex_index = 1;
+	// *tex_index = 1;
 
     return texture;
 }
@@ -95,25 +98,25 @@ int	get_color_render3d(t_data *dt, t_ray *ray, t_coor *tex_coor)
 	int			side_texture_index;
 	t_texture *texture = NULL;
 
-	if (ft_strchr(DOOR_TYPES, ray->hit_content))
+	if (ray->hit_cell->is_near_door && ray->hit_side == 'y' && ray->door && ray->door->orientation == 1)
 	{
-		texture = handle_door(&tex_index, ray, tex_coor, dt);
-		if (!texture) // fallback in case handle_door fails
-			texture = &dt->map.textures[ray->cell_type].texture;
-	}
-	else if (ray->hit_cell->is_near_door && ray->hit_side == 'y' && ray->door && ray->door->orientation == 1)
-	{
-		int side_texture_index = ray->door->side_texture_index;
+		side_texture_index = ray->door->side_texture_index;
 		texture = &dt->map.textures[side_texture_index].texture;
 		tex_coor->x = texture->width * ray->percentage_of_image;
 		tex_index = texture->width * tex_coor->y + tex_coor->x;
 	}
 	else if (ray->hit_cell->is_near_door && ray->hit_side == 'x' && ray->door && ray->door->orientation == 0)
 	{
-		int side_texture_index = ray->door->side_texture_index;
+		side_texture_index = ray->door->side_texture_index;
 		texture = &dt->map.textures[side_texture_index].texture;
 		tex_coor->x = texture->width * ray->percentage_of_image;
 		tex_index = texture->width * tex_coor->y + tex_coor->x;
+	}
+	else if (ft_strchr(DOOR_TYPES, ray->hit_content))
+	{
+		texture = handle_door(&tex_index, ray, tex_coor, dt);
+		if (!texture)
+			texture = &dt->map.textures[ray->cell_type].texture;
 	}
 	else
 	{
@@ -122,7 +125,8 @@ int	get_color_render3d(t_data *dt, t_ray *ray, t_coor *tex_coor)
 		tex_index = texture->width * tex_coor->y + tex_coor->x;
 	}
 
+	// tex_index = 20;
+	// texture = &dt->map.textures[1].texture;
 	color = texture->texture_data[tex_index];
-
 	return (color);
 }
