@@ -39,6 +39,7 @@ static int	setup_dt(t_data *dt)
 	load_sprites(dt);
 	setup_view(dt);
 	dt->player.ammo_level = STARTING_AMMO_LEVEL;
+	dt->player.health_level = STARTING_HEALTH_LEVEL;
 	dt->weapon_current_frame = 0;
 	setup_img(dt, dt->final_frame_img, WINDOW_W, WINDOW_H);
 	setup_img(dt, dt->raycasting_scene_img, WINDOW_W, WINDOW_H);

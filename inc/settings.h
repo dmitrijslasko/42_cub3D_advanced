@@ -47,6 +47,7 @@
 # define MIMIC_FULLSCREEN                   1
 
 # define STARTING_AMMO_LEVEL				9
+# define STARTING_HEALTH_LEVEL              50
 // constants.h or at the top of your .c file
 // 10 samples per degree
 # define TRIG_PRECISION                      20
@@ -157,6 +158,7 @@
 # define SHOW_WELCOME_IMAGE  				0
 
 // all printable ASCII characters + fallback texture
+// maximum
 # define NUMBER_TEXTURES    	            20
 
 # define WHITESPACE        	            	" \a\b\t\n\v\f\r"

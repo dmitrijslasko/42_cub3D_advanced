@@ -22,6 +22,7 @@ int	run_dda_loop(t_data *dt, t_ray *ray, t_dda_info *dda_info)
 	int	door_hit;
 
 	door_hit = 0;
+	ray->door = NULL;
 	if (check_hit_door_cell(dda_info->map_coor, dt))
 	{
 		door_hit = check_door_hit(dt, ray, dda_info->map_coor);
@@ -37,7 +38,6 @@ int	run_dda_loop(t_data *dt, t_ray *ray, t_dda_info *dda_info)
 		update_ray_distance_to_cell_edge(dt, ray, dda_info->map_coor);
 		update_ray_hit_point(dt, ray);
 
-		// handle doors
 		if (check_hit_door_cell(dda_info->map_coor, dt))
 		{
 			door_hit = check_door_hit(dt, ray, dda_info->map_coor);

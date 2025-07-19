@@ -28,6 +28,7 @@ int	calculate_all_rays(t_data *dt)
 		vector = rotate_vector(&dt->player.direction_vector, angle, dt);
 		dt->rays[i].id = i;
 		dt->rays[i].vector = vector;
+		dt->rays[i].door = NULL;
 		update_single_ray(dt, &dt->rays[i]);
 		angle += FIELD_OF_VIEW_DEG / (CASTED_RAYS_COUNT - 1);
 		i++;
