@@ -63,17 +63,21 @@ int mark_all_cells_that_neighbour_doors(t_data *dt)
 			i++;
 			continue ;
 		}
-		if (door->orientation == 1)
+		if (door[i].orientation == 1)
 		{
-			dt->map.map_data[y + 1][x].is_near_door = 1;
 			dt->map.map_data[y - 1][x].is_near_door = 1;
-			dt->map.map_data[y + 1][x].door = &door[i];
+			dt->map.map_data[y + 1][x].is_near_door = 1;
+			printf("Marked cell: %d %d\n", x, y - 1);
+			printf("Marked cell: %d %d\n", x, y + 1);
 			dt->map.map_data[y - 1][x].door = &door[i];
+			dt->map.map_data[y + 1][x].door = &door[i];
 		}
-		else
+		else if (door[i].orientation == 0)
 		{
-			dt->map.map_data[y][x + 1].is_near_door = 1;
 			dt->map.map_data[y][x - 1].is_near_door = 1;
+			dt->map.map_data[y][x + 1].is_near_door = 1;
+			printf("Marked cell: %d %d\n", x - 1, y);
+			printf("Marked cell: %d %d\n", x + 1, y);
 			dt->map.map_data[y][x + 1].door = &door[i];
 			dt->map.map_data[y][x - 1].door = &door[i];
 		}
@@ -82,6 +86,7 @@ int mark_all_cells_that_neighbour_doors(t_data *dt)
 	}
 	return (EXIT_SUCCESS);
 }
+
 int	get_color_render3d(t_data *dt, t_ray *ray, t_coor *tex_coor)
 {
 	int			color;
@@ -95,7 +100,14 @@ int	get_color_render3d(t_data *dt, t_ray *ray, t_coor *tex_coor)
 		if (!texture) // fallback in case handle_door fails
 			texture = &dt->map.textures[ray->cell_type].texture;
 	}
-	else if (ray->hit_cell->is_near_door && ray->hit_side == 'y')
+	if (ray->hit_cell->is_near_door && ray->hit_side == 'y' && ray->door && ray->door->orientation == 1)
+	{
+		int side_texture_index = ray->door->side_texture_index;
+		texture = &dt->map.textures[side_texture_index].texture;
+		tex_coor->x = texture->width * ray->percentage_of_image;
+		tex_index = texture->width * tex_coor->y + tex_coor->x;
+	}
+	else if (ray->hit_cell->is_near_door && ray->hit_side == 'x' && ray->door && ray->door->orientation == 0)
 	{
 		int side_texture_index = ray->door->side_texture_index;
 		texture = &dt->map.textures[side_texture_index].texture;

@@ -31,7 +31,7 @@ void	print_cell_info(t_data *dt, void *mlx, void *win, int *y)
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Cell hit point Y:");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
 	snprintf(buffer, sizeof(buffer), "%d", dt->rays[i].hit_cell->is_near_door);
-	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Is near door:");
+	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_2, "Is near door:");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
 	snprintf(buffer, sizeof(buffer), "%.2f", dt->rays[i].percentage_of_image);
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL_2, UI_CLR_1, "Percentage of image:");
@@ -120,7 +120,7 @@ void	show_debug_info(t_data *dt)
 	mlx = dt->mlx_ptr;
 	win = dt->win_ptr;
 	//print_window_info(dt, mlx, win, &y);
-	print_plane_stats(dt, mlx, win, &y);
+	// print_plane_stats(dt, mlx, win, &y);
 	print_player_position(dt, mlx, win, &y);
 	print_obstacle_info(dt, mlx, win, &y);
 	print_cell_info(dt, mlx, win, &y);

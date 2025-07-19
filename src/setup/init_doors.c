@@ -37,7 +37,7 @@ static void	init_a_door(t_data *dt, t_door **door_ptr, \
 	door_ptr_ref->state = 0;
 	printf("Door [%2zu] at X Y (%3d, %3d) added. Orientation: %d\n",
 		door_ptr_ref->id, curr_col, curr_row, door_ptr_ref->orientation);
-	printf("Door side texture for door [%2zu] added: %d\n",
+	printf("Door side texture for door [%2zu] added: %d\n-------------\n",
 		door_ptr_ref->id, door_ptr_ref->side_texture_index);
 	(*door_ptr)++;
 }
@@ -52,7 +52,7 @@ void	init_doors(t_data *dt)
 	print_separator_default();
 	printf(TXT_YELLOW ">>> INITIALISING DOORS\n" TXT_RESET);
 	dt->door_count = count_elements_in_the_map(&dt->map, DOOR_TYPES);
-	printf("Doors found: %zu\n", dt->door_count);
+	printf("Doors elements found: %zu\n", dt->door_count);
 	dt->doors = protected_malloc(sizeof(t_door) * dt->door_count, dt);
 	door_ptr = dt->doors;
 	curr_row = 0;
