@@ -47,8 +47,12 @@ int		get_lookup_table_index_cell_type_by_map_char(int map_char)
 	i = 0;
 	while (g_texture_lookup[i].mapfile_key)
 	{
-
-		if (g_texture_lookup[i].map_char == map_char)
+		if (g_texture_lookup[i].map_char == NULL)
+		{
+			i++;
+			continue ;
+		}
+		if (ft_strchr(g_texture_lookup[i].map_char, map_char))
 			return (i);
 		i++;
 	}

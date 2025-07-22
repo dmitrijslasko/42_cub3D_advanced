@@ -14,39 +14,41 @@
 
 int is_in_list(char *str, char *list)
 {
-    for (int i = 0; i < ft_strlen(list); i++)
-        if (ft_strchr(str, list[i]))
-            return 1;
-    return 0;
+	for (int i = 0; i < ft_strlen(list); i++)
+		if (ft_strchr(str, list[i]))
+			return 1;
+	return 0;
 }
 
 t_texture *handle_door(int *tex_index, t_ray *ray, t_coor *tex_coor, t_data *dt)
 {
-    float side;
-	t_texture *texture;
-	int index;
+	float		side;
+	t_texture	*texture;
+	int			index;
 
-    index = get_lookup_table_index_cell_type(ray->cell_type);
+	index = get_lookup_table_index_cell_type(ray->cell_type);
 
-    if (index == -1)
-        return NULL;
+	if (index == -1)
+		return NULL;
 
-    if (ft_strchr(VERTICAL_DOOR_TYPES, g_texture_lookup[index].map_char))
-        side = ray->vector.x;
-    else if (ft_strchr(HORIZONTAL_DOOR_TYPES, g_texture_lookup[index].map_char))
-        side = -ray->vector.y;
-    else
-        return NULL;
+	if (g_texture_lookup[index].map_char == NULL)
+		return NULL;
+	
+	if (ft_strchr(VERTICAL_DOOR_TYPES, ray->hit_content))
+		side = ray->vector.x;
+	else if (ft_strchr(HORIZONTAL_DOOR_TYPES, ray->hit_content))
+		side = -ray->vector.y;
+	else
+		return NULL;
 
-    texture = &dt->map.textures[ray->cell_type].texture;
+	texture = &dt->map.textures[ray->cell_type].texture;
 
-    if (side > 0)
-        *tex_index = texture->width * (tex_coor->y + (ray->percentage_of_image - ray->door->open_progress));
-    else
-        *tex_index = texture->width * (tex_coor->y + (1.0f - ray->percentage_of_image - ray->door->open_progress));
-	// *tex_index = 1;
+	if (side > 0)
+		*tex_index = texture->width * (tex_coor->y + (ray->percentage_of_image - ray->door->open_progress));
+	else
+		*tex_index = texture->width * (tex_coor->y + (1.0f - ray->percentage_of_image - ray->door->open_progress));
 
-    return texture;
+	return texture;
 }
 
 int mark_all_cells_that_neighbour_doors(t_data *dt)
