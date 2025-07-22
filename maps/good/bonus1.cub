@@ -12,16 +12,16 @@ W08         textures/curtain-2.xpm
 W09         textures/curtain-3.xpm
 DOOR_01    	textures/wolf37.xpm
 DOOR_01_S   textures/wolf44.xpm
-DOOR_03     textures/door-red.xpm
+DOOR_02     textures/door-red.xpm
 DOOR_02_S   textures/car.xpm
-DOOR_02     textures/bookshelf.xpm
+DOOR_03     textures/bookshelf.xpm
 DOOR_03_S   textures/bookshelf.xpm
 ED1    	    textures/wolf44.xpm
 
 
 
 111166111111111111111111111111111111111111111111111
-9p     9343434116666666615555555   1              1
+9p     9343434116666666615555555   1              1F
 9   S  | [    ] pppppppp      5    1  2 2 2 2 2 2 1
 9      93434341               [    2              1
 99-9-9-9  1   2 pppppppp      1    1              1

@@ -63,6 +63,22 @@ int	bob_weapon(t_data *dt)
 	return (y_offset);
 }
 
+int print_out_sprite_info(t_data *dt)
+{
+	t_sprite 	*sprites;
+	size_t		i;
+	float		distance;
+
+	sprites = dt->sprites;
+	i = 0;
+	while (i < dt->sprite_count)
+	{
+		distance = sprites[i].distance_to_player;
+		printf("[%zu] Distance: %.2f\n", i, distance);
+		i++;
+	}
+}
+
 int	render_frame(void *param)
 {
 	t_data		*dt;
@@ -121,7 +137,7 @@ int	render_frame(void *param)
 	}
 	// render weapon
 	put_img_to_img(dt->final_frame_img, &dt->weapon_img[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
-	// put_img_to_img(dt->final_frame_img, &dt->weapon_img[dt->weapon_current_frame], 0, 0);
 	dt->frames_drawn_count++;
+	print_out_sprite_info(dt);
 	return (EXIT_SUCCESS);
 }

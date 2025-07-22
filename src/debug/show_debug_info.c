@@ -98,7 +98,7 @@ void	print_plane_stats(t_data *dt, void *mlx, void *win, int *y)
 
 	f = mlx_string_put;
 	snprintf(buffer, sizeof(buffer), "%.4f", dt->player.plane_x);
-	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Plane X:");
+	f(mlx, win, DBG_1_X, *y += DBG_MN_NL_2, UI_CLR_1, "Plane X:");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
 	f = mlx_string_put;
 	snprintf(buffer, sizeof(buffer), "%.4f", dt->player.plane_y);
@@ -116,10 +116,11 @@ void	show_debug_info(t_data *dt)
 	if (!dt->view->show_debug_info)
 		return ;
 	f = mlx_string_put;
-	y = DBG_FIELD_OFFST_Y;
+	// y = DBG_FIELD_OFFST_Y;
+	y = 0;
 	mlx = dt->mlx_ptr;
 	win = dt->win_ptr;
-	//print_window_info(dt, mlx, win, &y);
+	// print_window_info(dt, mlx, win, &y);
 	// print_plane_stats(dt, mlx, win, &y);
 	print_player_position(dt, mlx, win, &y);
 	print_obstacle_info(dt, mlx, win, &y);
@@ -128,6 +129,7 @@ void	show_debug_info(t_data *dt)
 	f(mlx, win, DBG_1_X, y += DBG_MN_NL_2, UI_CLR_1, "LMB presses:");
 	f(mlx, win, DBG_2_X, y, UI_CLR_1, ft_itoa(dt->mouse.lmb_press_count));
 	print_time_stats(dt, mlx, win, &y);
+	print_enemy_info(dt, mlx, win, &y);
 }
 
 void	show_player_info(t_data *dt)

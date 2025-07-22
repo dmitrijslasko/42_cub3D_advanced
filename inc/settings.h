@@ -31,7 +31,7 @@
 # define VERSION_INFO      "cub3D project - 42 Berlin - dmlasko, v2.0"
 
 # define SHOW_CALCULATION_LOGS				1
-# define SHOW_DEBUG_INFO 					0
+# define SHOW_DEBUG_INFO 					1
 
 # define TILE_SIZE  						64
 

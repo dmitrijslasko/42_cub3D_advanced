@@ -71,6 +71,14 @@ typedef enum e_active_item
 	MACHINE_GUN
 }	t_active_item;
 
+// typedef enum e_sprite_type {
+//     SPRITE_ENEMY,
+//     SPRITE_HEART,
+//     SPRITE_WEAPON,
+//     SPRITE_DECOR,
+//     // etc
+// } t_sprite_type;
+
 typedef struct s_weapon
 {
 	const int 	type;
@@ -232,6 +240,7 @@ typedef struct s_sprite
 {
 	char				id;
 	t_sprite_type		type;
+	int					active;
 	char				*path;
 	float				width;
 	float				height;
@@ -539,7 +548,7 @@ void		sprite_put_color(t_data *dt, t_sprite *sprite, \
 										t_coor *coor, t_coor *tex_coor);
 t_coor		calculate_tex_x_y(t_sprite_texture *texture, t_coor *coor, \
 									t_coor *offset, t_coor *sprite_size);
-bool		check_sprite_closer_than_wall(t_data *dt, t_coor *coor, \
+bool		check_if_sprite_is_closer_than_wall(t_data *dt, t_coor *coor, \
 															t_sprite *spr);
 int			init_keys(t_data *dt);
 void		init_graphic(t_data *dt);
@@ -591,6 +600,7 @@ void		print_door_hit_stats(t_data *dt, void *mlx, void *win, int *y);
 void		print_window_info(t_data *dt, void *mlx, void *win, int *y);
 void		print_obstacle_info(t_data *dt, void *mlx, void *win, int *y);
 void		print_player_position(t_data *dt, void *mlx, void *win, int *y);
+void		print_enemy_info(t_data *dt, void *mlx, void *win, int *y);
 
 int			load_sprite_images(t_data *dt);
 int			load_weapons(t_data *dt);

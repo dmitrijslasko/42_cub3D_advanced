@@ -95,13 +95,13 @@ void	process_keypresses(t_data *dt)
 		printf("%f\n", dt->test_value_1);
 	}
 	if (dt->keys[XK_v])
-		dt->test_value_2 -= 0.001f;
+		dt->sprites[74].active = 0;
 	if (dt->keys[XK_b])
-		dt->test_value_2 += 0.001f;
+		dt->sprites[74].active = 1;
 	if (dt->keys[XK_h])
-		dt->test_value_3 -= 0.1f;
+		dt->test_value_3 -= 10.0f;
 	if (dt->keys[XK_j])
-		dt->test_value_3 += 0.1f;
+		dt->test_value_3 += 10.0f;
 	if (dt->keys[XK_n])
 		dt->test_value_4 -= 0.001f;
 	if (dt->keys[XK_m])

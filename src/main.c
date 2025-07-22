@@ -21,6 +21,13 @@ static int	setup_keyboard_and_mouse_controls(t_data *dt)
 	return (EXIT_SUCCESS);
 }
 
+static int setup_player(t_data *dt)
+{
+	dt->player.ammo_level = STARTING_AMMO_LEVEL;
+	dt->player.health_level = STARTING_HEALTH_LEVEL;
+	return (EXIT_SUCCESS);
+}
+
 static int	setup_dt(t_data *dt)
 {
 	init_rays(dt);
@@ -38,8 +45,7 @@ static int	setup_dt(t_data *dt)
 	mark_all_cells_that_neighbour_doors(dt);
 	load_sprites(dt);
 	setup_view(dt);
-	dt->player.ammo_level = STARTING_AMMO_LEVEL;
-	dt->player.health_level = STARTING_HEALTH_LEVEL;
+	setup_player(dt);
 	dt->weapon_current_frame = 0;
 	setup_img(dt, dt->final_frame_img, WINDOW_W, WINDOW_H);
 	setup_img(dt, dt->raycasting_scene_img, WINDOW_W, WINDOW_H);

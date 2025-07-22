@@ -65,7 +65,9 @@ static int	handle_sprites(t_data *dt, float *new_x, float *new_y)
 	ft_strchr(SPRITE_TYPES, dt->map.map_data[min.y][max.x].cell_char) ||
 	ft_strchr(SPRITE_TYPES, dt->map.map_data[max.y][min.x].cell_char) ||
 	ft_strchr(SPRITE_TYPES, dt->map.map_data[max.y][max.x].cell_char))
+	{
 		return (0);
+	}
 	return (1);
 }
 
