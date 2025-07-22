@@ -169,9 +169,9 @@
 # define WALL_TYPES							"123456789"
 # define VERTICAL_WALL_TYPES				"v"
 # define HORIZONTAL_WALL_TYPES				"h"
-# define DOOR_TYPES							"|[]-!"
-# define VERTICAL_DOOR_TYPES				"|[]"
-# define HORIZONTAL_DOOR_TYPES				"--"
+# define DOOR_TYPES							"|][]I-="
+# define VERTICAL_DOOR_TYPES				"|][I"
+# define HORIZONTAL_DOOR_TYPES				"-="
 
 // shaders
 # define ENABLE_SHADERS						1
