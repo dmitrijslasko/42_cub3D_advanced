@@ -164,16 +164,16 @@
 # define WHITESPACE        	            	" \a\b\t\n\v\f\r"
 
 # define PLAYER_SPAWN_POINT_TYPES			"NSWE"
-# define SPRITE_TYPES     	 	            "ABCDFGHIJKLMOPQRTUVXYZabcdefghijklmnopqrstuvwxyz+"
+# define SPRITE_TYPES     	 	            "ABCDFGHIJKLMOPQRTUVXYZabcdefghijklmnopqrstuvwxyz+$"
 # define DECORATION_TYPES     	 	        "abcdefghijklmnopqrstuvwxyz"
-# define CONSUMABLE_TYPES     	 	        "+"
+# define CONSUMABLE_TYPES     	 	        "+$"
 //# define TOKEN_TYPES     	 	            "+"
 # define SPRITE_FRAMES						2
 # define WALL_TYPES							"123456789"
 # define VERTICAL_WALL_TYPES				"v"
 # define HORIZONTAL_WALL_TYPES				"h"
-# define DOOR_TYPES							"|][]I-="
-# define VERTICAL_DOOR_TYPES				"|][I"
+# define DOOR_TYPES							"|][]I-=*"
+# define VERTICAL_DOOR_TYPES				"|][I*"
 # define HORIZONTAL_DOOR_TYPES				"-="
 
 // shaders

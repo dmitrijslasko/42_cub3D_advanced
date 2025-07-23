@@ -89,7 +89,7 @@ static const t_texture_match	g_texture_lookup[] = {
 {"W09", "wall 9 texture", WALL_9, "9"},
 {"TWV01", "thin v wall 1 texture", THIN_WALL_VERTICAL_1, "v"},
 {"TWH01", "thin h wall 1 texture", THIN_WALL_HORIZONTAL_1, "h"},
-{"DOOR_01", "door 1 texture", DOOR_1, "|-"},
+{"DOOR_01", "door 1 texture", DOOR_1, "|-*"},
 {"DOOR_01_S", "door 1 texture sides", DOOR_1_SIDES, NULL},
 {"DOOR_02", "door 2 texture", DOOR_2, "[="},
 {"DOOR_02_S", "door 2 texture sides", DOOR_2_SIDES, NULL},
@@ -109,10 +109,11 @@ typedef struct s_sprite_file
 
 static const t_sprite_file	g_sprites[] = {
 {'+', "SPRITE_01", {"./sprites/heart.xpm", "./sprites/heart.xpm"}},
-{'a', "SPRITE_02", {"./sprites/plant.xpm", "./sprites/plant.xpm"}},
-{'b', "SPRITE_03", {"./sprites/plant-2-128x128.xpm", "./sprites/plant-2-128x128.xpm"}},
-{'A', "SPRITE_04", {"./sprites/sammy1-.xpm", "./sprites/sammy2-.xpm"}},
-{'B', "SPRITE_05", {"./sprites/tommy1.xpm", "./sprites/tommy2.xpm"}},
+{'$', "SPRITE_02", {"./sprites/key.xpm", "./sprites/key.xpm"}},
+{'a', "SPRITE_03", {"./sprites/plant.xpm", "./sprites/plant.xpm"}},
+{'b', "SPRITE_04", {"./sprites/plant-2-128x128.xpm", "./sprites/plant-2-128x128.xpm"}},
+{'A', "SPRITE_05", {"./sprites/sammy1-.xpm", "./sprites/sammy2-.xpm"}},
+{'B', "SPRITE_06", {"./sprites/tommy1.xpm", "./sprites/tommy2.xpm"}},
 };
 
 #endif

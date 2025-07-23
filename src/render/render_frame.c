@@ -130,7 +130,6 @@ int	render_frame(void *param)
 	if (dt->view->show_minimap)
 		update_minimap(dt);
 	update_prompt_message(dt);
-	// put_img_to_img(dt->final_frame_img, dt->ui_img, 100, 100);
 	render_minimap_and_ui(dt);
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr,dt->final_frame_img->mlx_img, 0, 0);
 	show_debug_info(dt);
