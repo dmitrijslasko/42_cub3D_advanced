@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:35:51 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/23 18:43:11 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 20:15:33 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,15 @@ typedef enum e_active_item
 
 typedef struct 		s_weapon
 {
-	int 			type;
-	char			*description;
-	int				bullets_in_clip;
-	int				total_ammo;
+	int 		type;
+	char		*description;
+	int			bullets_in_clip;
+	int			total_ammo;
 	int			clip_size;
 	float		shot_speed;
 	float		reload_speed;
 	float		weight;
+	int			player_has_it;
 }	t_weapon;
 
 // Door structure with animation info

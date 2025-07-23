@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:04:26 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/23 19:12:49 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 20:29:55 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ int	handle_keyrelease(int keycode, t_data *dt)
 	if (dt->keys[XK_4])
 		dt->player.selected_weapon = &dt->weapon[3];
 	if (dt->keys[XK_5])
+	{
+		print_level_map(&dt->map);
 		dt->player.selected_weapon = &dt->weapon[4];
+	}
 	if (dt->keys[XK_8])
 	{
 		//dt->ambient_light -= 10.0f;

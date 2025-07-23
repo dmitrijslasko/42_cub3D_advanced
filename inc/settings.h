@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:39:14 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/23 17:03:44 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 19:38:08 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,10 @@
 # define WHITESPACE        	            	" \a\b\t\n\v\f\r"
 
 # define PLAYER_SPAWN_POINT_TYPES			"NSWE"
-# define SPRITE_TYPES     	 	            "abcdefghijklmnopqrstuvwxyz"
+# define SPRITE_TYPES     	 	            "ABCDFGHIJKLMOPQRTUVXYZabcdefghijklmnopqrstuvwxyz+"
+# define DECORATION_TYPES     	 	        "abcdefghijklmnopqrstuvwxyz"
+# define CONSUMABLE_TYPES     	 	        "+"
+//# define TOKEN_TYPES     	 	            "+"
 # define SPRITE_FRAMES						2
 # define WALL_TYPES							"123456789"
 # define VERTICAL_WALL_TYPES				"v"

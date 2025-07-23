@@ -108,11 +108,11 @@ typedef struct s_sprite_file
 }				t_sprite_file;
 
 static const t_sprite_file	g_sprites[] = {
-{'s', "SPRITE_01", {"./sprites/heart.xpm", "./sprites/heart.xpm"}},
-{'d', "SPRITE_02", {"./sprites/plant.xpm", "./sprites/plant.xpm"}},
-{'p', "SPRITE_03", {"./sprites/plant-2-128x128.xpm", "./sprites/plant-2-128x128.xpm"}},
-{'h', "SPRITE_04", {"./sprites/sammy1-.xpm", "./sprites/sammy2-.xpm"}},
-{'a', "SPRITE_05", {"./sprites/tommy1.xpm", "./sprites/tommy2.xpm"}},
+{'+', "SPRITE_01", {"./sprites/heart.xpm", "./sprites/heart.xpm"}},
+{'a', "SPRITE_02", {"./sprites/plant.xpm", "./sprites/plant.xpm"}},
+{'b', "SPRITE_03", {"./sprites/plant-2-128x128.xpm", "./sprites/plant-2-128x128.xpm"}},
+{'A', "SPRITE_04", {"./sprites/sammy1-.xpm", "./sprites/sammy2-.xpm"}},
+{'B', "SPRITE_05", {"./sprites/tommy1.xpm", "./sprites/tommy2.xpm"}},
 };
 
 #endif

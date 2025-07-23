@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:03:40 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/11 18:15:13 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 20:28:47 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,16 @@ int	move_forward_backward(t_data *dt, int direction)
 		player_pos->x = new_x;
 	else if (map_position_is_walkable(dt, &player_pos->x, &new_y))
 		player_pos->y = new_y;
+
+	//printf("%zu %zu\n", (size_t) player_pos->y, (size_t) player_pos->x);
+	//printf("TYPE: %c\n", get_cell_type_by_coordinates(&dt->map, (size_t) player_pos->y, (size_t) player_pos->x));
+	if (get_cell_type_by_coordinates(&dt->map, (size_t)player_pos->y, (size_t)player_pos->x) == '+')
+	{
+		//printf("Player is getting healthier!\n");
+		system("aplay sounds/shot.wav &");
+		dt->sprite_count = 0;
+		dt->player.health_level = ft_min(100, dt->player.health_level += 10);
+		dt->map.map_data[(size_t)player_pos->y][(size_t)player_pos->x].cell_char = ' ';
+	}
 	return (EXIT_SUCCESS);
 }

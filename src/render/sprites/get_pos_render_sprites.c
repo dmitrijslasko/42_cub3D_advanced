@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:08:36 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/12 20:20:38 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 20:27:07 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	get_position_and_render_sprite(t_data *dt, t_sprite *sprite)
 	transform.y = (dt->player.direction_vector.x * dist_to_player.x + \
 					dt->player.direction_vector.y * dist_to_player.y);
 
-	if (transform.y <= 0.4f)
-		return (EXIT_SUCCESS);
+	//if (transform.y <= 0.1f)
+	//	return (EXIT_SUCCESS);
 
 	transform.x = (-1.0f / FIELD_OF_VIEW_SCALE) * \
 					(dt->player.direction_vector.y * dist_to_player.x - \

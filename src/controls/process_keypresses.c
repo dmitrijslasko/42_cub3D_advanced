@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:04:00 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/23 17:16:18 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 20:30:13 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	process_keypresses(t_data *dt)
 	if (dt->keys[XK_9])
 	{
 		//dt->ambient_light -= 10.0f;
-		dt->ambient_light = fmax(0.0f, dt->ambient_light / 1.1f);
+		dt->ambient_light = fmax(1.0f, dt->ambient_light / 1.1f);
 		printf("Ambient light: %.2f\n", dt->ambient_light);
 	}
 	if (dt->keys[XK_0])

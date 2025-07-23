@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:10:10 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/23 19:20:34 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 19:27:40 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	load_weapons(t_data *dt)
 		dt->weapon[i].weight = g_weapon_lookup[i].weight;
 		dt->weapon[i].total_ammo = i;
 		dt->weapon[i].bullets_in_clip = 0;
+		dt->weapon[i].player_has_it = 1;
 		i++;
 	}
 	i = 0;

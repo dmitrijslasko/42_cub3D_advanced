@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:04:23 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/16 19:18:56 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 19:32:16 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ static int	handle_sprites(t_data *dt, float *new_x, float *new_y)
 	max.x = (int)(*new_x + MIN_DISTANCE_TO_WALL / 2);
 	min.y = (int)(*new_y - MIN_DISTANCE_TO_WALL / 2);
 	max.y = (int)(*new_y + MIN_DISTANCE_TO_WALL / 2);
-	if (ft_strchr(SPRITE_TYPES, dt->map.map_data[min.y][min.x].cell_char) ||
-	ft_strchr(SPRITE_TYPES, dt->map.map_data[min.y][max.x].cell_char) ||
-	ft_strchr(SPRITE_TYPES, dt->map.map_data[max.y][min.x].cell_char) ||
-	ft_strchr(SPRITE_TYPES, dt->map.map_data[max.y][max.x].cell_char))
+	if (ft_strchr(DECORATION_TYPES, dt->map.map_data[min.y][min.x].cell_char) ||
+	ft_strchr(DECORATION_TYPES, dt->map.map_data[min.y][max.x].cell_char) ||
+	ft_strchr(DECORATION_TYPES, dt->map.map_data[max.y][min.x].cell_char) ||
+	ft_strchr(DECORATION_TYPES, dt->map.map_data[max.y][max.x].cell_char))
 	{
 		return (0);
 	}
