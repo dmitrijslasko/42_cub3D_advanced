@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:04:29 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/12 19:47:01 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 19:12:15 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,16 @@ int	mouse_press(int button, int x, int y, t_data *dt)
 	{
 		dt->mouse.lmb_is_pressed = 1;
 		dt->mouse.lmb_press_count++;
-		if (dt->player.ammo_level > 0)
+		if (dt->player.selected_weapon->total_ammo > 0)
 		{
+			dt->weapon_is_animating = 1;
 			system("aplay sounds/shot.wav &");
+			dt->player.selected_weapon->total_ammo = ft_max(0, --dt->player.selected_weapon->total_ammo);
 		}
 		else
 			system("aplay sounds/empty-gun.wav &");
 		printf("🖱️  LMB is pressed! Total press count: %zu\n", \
 			dt->mouse.lmb_press_count);
-		dt->player.ammo_level = ft_max(0, --dt->player.ammo_level);
-		if (dt->player.ammo_level > 0)
-		{
-			// fire_gun(dt);
-			dt->weapon_is_animating = 1;
-		}
 	}
 	return (EXIT_SUCCESS);
 }
@@ -67,7 +63,7 @@ int	mouse_move(int x, int y, t_data *dt)
 	dt->mouse.prev_y = dt->mouse.y;
 	dt->mouse.x = x;
 	dt->mouse.y = y;
-	
+
 	if (x > dt->mouse.prev_x)
 		rotate_player(dt, MOUSE_SENS_ROTATE, -1);
 	else if (x < dt->mouse.prev_x)

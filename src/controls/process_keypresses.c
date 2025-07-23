@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:04:00 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/12 19:52:29 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 17:16:18 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,17 @@ void	process_keypresses(t_data *dt)
 		dt->test_value_4 -= 0.001f;
 	if (dt->keys[XK_m])
 		dt->test_value_4 += 0.001f;
+	if (dt->keys[XK_9])
+	{
+		//dt->ambient_light -= 10.0f;
+		dt->ambient_light = fmax(0.0f, dt->ambient_light / 1.1f);
+		printf("Ambient light: %.2f\n", dt->ambient_light);
+	}
+	if (dt->keys[XK_0])
+	{
+		dt->ambient_light = fmin(1000.0f, dt->ambient_light * 1.1f);
+		printf("Ambient light: %.2f\n", dt->ambient_light);
+	}
 
 
 	dt->player.is_moving = is_moving_now;

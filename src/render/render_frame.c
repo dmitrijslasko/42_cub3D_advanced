@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:21 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/15 16:30:27 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 18:33:57 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int print_out_sprite_info(t_data *dt)
 	while (i < dt->sprite_count)
 	{
 		distance = sprites[i].distance_to_player;
-		printf("[%zu] Distance: %.2f\n", i, distance);
+		//printf("[%zu] Distance: %.2f\n", i, distance);
 		i++;
 	}
 }
@@ -86,7 +86,7 @@ int	render_frame(void *param)
 	int 		y_offset;
 
 	dt = (t_data *)param;
-	y_offset = 0;
+
 	reset_mouse_position(dt);
 	current_time = get_current_time_in_ms();
 	dt->time.delta_time = current_time - dt->time.last_time;
@@ -130,6 +130,8 @@ int	render_frame(void *param)
 		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press [ / ] to open the door");
 		// render_ui_message(dt);
 	}
+
+	y_offset = 0;
 	if (ENABLE_BOBBING)
 	{
 		bob_walls(dt);

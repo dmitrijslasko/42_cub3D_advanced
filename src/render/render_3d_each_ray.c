@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:15 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/18 16:25:25 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 17:06:56 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	put_pix_img(t_data *dt, t_ray *ray, t_coor *texture, t_coor *coor)
 	if (ENABLE_SHADERS)
 	{
 		apply_wall_orientation_shading(ray, &color);
-		apply_distance_shadow_distance(dt->test_value_3, &color);
+		apply_distance_shadow_distance(dt->ambient_light, &color);
 		apply_distance_shadow(ray, &color);
 	}
 	img_pix_put(dt->raycasting_scene_img, coor->x, coor->y, color);

@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:33:06 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/18 16:46:47 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 18:44:00 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,10 +146,11 @@ void	show_player_info(t_data *dt)
 	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->player.health_level));
 
 	mlx_string_put(mlx, win, x += 100, WINDOW_H - 20, GOLD, "Weapon: ");
-	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, "PISTOL");
+	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, dt->player.selected_weapon->description);
+	//mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->weapon->type));
 
 	mlx_string_put(mlx, win, x += 100, WINDOW_H - 20, GOLD, "Ammo: ");
-	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->player.ammo_level));
+	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->player.selected_weapon->total_ammo));
 
 	mlx_string_put(mlx, win, x += 100, WINDOW_H - 20, GOLD, "Is moving: ");
 	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->player.is_moving));

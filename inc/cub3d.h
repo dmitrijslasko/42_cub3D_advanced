@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:35:51 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/18 17:28:33 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 18:43:11 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,7 @@ typedef enum e_active_message
 	ENJOY_THE_GAME,
 }	t_active_message;
 
-typedef enum e_active_item
-{
-	NO_WEAPON = 0,
-	KNIFE,
-	PISTOL,
-	AUTOMATIC_GUN,
-	MACHINE_GUN
-}	t_active_item;
+
 
 // typedef enum e_sprite_type {
 //     SPRITE_ENEMY,
@@ -79,16 +72,25 @@ typedef enum e_active_item
 //     // etc
 // } t_sprite_type;
 
-typedef struct s_weapon
+typedef enum e_active_item
 {
-	const int 	type;
-	int		total_ammo_count;
-	int		bullets_in_clip;
-	const int		clip_size;
-	
-	const float	shot_speed;
-	const float	reload_speed;
-	const float	weight;
+	WEAPON_NO_WEAPON = 0,
+	WEAPON_KNIFE,
+	WEAPON_PISTOL,
+	WEAPON_AUTOMATIC_GUN,
+	WEAPON_MACHINE_GUN
+}	t_active_item;
+
+typedef struct 		s_weapon
+{
+	int 			type;
+	char			*description;
+	int				bullets_in_clip;
+	int				total_ammo;
+	int			clip_size;
+	float		shot_speed;
+	float		reload_speed;
+	float		weight;
 }	t_weapon;
 
 // Door structure with animation info
@@ -176,7 +178,7 @@ typedef struct s_player
 	float	move_speed_multiplier;
 	int		health_level;
 	int		ammo_level;
-	int		selected_weapon;
+	t_weapon	*selected_weapon;
 
 }	t_player;
 
@@ -274,32 +276,42 @@ typedef struct s_data
 	t_img				*minimap_base_img;
 	t_img				*minimap_img;
 	t_img				*ui_img;
+
+	t_ray				*rays;
+
 	t_map				map;
 	t_door				*doors;
 	size_t				door_count;
-	t_ray				*rays;
+
 	t_player			player;
+	t_view				*view;
+	char				keys[TRACKED_KEYS];
+	t_mouse				mouse;
+	float				sin_table[PRECALCULATED_TRIG];
+	float				cos_table[PRECALCULATED_TRIG];
+
 	t_sprite			*sprites;
 	t_sprite_texture	*sprite_textures;
 	size_t				sprite_count;
 	size_t				sprite_texture_count;
-	t_view				*view;
-	t_mouse				mouse;
-	float				sin_table[PRECALCULATED_TRIG];
-	float				cos_table[PRECALCULATED_TRIG];
-	char				keys[TRACKED_KEYS];
+
+
 	void				*welcome_img;
 	t_gametime			time;
 	t_img				*sky_image;
 	t_img				*message_img;
-	t_img				*weapon_img;
+
 	float				ambient_light;
 	void				*background_music;
 	int					has_changed;
 	int					frames_drawn_count;
+
+	t_weapon			*weapon;
+	t_img				*weapon_img;
 	int					weapon_current_frame;
 	int 				weapon_is_animating;
 	long				weapon_last_frame_time;
+
 	float				test_value_1;
 	float				test_value_2;
 	float				test_value_3;

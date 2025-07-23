@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:39:14 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/18 15:35:01 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 17:03:44 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # endif
 
 # ifndef LINUX_22
-# 	define LINUX_22 0
+# 	define LINUX_22 1
 # endif
 
 // window name
@@ -44,11 +44,11 @@
 # define CASTED_RAYS_COUNT					640
 # define FPS								60
 # define SCALING				            250
-# define MIMIC_FULLSCREEN                   1
+# define MIMIC_FULLSCREEN                   0
 
-# define STARTING_AMMO_LEVEL				9
+# define STARTING_AMMO_LEVEL				999
 # define STARTING_HEALTH_LEVEL              50
-// constants.h or at the top of your .c file
+
 // 10 samples per degree
 # define TRIG_PRECISION                      20
 # define PRECALCULATED_TRIG                  7200
