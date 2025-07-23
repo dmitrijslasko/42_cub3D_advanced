@@ -548,6 +548,7 @@ void		set_cell_type(t_data *dt, t_ray *ray, t_coor *map_coor);
 
 int			ray_hits_door(t_data *dt, t_coor *map_coor, t_ray *ray);
 t_door		*find_door_at(t_data *dt, int x, int y);
+t_sprite	*find_sprite_at(t_data *dt, int x, int y);
 
 //sprites
 void		find_all_sprites(t_data *dt);

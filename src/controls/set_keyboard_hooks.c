@@ -55,13 +55,11 @@ int	handle_keyrelease(int keycode, t_data *dt)
 	}
 	if (dt->keys[XK_8])
 	{
-		//dt->ambient_light -= 10.0f;
 		float prev_value = dt->ambient_light;
-		if (prev_value > 0)
+		if (prev_value > 500)
 			dt->ambient_light = 0.0f;
 		else
 			dt->ambient_light = 1000.0f;
-		//printf("Ambient light: %.2f\n", dt->ambient_light);
 	}
 	if (keycode == XK_Tab)
 	{

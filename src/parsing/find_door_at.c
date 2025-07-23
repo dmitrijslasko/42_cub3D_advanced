@@ -25,3 +25,18 @@ t_door	*find_door_at(t_data *dt, int x, int y)
 	}
 	return (NULL);
 }
+
+t_sprite	*find_sprite_at(t_data *dt, int x, int y)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < dt->sprite_count)
+	{
+		printf("%d\n", i);
+		if ((int)dt->sprites[i].pos.x == x && (int)dt->sprites[i].pos.y == y)
+			return (&dt->sprites[i]);
+		i++;
+	}
+	return (NULL);
+}

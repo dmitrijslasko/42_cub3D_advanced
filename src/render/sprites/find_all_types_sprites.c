@@ -41,7 +41,6 @@ void	find_sprites(t_data *dt)
 		row++;
 	}
 }
-
 void	find_all_sprites(t_data *dt)
 {
 	size_t	sprite_count;

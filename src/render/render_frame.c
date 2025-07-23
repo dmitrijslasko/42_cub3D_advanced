@@ -112,6 +112,16 @@ int	render_frame(void *param)
 	}
 
 	process_keypresses(dt);
+
+	t_sprite *spr = find_sprite_at(dt, (size_t)dt->player.pos.x, (size_t)dt->player.pos.y);
+	if (spr && spr->active && spr->type == '+')
+	{
+		spr->active = 0;
+		system("aplay sounds/health.wav &");
+		dt->player.health_level = ft_min(100, dt->player.health_level += 10);
+		printf("Sprite found: %d\n", spr->id);
+	}
+
 	calculate_all_rays(dt);
 	render_3d_scene(dt);
 	put_img_to_img(dt->final_frame_img, dt->raycasting_scene_img, 0, 0);
