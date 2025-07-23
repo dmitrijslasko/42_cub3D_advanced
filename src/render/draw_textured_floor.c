@@ -52,7 +52,7 @@ int draw_textured_floor(t_data *dt)
 
             // Get color and draw pixel
             color = texture.texture_data[TILE_SIZE * texY + texX];
-			// apply_distance_shadow_floor(100, &color);
+			apply_distance_shadow_distance(dt->ambient_light, &color);
             img_pix_put(dt->raycasting_scene_img, x, current_row, color);
 
             floorX += floorStepX;

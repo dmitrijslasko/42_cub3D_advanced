@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:07 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/12 20:43:19 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 17:08:40 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	apply_distance_shadow_distance(int distance, int *color)
 
 	if (*color == BLACK)
 		return (0);
+	if (distance < 0)
+		distance = 0;
 	shade = 1.0f / (1.0f + distance * 0.01f * DISTANCE_SHADOW_STRENGTH);
 	if (shade < 0.1f)
 		shade = 0.1f;

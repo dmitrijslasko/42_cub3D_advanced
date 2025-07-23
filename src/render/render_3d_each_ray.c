@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:15 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/18 16:25:25 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 17:06:56 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	put_pix_img(t_data *dt, t_ray *ray, t_coor *texture, t_coor *coor)
 	if (ENABLE_SHADERS)
 	{
 		apply_wall_orientation_shading(ray, &color);
+		apply_distance_shadow_distance(dt->ambient_light, &color);
 		apply_distance_shadow(ray, &color);
 	}
 	img_pix_put(dt->raycasting_scene_img, coor->x, coor->y, color);
@@ -45,11 +46,11 @@ void	render_3d_each_ray(t_data *dt, t_ray *ray, int screen_slice_width)
 	texture.x = 0;
 	texture.y = 0;
 	// NOTE DL: manipulating 1.0f here can be used to simulate water level
-	wall_height = 1.0f / ray->corrected_distance_to_wall * SCALING + dt->test_value_3;
+	wall_height = 1.0f / ray->corrected_distance_to_wall * SCALING;
 	ray->wall_height = (int)wall_height;
-	top_y = dt->view->screen_center_y - wall_height - dt->test_value_1 + dt->test_value_1;
+	top_y = dt->view->screen_center_y - wall_height - dt->test_value_1;
 	coor.y = ft_max(top_y, 0);
-	bottom_y = ft_min(WINDOW_H, dt->view->screen_center_y + wall_height) + dt->test_value_2;
+	bottom_y = ft_min(WINDOW_H, dt->view->screen_center_y + wall_height);
 	while (coor.y < bottom_y)
 	{
 		calc_texture_coor(dt, &texture.y, &ray->corrected_distance_to_wall, coor.y - top_y);

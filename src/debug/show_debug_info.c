@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:33:06 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/18 16:46:47 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 18:44:00 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	print_plane_stats(t_data *dt, void *mlx, void *win, int *y)
 
 	f = mlx_string_put;
 	snprintf(buffer, sizeof(buffer), "%.4f", dt->player.plane_x);
-	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Plane X:");
+	f(mlx, win, DBG_1_X, *y += DBG_MN_NL_2, UI_CLR_1, "Plane X:");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
 	f = mlx_string_put;
 	snprintf(buffer, sizeof(buffer), "%.4f", dt->player.plane_y);
@@ -116,10 +116,11 @@ void	show_debug_info(t_data *dt)
 	if (!dt->view->show_debug_info)
 		return ;
 	f = mlx_string_put;
-	y = DBG_FIELD_OFFST_Y;
+	// y = DBG_FIELD_OFFST_Y;
+	y = 0;
 	mlx = dt->mlx_ptr;
 	win = dt->win_ptr;
-	//print_window_info(dt, mlx, win, &y);
+	// print_window_info(dt, mlx, win, &y);
 	// print_plane_stats(dt, mlx, win, &y);
 	print_player_position(dt, mlx, win, &y);
 	print_obstacle_info(dt, mlx, win, &y);
@@ -128,6 +129,7 @@ void	show_debug_info(t_data *dt)
 	f(mlx, win, DBG_1_X, y += DBG_MN_NL_2, UI_CLR_1, "LMB presses:");
 	f(mlx, win, DBG_2_X, y, UI_CLR_1, ft_itoa(dt->mouse.lmb_press_count));
 	print_time_stats(dt, mlx, win, &y);
+	print_enemy_info(dt, mlx, win, &y);
 }
 
 void	show_player_info(t_data *dt)
@@ -144,10 +146,11 @@ void	show_player_info(t_data *dt)
 	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->player.health_level));
 
 	mlx_string_put(mlx, win, x += 100, WINDOW_H - 20, GOLD, "Weapon: ");
-	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, "PISTOL");
+	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, dt->player.selected_weapon->description);
+	//mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->weapon->type));
 
 	mlx_string_put(mlx, win, x += 100, WINDOW_H - 20, GOLD, "Ammo: ");
-	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->player.ammo_level));
+	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->player.selected_weapon->total_ammo));
 
 	mlx_string_put(mlx, win, x += 100, WINDOW_H - 20, GOLD, "Is moving: ");
 	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->player.is_moving));

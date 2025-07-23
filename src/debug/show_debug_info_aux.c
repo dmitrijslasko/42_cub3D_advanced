@@ -18,7 +18,7 @@ void	print_window_info(t_data *dt, void *mlx, void *win, int *y)
 
 	(void) dt;
 	f = mlx_string_put;
-	f(mlx, win, DBG_1_X, *y, UI_CLR_1, "Frames per second (FPS):");
+	f(mlx, win, DBG_1_X, *y += DBG_MN_NL_2, UI_CLR_1, "Frames per second (FPS):");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, ft_itoa(FPS));
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Window W:");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, ft_itoa(WINDOW_W));
@@ -43,6 +43,17 @@ void	print_player_position(t_data *dt, void *mlx, void *win, int *y)
 	snprintf(buffer, sizeof(buffer), "%.2f", dt->player.direction_vector_deg);
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1,
 		"Player orientation (deg):");
+	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
+}
+
+void	print_enemy_info(t_data *dt, void *mlx, void *win, int *y)
+{
+	char	buffer[32];
+	int		(*f)(void*, void*, int, int, int, char*);
+
+	f = mlx_string_put;
+	snprintf(buffer, sizeof(buffer), "%.2f", dt->sprites[0].distance_to_player);
+	f(mlx, win, DBG_1_X, *y += DBG_MN_NL_2, UI_CLR_1, "Enemy info: ");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
 }
 

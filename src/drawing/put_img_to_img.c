@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_img_to_img.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:05:15 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/02 00:05:16 by fvargas          ###   ########.fr       */
+/*   Updated: 2025/07/23 17:18:07 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void	put_img_to_img_circle(t_img *dest, t_img *src, int dx, int dy)
 			src_y = y - dy;
 			if (x < MINIMAP_SIZE / 2)
 				dist_x = MINIMAP_SIZE / 2 - x;
-			else 
+			else
 				dist_x = x - MINIMAP_SIZE / 2;
 			if (y < MINIMAP_SIZE / 2)
 				dist_y = MINIMAP_SIZE / 2 - y;
-			else 
+			else
 				dist_y = y - MINIMAP_SIZE / 2;
-			if ((dist_x * dist_x + dist_y * dist_y) > (MINIMAP_SIZE / 2) * (MINIMAP_SIZE / 2) - 20) 
+			if ((dist_x * dist_x + dist_y * dist_y) > (MINIMAP_SIZE / 2) * (MINIMAP_SIZE / 2) - 20)
 			{
 				x++;
 				continue;
