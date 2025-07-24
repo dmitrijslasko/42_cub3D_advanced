@@ -53,20 +53,21 @@ int	load_sprite_images(t_data *dt)
 	while (i < dt->sprite_texture_count)
 	{
 		printf("Loading sprite texture for mapchar %c\n", g_sprites[i].map_char);
-		sprite_textures[i].type = g_sprites[i].map_char;
+		sprite_textures[i].mapchar = g_sprites[i].map_char;
+		sprite_textures[i].chromakey_color = g_sprites[i].chromakey_color;
 		set_sprite_img(dt, sprite_textures, i, 0);
 		sprite_textures[i].sprite_data[0] = (int *)mlx_get_data_addr(\
 						sprite_textures[i].sprite_img[0], \
 						&sprite_textures[i].bpp, \
 						&sprite_textures[i].size_line, \
 						&sprite_textures[i].endian);
-		//set_sprite_img(dt, sprite_textures, i, 1);
-		//sprite_textures[i].sprite_data[1] = (int *)mlx_get_data_addr(\
-		//				sprite_textures[i].sprite_img[1], \
-		//				&sprite_textures[i].bpp, \
-		//				&sprite_textures[i].size_line, \
-		//				&sprite_textures[i].endian);
-		printf("Sprite image for %c loaded!\n", sprite_textures[i].type);
+		set_sprite_img(dt, sprite_textures, i, 1);
+		sprite_textures[i].sprite_data[1] = (int *)mlx_get_data_addr(\
+						sprite_textures[i].sprite_img[1], \
+						&sprite_textures[i].bpp, \
+						&sprite_textures[i].size_line, \
+						&sprite_textures[i].endian);
+		printf("Sprite image for %c loaded!\n", sprite_textures[i].mapchar);
 		i++;
 	}
 	return (EXIT_SUCCESS);

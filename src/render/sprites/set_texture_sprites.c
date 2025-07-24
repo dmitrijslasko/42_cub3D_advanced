@@ -25,7 +25,7 @@ bool	set_texture_sprites(t_data *dt)
 		j = 0;
 		while (j < dt->sprite_texture_count)
 		{
-			if (dt->sprites[i].type == dt->sprite_textures[j].type)
+			if (dt->sprites[i].type == dt->sprite_textures[j].mapchar)
 			{
 				dt->sprites[i].texture = &dt->sprite_textures[j];
 				break ;

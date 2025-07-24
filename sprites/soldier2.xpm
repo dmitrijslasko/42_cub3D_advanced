@@ -15,7 +15,7 @@ static char *_9ce941e6278460cfca91d48f5db3298DTt2laCtUgIV3ti2[] = {
 "& c #00004C",
 "* c gray33",
 "= c #646464",
-"- c #63747D",
+"- c none",
 "; c gray44",
 ": c #7C7C7C",
 "> c #880000",

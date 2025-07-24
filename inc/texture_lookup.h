@@ -110,13 +110,13 @@ typedef struct s_sprite_file
 }				t_sprite_file;
 
 static const t_sprite_file	g_sprites[] = {
-{'+', "SPRITE_01", 0, -1, {"./sprites/heart.xpm", "./sprites/heart.xpm"}},
-{'$', "SPRITE_02", 0, -1, {"./sprites/key.xpm", "./sprites/key.xpm"}},
-{'a', "SPRITE_03", 0, -1, {"./sprites/plant.xpm", "./sprites/plant.xpm"}},
-{'b', "SPRITE_04", 0, -1, {"./sprites/plant-2-128x128.xpm", "./sprites/plant-2-128x128.xpm"}},
-{'A', "SPRITE_05", 0, -1, {"./sprites/soldier1.xpm", "./sprites/soldier2.xpm"}},
-{'B', "SPRITE_06", 0, -1, {"./sprites/tommy1.xpm", "./sprites/tommy2.xpm"}},
-{'C', "SPRITE_07", 1, -1, {"./sprites/soldier-1-sprite-sheet.xpm", NULL}},
+{'+', "SPRITE_01", 0, BLACK, {"./sprites/heart.xpm", "./sprites/heart.xpm"}},
+{'$', "SPRITE_02", 0, BLACK, {"./sprites/key.xpm", "./sprites/key.xpm"}},
+{'a', "SPRITE_03", 0, BLACK, {"./sprites/plant.xpm", "./sprites/plant.xpm"}},
+{'b', "SPRITE_04", 0, BLACK, {"./sprites/plant-2-128x128.xpm", "./sprites/plant-2-128x128.xpm"}},
+{'A', "SPRITE_05", 0, BLACK, {"./sprites/soldier1.xpm", "./sprites/soldier2.xpm"}},
+{'B', "SPRITE_06", 0, BLACK, {"./sprites/tommy1.xpm", "./sprites/tommy2.xpm"}},
+{'C', "SPRITE_07", 1, BLACK, {"./sprites/soldier-1-sprite-sheet.xpm", "./sprites/soldier-1-sprite-sheet.xpm"}},
 {0, NULL, 0, -1, {NULL, NULL}}
 };
 
