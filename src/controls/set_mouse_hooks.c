@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:04:29 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/23 19:12:15 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/24 19:13:44 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	mouse_press(int button, int x, int y, t_data *dt)
 			system("aplay sounds/shot.wav &");
 			dt->player.selected_weapon->total_ammo = ft_max(0, --dt->player.selected_weapon->total_ammo);
 			if (dt->targeted_sprite)
-				dt->targeted_sprite->active = 0;
+				dt->targeted_sprite->time = 1;
 		}
 		else
 			system("aplay sounds/empty-gun.wav &");

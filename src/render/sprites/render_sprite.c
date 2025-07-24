@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:08:41 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/23 19:29:08 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/24 19:13:39 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int render_sprite(t_data *dt, t_sprite *sprite, \
 	targets_sprite = 0;
     if (sprite->active == 0)
         return (0);
-    sprite->time = (dt->time.last_time - dt->time.start_time) / 100 % 2;
+    //sprite->time = (dt->time.last_time - dt->time.start_time) / 100 % 2;
+	//sprite->time = 0;
     coor.y = ft_max(offset->y, 0);
     while (coor.y < sprite_size->y + offset->y && coor.y < WINDOW_H)
     {

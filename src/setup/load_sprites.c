@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_sprites.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 20:10:31 by dmlasko           #+#    #+#             */
-/*   Updated: 2025/07/01 21:32:29 by fvargas          ###   ########.fr       */
+/*   Updated: 2025/07/24 20:00:27 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	load_sprite_images(t_data *dt)
 	i = 0;
 	while (i < dt->sprite_texture_count)
 	{
+		printf("Loading sprite texture for mapchar %c\n", g_sprites[i].map_char);
 		sprite_textures[i].type = g_sprites[i].map_char;
 		set_sprite_img(dt, sprite_textures, i, 0);
 		sprite_textures[i].sprite_data[0] = (int *)mlx_get_data_addr(\
@@ -59,12 +60,12 @@ int	load_sprite_images(t_data *dt)
 						&sprite_textures[i].bpp, \
 						&sprite_textures[i].size_line, \
 						&sprite_textures[i].endian);
-		set_sprite_img(dt, sprite_textures, i, 1);
-		sprite_textures[i].sprite_data[1] = (int *)mlx_get_data_addr(\
-						sprite_textures[i].sprite_img[1], \
-						&sprite_textures[i].bpp, \
-						&sprite_textures[i].size_line, \
-						&sprite_textures[i].endian);
+		//set_sprite_img(dt, sprite_textures, i, 1);
+		//sprite_textures[i].sprite_data[1] = (int *)mlx_get_data_addr(\
+		//				sprite_textures[i].sprite_img[1], \
+		//				&sprite_textures[i].bpp, \
+		//				&sprite_textures[i].size_line, \
+		//				&sprite_textures[i].endian);
 		printf("Sprite image for %c loaded!\n", sprite_textures[i].type);
 		i++;
 	}
