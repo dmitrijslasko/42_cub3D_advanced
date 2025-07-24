@@ -1,31 +1,28 @@
-F  10, 10, 10
-C  10, 10, 10
+DEF         textures/default-fallback-texture.xpm
+F1          textures/wolfenstein/color_stone.xpm
+C1          textures/floor-grey-noise.xpm
+W01         textures/simonkraft/bookshelf_02.xpm
+W02         textures/wolfenstein/red_brick.xpm
+W03 	    textures/ceiling.xpm
+W04 	    textures/ceiling.xpm
+W05         textures/bookshelf.xpm
+W06         textures/simonkraft/respawn_anchor_side3.xpm
+W07         textures/curtain-1.xpm
+W08         textures/curtain-2.xpm
+W09         textures/curtain-3.xpm
+DOOR_01    	textures/wolf37.xpm
+DOOR_01_S   textures/wolf44.xpm
+DOOR_02     textures/door-red.xpm
+DOOR_02_S   textures/car.xpm
+DOOR_03     textures/bookshelf.xpm
+DOOR_03_S   textures/bookshelf.xpm
+ED1    	    textures/wolf44.xpm
 
-W1     	textures/simonkraft/bookshelf_02.xpm
-W2      textures/wolfenstein/red_brick.xpm
-W3 		textures/blue-wall.xpm
-W4 		textures/blue-wall-skeleton.xpm
-W5      textures/bookshelf.xpm
-W6      textures/simonkraft/respawn_anchor_side3.xpm
-W7      textures/ceiling.xpm
-W8      textures/simonkraft/bookshelf_01.xpm
-W9      textures/test_floor.xpm
 
 
-111166111111111111111111111111111111111111111111111
-1      1343434116666666615555555   1             p1
-1      |      |    s   1      5    1              1
-1      13434341        |      5    1              1
-111-.221  1   2        1      5   11        s     1
-1      1   1           15555555   11        p     1
-1      1111111         11111111    |        d     1
-1 s          1         |    1     p1        h     1
-1    999     1      s  1    1     d1        a     1
-1     p1     1         1    1     11              12
-1      1     1    h    1    1   . p1         E    * 2
-1      1111111         111111     11              12
-1d p            t                 p1              1
-99-999999999999999999999999999999999999999999999-99
-9                                                 9
-9                                                 9
-999999999999999999999999999999999999999999999999999
+1111111
+1 S 1 1
+1   | 1
+11-11 1
+1     1
+1111111 

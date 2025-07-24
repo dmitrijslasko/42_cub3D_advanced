@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:39:14 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/12 20:28:02 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/24 19:56:10 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@
 #  define BONUS 0
 # endif
 
+# ifndef LINUX_22
+# 	define LINUX_22 1
+# endif
+
 // window name
-# define WINDOW_NAME       "cub3D - fvargas & dmlasko @ 42Berlin"
+# define WINDOW_NAME       "cub3D - dmlasko @ 42Berlin"
 # define VERSION_INFO      "cub3D project - 42 Berlin - dmlasko, v2.0"
 
 # define SHOW_CALCULATION_LOGS				1
@@ -41,10 +45,10 @@
 # define FPS								60
 # define SCALING				            250
 # define MIMIC_FULLSCREEN                   1
-# define LINUX_22                           0
 
-# define STARTING_AMMO_LEVEL				9
-// constants.h or at the top of your .c file
+# define STARTING_AMMO_LEVEL				999
+# define STARTING_HEALTH_LEVEL              50
+
 // 10 samples per degree
 # define TRIG_PRECISION                      20
 # define PRECALCULATED_TRIG                  7200
@@ -71,7 +75,7 @@
 
 # define MINIMAP_WALL_CELL_COLOR			DARKGREY
 # define MINIMAP_PLAYER_SPAWN_CELL_COLOR	0xFFBB00
-# define MINIMAP_DOOR_COLOR					GREY
+# define MINIMAP_DOOR_COLOR					BLACK
 # define MINIMAP_THIN_WALL_COLOR			BLACK
 # define MINIMAP_SPRITE_COLOR				RED
 
@@ -97,6 +101,7 @@
 
 # define DEF_DOOR_OFFSET_X					0.5f
 # define DEF_DOOR_OFFSET_Y					0.5f
+# define DEF_DOOR_SPEED                 0.05f
 
 // colors
 # define DEF_BG_COLOR			    		BLACK
@@ -125,7 +130,7 @@
 # define MOUSE_SENS_ROTATE 					2.0f
 //# define MOUSE_SENS_DRAG					0.05f
 # define MOUSE_SENS_SCROLL 					0.1f
-# define MOUSE_CENTER_TOLERANCE_PX			0
+# define MOUSE_CENTER_TOLERANCE_PX			20
 
 # define ENABLE_CROSSHAIR					1
 # define DEFAULT_CROSSHAIR_COLOR			WHITE
@@ -147,31 +152,34 @@
 # define UI_MESSAGE_OFFSET_Y			700
 
 // welcome screens
-# define REQUIRED_MAP_EXTENSION			".cub"
+# define REQUIRED_MAP_EXTENSION				".cub"
 
 # define WELCOME_IMAGE       				"./assets/images/intro.xpm"
 # define SHOW_WELCOME_IMAGE  				0
 
-# define PUT_DOOR				            1
-# define DOOR_TEXTURE_PATHFILE				"./textures/wolf37.xpm"
-// four walls + celling + floor even if is a color
-# define NUMBER_TEXTURES    	            11
+// all printable ASCII characters + fallback texture
+// maximum
+# define NUMBER_TEXTURES    	            20
 
-# define WHITE_SPACE        	            " \a\b\t\n\v\f\r"
+# define WHITESPACE        	            	" \a\b\t\n\v\f\r"
 
 # define PLAYER_SPAWN_POINT_TYPES			"NSWE"
-# define SPRITE_TYPES     	 	            "abcdefghijklmnopqrstuvwxyz"
+# define SPRITE_TYPES     	 	            "ABCDFGHIJKLMOPQRTUVXYZabcdefghijklmnopqrstuvwxyz+$"
+# define DECORATION_TYPES     	 	        "abcdefghijklmnopqrstuvwxyz"
+# define CONSUMABLE_TYPES     	 	        "+$"
+//# define TOKEN_TYPES     	 	            "+"
 # define SPRITE_FRAMES						2
 # define WALL_TYPES							"123456789"
 # define VERTICAL_WALL_TYPES				"v"
 # define HORIZONTAL_WALL_TYPES				"h"
-# define DOOR_TYPES							"|-*"
-# define VERTICAL_DOOR_TYPES				"|*"
-# define HORIZONTAL_DOOR_TYPES				"-"
+# define DOOR_TYPES							"|][]I-=*"
+# define VERTICAL_DOOR_TYPES				"|][I*"
+# define HORIZONTAL_DOOR_TYPES				"-="
 
 // shaders
 # define ENABLE_SHADERS						1
-# define DISTANCE_SHADOW_STRENGTH 			0.2f
+# define DISTANCE_SHADOW_STRENGTH 			0.4f
+# define WALL_ORIENTATION_SHADOW_STRENGTH   0.4f
 
 # define ENABLE_MOVING_SKY					1
 # define ROTATION_SCALE					    1

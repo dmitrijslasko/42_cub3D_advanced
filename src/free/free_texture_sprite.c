@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_texture_sprite.c                              :+:      :+:    :+:   */
+/*   free_sprites.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	free_texture_sprite(t_data *dt)
+void	free_sprites(t_data *dt)
 {
 	size_t	i;
 	size_t	j;

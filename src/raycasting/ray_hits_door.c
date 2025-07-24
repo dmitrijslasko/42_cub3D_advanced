@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_hits_door.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:08:00 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/02 00:08:01 by fvargas          ###   ########.fr       */
+/*   Updated: 2025/07/18 16:50:40 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	calculate_distance_to_door(t_door *door, t_ray *ray, \
 {
 	float	step;
 
+	if (door == NULL)
+		return ;
 	*distance_to_door = 0.0f;
 	if (ray->hit_side == 'x')
 	{
@@ -41,11 +43,13 @@ int	ray_hits_door(t_data *dt, t_coor *map_coor, t_ray *ray)
 	t_door	*door;
 	t_x_y	door_hit_coor;
 	float	dist_to_door;
+	int		door_char;
 
 	door = find_door_at(dt, map_coor->x, map_coor->y);
 	if (!door)
 		return (0);
 	ray->door = door;
+
 	calculate_distance_to_door(door, ray, &dist_to_door);
 	door_hit_coor.x = ray->wall_hit.x + ray->vector.x * dist_to_door;
 	door_hit_coor.y = ray->wall_hit.y + ray->vector.y * dist_to_door;

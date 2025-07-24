@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_special.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:07:24 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/02 00:07:25 by fvargas          ###   ########.fr       */
+/*   Updated: 2025/07/15 13:54:19 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static char	**split(char const *s, char *delimiters, char **a, size_t n)
 	return (a);
 }
 
-char	**ft_split_special(const char *s, char *c)
+char	**ft_split_by_multiple_delimiters(const char *s, char *c)
 {
 	char	**array;
 	size_t	size;

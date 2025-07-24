@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap_base_img.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:05:46 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/02 00:05:47 by fvargas          ###   ########.fr       */
+/*   Updated: 2025/07/23 19:29:23 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ typedef int	(*t_draw_func)(t_data *, size_t, size_t);
 t_draw_func	get_draw_func_for_tile(char tile)
 {
 	if (ft_strchr(VERTICAL_WALL_TYPES, tile))
-		return (draw_minimap_THIN_WALL_VERTICAL_1);
+		return (draw_minimap_thin_wall_vertical);
 	if (ft_strchr(VERTICAL_DOOR_TYPES, tile))
 		return (draw_minimap_door_vertical);
+	if (ft_strchr(HORIZONTAL_DOOR_TYPES, tile))
+		return (draw_minimap_door_horizontal);
 	if (ft_strchr(WALL_TYPES, tile))
 		return (draw_minimap_wall_cell);
 	if (ft_strchr(SPRITE_TYPES, tile))
@@ -40,7 +42,7 @@ int	draw_minimap_elements(t_data *dt)
 		col = 0;
 		while (col < dt->map.map_size_cols)
 		{
-			tile = dt->map.map_data[row][col];
+			tile = dt->map.map_data[row][col].cell_char;
 			draw = get_draw_func_for_tile(tile);
 			if (draw)
 				draw(dt, col, row);

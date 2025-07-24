@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:07 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/12 20:43:19 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 17:08:40 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	draw_ceiling(t_data *dt)
 
 	set_coor_values(&top_left, 0, 0);
 	set_coor_values(&bottom_right, WINDOW_W, dt->view->screen_center_y);
-	color = create_color_rgb(dt->map.wall_tile[CEILING].color.r, \
-							dt->map.wall_tile[CEILING].color.g, \
-							dt->map.wall_tile[CEILING].color.b);
+	color = create_color_rgb(dt->map.textures[CEILING].color.r, \
+							dt->map.textures[CEILING].color.g, \
+							dt->map.textures[CEILING].color.b);
 	draw_rectangle(dt->raycasting_scene_img, top_left, bottom_right, color);
 	return (EXIT_SUCCESS);
 }
@@ -35,9 +35,9 @@ int	draw_floor(t_data *dt)
 
 	set_coor_values(&top_left, 0, dt->view->screen_center_y);
 	set_coor_values(&bottom_right, WINDOW_W, WINDOW_H);
-	color = create_color_rgb(	dt->map.wall_tile[FLOOR].color.r, \
-								dt->map.wall_tile[FLOOR].color.g,
-								dt->map.wall_tile[FLOOR].color.b);
+	color = create_color_rgb(	dt->map.textures[FLOOR].color.r, \
+								dt->map.textures[FLOOR].color.g,
+								dt->map.textures[FLOOR].color.b);
 	draw_rectangle(dt->raycasting_scene_img, top_left, bottom_right, color);
 	return (EXIT_SUCCESS);
 }
@@ -51,6 +51,8 @@ int	apply_distance_shadow_distance(int distance, int *color)
 
 	if (*color == BLACK)
 		return (0);
+	if (distance < 0)
+		distance = 0;
 	shade = 1.0f / (1.0f + distance * 0.01f * DISTANCE_SHADOW_STRENGTH);
 	if (shade < 0.1f)
 		shade = 0.1f;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_all_types_sprites.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:08:34 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/02 00:08:35 by fvargas          ###   ########.fr       */
+/*   Updated: 2025/07/24 20:00:05 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,31 @@ void	find_sprites(t_data *dt)
 {
 	int		row;
 	int		col;
-	size_t	count;
+	size_t	i;
 	char	c;
 
-	count = 0;
+	i = 0;
 	row = 0;
-	while (row < dt->map.map_size_rows && count < dt->sprite_count)
+	while (row < dt->map.map_size_rows && i < dt->sprite_count)
 	{
 		col = 0;
-		while (col < dt->map.map_size_cols && count < dt->sprite_count)
+		while (col < dt->map.map_size_cols && i < dt->sprite_count)
 		{
 			c = get_cell_type_by_coordinates(&dt->map, row, col);
 			if (ft_strchr(SPRITE_TYPES, c))
 			{
-				dt->sprites[count].id = count;
-				dt->sprites[count].type = c;
-				dt->sprites[count].pos.x = col + 0.5;
-				dt->sprites[count].pos.y = row + 0.5;
-				count++;
+				dt->sprites[i].id = i;
+				dt->sprites[i].type = c;
+				dt->sprites[i].pos.x = col + 0.5;
+				dt->sprites[i].pos.y = row + 0.5;
+				dt->sprites[i].active = 1;
+				i++;
 			}
 			col++;
 		}
 		row++;
 	}
 }
-
 void	find_all_sprites(t_data *dt)
 {
 	size_t	sprite_count;

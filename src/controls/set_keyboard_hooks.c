@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:04:26 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/11 16:01:38 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 20:29:55 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,27 @@ int	handle_keypress(int keycode, t_data *dt)
 
 int	handle_keyrelease(int keycode, t_data *dt)
 {
+	if (dt->keys[XK_1])
+		dt->player.selected_weapon = &dt->weapon[0];
+	if (dt->keys[XK_2])
+		dt->player.selected_weapon = &dt->weapon[1];
+	if (dt->keys[XK_3])
+		dt->player.selected_weapon = &dt->weapon[2];
+	if (dt->keys[XK_4])
+		dt->player.selected_weapon = &dt->weapon[3];
+	if (dt->keys[XK_5])
+	{
+		print_level_map(&dt->map);
+		dt->player.selected_weapon = &dt->weapon[4];
+	}
+	if (dt->keys[XK_8])
+	{
+		float prev_value = dt->ambient_light;
+		if (prev_value > 500)
+			dt->ambient_light = 0.0f;
+		else
+			dt->ambient_light = 1000.0f;
+	}
 	if (keycode == XK_Tab)
 	{
 		toggle_setting(&dt->view->show_minimap);

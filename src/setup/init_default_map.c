@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:39 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/11 16:04:03 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/14 14:15:53 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_default_color(t_color *color)
 
 void	init_default_texture(t_texture *texture)
 {
-	texture->file = NULL;
+	texture->xpm_file = NULL;
 	texture->texture_img = NULL;
 	texture->texture_data = NULL;
 }
@@ -35,15 +35,24 @@ void	init_default_wall_tile(t_wall_tile *wall_tile)
 	init_default_color(&wall_tile->color);
 }
 
+int		init_default_textures(t_map *map)
+{
+	int i;
+
+	i = 0;
+	while (i < NUMBER_TEXTURES)
+		init_default_wall_tile(&map->textures[i++]);
+	return (EXIT_SUCCESS);
+}
+
 bool	init_default_map(t_map *map)
 {
-	int		i;
-
+	print_separator_default();
+	printf("Initiliazing default map... ");
 	map->map_data = NULL;
 	map->map_size_cols = 0;
 	map->map_size_rows = 0;
-	i = 0;
-	while (i < NUMBER_TEXTURES)
-		init_default_wall_tile(&map->wall_tile[i++]);
-	return (0);
+	init_default_textures(map);
+	printf("Done!\n");
+	return (EXIT_SUCCESS);
 }

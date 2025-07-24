@@ -30,11 +30,11 @@ int	reset_mouse_position(t_data *dt)
 
 	dx = dt->mouse.x - WINDOW_W / 2;
 	dy = dt->mouse.y - WINDOW_H / 2;
-	if (dt->mouse.suppress_mouse_frames > 0)
-	{
-		dt->mouse.suppress_mouse_frames--;
-		return (EXIT_SUCCESS);
-	}
+	// if (dt->mouse.suppress_mouse_frames > 0)
+	// {
+	// 	dt->mouse.suppress_mouse_frames--;
+	// 	return (EXIT_SUCCESS);
+	// }
 	if (abs(dx) > MOUSE_CENTER_TOLERANCE_PX || \
 		abs(dy) > MOUSE_CENTER_TOLERANCE_PX)
 	{
@@ -44,9 +44,9 @@ int	reset_mouse_position(t_data *dt)
 			new_x = WINDOW_W / 2 + sign(dx) * MOUSE_CENTER_TOLERANCE_PX;
 		if (abs(dy) > MOUSE_CENTER_TOLERANCE_PX)
 			new_y = WINDOW_H / 2 + sign(dy) * MOUSE_CENTER_TOLERANCE_PX;
-		dt->mouse.suppress_mouse_frames = 1;
+		// dt->mouse.suppress_mouse_frames = 1;
 		mlx_mouse_move(dt->mlx_ptr, dt->win_ptr, new_x, new_y);
-		 system("gsettings set org.gnome.desktop.a11y.magnifier mouse-tracking true");
+	 	// system("gsettings set org.gnome.desktop.a11y.magnifier mouse-tracking true");
 	}
 	return (EXIT_SUCCESS);
 }
