@@ -31,11 +31,14 @@ int	get_position_and_render_sprite(t_data *dt, t_sprite *sprite)
 	transform.x = (-1.0f / FIELD_OF_VIEW_SCALE) * \
 					(dt->player.direction_vector.y * dist_to_player.x - \
 								dt->player.direction_vector.x * dist_to_player.y);
+
 	sprite_size.y = fmin(WINDOW_H * 4, WINDOW_H / transform.y);
 	sprite_size.x = fmin(WINDOW_W * 4, sprite_size.y);
+
 	sprite_screen_x = (WINDOW_W / 2) * (1 + transform.x / transform.y);
 	offset.x = sprite_screen_x - sprite_size.x / 2;
 	offset.y = dt->view->screen_center_y - sprite_size.y / 3;
+	
 	render_sprite(dt, sprite, &offset, &sprite_size);
 	return (EXIT_SUCCESS);
 }

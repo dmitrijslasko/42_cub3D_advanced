@@ -119,7 +119,7 @@ int	render_frame(void *param)
 		spr->active = 0;
 		system("aplay sounds/health.wav &");
 		dt->player.health_level = ft_min(100, dt->player.health_level += 10);
-		printf("Sprite found: %d\n", spr->id);
+		// printf("Sprite found: %d\n", spr->id);
 	}
 
 	calculate_all_rays(dt);

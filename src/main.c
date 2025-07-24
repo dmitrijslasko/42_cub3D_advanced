@@ -37,6 +37,7 @@ static int	setup_dt(t_data *dt)
 	dt->minimap_img = protected_malloc(sizeof(t_img), dt);
 	dt->ui_img = protected_malloc(sizeof(t_img), dt);
 	dt->view = protected_malloc(sizeof(t_view), dt);
+	dt->targeted_sprite = dt->sprites;
 	load_textures(dt);
 	load_sky_image(dt);
 	load_messages(dt);

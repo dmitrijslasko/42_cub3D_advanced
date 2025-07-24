@@ -94,10 +94,6 @@ void	process_keypresses(t_data *dt)
 		dt->test_value_1 += 10.0f;
 		printf("%f\n", dt->test_value_1);
 	}
-	if (dt->keys[XK_v])
-		dt->sprites[74].active = 0;
-	if (dt->keys[XK_b])
-		dt->sprites[74].active = 1;
 	if (dt->keys[XK_h])
 		dt->test_value_3 -= 10.0f;
 	if (dt->keys[XK_j])

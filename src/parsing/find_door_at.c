@@ -33,7 +33,6 @@ t_sprite	*find_sprite_at(t_data *dt, int x, int y)
 	i = 0;
 	while (i < dt->sprite_count)
 	{
-		printf("%d\n", i);
 		if ((int)dt->sprites[i].pos.x == x && (int)dt->sprites[i].pos.y == y)
 			return (&dt->sprites[i]);
 		i++;

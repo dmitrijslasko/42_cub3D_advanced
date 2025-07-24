@@ -32,6 +32,8 @@ int	mouse_press(int button, int x, int y, t_data *dt)
 			dt->weapon_is_animating = 1;
 			system("aplay sounds/shot.wav &");
 			dt->player.selected_weapon->total_ammo = ft_max(0, --dt->player.selected_weapon->total_ammo);
+			if (dt->targeted_sprite)
+				dt->targeted_sprite->active = 0;
 		}
 		else
 			system("aplay sounds/empty-gun.wav &");

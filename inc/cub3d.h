@@ -313,6 +313,8 @@ typedef struct s_data
 	int 				weapon_is_animating;
 	long				weapon_last_frame_time;
 
+	t_sprite			*targeted_sprite;
+
 	float				test_value_1;
 	float				test_value_2;
 	float				test_value_3;
