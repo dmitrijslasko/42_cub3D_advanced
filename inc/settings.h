@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:39:14 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/23 19:38:08 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/24 18:44:39 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define CASTED_RAYS_COUNT					640
 # define FPS								60
 # define SCALING				            250
-# define MIMIC_FULLSCREEN                   1
+# define MIMIC_FULLSCREEN                   0
 
 # define STARTING_AMMO_LEVEL				999
 # define STARTING_HEALTH_LEVEL              50

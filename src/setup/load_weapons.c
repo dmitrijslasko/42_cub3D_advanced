@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:10:10 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/23 19:27:40 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/24 18:44:52 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	load_weapons(t_data *dt)
 		dt->weapon[i].reload_speed = g_weapon_lookup[i].reload_speed;
 		dt->weapon[i].shot_speed = g_weapon_lookup[i].shot_speed;
 		dt->weapon[i].weight = g_weapon_lookup[i].weight;
-		dt->weapon[i].total_ammo = i;
+		dt->weapon[i].total_ammo = STARTING_AMMO_LEVEL;
 		dt->weapon[i].bullets_in_clip = 0;
 		dt->weapon[i].player_has_it = 1;
 		i++;
