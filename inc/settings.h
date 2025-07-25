@@ -167,7 +167,6 @@
 # define SPRITE_TYPES     	 	            "ABCDFGHIJKLMOPQRTUVXYZabcdefghijklmnopqrstuvwxyz+$"
 # define DECORATION_TYPES     	 	        "abcdefghijklmnopqrstuvwxyz"
 # define CONSUMABLE_TYPES     	 	        "+$"
-//# define TOKEN_TYPES     	 	            "+"
 # define SPRITE_FRAMES						2
 # define WALL_TYPES							"123456789"
 # define VERTICAL_WALL_TYPES				"v"

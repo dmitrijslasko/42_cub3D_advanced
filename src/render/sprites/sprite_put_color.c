@@ -15,13 +15,13 @@
 void	sprite_put_color(t_data *dt, t_sprite *sprite, \
 							t_coor *coor, t_coor *tex_coor)
 {
-	int					time;
+	int					frame;
 	t_sprite_texture	*texture;
 	unsigned int		color;
 
-	time = sprite->current_frame;
+	frame = sprite->current_frame;
 	texture = sprite->texture;
-	color = texture->sprite_data[time][tex_coor->y * texture->width + \
+	color = texture->sprite_data[frame][tex_coor->y * texture->width + \
 			tex_coor->x];
 
 	apply_distance_shadow_distance(sprite->distance_to_player, &color);

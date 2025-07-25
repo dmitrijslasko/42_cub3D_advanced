@@ -114,7 +114,7 @@ static const t_sprite_file	g_sprites[] = {
 {'$', "SPRITE_02", 0, BLACK, {"./sprites/key.xpm", "./sprites/key.xpm"}},
 {'a', "SPRITE_03", 0, BLACK, {"./sprites/plant.xpm", "./sprites/plant.xpm"}},
 {'b', "SPRITE_04", 0, BLACK, {"./sprites/plant-2-128x128.xpm", "./sprites/plant-2-128x128.xpm"}},
-{'A', "SPRITE_05", 0, BLACK, {"./sprites/soldier1.xpm", "./sprites/soldier2.xpm"}},
+{'A', "SPRITE_05", 0, BLACK, {"./sprites/soldier1.xpm", "./sprites/soldier3.xpm"}},
 {'B', "SPRITE_06", 0, BLACK, {"./sprites/tommy1.xpm", "./sprites/tommy2.xpm"}},
 {'C', "SPRITE_07", 1, BLACK, {"./sprites/soldier-1-sprite-sheet.xpm", "./sprites/soldier-1-sprite-sheet.xpm"}},
 {0, NULL, 0, -1, {NULL, NULL}}
