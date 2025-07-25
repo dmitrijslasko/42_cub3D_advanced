@@ -34,6 +34,7 @@ void	find_sprites(t_data *dt)
 				dt->sprites[i].pos.x = col + 0.5;
 				dt->sprites[i].pos.y = row + 0.5;
 				dt->sprites[i].active = 1;
+				dt->sprites[i].orientation = 180.0f;
 				i++;
 			}
 			col++;

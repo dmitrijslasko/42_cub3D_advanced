@@ -15,18 +15,18 @@
 void	sprite_put_color(t_data *dt, t_sprite *sprite, \
 							t_coor *coor, t_coor *tex_coor)
 {
-	int					time;
+	int					frame;
 	t_sprite_texture	*texture;
 	unsigned int		color;
 
-	time = sprite->time;
+	frame = sprite->current_frame;
 	texture = sprite->texture;
-	color = texture->sprite_data[time][tex_coor->y * texture->width + \
+	color = texture->sprite_data[frame][tex_coor->y * texture->width + \
 			tex_coor->x];
 
 	apply_distance_shadow_distance(sprite->distance_to_player, &color);
 	apply_distance_shadow_distance(dt->ambient_light, &color);
-	if (color == BLACK)
+	if (color == sprite->texture->chromakey_color)
 		return ;
 	img_pix_put(dt->final_frame_img, coor->x, coor->y, color);
 }

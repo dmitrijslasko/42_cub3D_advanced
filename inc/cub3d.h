@@ -221,16 +221,19 @@ typedef struct s_img
 
 typedef struct s_sprite_texture
 {
+	char	*filepath;
 	int		texture_id;
+	char	mapchar;
 	void	*sprite_img[SPRITE_FRAMES];
 	int		*sprite_data[SPRITE_FRAMES];
+	// void	*sprite_img[NO_OF_ROTATION][NO_OF_ACTION];
+	// int		*sprite_data[NO_OF_ROTATION][NO_OF_ACTION];
+	int		chromakey_color;
 	int		width;
 	int		height;
 	int		bpp;
 	int		size_line;
 	int		endian;
-	char	type;
-	char	*filepath;
 }	t_sprite_texture;
 
 typedef enum e_sprite_type
@@ -244,14 +247,17 @@ typedef struct s_sprite
 	char				id;
 	t_sprite_type		type;
 	int					active;
-	char				*path;
-	float				width;
-	float				height;
-	int					frame_count;
-	t_sprite_texture	*texture;
+	// char				*path;
+	// float			width;
+	// float			height;
+	
 	t_x_y				pos;
+	float				orientation;
 	float				distance_to_player;
-	int					time;
+	// int				total_frame_count;
+	int					current_frame;
+
+	t_sprite_texture	*texture;
 }	t_sprite;
 
 typedef struct s_gametime

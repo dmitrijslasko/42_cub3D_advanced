@@ -15,6 +15,7 @@
 int	get_position_and_render_sprite(t_data *dt, t_sprite *sprite)
 {
 	t_x_y	dist_to_player;
+	float	orientation;
 	t_x_y	transform;
 	int		sprite_screen_x;
 	t_coor	sprite_size;
@@ -22,6 +23,15 @@ int	get_position_and_render_sprite(t_data *dt, t_sprite *sprite)
 
 	dist_to_player.x = sprite->pos.x - dt->player.pos.x;
 	dist_to_player.y = sprite->pos.y - dt->player.pos.y;
+	orientation = dt->player.direction_vector_deg - sprite->orientation;
+	if (sprite->id == 35)
+	{
+		if (orientation < 0)
+			sprite->current_frame = 0;
+		else
+			sprite->current_frame = 1;
+		printf("%.2f\n", orientation);
+	}
 	transform.y = (dt->player.direction_vector.x * dist_to_player.x + \
 					dt->player.direction_vector.y * dist_to_player.y);
 

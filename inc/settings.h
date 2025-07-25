@@ -23,7 +23,7 @@
 # endif
 
 # ifndef LINUX_22
-# 	define LINUX_22 1
+# 	define LINUX_22 0
 # endif
 
 // window name
@@ -167,7 +167,6 @@
 # define SPRITE_TYPES     	 	            "ABCDFGHIJKLMOPQRTUVXYZabcdefghijklmnopqrstuvwxyz+$"
 # define DECORATION_TYPES     	 	        "abcdefghijklmnopqrstuvwxyz"
 # define CONSUMABLE_TYPES     	 	        "+$"
-//# define TOKEN_TYPES     	 	            "+"
 # define SPRITE_FRAMES						2
 # define WALL_TYPES							"123456789"
 # define VERTICAL_WALL_TYPES				"v"
@@ -175,6 +174,9 @@
 # define DOOR_TYPES							"|][]I-=*"
 # define VERTICAL_DOOR_TYPES				"|][I*"
 # define HORIZONTAL_DOOR_TYPES				"-="
+
+# define NO_OF_ROTATION                     8
+# define NO_OF_ACTION                       8
 
 // shaders
 # define ENABLE_SHADERS						1

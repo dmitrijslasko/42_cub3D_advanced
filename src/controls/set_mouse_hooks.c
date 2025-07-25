@@ -33,7 +33,7 @@ int	mouse_press(int button, int x, int y, t_data *dt)
 			system("aplay sounds/shot.wav &");
 			dt->player.selected_weapon->total_ammo = ft_max(0, --dt->player.selected_weapon->total_ammo);
 			if (dt->targeted_sprite)
-				dt->targeted_sprite->time = 1;
+				dt->targeted_sprite->current_frame = 1;
 		}
 		else
 			system("aplay sounds/empty-gun.wav &");

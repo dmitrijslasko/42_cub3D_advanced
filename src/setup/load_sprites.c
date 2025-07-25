@@ -46,27 +46,28 @@ int	load_sprite_images(t_data *dt)
 {
 	size_t				i;
 	t_sprite_texture	*sprite_textures;
+	size_t				frame;
 
 	sprite_textures = dt->sprite_textures;
-	printf("Sprite types to be loaded: %zu\n", dt->sprite_texture_count);
+	printf("Number of sprite types to be loaded: %zu\n", dt->sprite_texture_count);
 	i = 0;
 	while (i < dt->sprite_texture_count)
 	{
 		printf("Loading sprite texture for mapchar %c\n", g_sprites[i].map_char);
-		sprite_textures[i].type = g_sprites[i].map_char;
-		set_sprite_img(dt, sprite_textures, i, 0);
-		sprite_textures[i].sprite_data[0] = (int *)mlx_get_data_addr(\
-						sprite_textures[i].sprite_img[0], \
-						&sprite_textures[i].bpp, \
-						&sprite_textures[i].size_line, \
-						&sprite_textures[i].endian);
-		//set_sprite_img(dt, sprite_textures, i, 1);
-		//sprite_textures[i].sprite_data[1] = (int *)mlx_get_data_addr(\
-		//				sprite_textures[i].sprite_img[1], \
-		//				&sprite_textures[i].bpp, \
-		//				&sprite_textures[i].size_line, \
-		//				&sprite_textures[i].endian);
-		printf("Sprite image for %c loaded!\n", sprite_textures[i].type);
+		sprite_textures[i].mapchar = g_sprites[i].map_char;
+		sprite_textures[i].chromakey_color = g_sprites[i].chromakey_color;
+		frame = 0;
+		while (frame < SPRITE_FRAMES)
+		{
+			set_sprite_img(dt, sprite_textures, i, frame);
+			sprite_textures[i].sprite_data[frame] = (int *)mlx_get_data_addr(\
+							sprite_textures[i].sprite_img[frame], \
+							&sprite_textures[i].bpp, \
+							&sprite_textures[i].size_line, \
+							&sprite_textures[i].endian);
+			frame++;
+		}
+		printf("Sprite image for %c loaded!\n", sprite_textures[i].mapchar);
 		i++;
 	}
 	return (EXIT_SUCCESS);
