@@ -133,7 +133,7 @@ int	render_frame(void *param)
 	render_minimap_and_ui(dt);
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr,dt->final_frame_img->mlx_img, 0, 0);
 	show_debug_info(dt);
- 	show_player_info(dt);
+ 	// show_player_info(dt);
 	if (dt->view->show_door_open_message)
 	{
 		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press [ / ] to open the door");
