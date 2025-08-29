@@ -28,6 +28,7 @@ static int	set_sprite_img(t_data *dt, t_sprite_texture *texture,
 		filepath, \
 		&texture[i].width, \
 		&texture[i].height);
+	
 	return (EXIT_SUCCESS);
 }
 
@@ -39,6 +40,7 @@ int	count_sprite_textures(t_data *dt)
 	while (g_sprites[len].map_char)
 		len++;
 	dt->sprite_texture_count = len;
+	
 	return (EXIT_SUCCESS);
 }
 
@@ -50,13 +52,18 @@ int	load_sprite_images(t_data *dt)
 
 	sprite_textures = dt->sprite_textures;
 	printf("Number of sprite types to be loaded: %zu\n", dt->sprite_texture_count);
+	
 	i = 0;
 	while (i < dt->sprite_texture_count)
 	{
-		printf("Loading sprite texture for mapchar %c\n", g_sprites[i].map_char);
-		sprite_textures[i].mapchar = g_sprites[i].map_char;
+		printf("Loading sprite texture for map_char %c\n", g_sprites[i].map_char);
+		
+		sprite_textures[i].map_char = g_sprites[i].map_char;
+
 		sprite_textures[i].chromakey_color = g_sprites[i].chromakey_color;
+		
 		frame = 0;
+
 		while (frame < SPRITE_FRAMES)
 		{
 			set_sprite_img(dt, sprite_textures, i, frame);
@@ -67,7 +74,7 @@ int	load_sprite_images(t_data *dt)
 							&sprite_textures[i].endian);
 			frame++;
 		}
-		printf("Sprite image for %c loaded!\n", sprite_textures[i].mapchar);
+		printf("Sprite image for %c loaded!\n", sprite_textures[i].map_char);
 		i++;
 	}
 	return (EXIT_SUCCESS);

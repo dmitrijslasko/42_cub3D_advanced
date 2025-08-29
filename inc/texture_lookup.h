@@ -109,6 +109,7 @@ typedef struct s_sprite_file
 	char		*filepath[2];
 }				t_sprite_file;
 
+
 static const t_sprite_file	g_sprites[] = {
 {'+', "SPRITE_01", 0, BLACK, {"./sprites/heart.xpm", "./sprites/heart.xpm"}},
 {'$', "SPRITE_02", 0, BLACK, {"./sprites/key.xpm", "./sprites/key.xpm"}},

@@ -32,12 +32,14 @@ static int	setup_dt(t_data *dt)
 {
 	init_rays(dt);
 	init_keys(dt);
+	
 	dt->raycasting_scene_img = protected_malloc(sizeof(t_img), dt);
 	dt->final_frame_img = protected_malloc(sizeof(t_img), dt);
 	dt->minimap_img = protected_malloc(sizeof(t_img), dt);
 	dt->ui_img = protected_malloc(sizeof(t_img), dt);
 	dt->view = protected_malloc(sizeof(t_view), dt);
 	dt->targeted_sprite = dt->sprites;
+	
 	load_textures(dt);
 	load_sky_image(dt);
 	load_messages(dt);
@@ -65,8 +67,10 @@ static int	setup_dt(t_data *dt)
 	dt->test_value_4 = 0.0f;
 
 	dt->ambient_light = 10.0f;
+
 	// if (BONUS)
 	// 	dt->background_music = init_audio();
+	
 	return (EXIT_SUCCESS);
 }
 unsigned long get_focused_window_id() {
@@ -134,26 +138,6 @@ int move_active_window_to_mouse_position_with_xdotool() {
 	snprintf(cmd, sizeof(cmd), "xdotool windowmove %s %d %d", win_id, x - WINDOW_W/2, y - WINDOW_H/2 - 38);
 	int result = system(cmd);
 	return result == 0 ? 0 : 1;
-}
-
-int print_out_texture_lookup_table(t_data *dt)
-{
-	int	i;
-
-	i = 0;
-	printf(TXT_CYAN">>> Printing out the texture lookup table!\n"TXT_RESET);
-	while (g_texture_lookup[i].mapfile_key)
-	{
-		printf("%25s [%4s, %2d] : %s\n",
-			g_texture_lookup[i].description,
-			g_texture_lookup[i].mapfile_key,
-			g_texture_lookup[i].texture_type,
-			dt->map.textures[i].texture.xpm_file
-			);
-		i++;
-	}
-	print_separator_default();
-	return (EXIT_SUCCESS);
 }
 
 int	main(int argc, char **argv)

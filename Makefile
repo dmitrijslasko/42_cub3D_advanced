@@ -39,7 +39,6 @@ OBJ_DIR = ./obj
 OBJ_DIR_BONUS = ./obj_bonus
 
 
-
 # LIBRARIES
 LIBDIRS = ./lib
 LIBFT_DIR = $(LIBDIRS)/libft
@@ -78,7 +77,7 @@ SRC := $(shell find $(SRC_DIR) -name "*.c")
 # SRC =	./src/controls/map_position_is_walkable.c \
 # 		./src/controls/move_forward_backward.c \
 # 		./src/controls/move_sideways.c \
-# 		./src/controls/process_keypresses.c \
+# 		./src/controls/process_keyboard_keypresses.c \
 # 		./src/controls/reset_mouse_position.c \
 # 		./src/controls/rotate_player.c \
 # 		./src/controls/rotate_vector.c \
@@ -174,7 +173,7 @@ SRC := $(shell find $(SRC_DIR) -name "*.c")
 # 		./src/render/sprites/get_pos_render_sprites.c \
 # 		./src/render/sprites/render_all_sprites.c \
 # 		./src/render/sprites/render_sprite.c \
-# 		./src/render/sprites/set_texture_sprites.c \
+# 		./src/render/sprites/find_sprite_texture.c \
 # 		./src/render/sprites/sort_sprite_by_distance.c \
 # 		./src/render/sprites/sort_sprites.c \
 # 		./src/render/sprites/sprit_put_color.c \
@@ -294,4 +293,4 @@ ubuntu:
 
 # ------------------------------------------------------------------------------
 
-.PHONY: all bonus clean fclean re minilibx %
+.PHONY: all bonus clean fclean re minilibx ubuntu %

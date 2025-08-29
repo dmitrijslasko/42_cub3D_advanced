@@ -18,8 +18,10 @@ int	render_all_sprites(t_data *dt)
 	float	distance_to_player;
 
 	i = 0;
+
 	sort_sprites_by_distance(dt);
-	set_texture_sprites(dt);
+	find_sprite_texture(dt);
+
 	while (i < dt->sprite_count)
 	{
 		// if (dt->player.pos.x - dt->sprites[i].pos.x > 0.01)

@@ -223,7 +223,7 @@ typedef struct s_sprite_texture
 {
 	char	*filepath;
 	int		texture_id;
-	char	mapchar;
+	char	map_char;
 	void	*sprite_img[SPRITE_FRAMES];
 	int		*sprite_data[SPRITE_FRAMES];
 	// void	*sprite_img[NO_OF_ROTATION][NO_OF_ACTION];
@@ -523,14 +523,13 @@ int			load_textures(t_data *dt);
 int			load_sprites(t_data *dt);
 int			precalculate_trig_tables(t_data *dt);
 
-int			render_all_sprites(t_data *dt);
 void		render_3d_each_ray(t_data *dt, t_ray *ray, int screen_slice_width);
 
 int			apply_distance_shadow(t_ray *ray, int *color);
 int			apply_shadow(t_ray *ray, int *color, float strength);
 
 int			reset_mouse_position(t_data *dt);
-void		process_keypresses(t_data *dt);
+void		process_keyboard_keypresses(t_data *dt);
 int			get_color_render3d(t_data *dt, t_ray *ray, t_coor *tex_coor);
 void		calc_texture_coor(t_data *dt, int *texture_y, \
 							float *distance_to_wall, int d);
@@ -565,7 +564,7 @@ void		sort_sprites_by_distance(t_data *dt);
 void		sort_sprites(t_sprite *sprites, size_t num_sprites);
 int			render_all_sprites(t_data *dt);
 int			get_position_and_render_sprite(t_data *dt, t_sprite *sprite);
-bool		set_texture_sprites(t_data *dt);
+bool		find_sprite_texture(t_data *dt);
 void		sprite_put_color(t_data *dt, t_sprite *sprite, \
 										t_coor *coor, t_coor *tex_coor);
 t_coor		calculate_tex_x_y(t_sprite_texture *texture, t_coor *coor, \
@@ -648,5 +647,7 @@ int mark_all_cells_that_neighbour_doors(t_data *dt);
 int is_in_list(char *str, char *list);
 
 int	fire_gun(t_data *dt);
+
+int print_out_texture_lookup_table(t_data *dt);
 
 #endif

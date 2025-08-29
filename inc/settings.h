@@ -44,7 +44,8 @@
 # define CASTED_RAYS_COUNT					640
 # define FPS								60
 # define SCALING				            250
-# define MIMIC_FULLSCREEN                   1
+# define MIMIC_FULLSCREEN                   0
+# define CAPTURE_MOUSE                      0
 
 # define STARTING_AMMO_LEVEL				999
 # define STARTING_HEALTH_LEVEL              50

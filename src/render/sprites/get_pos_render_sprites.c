@@ -24,6 +24,7 @@ int	get_position_and_render_sprite(t_data *dt, t_sprite *sprite)
 	dist_to_player.x = sprite->pos.x - dt->player.pos.x;
 	dist_to_player.y = sprite->pos.y - dt->player.pos.y;
 	orientation = dt->player.direction_vector_deg - sprite->orientation;
+	
 	if (sprite->id == 35)
 	{
 		if (orientation < 0)

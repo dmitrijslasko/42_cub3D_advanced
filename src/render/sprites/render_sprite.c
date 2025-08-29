@@ -22,8 +22,10 @@ int render_sprite(t_data *dt, t_sprite *sprite, \
 	targets_sprite = 0;
     if (sprite->active == 0)
         return (0);
+
     //sprite->time = (dt->time.last_time - dt->time.start_time) / 100 % 2;
 	//sprite->time = 0;
+
     coor.y = ft_max(offset->y, 0);
     while (coor.y < sprite_size->y + offset->y && coor.y < WINDOW_H)
     {
@@ -42,9 +44,11 @@ int render_sprite(t_data *dt, t_sprite *sprite, \
         }
         coor.y++;
     }
+
 	if (targets_sprite)
 		dt->targeted_sprite = sprite;
 	else
 		dt->targeted_sprite = NULL;
+        
     return (EXIT_SUCCESS);
 }

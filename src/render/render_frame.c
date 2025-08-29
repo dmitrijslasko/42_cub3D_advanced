@@ -79,27 +79,28 @@ int print_out_sprite_info(t_data *dt)
 	}
 }
 
-int	render_frame(void *param)
+int process_sprite_pickups(t_data *dt)
 {
-	t_data		*dt;
-	long		current_time;
-	int 		y_offset;
+	t_sprite *sprite = find_sprite_at(dt, (size_t)dt->player.pos.x, (size_t)dt->player.pos.y);
 
-	dt = (t_data *)param;
-
-	reset_mouse_position(dt);
-	current_time = get_current_time_in_ms();
-	dt->time.delta_time = current_time - dt->time.last_time;
-	if (dt->time.delta_time < (1000 / FPS))
+	if (sprite && sprite->active && sprite->type == '+')
 	{
-		my_sleep();
-		return (0);
+		sprite->active = 0;
+		system("aplay sounds/health.wav &");
+		dt->player.health_level = ft_min(100, dt->player.health_level += 10);
 	}
-	dt->time.last_time = current_time;
+	return (EXIT_SUCCESS);
+}
+
+int animate_weapon(t_data *dt)
+{
+	long now;
+
 	if (dt->weapon_is_animating == 1)
 	{
-		long now = get_current_time_in_ms();
-		if (now - dt->weapon_last_frame_time > (1000 / FPS) * 4)
+		now = get_current_time_in_ms();
+
+		if (now - dt->weapon_last_frame_time > (1000 / FPS) * 2)
 		{
 			dt->weapon_current_frame++;
 			dt->weapon_last_frame_time = now;
@@ -110,17 +111,32 @@ int	render_frame(void *param)
 			}
 		}
 	}
+	return (EXIT_SUCCESS);
+}
 
-	process_keypresses(dt);
+int	render_frame(void *param)
+{
+	t_data		*dt;
+	long		current_time;
+	int 		y_offset;
 
-	t_sprite *spr = find_sprite_at(dt, (size_t)dt->player.pos.x, (size_t)dt->player.pos.y);
-	if (spr && spr->active && spr->type == '+')
+	dt = (t_data *)param;
+
+	// reset_mouse_position(dt);
+
+	current_time = get_current_time_in_ms();
+	dt->time.delta_time = current_time - dt->time.last_time;
+	if (dt->time.delta_time < (1000 / FPS))
 	{
-		spr->active = 0;
-		system("aplay sounds/health.wav &");
-		dt->player.health_level = ft_min(100, dt->player.health_level += 10);
-		// printf("Sprite found: %d\n", spr->id);
+		my_sleep();
+		return (0);
 	}
+	dt->time.last_time = current_time;
+
+	animate_weapon(dt);
+
+	process_keyboard_keypresses(dt);	
+	process_sprite_pickups(dt);
 
 	calculate_all_rays(dt);
 	render_3d_scene(dt);
@@ -129,11 +145,14 @@ int	render_frame(void *param)
 		render_all_sprites(dt);
 	if (dt->view->show_minimap)
 		update_minimap(dt);
+
 	update_prompt_message(dt);
 	render_minimap_and_ui(dt);
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr,dt->final_frame_img->mlx_img, 0, 0);
 	show_debug_info(dt);
- 	// show_player_info(dt);
+
+ 	show_player_info(dt);
+
 	if (dt->view->show_door_open_message)
 	{
 		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press [ / ] to open the door");

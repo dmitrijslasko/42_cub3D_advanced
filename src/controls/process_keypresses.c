@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_keypresses.c                               :+:      :+:    :+:   */
+/*   process_keyboard_keypresses.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -58,7 +58,7 @@ static void	process_door(t_data *dt)
 		open_close_door(dt, 1);
 }
 
-void	process_keypresses(t_data *dt)
+void	process_keyboard_keypresses(t_data *dt)
 {
 	int is_moving_now = 0;
 
