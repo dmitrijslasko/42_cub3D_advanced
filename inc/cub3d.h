@@ -647,4 +647,6 @@ int mark_all_cells_that_neighbour_doors(t_data *dt);
 
 int is_in_list(char *str, char *list);
 
+int	fire_gun(t_data *dt);
+
 #endif
