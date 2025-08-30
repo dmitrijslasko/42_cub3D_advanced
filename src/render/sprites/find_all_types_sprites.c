@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	find_sprites(t_data *dt)
+void	init_all_sprites(t_data *dt)
 {
 	int		row;
 	int		col;
@@ -21,6 +21,7 @@ void	find_sprites(t_data *dt)
 
 	i = 0;
 	row = 0;
+	
 	while (row < dt->map.map_size_rows && i < dt->sprite_count)
 	{
 		col = 0;
@@ -30,11 +31,14 @@ void	find_sprites(t_data *dt)
 			if (ft_strchr(SPRITE_TYPES, c))
 			{
 				dt->sprites[i].id = i;
-				dt->sprites[i].type = c;
+				dt->sprites[i].map_char = c;
 				dt->sprites[i].pos.x = col + 0.5;
 				dt->sprites[i].pos.y = row + 0.5;
-				dt->sprites[i].active = 1;
+				dt->sprites[i].is_shown = 1;
 				dt->sprites[i].orientation = 180.0f;
+				dt->sprites[i].is_moving = 1;
+				dt->sprites[i].current_frame = 0;
+				dt->sprites[i].last_frame_time = 0;
 				i++;
 			}
 			col++;
@@ -49,7 +53,9 @@ void	find_all_sprites(t_data *dt)
 	sprite_count = count_elements_in_the_map(&dt->map, SPRITE_TYPES);
 	if (!sprite_count)
 		return ;
-	dt->sprites = protected_malloc(sprite_count * sizeof(t_sprite), dt);
+	
 	dt->sprite_count = sprite_count;
-	find_sprites(dt);
+	dt->sprites = protected_malloc(sprite_count * sizeof(t_sprite), dt);
+	
+	init_all_sprites(dt);
 }

@@ -1,5 +1,5 @@
 DEF         textures/default-fallback-texture.xpm
-F1          textures/wolfenstein/color_stone.xpm
+F1          textures/floor-grey-noise.xpm
 C1          textures/floor-grey-noise.xpm
 W01         textures/wolfenstein/grey_stone.xpm
 W02         textures/wolfenstein/red_brick.xpm
@@ -20,7 +20,7 @@ ED1    	    textures/wolf44.xpm
 
 
 111111111111111111111111111111111111111111111111111
-2  S    23434342a a a a a a a a1                   1
+2      23434342a a a a a a a a1                   1
 2      |   [  ]              A5    1  2 2 2 2 2 2 1
 2  C   23434342               [    1      A       1
 22-2-2-2  1   2              A5    1              1
@@ -28,8 +28,8 @@ ED1    	    textures/wolf44.xpm
 1      1111111bbbbbbbb 11111111    |  2 2 2 2 2 2 1
 1 +          |         |    1     a1              1
 1     1      1      +  1    1     b1              1
-1    a1      [         1    1     11             A122
-1  +  1    $11  A      1    1   . a1              * 2
-1      1111111         111111     11             A122
-1b a                 +                            1
+1    a1      [         1    1     11             C122
+1  +  1    $11  A      1    1   . a1   E  C A     * 2
+1      111111111111    111111     11             C122
+1b a           A  A  A A   +                      1
 666666666666666666666666666666666666666666666666666

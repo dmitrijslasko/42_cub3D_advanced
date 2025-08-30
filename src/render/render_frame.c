@@ -83,9 +83,9 @@ int process_sprite_pickups(t_data *dt)
 {
 	t_sprite *sprite = find_sprite_at(dt, (size_t)dt->player.pos.x, (size_t)dt->player.pos.y);
 
-	if (sprite && sprite->active && sprite->type == '+')
+	if (sprite && sprite->is_shown && sprite->map_char == '+')
 	{
-		sprite->active = 0;
+		sprite->is_shown = 0;
 		system("aplay sounds/health.wav &");
 		dt->player.health_level = ft_min(100, dt->player.health_level += 10);
 	}
@@ -98,7 +98,7 @@ int animate_weapon(t_data *dt)
 
 	if (dt->weapon_is_animating == 1)
 	{
-		now = get_current_time_in_ms();
+		now = dt->time.last_time;
 
 		if (now - dt->weapon_last_frame_time > (1000 / FPS) * 2)
 		{
@@ -120,7 +120,7 @@ int	render_frame(void *param)
 	long		current_time;
 	int 		y_offset;
 
-	dt = (t_data *)param;
+	dt = (t_data *) param;
 
 	// reset_mouse_position(dt);
 
@@ -133,26 +133,38 @@ int	render_frame(void *param)
 	}
 	dt->time.last_time = current_time;
 
+	// draw game menu
 	animate_weapon(dt);
 
 	process_keyboard_keypresses(dt);	
 	process_sprite_pickups(dt);
 
 	calculate_all_rays(dt);
+
 	render_3d_scene(dt);
 	put_img_to_img(dt->final_frame_img, dt->raycasting_scene_img, 0, 0);
+
 	if (RENDER_SPRITES)
 		render_all_sprites(dt);
+	
+	// show minimap
 	if (dt->view->show_minimap)
 		update_minimap(dt);
 
-	update_prompt_message(dt);
 	render_minimap_and_ui(dt);
+
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr,dt->final_frame_img->mlx_img, 0, 0);
+	
+	// time stats
+	// int y = 20;
+	// print_time_stats(dt, dt->mlx_ptr, dt->win_ptr, &y);
+	
+
 	show_debug_info(dt);
 
  	show_player_info(dt);
 
+	update_prompt_message(dt);
 	if (dt->view->show_door_open_message)
 	{
 		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press [ / ] to open the door");

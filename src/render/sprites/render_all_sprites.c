@@ -17,21 +17,13 @@ int	render_all_sprites(t_data *dt)
 	size_t	i;
 	float	distance_to_player;
 
-	i = 0;
-
 	sort_sprites_by_distance(dt);
+
 	find_sprite_texture(dt);
 
+	i = 0;
 	while (i < dt->sprite_count)
 	{
-		// if (dt->player.pos.x - dt->sprites[i].pos.x > 0.01)
-		// 	dt->sprites[i].pos.x += 0.01f;
-		// else if (dt->player.pos.x - dt->sprites[i].pos.x < 0.01)
-		// 	dt->sprites[i].pos.x -= 0.01f;
-		// if (dt->player.pos.y - dt->sprites[i].pos.y > 0.01)
-		// 	dt->sprites[i].pos.y += 0.01f;
-		// else if (dt->player.pos.x - dt->sprites[i].pos.x < 0.01)
-		// 	dt->sprites[i].pos.y -= 0.01f;
 		get_position_and_render_sprite(dt, &dt->sprites[i]);
 		i++;
 	}

@@ -153,6 +153,11 @@ void	show_player_info(t_data *dt)
 	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->player.selected_weapon->total_ammo));
 
 	mlx_string_put(mlx, win, x += 100, WINDOW_H - 20, GOLD, "Target: ");
-	if (dt->targeted_sprite)
-		mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->targeted_sprite->id));
+	
+	// char	buffer[32];
+	// snprintf(buffer, sizeof(buffer), "%.2f", dt->sprites[30].orientation_to_player);
+	// mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, buffer);
+
+	// if (dt->targeted_sprite)
+	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->sprites[30].current_frame));
 }

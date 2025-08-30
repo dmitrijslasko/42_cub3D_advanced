@@ -26,7 +26,7 @@ bool	find_sprite_texture(t_data *dt)
 		j = 0;
 		while (j < dt->sprite_texture_count)
 		{
-			if (dt->sprites[i].type == dt->sprite_textures[j].map_char)
+			if (dt->sprites[i].map_char == dt->sprite_textures[j].map_char)
 			{
 				dt->sprites[i].texture = &dt->sprite_textures[j];
 				break ;

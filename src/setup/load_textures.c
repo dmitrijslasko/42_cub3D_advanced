@@ -41,7 +41,7 @@ int	load_textures(t_data *dt)
 {
 	t_texture	*texture;
 	size_t		i;
-	char	*text_type_repr;
+	// char		*text_type_repr;
 
 	print_separator_default();
 	printf(TXT_YELLOW ">>> LOADING TEXTURES\n" TXT_RESET);

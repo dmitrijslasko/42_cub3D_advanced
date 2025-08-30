@@ -224,40 +224,51 @@ typedef struct s_sprite_texture
 	char	*filepath;
 	int		texture_id;
 	char	map_char;
+	
 	void	*sprite_img[SPRITE_FRAMES];
 	int		*sprite_data[SPRITE_FRAMES];
+
 	// void	*sprite_img[NO_OF_ROTATION][NO_OF_ACTION];
 	// int		*sprite_data[NO_OF_ROTATION][NO_OF_ACTION];
-	int		chromakey_color;
+	
+	char	is_sprite_sheet;
 	int		width;
 	int		height;
 	int		bpp;
 	int		size_line;
 	int		endian;
+	
 }	t_sprite_texture;
 
-typedef enum e_sprite_type
-{
-	STATIC,
-	DYNAMIC
-}	t_sprite_type;
+// typedef enum e_sprite_type
+// {
+// 	STATIC,
+// 	DYNAMIC
+// }	t_sprite_type;
 
 typedef struct s_sprite
 {
+	t_sprite_texture	*texture;
+
 	char				id;
-	t_sprite_type		type;
-	int					active;
+	char				map_char;
+	
+	int					is_shown;
 	// char				*path;
 	// float			width;
 	// float			height;
 	
 	t_x_y				pos;
+	t_coor				size;
 	float				orientation;
 	float				distance_to_player;
-	// int				total_frame_count;
-	int					current_frame;
+	float				orientation_to_player;
 
-	t_sprite_texture	*texture;
+	char				is_moving;
+	int					current_frame;
+	long				last_frame_time;
+/*  */
+	// int				total_frame_count;
 }	t_sprite;
 
 typedef struct s_gametime
@@ -278,6 +289,8 @@ typedef struct s_data
 {
 	void				*mlx_ptr;
 	void				*win_ptr;
+
+	t_img				*game_menu_img;
 	t_img				*raycasting_scene_img;
 	t_img				*final_frame_img;
 	t_img				*minimap_base_img;
@@ -301,7 +314,6 @@ typedef struct s_data
 	t_sprite_texture	*sprite_textures;
 	size_t				sprite_count;
 	size_t				sprite_texture_count;
-
 
 	void				*welcome_img;
 	t_gametime			time;
@@ -512,7 +524,7 @@ void		render_3d_scene(t_data *dt);
 int			draw_ceiling(t_data *dt);
 int			draw_floor(t_data *dt);
 int			draw_textured_floor(t_data *dt);
-int			draw_textured_floor2(t_data *dt);
+// int			draw_textured_floor2(t_data *dt);
 int 		draw_textured_ceiling(t_data *dt);
 int			render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset,
 						t_coor *sprite_size);
@@ -568,13 +580,13 @@ bool		find_sprite_texture(t_data *dt);
 void		sprite_put_color(t_data *dt, t_sprite *sprite, \
 										t_coor *coor, t_coor *tex_coor);
 t_coor		calculate_tex_x_y(t_sprite_texture *texture, t_coor *coor, \
-									t_coor *offset, t_coor *sprite_size);
-bool		check_if_sprite_is_closer_than_wall(t_data *dt, t_coor *coor, \
+									t_coor *offset, t_sprite *sprite);
+bool		sprite_is_closer_than_wall(t_data *dt, t_coor *coor, \
 															t_sprite *spr);
 int			init_keys(t_data *dt);
 void		init_graphic(t_data *dt);
 void		init_text_sprites(t_sprite_texture *texture);
-int			load_messages(t_data *dt);
+int			load_ui_messages(t_data *dt);
 void		setup_view(t_data *dt);
 
 int			create_color_rgba(int r, int g, int b, int a);

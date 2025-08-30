@@ -35,10 +35,14 @@ int	draw_floor(t_data *dt)
 
 	set_coor_values(&top_left, 0, dt->view->screen_center_y);
 	set_coor_values(&bottom_right, WINDOW_W, WINDOW_H);
+
 	color = create_color_rgb(	dt->map.textures[FLOOR].color.r, \
 								dt->map.textures[FLOOR].color.g,
 								dt->map.textures[FLOOR].color.b);
+	
+	color = GREY;
 	draw_rectangle(dt->raycasting_scene_img, top_left, bottom_right, color);
+
 	return (EXIT_SUCCESS);
 }
 
@@ -51,11 +55,9 @@ int	apply_distance_shadow_distance(int distance, int *color)
 
 	if (*color == BLACK)
 		return (0);
-	if (distance < 0)
-		distance = 0;
-	shade = 1.0f / (1.0f + distance * 0.01f * DISTANCE_SHADOW_STRENGTH);
-	if (shade < 0.1f)
-		shade = 0.1f;
+	distance = ft_max(0, distance);
+	shade = fmax(0.1f, 1.0f / (1.0f + distance * 0.01f * DISTANCE_SHADOW_STRENGTH));
+
 	r = ((*color >> 16) & 0xFF) * shade;
 	g = ((*color >> 8) & 0xFF) * shade;
 	b = ((*color >> 0) & 0xFF) * shade;

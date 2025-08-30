@@ -19,15 +19,14 @@ int	fire_gun(t_data *dt)
 	if (dt->player.selected_weapon->total_ammo > 0)
 	{
 		dt->weapon_is_animating = 1;
-		system("aplay sounds/shot.wav &");
+		system("aplay sounds/shot.wav > /dev/null 2>&1 &");
 		dt->player.selected_weapon->total_ammo = ft_max(0, --dt->player.selected_weapon->total_ammo);
 		if (dt->targeted_sprite)
 			dt->targeted_sprite->current_frame = 1;
 	}
 	else
 		system("aplay sounds/empty-gun.wav &");
-	printf("🖱️  LMB is pressed! Total press count: %zu\n", \
-		dt->mouse.lmb_press_count);
+	// printf("🖱️  LMB is pressed! Total press count: %zu\n", dt->mouse.lmb_press_count);
 	return (EXIT_SUCCESS);
 }
 
@@ -51,7 +50,7 @@ int	mouse_release(int button, int x, int y, t_data *dt)
 	if (button == MOUSE_LEFT_BUTTON)
 	{
 		dt->mouse.lmb_is_pressed = 0;
-		printf("LMB released!\n");
+		// printf("LMB released!\n");
 		// dt->weapon_current_frame = 0;
 	}
 	return (0);

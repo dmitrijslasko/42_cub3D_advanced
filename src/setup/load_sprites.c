@@ -60,14 +60,14 @@ int	load_sprite_images(t_data *dt)
 		
 		sprite_textures[i].map_char = g_sprites[i].map_char;
 
-		sprite_textures[i].chromakey_color = g_sprites[i].chromakey_color;
+		sprite_textures[i].is_sprite_sheet = g_sprites[i].is_sprite_sheet;
 		
 		frame = 0;
 
 		while (frame < SPRITE_FRAMES)
 		{
 			set_sprite_img(dt, sprite_textures, i, frame);
-			sprite_textures[i].sprite_data[frame] = (int *)mlx_get_data_addr(\
+			sprite_textures[i].sprite_data[frame] = (int *) mlx_get_data_addr(\
 							sprite_textures[i].sprite_img[frame], \
 							&sprite_textures[i].bpp, \
 							&sprite_textures[i].size_line, \
@@ -85,6 +85,7 @@ int	load_sprites(t_data *dt)
 	print_separator_default();
 	printf(TXT_YELLOW ">>> LOADING SPRITES\n" TXT_RESET);
 	load_sprite_textures(dt);
+
 	find_all_sprites(dt);
 	printf(TXT_GREEN "Done!\n" TXT_RESET);
 	return (EXIT_SUCCESS);

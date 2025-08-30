@@ -18,10 +18,10 @@ int	load_sky_image(t_data *dt)
 	int	h;
 
 	print_separator_default();
+
 	printf(TXT_YELLOW ">>> LOADING SKY IMAGE\n" TXT_RESET);
 	dt->sky_image = protected_malloc(sizeof(t_img), dt);
-	dt->sky_image->mlx_img = mlx_xpm_file_to_image(dt->mlx_ptr,
-			SKY_TXT_PATHFILE, &w, &h);
+	dt->sky_image->mlx_img = mlx_xpm_file_to_image(dt->mlx_ptr, SKY_TXT_PATHFILE, &w, &h);
 	if (!dt->sky_image->mlx_img)
 	{
 		fprintf(stderr, "Failed to load sky texture\n");
@@ -34,5 +34,6 @@ int	load_sky_image(t_data *dt)
 			&dt->sky_image->endian);
 	printf("Loaded sky texture: %d x %d px\n", w, h);
 	printf(TXT_GREEN "Done!\n" TXT_RESET);
+	
 	return (EXIT_SUCCESS);
 }

@@ -26,12 +26,15 @@
 # 	define LINUX_22 0
 # endif
 
+# define MIMIC_FULLSCREEN                   0
+# define CAPTURE_MOUSE                      0
+
 // window name
 # define WINDOW_NAME       "cub3D - dmlasko @ 42Berlin"
 # define VERSION_INFO      "cub3D project - 42 Berlin - dmlasko, v2.0"
 
 # define SHOW_CALCULATION_LOGS				1
-# define SHOW_DEBUG_INFO 					1
+# define SHOW_DEBUG_INFO 					0
 
 # define TILE_SIZE  						64
 
@@ -44,8 +47,6 @@
 # define CASTED_RAYS_COUNT					640
 # define FPS								60
 # define SCALING				            250
-# define MIMIC_FULLSCREEN                   0
-# define CAPTURE_MOUSE                      0
 
 # define STARTING_AMMO_LEVEL				999
 # define STARTING_HEALTH_LEVEL              50
@@ -117,17 +118,17 @@
 # define KEYBOARD_PLAYER_STEP_FORWARD		0.05f
 # define KEYBOARD_PLAYER_STEP_BACKWARD		0.025f
 # define KEYBOARD_PLAYER_STEP_SIDE 			0.025f
-# define KEYBOARD_PLAYER_ROTATION_STEP 		2.0f
-# define KEYBOARD_VERTICAL_LOOK_STEP        10.0f
+# define KEYBOARD_PLAYER_ROTATION_STEP 		3.0f
+# define KEYBOARD_VERTICAL_LOOK_STEP        20.0f
 # define MOVE_SPEED_MULTIPLIER_SLOW 		2.4f
 # define MOVE_SPEED_MULTIPLIER_FAST			1.5f
 
-# define ENABLE_VERTICAL_LOOK				1
+# define ENABLE_VERTICAL_LOOK				0
 # define VERTICAL_LOOK_LOCK_UP				100
 # define VERTICAL_LOOK_LOCK_DOWN			100
 
 // mouse sensitivity
-# define ENABLE_MOUSE       				1
+# define ENABLE_MOUSE       				0
 # define MOUSE_SENS_ROTATE 					2.0f
 //# define MOUSE_SENS_DRAG					0.05f
 # define MOUSE_SENS_SCROLL 					0.1f

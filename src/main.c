@@ -33,66 +33,87 @@ static int	setup_dt(t_data *dt)
 	init_rays(dt);
 	init_keys(dt);
 	
+	// image setup
+	dt->game_menu_img = protected_malloc(sizeof(t_img), dt);
+
 	dt->raycasting_scene_img = protected_malloc(sizeof(t_img), dt);
 	dt->final_frame_img = protected_malloc(sizeof(t_img), dt);
+
 	dt->minimap_img = protected_malloc(sizeof(t_img), dt);
 	dt->ui_img = protected_malloc(sizeof(t_img), dt);
 	dt->view = protected_malloc(sizeof(t_view), dt);
-	dt->targeted_sprite = dt->sprites;
 	
-	load_textures(dt);
-	load_sky_image(dt);
-	load_messages(dt);
-	load_weapons(dt);
-	init_doors(dt);
-	mark_all_cells_that_neighbour_doors(dt);
-	load_sprites(dt);
-	setup_view(dt);
-	setup_player(dt);
-
-	dt->player.selected_weapon = &dt->weapon[0];
-	dt->weapon_current_frame = 0;
-	dt->weapon_last_frame_time = 0;
+	setup_img(dt, dt->game_menu_img, WINDOW_W, WINDOW_H);
 
 	setup_img(dt, dt->final_frame_img, WINDOW_W, WINDOW_H);
 	setup_img(dt, dt->raycasting_scene_img, WINDOW_W, WINDOW_H);
 	setup_img(dt, dt->minimap_img, MINIMAP_SIZE, MINIMAP_SIZE);
 	setup_img(dt, dt->ui_img, WINDOW_W, WINDOW_H);
+
+	// player
+	setup_player(dt);
+	
+	// wall textures
+	load_textures(dt);
+	load_sky_image(dt);
+	
+	load_ui_messages(dt);
+	
+	// doors
+	init_doors(dt);
+	mark_all_cells_that_neighbour_doors(dt);
+	
+	// sprites
+	load_sprites(dt);
+	dt->targeted_sprite = dt->sprites;
+	
+	// view
+	setup_view(dt);
+	
+	// weapon aka active item
+	load_weapons(dt);
+	dt->player.selected_weapon = &dt->weapon[0];
+	dt->weapon_current_frame = 0;
+	dt->weapon_last_frame_time = 0;
+
+	// time
 	dt->time.start_time = get_current_time_in_ms();
 	dt->time.last_time = 0;
 
+	// test value for in-game tests
 	dt->test_value_1 = 0.0f;
 	dt->test_value_2 = 0.0f;
 	dt->test_value_3 = 0.0f;
 	dt->test_value_4 = 0.0f;
 
+	// ambient light
 	dt->ambient_light = 10.0f;
 
 	// if (BONUS)
 	// 	dt->background_music = init_audio();
-	
+
 	return (EXIT_SUCCESS);
 }
-unsigned long get_focused_window_id() {
-	FILE *fp;
-	char buffer[128];
-	unsigned long window_id = 0;
+// unsigned long get_focused_window_id() {
+// 	FILE *fp;
+// 	char buffer[128];
+// 	unsigned long window_id = 0;
 
-	fp = popen("xdotool getwindowfocus", "r");
-	if (fp == NULL) {
-		perror("popen failed");
-		return 0;
-	}
+// 	fp = popen("xdotool getwindowfocus", "r");
+// 	if (fp == NULL) {
+// 		perror("popen failed");
+// 		return 0;
+// 	}
 
-	if (fgets(buffer, sizeof(buffer), fp) != NULL) {
-		window_id = strtoul(buffer, NULL, 10);
-	} else {
-		fprintf(stderr, "Failed to read window ID\n");
-	}
+// 	if (fgets(buffer, sizeof(buffer), fp) != NULL) {
+// 		window_id = strtoul(buffer, NULL, 10);
+// 	} else {
+// 		fprintf(stderr, "Failed to read window ID\n");
+// 	}
 
-	pclose(fp);
-	return window_id;
-}
+// 	pclose(fp);
+// 	return window_id;
+// }
 
 int move_active_window_to_mouse_position_with_xdotool() {
 	FILE *fp = popen("xdotool getmouselocation --shell", "r");
@@ -140,75 +161,87 @@ int move_active_window_to_mouse_position_with_xdotool() {
 	return result == 0 ? 0 : 1;
 }
 
+int move_mouse_to_center_of_active_window(void) {
+	Display *dpy = XOpenDisplay(NULL);
+	if (!dpy) {
+		fprintf(stderr, "Unable to open X display\n");
+		return 1;
+	}
+
+	Window root = DefaultRootWindow(dpy);
+	Atom activeAtom = XInternAtom(dpy, "_NET_ACTIVE_WINDOW", True);
+	Atom actualType;
+	int actualFormat;
+	unsigned long nItems, bytesAfter;
+	unsigned char *prop = NULL;
+
+	if (XGetWindowProperty(dpy, root, activeAtom, 0, (~0L), False, AnyPropertyType,
+						   &actualType, &actualFormat, &nItems, &bytesAfter, &prop) != Success || !prop) {
+		fprintf(stderr, "Unable to get _NET_ACTIVE_WINDOW\n");
+		XCloseDisplay(dpy);
+		return 1;
+	}
+
+	Window activeWindow = *(Window *)prop;
+	XFree(prop);
+
+	XWindowAttributes attr;
+	if (!XGetWindowAttributes(dpy, activeWindow, &attr)) {
+		fprintf(stderr, "Failed to get window attributes\n");
+		XCloseDisplay(dpy);
+		return 1;
+	}
+
+	int x, y;
+	Window child;
+	XTranslateCoordinates(dpy, activeWindow, root, 0, 0, &x, &y, &child);
+
+	int center_x = x + attr.width / 2;
+	int center_y = y + attr.height / 2;
+
+	XWarpPointer(dpy, None, root, 0, 0, 0, 0, center_x, center_y);
+	XFlush(dpy);
+	XCloseDisplay(dpy);
+	return 0;
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	dt;
 
+	// check and parse command line arguments
 	check_and_parse_args(&dt, argc, argv);
+
 	print_level_map(&dt.map);
 
+	// precalculate sin and cos lookup tables
 	precalculate_trig_tables(&dt);
 
+	// setup minilibx stuff
 	if (setup_mlx_and_win(&dt))
 		return (MLX_ERROR);
+
+	// setup dt - sets up the whole game structure and data
 	setup_dt(&dt);
 
-	draw_minimap_base_img(&dt);
 	setup_keyboard_and_mouse_controls(&dt);
+
+	draw_minimap_base_img(&dt);
+
 	print_separator(3, DEF_SEPARATOR_CHAR);
 
+	// emulates full screen for immersive gameplay
 	system("gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false");
 	mimic_fullscreen();
+	move_mouse_to_center_of_active_window();
 
 	printf("🎮 Starting game!\n");
 
 	mlx_loop_hook(dt.mlx_ptr, &render_frame, &dt);
 	mlx_loop(dt.mlx_ptr);
+
 	free_dt(&dt);
+	
 	return (EXIT_SUCCESS);
 }
 
-
-// int move_mouse_to_center_of_active_window() {
-// 	Display *dpy = XOpenDisplay(NULL);
-// 	if (!dpy) {
-// 		fprintf(stderr, "Unable to open X display\n");
-// 		return 1;
-// 	}
-
-// 	Window root = DefaultRootWindow(dpy);
-// 	Atom activeAtom = XInternAtom(dpy, "_NET_ACTIVE_WINDOW", True);
-// 	Atom actualType;
-// 	int actualFormat;
-// 	unsigned long nItems, bytesAfter;
-// 	unsigned char *prop = NULL;
-
-// 	if (XGetWindowProperty(dpy, root, activeAtom, 0, (~0L), False, AnyPropertyType,
-// 						   &actualType, &actualFormat, &nItems, &bytesAfter, &prop) != Success || !prop) {
-// 		fprintf(stderr, "Unable to get _NET_ACTIVE_WINDOW\n");
-// 		XCloseDisplay(dpy);
-// 		return 1;
-// 	}
-
-// 	Window activeWindow = *(Window *)prop;
-// 	XFree(prop);
-
-// 	XWindowAttributes attr;
-// 	if (!XGetWindowAttributes(dpy, activeWindow, &attr)) {
-// 		fprintf(stderr, "Failed to get window attributes\n");
-// 		XCloseDisplay(dpy);
-// 		return 1;
-// 	}
-
-// 	int x, y;
-// 	Window child;
-// 	XTranslateCoordinates(dpy, activeWindow, root, 0, 0, &x, &y, &child);
-
-// 	int center_x = x + attr.width / 2;
-// 	int center_y = y + attr.height / 2;
-
-// 	XWarpPointer(dpy, None, root, 0, 0, 0, 0, center_x, center_y);
-// 	XFlush(dpy);
-// 	XCloseDisplay(dpy);
-// 	return 0;
-// }

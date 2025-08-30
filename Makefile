@@ -187,7 +187,7 @@ SRC := $(shell find $(SRC_DIR) -name "*.c")
 # 		./src/setup/init_keys.c \
 # 		./src/setup/init_texture_sprites.c \
 # 		./src/setup/init_value_map.c \
-# 		./src/setup/load_messages.c \
+# 		./src/setup/load_ui_messages.c \
 # 		./src/setup/load_sky_image.c \
 # 		./src/setup/load_sprites.c \
 # 		./src/setup/load_sprite_texture.c \
