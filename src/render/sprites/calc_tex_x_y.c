@@ -28,10 +28,10 @@ t_coor	calculate_tex_x_y(t_sprite_texture *texture, t_coor *coor, t_coor *offset
 	}
 	else
 	{
-		if (sprite->id == 30)
+		// if (sprite->id  0)
 			row = sprite->current_frame;
-		else
-			row = 0;
+		// else
+		// 	row = 0;
 			
 		float angle = 180.0f - sprite->orientation_to_player;
 		int col = (int)lroundf(angle / 45.0f);

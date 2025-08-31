@@ -1,6 +1,7 @@
 DEF         textures/default-fallback-texture.xpm
 F1          textures/floor-grey-noise.xpm
 C1          textures/floor-grey-noise.xpm
+
 W01         textures/wolfenstein/grey_stone.xpm
 W02         textures/wolfenstein/red_brick.xpm
 W03 	    textures/wolfenstein/grey_stone.xpm
@@ -10,26 +11,20 @@ W06         textures/wolfenstein/wood.xpm
 W07         textures/curtain-1.xpm
 W08         textures/curtain-2.xpm
 W09         textures/curtain-3.xpm
+
 DOOR_01    	textures/wolf37.xpm
 DOOR_01_S   textures/wolf44.xpm
 DOOR_02     textures/door-orange.xpm
 DOOR_02_S   textures/door-side-orange.xpm
 DOOR_03     textures/door-orange.xpm
 DOOR_03_S   textures/bookshelf.xpm
+
 ED1    	    textures/wolf44.xpm
 
 
-111111111111111111111111111111111111111111111111111
-2      23434342a a a a a a a a1                   1
-2      |   [  ]              A5    1  2 2 2 2 2 2 1
-2  C   23434342               [    1      A       1
-22-2-2-2  1   2              A5    1              1
-1      1   1           1      5   11              1
-1      1111111bbbbbbbb 11111111    |  2 2 2 2 2 2 1
-1 +          |        E|    1     a1              1
-1     1      1      +  1    1     b1              1
-1    a1      [         1    1     11             C122
-1  +  1    $11  A      1    1   . a1     A C     * 2
-1      111111111111    111111     11             C122
-1b a           A  A  A A   +                      1
-666666666666666666666666666666666666666666666666666
+2222222355661111166666
+1       AAAA    |    6
+1       AAAA    1666 6
+1 E     AAAA    1166 6
+1       AAAA    16   6
+1111111111111111166666

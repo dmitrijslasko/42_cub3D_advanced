@@ -120,16 +120,15 @@ void	process_keyboard_keypresses(t_data *dt)
 		dt->test_value_4 += 0.001f;
 	if (dt->keys[XK_9])
 	{
-		//dt->ambient_light -= 10.0f;
-		dt->ambient_light = fmax(1.0f, dt->ambient_light / 1.1f);
+		dt->ambient_light = fmin(1000.0f, dt->ambient_light * 1.1f);
 		printf("Ambient light: %.2f\n", dt->ambient_light);
 	}
 	if (dt->keys[XK_0])
 	{
-		dt->ambient_light = fmin(1000.0f, dt->ambient_light * 1.1f);
+		dt->ambient_light = fmax(1.0f, dt->ambient_light / 1.1f);
 		printf("Ambient light: %.2f\n", dt->ambient_light);
 	}
-
+		
 
 	dt->player.is_moving = is_moving_now;
 

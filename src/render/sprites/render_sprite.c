@@ -7,14 +7,13 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 	int		targets_sprite;
 
 	targets_sprite = 0;
+
+	// skip if sprite is not shown
 	if (sprite->is_shown == 0)
 		return (0);
 
-	if (sprite->distance_to_player < 10 && sprite->orientation_to_player >= 160.0f && sprite->orientation_to_player <= 200.0f)
-		sprite->is_moving = 1;
-	else
-		sprite->is_moving = 0;
-	if (sprite->id == 30 && dt->time.last_time - sprite->last_frame_time > (1000 / FPS) * 15)
+	sprite->is_moving = 1;
+	if (dt->time.last_time - sprite->last_frame_time > (1000 / FPS) * 15)
 	{
 		if (sprite->is_moving)
 		{

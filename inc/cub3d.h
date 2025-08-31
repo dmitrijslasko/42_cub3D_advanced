@@ -267,6 +267,9 @@ typedef struct s_sprite
 	float				distance_to_player;
 	float				orientation_to_player;
 
+	char				is_blocking;
+
+	int					health_level;
 	char				is_moving;
 	char				is_shooting;
 	char				is_dead;

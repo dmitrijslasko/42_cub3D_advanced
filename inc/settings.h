@@ -182,7 +182,7 @@
 
 // shaders
 # define ENABLE_SHADERS						1
-# define DISTANCE_SHADOW_STRENGTH 			0.4f
+# define DISTANCE_SHADOW_STRENGTH 			0.1f
 # define WALL_ORIENTATION_SHADOW_STRENGTH   0.4f
 
 # define ENABLE_MOVING_SKY					1
@@ -191,5 +191,6 @@
 
 # define RENDER_SPRITES                     1
 
-# define DOOR_AUTOCLOSURE_TIME_MS           2000
+# define DOOR_AUTOCLOSURE_TIME_MS           4000        // 4s
+
 #endif

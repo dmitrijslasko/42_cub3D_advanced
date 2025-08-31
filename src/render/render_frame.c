@@ -138,6 +138,14 @@ int animate_doors(t_data *dt)
         // Closing after 2 seconds
         else if (dt->time.last_time - door->opening_finish_time > DOOR_AUTOCLOSURE_TIME_MS)
         {
+			// printf("door @ %d %d vs ", door->cell_x, door->cell_y);
+			// printf("player @ %f %f\n", dt->player.pos.x, dt->player.pos.y);
+			if (door->cell_x == (int) dt->player.pos.x && door->cell_y == (int) dt->player.pos.y)
+			{
+				// puts("Door blocked by the player!");
+				i++;
+				continue ;
+			}
             if (door->open_progress > 0.0f)
             {
                 door->open_progress -= door->speed;
@@ -145,7 +153,6 @@ int animate_doors(t_data *dt)
                     door->open_progress = 0.0f;
             }
         }
-
         i++;
     }
     return (EXIT_SUCCESS);
