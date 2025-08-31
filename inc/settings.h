@@ -29,6 +29,7 @@
 # define MIMIC_FULLSCREEN                   0
 # define CAPTURE_MOUSE                      0
 
+# define SHOW_TARGETED_SPRITE               0
 // window name
 # define WINDOW_NAME       "cub3D - dmlasko @ 42Berlin"
 # define VERSION_INFO      "cub3D project - 42 Berlin - dmlasko, v2.0"
