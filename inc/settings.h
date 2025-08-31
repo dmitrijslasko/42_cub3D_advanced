@@ -190,4 +190,6 @@
 # define ENABLE_BOBBING                     1
 
 # define RENDER_SPRITES                     1
+
+# define DOOR_AUTOCLOSURE_TIME_MS           2000
 #endif

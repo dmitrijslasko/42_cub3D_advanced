@@ -50,12 +50,28 @@ void	open_close_door(t_data *dt, int dir)
 	}
 }
 
+void	open_close_door2(t_data *dt)
+{
+	t_coor	cell_ahead;
+	t_door	*door;
+
+	cell_ahead = get_cell_ahead(dt);
+	if (ft_strchr(DOOR_TYPES, get_cell_type(&dt->map, &cell_ahead)))
+	{
+		door = find_door_at(dt, cell_ahead.x, cell_ahead.y);
+			door->is_opening = 1;
+	}
+	// dt->doors[9].is_opening = 1;
+}
+
 static void	process_door(t_data *dt)
 {
 	if (dt->keys[XK_bracketleft])
 		open_close_door(dt, -1);
 	if (dt->keys[XK_bracketright])
 		open_close_door(dt, 1);
+	if (dt->keys[XK_e])
+		open_close_door2(dt);
 }
 
 void	process_keyboard_keypresses(t_data *dt)

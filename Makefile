@@ -173,7 +173,7 @@ SRC := $(shell find $(SRC_DIR) -name "*.c")
 # 		./src/render/sprites/get_pos_render_sprites.c \
 # 		./src/render/sprites/render_all_sprites.c \
 # 		./src/render/sprites/render_sprite.c \
-# 		./src/render/sprites/find_sprite_texture.c \
+# 		./src/render/sprites/set_sprite_textures.c \
 # 		./src/render/sprites/sort_sprite_by_distance.c \
 # 		./src/render/sprites/sort_sprites.c \
 # 		./src/render/sprites/sprit_put_color.c \

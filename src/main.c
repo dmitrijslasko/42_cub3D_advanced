@@ -21,79 +21,6 @@ static int	setup_keyboard_and_mouse_controls(t_data *dt)
 	return (EXIT_SUCCESS);
 }
 
-static int setup_player(t_data *dt)
-{
-	dt->player.ammo_level = STARTING_AMMO_LEVEL;
-	dt->player.health_level = STARTING_HEALTH_LEVEL;
-	return (EXIT_SUCCESS);
-}
-
-static int	setup_dt(t_data *dt)
-{
-	init_rays(dt);
-	init_keys(dt);
-	
-	// image setup
-	dt->game_menu_img = protected_malloc(sizeof(t_img), dt);
-
-	dt->raycasting_scene_img = protected_malloc(sizeof(t_img), dt);
-	dt->final_frame_img = protected_malloc(sizeof(t_img), dt);
-
-	dt->minimap_img = protected_malloc(sizeof(t_img), dt);
-	dt->ui_img = protected_malloc(sizeof(t_img), dt);
-	dt->view = protected_malloc(sizeof(t_view), dt);
-	
-	setup_img(dt, dt->game_menu_img, WINDOW_W, WINDOW_H);
-
-	setup_img(dt, dt->final_frame_img, WINDOW_W, WINDOW_H);
-	setup_img(dt, dt->raycasting_scene_img, WINDOW_W, WINDOW_H);
-	setup_img(dt, dt->minimap_img, MINIMAP_SIZE, MINIMAP_SIZE);
-	setup_img(dt, dt->ui_img, WINDOW_W, WINDOW_H);
-
-	// player
-	setup_player(dt);
-	
-	// wall textures
-	load_textures(dt);
-	load_sky_image(dt);
-	
-	load_ui_messages(dt);
-	
-	// doors
-	init_doors(dt);
-	mark_all_cells_that_neighbour_doors(dt);
-	
-	// sprites
-	load_sprites(dt);
-	dt->targeted_sprite = dt->sprites;
-	
-	// view
-	setup_view(dt);
-	
-	// weapon aka active item
-	load_weapons(dt);
-	dt->player.selected_weapon = &dt->weapon[0];
-	dt->weapon_current_frame = 0;
-	dt->weapon_last_frame_time = 0;
-
-	// time
-	dt->time.start_time = get_current_time_in_ms();
-	dt->time.last_time = 0;
-
-	// test value for in-game tests
-	dt->test_value_1 = 0.0f;
-	dt->test_value_2 = 0.0f;
-	dt->test_value_3 = 0.0f;
-	dt->test_value_4 = 0.0f;
-
-	// ambient light
-	dt->ambient_light = 10.0f;
-
-	// if (BONUS)
-	// 	dt->background_music = init_audio();
-
-	return (EXIT_SUCCESS);
-}
 // unsigned long get_focused_window_id() {
 // 	FILE *fp;
 // 	char buffer[128];
@@ -223,6 +150,7 @@ int	main(int argc, char **argv)
 
 	// setup dt - sets up the whole game structure and data
 	setup_dt(&dt);
+	set_sprite_textures(&dt);
 
 	setup_keyboard_and_mouse_controls(&dt);
 
@@ -236,7 +164,7 @@ int	main(int argc, char **argv)
 	move_mouse_to_center_of_active_window();
 
 	printf("🎮 Starting game!\n");
-
+	
 	mlx_loop_hook(dt.mlx_ptr, &render_frame, &dt);
 	mlx_loop(dt.mlx_ptr);
 

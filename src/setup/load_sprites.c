@@ -59,7 +59,7 @@ int	load_sprite_images(t_data *dt)
 		printf("Loading sprite texture for map_char %c\n", g_sprites[i].map_char);
 		
 		sprite_textures[i].map_char = g_sprites[i].map_char;
-
+		sprite_textures[i].orientation = g_sprites[i].orientation;
 		sprite_textures[i].is_sprite_sheet = g_sprites[i].is_sprite_sheet;
 		
 		frame = 0;
@@ -84,9 +84,11 @@ int	load_sprites(t_data *dt)
 {
 	print_separator_default();
 	printf(TXT_YELLOW ">>> LOADING SPRITES\n" TXT_RESET);
+	
 	load_sprite_textures(dt);
 
 	find_all_sprites(dt);
+
 	printf(TXT_GREEN "Done!\n" TXT_RESET);
 	return (EXIT_SUCCESS);
 }

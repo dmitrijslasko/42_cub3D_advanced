@@ -31,8 +31,6 @@ int	handle_keypress(int keycode, t_data *dt)
 {
 	if (keycode == ESC_BUTTON)
 		keypress_exit(dt);
-	if (keycode == XK_e)
-		printf("Door triggered!\n");
 	else if (keycode >= 0 && keycode < TRACKED_KEYS)
 		dt->keys[keycode] = 1;
 	return (0);

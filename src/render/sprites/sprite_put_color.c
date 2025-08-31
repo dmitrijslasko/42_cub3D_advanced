@@ -18,7 +18,6 @@ void	sprite_put_color(t_data *dt, t_sprite *sprite, t_coor *coor, t_coor *tex_co
 	t_sprite_texture	*texture;
 	unsigned int		color;
 
-
 	frame = sprite->current_frame;
 	// printf("%d\n", frame);
 

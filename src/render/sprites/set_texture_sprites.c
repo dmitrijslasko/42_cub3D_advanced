@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_sprite_texture.c                              :+:      :+:    :+:   */
+/*   set_sprite_textures.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-bool	find_sprite_texture(t_data *dt)
+bool	set_sprite_textures(t_data *dt)
 {
 	size_t	i;
 	size_t	j;

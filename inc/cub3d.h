@@ -106,6 +106,8 @@ typedef struct s_door
 	int		state;
 	int		orientation;
 	float	open_progress;
+	char	is_opening;
+	long	opening_finish_time;
 	float	speed;
 }	t_door;
 
@@ -232,6 +234,7 @@ typedef struct s_sprite_texture
 	// int		*sprite_data[NO_OF_ROTATION][NO_OF_ACTION];
 	
 	char	is_sprite_sheet;
+	float	orientation;
 	int		width;
 	int		height;
 	int		bpp;
@@ -265,6 +268,8 @@ typedef struct s_sprite
 	float				orientation_to_player;
 
 	char				is_moving;
+	char				is_shooting;
+	char				is_dead;
 	int					current_frame;
 	long				last_frame_time;
 /*  */
@@ -576,7 +581,7 @@ void		sort_sprites_by_distance(t_data *dt);
 void		sort_sprites(t_sprite *sprites, size_t num_sprites);
 int			render_all_sprites(t_data *dt);
 int			get_position_and_render_sprite(t_data *dt, t_sprite *sprite);
-bool		find_sprite_texture(t_data *dt);
+bool		set_sprite_textures(t_data *dt);
 void		sprite_put_color(t_data *dt, t_sprite *sprite, \
 										t_coor *coor, t_coor *tex_coor);
 t_coor		calculate_tex_x_y(t_sprite_texture *texture, t_coor *coor, \
@@ -661,5 +666,7 @@ int is_in_list(char *str, char *list);
 int	fire_gun(t_data *dt);
 
 int print_out_texture_lookup_table(t_data *dt);
+
+int	setup_dt(t_data *dt);
 
 #endif

@@ -114,6 +114,44 @@ int animate_weapon(t_data *dt)
 	return (EXIT_SUCCESS);
 }
 
+int animate_doors(t_data *dt)
+{
+    int i;
+    t_door *door;
+
+    i = 0;
+    while (i < dt->door_count)
+    {
+        door = &dt->doors[i];
+
+        // Opening
+        if (door->is_opening)
+        {
+            door->open_progress += door->speed;
+            if (door->open_progress >= 1.0f)
+            {
+                door->open_progress = 1.0f;
+                door->is_opening = 0;
+                door->opening_finish_time = dt->time.last_time;
+            }
+        }
+        // Closing after 2 seconds
+        else if (dt->time.last_time - door->opening_finish_time > DOOR_AUTOCLOSURE_TIME_MS)
+        {
+            if (door->open_progress > 0.0f)
+            {
+                door->open_progress -= door->speed;
+                if (door->open_progress < 0.0f)
+                    door->open_progress = 0.0f;
+            }
+        }
+
+        i++;
+    }
+    return (EXIT_SUCCESS);
+}
+
+
 int	render_frame(void *param)
 {
 	t_data		*dt;
@@ -137,6 +175,9 @@ int	render_frame(void *param)
 	animate_weapon(dt);
 
 	process_keyboard_keypresses(dt);	
+	
+	animate_doors(dt);
+	
 	process_sprite_pickups(dt);
 
 	calculate_all_rays(dt);
@@ -167,7 +208,7 @@ int	render_frame(void *param)
 	update_prompt_message(dt);
 	if (dt->view->show_door_open_message)
 	{
-		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press [ / ] to open the door");
+		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press E to open the door");
 		// render_ui_message(dt);
 	}
 

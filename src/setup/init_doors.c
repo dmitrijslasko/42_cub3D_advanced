@@ -15,30 +15,32 @@
 static void	init_a_door(t_data *dt, t_door **door_ptr, \
 						int curr_row, int curr_col)
 {
-	t_door	*door_ptr_ref;
+	t_door	*door;
 	char 	door_type;
 
 	door_type =  get_cell_type_by_coordinates(&dt->map,
 						curr_row, curr_col);
 
-	door_ptr_ref = *door_ptr;
-	door_ptr_ref->id = door_ptr_ref - dt->doors;
-	door_ptr_ref->side_texture_index = get_lookup_table_index_cell_type_by_map_char(door_type) + 1;
-	door_ptr_ref->cell_x = curr_col;
-	door_ptr_ref->cell_y = curr_row;
-	door_ptr_ref->pos_x = DEF_DOOR_OFFSET_X;
-	door_ptr_ref->pos_y = DEF_DOOR_OFFSET_Y;
-	door_ptr_ref->open_progress = 0.0f;
+	door = *door_ptr;
+	door->id = door - dt->doors;
+	door->side_texture_index = get_lookup_table_index_cell_type_by_map_char(door_type) + 1;
+	door->cell_x = curr_col;
+	door->cell_y = curr_row;
+	door->pos_x = DEF_DOOR_OFFSET_X;
+	door->pos_y = DEF_DOOR_OFFSET_Y;
+	door->is_opening = 0;
+	door->open_progress = 0.0f;
+	// door->opening_finish_time = dt->time.last_time;
 	if (ft_strchr(VERTICAL_DOOR_TYPES, dt->map.map_data[curr_row][curr_col].cell_char))
-		door_ptr_ref->orientation = 1;
+		door->orientation = 1;
 	else
-		door_ptr_ref->orientation = 0;
-	door_ptr_ref->speed = DEF_DOOR_SPEED;
-	door_ptr_ref->state = 0;
+		door->orientation = 0;
+	door->speed = DEF_DOOR_SPEED;
+	door->state = 0;
 	printf("Door [%2zu] at X Y (%3d, %3d) added. Orientation: %d\n",
-		door_ptr_ref->id, curr_col, curr_row, door_ptr_ref->orientation);
+		door->id, curr_col, curr_row, door->orientation);
 	printf("Door side texture for door [%2zu] added: %d\n-------------\n",
-		door_ptr_ref->id, door_ptr_ref->side_texture_index);
+		door->id, door->side_texture_index);
 	(*door_ptr)++;
 }
 

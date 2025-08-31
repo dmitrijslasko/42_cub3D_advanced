@@ -19,8 +19,6 @@ int	render_all_sprites(t_data *dt)
 
 	sort_sprites_by_distance(dt);
 
-	find_sprite_texture(dt);
-
 	i = 0;
 	while (i < dt->sprite_count)
 	{
