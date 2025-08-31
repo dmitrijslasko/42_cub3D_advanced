@@ -191,6 +191,7 @@ int	render_frame(void *param)
 	calculate_all_rays(dt);
 
 	render_3d_scene(dt);
+	
 	put_img_to_img(dt->final_frame_img, dt->raycasting_scene_img, 0, 0);
 
 	if (RENDER_SPRITES)
@@ -202,13 +203,13 @@ int	render_frame(void *param)
 
 	render_minimap_and_ui(dt);
 
+	
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr,dt->final_frame_img->mlx_img, 0, 0);
 	
 	// time stats
 	// int y = 20;
 	// print_time_stats(dt, dt->mlx_ptr, dt->win_ptr, &y);
 	
-
 	show_debug_info(dt);
 
  	show_player_info(dt);
@@ -230,5 +231,6 @@ int	render_frame(void *param)
 	put_img_to_img(dt->final_frame_img, &dt->weapon_img[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
 	dt->frames_drawn_count++;
 	print_out_sprite_info(dt);
+
 	return (EXIT_SUCCESS);
 }

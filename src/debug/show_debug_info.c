@@ -161,5 +161,5 @@ void	show_player_info(t_data *dt)
 	// mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->sprites[30].current_frame));
 
 	if (dt->targeted_sprite)
-		mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->targeted_sprite));
+		mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->targeted_sprite->id));
 }

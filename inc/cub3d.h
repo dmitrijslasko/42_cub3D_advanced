@@ -249,6 +249,15 @@ typedef enum e_sprite_type
 	DYNAMIC
 }	t_sprite_type;
 
+typedef enum e_sprite_status
+{
+	IDLE,
+	MOVING,
+	SHOOTING,
+	HURT,
+	DYING
+}	t_sprite_status;
+
 typedef struct s_sprite
 {
 	t_sprite_texture	*texture;
@@ -271,13 +280,15 @@ typedef struct s_sprite
 	float				orientation_to_player;
 
 	int					health_level;
-	char				is_idle;
-	char				is_moving;
-	char				is_shooting;
-	char				is_hurt;
-	char				is_dying;
+	t_sprite_status		status;
+
+	int					starting_frame;
 	int					current_frame;
 	long				last_frame_time;
+
+	int					start_x;
+	int					center_x;
+	int					aim;
 /*  */
 	// int				total_frame_count;
 }	t_sprite;

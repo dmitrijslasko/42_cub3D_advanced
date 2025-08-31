@@ -37,7 +37,7 @@ void	init_sprites(t_data *dt)
 				dt->sprites[i].pos.y = row + 0.5;
 				dt->sprites[i].is_hidden = 0;
 				dt->sprites[i].orientation = 180.0f;
-				dt->sprites[i].is_moving = 0;
+				dt->sprites[i].status = 0;
 				dt->sprites[i].current_frame = 0;
 				dt->sprites[i].last_frame_time = 0;
 				// dt->sprites[i].orientation = dt->sprites[i].texture->orientation;

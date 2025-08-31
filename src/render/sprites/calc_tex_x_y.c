@@ -16,10 +16,9 @@ t_coor	calculate_tex_x_y(t_sprite_texture *texture, t_coor *coor, t_coor *offset
 {
 	t_coor	tex_coor;
 	t_coor	sprite_size;
-	// int	row;
-	// int col;
-	// float angle;
 
+	int	center_x;
+	
 	sprite_size = sprite->size;
 
 	if (texture->is_sprite_sheet == 0)
@@ -30,23 +29,7 @@ t_coor	calculate_tex_x_y(t_sprite_texture *texture, t_coor *coor, t_coor *offset
 	}
 	else
 	{
-		// if (sprite->is_moving)
-		// {
-		// 	row = sprite->current_frame;
-		// 	angle = 180.0f - sprite->orientation_to_player;
-		// 	col = (int)lroundf(angle / 45.0f);
-		// }
-
-		// if (sprite->is_hurt)
-		// {
-		// 	row = 5;
-		// }
-
-		// if (sprite->is_shooting)
-		// {
-		// 	row = 6;
-		// }
-
+		// sprite sheet
 		tex_coor.x = col * 65 + 1 + (coor->x - offset->x) * ((texture->width - 9) / 8) / sprite_size.x;
 		tex_coor.y = row * 65 + 1 + (coor->y - offset->y) * ((texture->height - 8) / 7) / sprite_size.y;
 	}

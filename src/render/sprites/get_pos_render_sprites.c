@@ -31,7 +31,6 @@ int	get_position_and_render_sprite(t_data *dt, t_sprite *sprite)
 	
 	sprite->orientation_to_player = relative_orientation;
 
-
 	transform.y = (dt->player.direction_vector.x * dist_to_player.x + \
 					dt->player.direction_vector.y * dist_to_player.y);
 
@@ -49,7 +48,7 @@ int	get_position_and_render_sprite(t_data *dt, t_sprite *sprite)
 	
 	offset.x = sprite_screen_x - sprite_size.x / 2;
 	offset.y = dt->view->screen_center_y - sprite_size.y / 3;
-	
+
 	render_sprite(dt, sprite, &offset, &sprite_size);
 	
 	return (EXIT_SUCCESS);

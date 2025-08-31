@@ -1,5 +1,20 @@
 #include "cub3d.h"
 
+static int set_animation_speed(t_sprite *sprite, int *sprite_animation_speed)
+{
+	
+	if (sprite->status == MOVING)
+		*sprite_animation_speed = 15;
+	else if (sprite->status == DYING)
+		*sprite_animation_speed = 5;
+	else if (sprite->status == SHOOTING)
+		*sprite_animation_speed = 5;
+	else
+		*sprite_animation_speed = 15;
+
+	return (EXIT_SUCCESS);
+}
+
 int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_size)
 {
 	t_coor  coor;
@@ -12,17 +27,24 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 	if (sprite->is_hidden)
 		return (0);
 
-	// sprite->
+	int sprite_animation_speed;
 
-	if (dt->time.last_time - sprite->last_frame_time > (1000 / FPS) * 15)
+	set_animation_speed(sprite, &sprite_animation_speed);
+	if (dt->time.last_time - sprite->last_frame_time > (1000 / FPS) * sprite_animation_speed)
 	{
-		if (sprite->is_moving)
-		{
+		if (sprite->status == MOVING)
+		{	
 			sprite->current_frame++;
 			if (sprite->current_frame > 4)
 				sprite->current_frame = 1;
 		}
-		else if (sprite->is_dying)
+		else if (sprite->status == SHOOTING)
+		{
+			sprite->current_frame++;
+			if (sprite->current_frame > 2)
+				sprite->current_frame = 1;
+		}
+		else if (sprite->status == DYING)
 		{
 			sprite->current_frame++;
 			if (sprite->current_frame > 5)
@@ -37,6 +59,7 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 	while (coor.y < sprite_size->y + offset->y && coor.y < WINDOW_H)
 	{
 		coor.x = ft_max(offset->x, 0);
+
 		while (coor.x < sprite_size->x + offset->x && coor.x < WINDOW_W)
 		{
 			if (sprite_is_closer_than_wall(dt, &coor, sprite))
@@ -46,18 +69,23 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 				int row = 0;
 				int col = 0;
 
-				if (sprite->is_moving)
+				if (sprite->status == MOVING)
 				{
 					row = sprite->current_frame;
 					float angle = 180.0f - sprite->orientation_to_player;
 					col = (int)lroundf(angle / 45.0f);
 				}
-				else if (sprite->is_dying)
+				if (sprite->status == SHOOTING)
+				{
+					row = 6;
+					col = sprite->current_frame;
+				}
+				if (sprite->status == DYING)
 				{
 					row = 5;
 					col = sprite->current_frame;
 				}
-				else 
+				if (sprite->status == IDLE)
 				{
 					float angle = 180.0f - sprite->orientation_to_player;
 					col = (int)lroundf(angle / 45.0f);		
@@ -67,18 +95,30 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 
 				sprite_put_color(dt, sprite, &coor, &sprite_texture_coor);
 				
-				if (coor.x == WINDOW_W / 2)
-					targets_sprite = 1; 
+				if (sprite->start_x == -1)
+				{
+					sprite->start_x = coor.x;
+					sprite->center_x = coor.x + sprite_size->x / 2;
+				}
+				int aim;
+				int distance;
+					
+				distance = (int) sprite->distance_to_player;
+				aim = ft_max(10, 100 - distance * 20);
+				sprite->aim = aim;
+				if (sprite->distance_to_player > 30)
+					;
+				else if (sprite->center_x >= WINDOW_W / 2 - aim && sprite->center_x <= WINDOW_W / 2 + aim && sprite->status != DYING)
+					targets_sprite = 1;
 			}
 			coor.x++;
 		}
 		coor.y++;
 	}
 
+
 	if (targets_sprite)
 		dt->targeted_sprite = sprite;
-	else
-		dt->targeted_sprite = NULL;
 		
 	return (EXIT_SUCCESS);
 }
