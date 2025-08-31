@@ -32,9 +32,10 @@ void	init_sprites(t_data *dt)
 			{
 				dt->sprites[i].id = i;
 				dt->sprites[i].map_char = c;
+				dt->sprites[i].type = STATIC;
 				dt->sprites[i].pos.x = col + 0.5;
 				dt->sprites[i].pos.y = row + 0.5;
-				dt->sprites[i].is_shown = 1;
+				dt->sprites[i].is_hidden = 0;
 				dt->sprites[i].orientation = 180.0f;
 				dt->sprites[i].is_moving = 0;
 				dt->sprites[i].current_frame = 0;

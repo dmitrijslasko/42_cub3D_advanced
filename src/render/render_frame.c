@@ -83,9 +83,10 @@ int process_sprite_pickups(t_data *dt)
 {
 	t_sprite *sprite = find_sprite_at(dt, (size_t)dt->player.pos.x, (size_t)dt->player.pos.y);
 
-	if (sprite && sprite->is_shown && sprite->map_char == '+')
+	// health pickup
+	if (sprite && !sprite->is_hidden && sprite->map_char == '+')
 	{
-		sprite->is_shown = 0;
+		sprite->is_hidden = 1;
 		system("aplay sounds/health.wav &");
 		dt->player.health_level = ft_min(100, dt->player.health_level += 10);
 	}

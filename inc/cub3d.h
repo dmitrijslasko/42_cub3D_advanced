@@ -243,11 +243,11 @@ typedef struct s_sprite_texture
 	
 }	t_sprite_texture;
 
-// typedef enum e_sprite_type
-// {
-// 	STATIC,
-// 	DYNAMIC
-// }	t_sprite_type;
+typedef enum e_sprite_type
+{
+	STATIC,
+	DYNAMIC
+}	t_sprite_type;
 
 typedef struct s_sprite
 {
@@ -255,8 +255,11 @@ typedef struct s_sprite
 
 	char				id;
 	char				map_char;
+	t_sprite_type		type;
 	
-	int					is_shown;
+	int					is_hidden;
+	char				is_blocking;
+
 	// char				*path;
 	// float			width;
 	// float			height;
@@ -267,12 +270,12 @@ typedef struct s_sprite
 	float				distance_to_player;
 	float				orientation_to_player;
 
-	char				is_blocking;
-
 	int					health_level;
+	char				is_idle;
 	char				is_moving;
 	char				is_shooting;
-	char				is_dead;
+	char				is_hurt;
+	char				is_dying;
 	int					current_frame;
 	long				last_frame_time;
 /*  */
@@ -588,7 +591,7 @@ bool		set_sprite_textures(t_data *dt);
 void		sprite_put_color(t_data *dt, t_sprite *sprite, \
 										t_coor *coor, t_coor *tex_coor);
 t_coor		calculate_tex_x_y(t_sprite_texture *texture, t_coor *coor, \
-									t_coor *offset, t_sprite *sprite);
+									t_coor *offset, t_sprite *sprite, int row, int col);
 bool		sprite_is_closer_than_wall(t_data *dt, t_coor *coor, \
 															t_sprite *spr);
 int			init_keys(t_data *dt);
@@ -671,5 +674,7 @@ int	fire_gun(t_data *dt);
 int print_out_texture_lookup_table(t_data *dt);
 
 int	setup_dt(t_data *dt);
+
+
 
 #endif

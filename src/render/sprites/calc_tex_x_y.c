@@ -12,11 +12,13 @@
 
 #include "cub3d.h"
 
-t_coor	calculate_tex_x_y(t_sprite_texture *texture, t_coor *coor, t_coor *offset, t_sprite *sprite)
+t_coor	calculate_tex_x_y(t_sprite_texture *texture, t_coor *coor, t_coor *offset, t_sprite *sprite, int row, int col)
 {
 	t_coor	tex_coor;
 	t_coor	sprite_size;
-	int	row;
+	// int	row;
+	// int col;
+	// float angle;
 
 	sprite_size = sprite->size;
 
@@ -28,13 +30,22 @@ t_coor	calculate_tex_x_y(t_sprite_texture *texture, t_coor *coor, t_coor *offset
 	}
 	else
 	{
-		// if (sprite->id  0)
-			row = sprite->current_frame;
-		// else
-		// 	row = 0;
-			
-		float angle = 180.0f - sprite->orientation_to_player;
-		int col = (int)lroundf(angle / 45.0f);
+		// if (sprite->is_moving)
+		// {
+		// 	row = sprite->current_frame;
+		// 	angle = 180.0f - sprite->orientation_to_player;
+		// 	col = (int)lroundf(angle / 45.0f);
+		// }
+
+		// if (sprite->is_hurt)
+		// {
+		// 	row = 5;
+		// }
+
+		// if (sprite->is_shooting)
+		// {
+		// 	row = 6;
+		// }
 
 		tex_coor.x = col * 65 + 1 + (coor->x - offset->x) * ((texture->width - 9) / 8) / sprite_size.x;
 		tex_coor.y = row * 65 + 1 + (coor->y - offset->y) * ((texture->height - 8) / 7) / sprite_size.y;
