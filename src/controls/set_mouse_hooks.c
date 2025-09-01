@@ -22,12 +22,19 @@ int	fire_gun(t_data *dt)
 		dt->weapon_is_animating = 1;
 		system("aplay sounds/shot.wav > /dev/null 2>&1 &");
 		dt->player.selected_weapon->total_ammo = ft_max(0, --dt->player.selected_weapon->total_ammo);
+
 		if (dt->targeted_sprite)
-			dt->targeted_sprite->status = DYING;
+			dt->targeted_sprite->state = DYING;
+
 		for (int i = 0; i < dt->sprite_count; i++)
 		{
-			if (dt->sprites[i].status != DYING)
-				dt->sprites[i].status = SHOOTING;
+			if (dt->sprites[i].type != ENEMY)
+			{
+				i++;
+				continue ;
+			}
+			if (dt->sprites[i].state != DYING)
+				dt->sprites[i].state = SHOOTING;
 		}
 	}
 	else

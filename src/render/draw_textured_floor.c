@@ -22,7 +22,6 @@ int draw_textured_floor(t_data *dt)
     while (current_row < WINDOW_H)
     {
         float adjustment = 0.6354f;
-        adjustment = 1;
 		float fov_factor = tanf((FIELD_OF_VIEW_DEG * adjustment) * (M_PI / 180.0f));
 
         int p = current_row - dt->view->screen_center_y;

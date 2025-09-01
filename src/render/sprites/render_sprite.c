@@ -3,11 +3,11 @@
 static int set_animation_speed(t_sprite *sprite, int *sprite_animation_speed)
 {
 	
-	if (sprite->status == MOVING)
+	if (sprite->state == MOVING)
 		*sprite_animation_speed = 15;
-	else if (sprite->status == DYING)
+	else if (sprite->state == DYING)
 		*sprite_animation_speed = 5;
-	else if (sprite->status == SHOOTING)
+	else if (sprite->state == SHOOTING)
 		*sprite_animation_speed = 5;
 	else
 		*sprite_animation_speed = 15;
@@ -32,19 +32,19 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 	set_animation_speed(sprite, &sprite_animation_speed);
 	if (dt->time.last_time - sprite->last_frame_time > (1000 / FPS) * sprite_animation_speed)
 	{
-		if (sprite->status == MOVING)
+		if (sprite->state == MOVING)
 		{	
 			sprite->current_frame++;
 			if (sprite->current_frame > 4)
 				sprite->current_frame = 1;
 		}
-		else if (sprite->status == SHOOTING)
+		else if (sprite->state == SHOOTING)
 		{
 			sprite->current_frame++;
 			if (sprite->current_frame > 2)
 				sprite->current_frame = 1;
 		}
-		else if (sprite->status == DYING)
+		else if (sprite->state == DYING)
 		{
 			sprite->current_frame++;
 			if (sprite->current_frame > 5)
@@ -69,23 +69,23 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 				int row = 0;
 				int col = 0;
 
-				if (sprite->status == MOVING)
+				if (sprite->state == MOVING)
 				{
 					row = sprite->current_frame;
 					float angle = 180.0f - sprite->orientation_to_player;
 					col = (int)lroundf(angle / 45.0f);
 				}
-				if (sprite->status == SHOOTING)
+				if (sprite->state == SHOOTING)
 				{
 					row = 6;
 					col = sprite->current_frame;
 				}
-				if (sprite->status == DYING)
+				if (sprite->state == DYING)
 				{
 					row = 5;
 					col = sprite->current_frame;
 				}
-				if (sprite->status == IDLE)
+				if (sprite->state == IDLE)
 				{
 					float angle = 180.0f - sprite->orientation_to_player;
 					col = (int)lroundf(angle / 45.0f);		
@@ -100,15 +100,15 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 					sprite->start_x = coor.x;
 					sprite->center_x = coor.x + sprite_size->x / 2;
 				}
-				int aim;
-				int distance;
+				float aim;
+				float distance;
 					
-				distance = (int) sprite->distance_to_player;
+				distance = sprite->distance_to_player;
 				aim = ft_max(10, 100 - distance * 20);
 				sprite->aim = aim;
-				if (sprite->distance_to_player > 30)
+				if (distance > dt->player.selected_weapon->max_distance)
 					;
-				else if (sprite->center_x >= WINDOW_W / 2 - aim && sprite->center_x <= WINDOW_W / 2 + aim && sprite->status != DYING)
+				else if (sprite->center_x >= WINDOW_W / 2 - aim && sprite->center_x <= WINDOW_W / 2 + aim && sprite->state != DYING)
 					targets_sprite = 1;
 			}
 			coor.x++;
@@ -117,7 +117,7 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 	}
 
 
-	if (targets_sprite)
+	if (targets_sprite && sprite->type == ENEMY)
 		dt->targeted_sprite = sprite;
 		
 	return (EXIT_SUCCESS);

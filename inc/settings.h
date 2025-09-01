@@ -29,7 +29,7 @@
 # define MIMIC_FULLSCREEN                   0
 # define CAPTURE_MOUSE                      0
 
-# define SHOW_TARGETED_SPRITE               0
+# define SHOW_TARGETED_SPRITE               1
 // window name
 # define WINDOW_NAME       "cub3D - dmlasko @ 42Berlin"
 # define VERSION_INFO      "cub3D project - 42 Berlin - dmlasko, v2.0"
@@ -119,6 +119,7 @@
 # define KEYBOARD_PLAYER_STEP_FORWARD		0.05f
 # define KEYBOARD_PLAYER_STEP_BACKWARD		0.025f
 # define KEYBOARD_PLAYER_STEP_SIDE 			0.025f
+
 # define KEYBOARD_PLAYER_ROTATION_STEP 		3.0f
 # define KEYBOARD_VERTICAL_LOOK_STEP        20.0f
 # define MOVE_SPEED_MULTIPLIER_SLOW 		2.4f

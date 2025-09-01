@@ -63,7 +63,7 @@ int	handle_keyrelease(int keycode, t_data *dt)
 		toggle_setting(&dt->view->show_minimap);
 	if (keycode == XK_F12)
 		toggle_setting(&dt->view->show_debug_info);
-	if (keycode == XK_Control_R)
+	if (keycode == XK_Control_R || keycode == XK_i)
 		fire_gun(dt);
 	else if (keycode >= 0 && keycode < TRACKED_KEYS)
 		dt->keys[keycode] = 0;

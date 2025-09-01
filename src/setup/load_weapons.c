@@ -32,24 +32,6 @@ int	load_weapon_frame(t_data *dt, int i, const char* filename)
 	printf(TXT_GREEN "Loaded frame: %s\n" TXT_RESET, filename);
 }
 
-typedef struct s_weapon_data
-{
-	const int 				type;
-	const char				*description;
-	const int				clip_size;
-	const float				shot_speed;
-	const float				reload_speed;
-	const float				weight;
-}							t_weapon_data;
-
-static const t_weapon_data	g_weapon_lookup[] = {
-{WEAPON_NO_WEAPON, "NONE", 0, 1.0f, 3.0f, 0.0f},
-{WEAPON_KNIFE, "KNIFE", 0, 1.0f, 3.0f, 0.0f},
-{WEAPON_PISTOL, "PISTOL", 9, 1.0f, 3.0f, 0.0f},
-{WEAPON_AUTOMATIC_GUN, "AUTOMATIC", 30, 1.0f, 3.0f, 0.0f},
-{WEAPON_MACHINE_GUN, "MACHINE GUN", 100, 1.0f, 3.0f, 0.0f},
-{-1, NULL, -1, -1, -1, -1}
-};
 
 
 int	load_weapons(t_data *dt)
@@ -71,10 +53,12 @@ int	load_weapons(t_data *dt)
 		dt->weapon[i].shot_speed = g_weapon_lookup[i].shot_speed;
 		dt->weapon[i].weight = g_weapon_lookup[i].weight;
 		dt->weapon[i].total_ammo = STARTING_AMMO_LEVEL;
+		dt->weapon[i].max_distance = g_weapon_lookup[i].max_distance;
 		dt->weapon[i].bullets_in_clip = 0;
 		dt->weapon[i].player_has_it = 1;
 		i++;
 	}
+
 	i = 0;
 	while (i < 5)
 	{

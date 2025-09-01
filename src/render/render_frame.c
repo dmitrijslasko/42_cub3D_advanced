@@ -90,6 +90,13 @@ int process_sprite_pickups(t_data *dt)
 		system("aplay sounds/health.wav &");
 		dt->player.health_level = ft_min(100, dt->player.health_level += 10);
 	}
+
+	if (sprite && !sprite->is_hidden && sprite->map_char == '$')
+	{
+		// sprite->is_hidden = 1;
+		printf("Game won!\n");
+		exit(1);
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -203,7 +210,6 @@ int	render_frame(void *param)
 
 	render_minimap_and_ui(dt);
 
-	
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr,dt->final_frame_img->mlx_img, 0, 0);
 	
 	// time stats
@@ -228,7 +234,8 @@ int	render_frame(void *param)
 		y_offset = bob_weapon(dt);
 	}
 	// render weapon
-	put_img_to_img(dt->final_frame_img, &dt->weapon_img[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
+	if (dt->player.selected_weapon->type == WEAPON_PISTOL)
+		put_img_to_img(dt->final_frame_img, &dt->weapon_img[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
 	dt->frames_drawn_count++;
 	print_out_sprite_info(dt);
 

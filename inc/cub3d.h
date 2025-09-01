@@ -41,6 +41,7 @@
 # include "keys.h"
 # include "settings.h"
 # include "texture_lookup.h"
+# include "weapons.h"
 //# include "sound.h"
 
 // structs
@@ -62,8 +63,6 @@ typedef enum e_active_message
 	ENJOY_THE_GAME,
 }	t_active_message;
 
-
-
 // typedef enum e_sprite_type {
 //     SPRITE_ENEMY,
 //     SPRITE_HEART,
@@ -72,18 +71,11 @@ typedef enum e_active_message
 //     // etc
 // } t_sprite_type;
 
-typedef enum e_active_item
-{
-	WEAPON_NO_WEAPON = 0,
-	WEAPON_KNIFE,
-	WEAPON_PISTOL,
-	WEAPON_AUTOMATIC_GUN,
-	WEAPON_MACHINE_GUN
-}	t_active_item;
+
 
 typedef struct 		s_weapon
 {
-	int 		type;
+	t_active_item 		type;
 	char		*description;
 	int			bullets_in_clip;
 	int			total_ammo;
@@ -91,6 +83,7 @@ typedef struct 		s_weapon
 	float		shot_speed;
 	float		reload_speed;
 	float		weight;
+	int			max_distance;
 	int			player_has_it;
 }	t_weapon;
 
@@ -246,7 +239,9 @@ typedef struct s_sprite_texture
 typedef enum e_sprite_type
 {
 	STATIC,
-	DYNAMIC
+	DYNAMIC,
+	ENEMY,
+	PICKUP,
 }	t_sprite_type;
 
 typedef enum e_sprite_status
@@ -256,7 +251,7 @@ typedef enum e_sprite_status
 	SHOOTING,
 	HURT,
 	DYING
-}	t_sprite_status;
+}	t_sprite_state;
 
 typedef struct s_sprite
 {
@@ -280,7 +275,7 @@ typedef struct s_sprite
 	float				orientation_to_player;
 
 	int					health_level;
-	t_sprite_status		status;
+	t_sprite_state		state;
 
 	int					starting_frame;
 	int					current_frame;
