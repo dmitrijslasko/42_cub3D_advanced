@@ -1,4 +1,6 @@
+
 DEF         textures/default-fallback-texture.xpm
+
 F1          textures/wolfenstein/wood.xpm
 C1          textures/floor-grey-noise.xpm
 
@@ -12,19 +14,27 @@ W07         textures/curtain-1.xpm
 W08         textures/curtain-2.xpm
 W09         textures/curtain-3.xpm
 
-DOOR_01    	textures/wolf37.xpm
-DOOR_01_S   textures/wolf44.xpm
+DOOR_01    	textures/shoji-64.xpm
+DOOR_01_S   textures/shoji-64-sides.xpm
 DOOR_02     textures/door-orange.xpm
 DOOR_02_S   textures/door-side-orange.xpm
-DOOR_03     textures/door-orange.xpm
+DOOR_03     textures/bookshelf.xpm
 DOOR_03_S   textures/bookshelf.xpm
 
 ED1    	    textures/wolf44.xpm
 
 
-222222235566111116666611
-1a   +  ACAC    |    |$1
-1       CACA    1666 611
-1 E     ACAC    1166 6
-1b   +  CACA    16   6
-1111111111111111166666
+2222222355661111166666111111111111111111111111111
+1a              |    |                          1
+1               1666 6                          1
+1 E         #   1166 6                          1
+1b   +          16#  6                       +  1
+1111111111111111166666 4 4 4 4 4 4              1
+2               +                               2
+2                                               2
+2       #                              #        2
+2       A A                                     2
+2-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1
+2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+2 1 1 1 1$1 1#1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+2222222222222222222222222222222222222222222222222

@@ -26,7 +26,7 @@
 # 	define LINUX_22 0
 # endif
 
-# define MIMIC_FULLSCREEN                   0
+# define MIMIC_FULLSCREEN                   1
 # define CAPTURE_MOUSE                      0
 
 # define SHOW_TARGETED_SPRITE               1
@@ -37,14 +37,17 @@
 # define SHOW_CALCULATION_LOGS				1
 # define SHOW_DEBUG_INFO 					0
 
-# define TILE_SIZE  						64
+# define TILE_SIZE  						128
 
 // bonus part
 # define SKY_TXT_PATHFILE	"./textures/sky_1.xpm"
+# define MENU_PATHFILE	    "./sprites/menu-screen-1.xpm"
+# define MENU2_PATHFILE	    "./sprites/menu-screen-2.xpm"
 
 // window size
 # define WINDOW_W							640
 # define WINDOW_H							360
+
 # define CASTED_RAYS_COUNT					640
 # define FPS								60
 # define SCALING				            250
@@ -168,9 +171,9 @@
 # define WHITESPACE        	            	" \a\b\t\n\v\f\r"
 
 # define PLAYER_SPAWN_POINT_TYPES			"NSWE"
-# define SPRITE_TYPES     	 	            "ABCDFGHIJKLMOPQRTUVXYZabcdefghijklmnopqrstuvwxyz+$"
+# define SPRITE_TYPES     	 	            "ABCDFGHIJKLMOPQRTUVXYZabcdefghijklmnopqrstuvwxyz+$#"
 # define DECORATION_TYPES     	 	        "abcdefghijklmnopqrstuvwxyz"
-# define CONSUMABLE_TYPES     	 	        "+$"
+# define CONSUMABLE_TYPES     	 	        "+$#"
 # define SPRITE_FRAMES						2
 # define WALL_TYPES							"123456789"
 # define VERTICAL_WALL_TYPES				"v"

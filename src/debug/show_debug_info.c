@@ -163,3 +163,18 @@ void	show_player_info(t_data *dt)
 	if (dt->targeted_sprite)
 		mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->targeted_sprite->id));
 }
+
+void	show_level_info(t_data *dt)
+{
+	void	*mlx;
+	void	*win;
+
+	mlx = dt->mlx_ptr;
+	win = dt->win_ptr;
+	mlx_string_put(mlx, win, 20, 20, GOLD, "Collected: ");
+	mlx_string_put(mlx, win, 100, 20, GOLD, ft_itoa(dt->gamescore));
+
+	mlx_string_put(mlx, win, 20, 30, GOLD, "Goal: ");
+	mlx_string_put(mlx, win, 100, 30, GOLD, ft_itoa(dt->gamescore));
+
+}

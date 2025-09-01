@@ -42,6 +42,7 @@
 # include "settings.h"
 # include "texture_lookup.h"
 # include "weapons.h"
+# include "sprites.h"
 //# include "sound.h"
 
 // structs
@@ -71,6 +72,13 @@ typedef enum e_active_message
 //     // etc
 // } t_sprite_type;
 
+typedef enum e_game_status {
+	WELCOME_SCREEN,
+	MENU_SCREEN,
+	PAUSE_SCREEN,
+	GAME_SCREEN,
+	GAME_OVER_SCREEN,
+}	t_game_status;
 
 
 typedef struct 		s_weapon
@@ -138,6 +146,7 @@ typedef struct s_ray
 	float		distance_to_wall;
 	float		corrected_distance_to_wall;
 	int			wall_height;
+	
 	float		percentage_of_image;
 	t_mapcell	*hit_cell;
 	int			cell_type;
@@ -307,7 +316,10 @@ typedef struct s_data
 	void				*mlx_ptr;
 	void				*win_ptr;
 
+	t_game_status		game_status;
+
 	t_img				*game_menu_img;
+	t_img				*game_menu_img2;
 	t_img				*raycasting_scene_img;
 	t_img				*final_frame_img;
 	t_img				*minimap_base_img;
@@ -321,6 +333,8 @@ typedef struct s_data
 	size_t				door_count;
 
 	t_player			player;
+	int					gamescore;
+	
 	t_view				*view;
 	char				keys[TRACKED_KEYS];
 	t_mouse				mouse;
@@ -472,6 +486,7 @@ void		draw_line(t_img *img, t_coor pt_1, t_coor pt_2, int clr);
 void		draw_vertical_line(t_img *img, t_coor pt_1, t_coor pt_2, int color);
 
 void		draw_circle(t_img *img, t_coor *coor, int radius, int clr);
+void	draw_lighter_circle(t_img *img, t_coor *coor, int radius, int clr);
 void		draw_rectangle(t_img *img, t_coor top_left,
 						t_coor bottom_right, int clr);
 
@@ -681,6 +696,12 @@ int print_out_texture_lookup_table(t_data *dt);
 
 int	setup_dt(t_data *dt);
 
+void	draw_flashlight(t_data *dt, t_img *img, int radius, int clr);
 
+void	show_level_info(t_data *dt);
+
+int	load_menu_image(t_data *dt);
+
+int	keypress_exit(t_data *dt);
 
 #endif

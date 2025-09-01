@@ -31,6 +31,7 @@ static const t_weapon_data	g_weapon_lookup[] = {
 {WEAPON_PISTOL, 		"PISTOL", 		9, 		1.0f, 	3.0f, 	30, 	0.0f},
 {WEAPON_AUTOMATIC_GUN, 	"AUTOMATIC", 	30, 	1.0f, 	3.0f, 	50, 	0.0f},
 {WEAPON_MACHINE_GUN, 	"MACHINE GUN", 	100, 	1.0f, 	3.0f, 	70, 	0.0f},
+//sentinel
 {-1, 					NULL, 			-1, 	-1, 	-1,		-1, 	-1}
 };
 

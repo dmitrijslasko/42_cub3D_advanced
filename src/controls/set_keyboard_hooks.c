@@ -12,9 +12,9 @@
 
 #include "cub3d.h"
 
-static int	keypress_exit(t_data *dt)
+int	keypress_exit(t_data *dt)
 {
-	printf("ESC button pressed, closing the window...");
+	// printf("ESC button pressed, closing the window...");
 	free_dt(dt);
 	printf(" Done!\n");
 	system("gnome-extensions enable ubuntu-dock@ubuntu.com");

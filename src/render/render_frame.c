@@ -91,11 +91,20 @@ int process_sprite_pickups(t_data *dt)
 		dt->player.health_level = ft_min(100, dt->player.health_level += 10);
 	}
 
+	// food pickup
+	if (sprite && !sprite->is_hidden && sprite->map_char == '#')
+	{
+		sprite->is_hidden = 1;
+		dt->gamescore++;
+	}
+
+	// key pickup pickup - game won!
 	if (sprite && !sprite->is_hidden && sprite->map_char == '$')
 	{
 		// sprite->is_hidden = 1;
 		printf("Game won!\n");
-		exit(1);
+		print_separator(3, DEF_SEPARATOR_CHAR);
+		keypress_exit(dt);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -186,10 +195,30 @@ int	render_frame(void *param)
 	}
 	dt->time.last_time = current_time;
 
-	// draw game menu
-	animate_weapon(dt);
+	// game menu
+	if (dt->game_status == WELCOME_SCREEN)
+	{
+		mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr, dt->game_menu_img->mlx_img, 0, 0);
+		if (dt->keys[XK_space] == 0)	
+			return (EXIT_SUCCESS);
+		else 
+			dt->game_status = MENU_SCREEN;
+			dt->keys[XK_space] = 0;
+	}
+
+	if (dt->game_status == MENU_SCREEN)
+	{
+		mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr, dt->game_menu_img2->mlx_img, 0, 0);
+		if (dt->keys[XK_space] == 0)	
+			return (EXIT_SUCCESS);
+		else 
+			dt->game_status = GAME_SCREEN;
+	}
 
 	process_keyboard_keypresses(dt);	
+
+	// draw game menu
+	animate_weapon(dt);
 	
 	animate_doors(dt);
 	
@@ -217,13 +246,13 @@ int	render_frame(void *param)
 	// print_time_stats(dt, dt->mlx_ptr, dt->win_ptr, &y);
 	
 	show_debug_info(dt);
-
  	show_player_info(dt);
+	show_level_info(dt);
 
 	update_prompt_message(dt);
 	if (dt->view->show_door_open_message)
 	{
-		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press E to open the door");
+		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press E to slide the shoji");
 		// render_ui_message(dt);
 	}
 
@@ -234,6 +263,9 @@ int	render_frame(void *param)
 		y_offset = bob_weapon(dt);
 	}
 	// render weapon
+
+
+	
 	if (dt->player.selected_weapon->type == WEAPON_PISTOL)
 		put_img_to_img(dt->final_frame_img, &dt->weapon_img[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
 	dt->frames_drawn_count++;

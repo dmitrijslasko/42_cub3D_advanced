@@ -12,6 +12,63 @@
 
 #include "cub3d.h"
 
+int	load_menu_image(t_data *dt)
+{
+	int	w;
+	int	h;
+
+	print_separator_default();
+
+	printf(TXT_YELLOW ">>> LOADING MENU IMAGE\n" TXT_RESET);
+
+	dt->game_menu_img = protected_malloc(sizeof(t_img), dt);
+	dt->game_menu_img->mlx_img = mlx_xpm_file_to_image(dt->mlx_ptr, MENU_PATHFILE, &w, &h);
+	if (!dt->game_menu_img->mlx_img)
+	{
+		fprintf(stderr, "Failed to load menu image\n");
+		return (EXIT_FAILURE);
+	}
+	dt->game_menu_img->width = w;
+	dt->game_menu_img->height = h;
+	dt->game_menu_img->addr = mlx_get_data_addr(dt->game_menu_img->mlx_img,
+			&dt->game_menu_img->bpp, &dt->game_menu_img->line_len,
+			&dt->game_menu_img->endian);
+	
+	printf("Loaded menu image: %d x %d px\n", w, h);
+	printf(TXT_GREEN "Done!\n" TXT_RESET);
+	
+	return (EXIT_SUCCESS);
+}
+
+int	load_menu_image_2(t_data *dt)
+{
+	int	w;
+	int	h;
+
+	print_separator_default();
+
+	printf(TXT_YELLOW ">>> LOADING MENU IMAGE\n" TXT_RESET);
+
+	dt->game_menu_img2 = protected_malloc(sizeof(t_img), dt);
+	dt->game_menu_img2->mlx_img = mlx_xpm_file_to_image(dt->mlx_ptr, MENU2_PATHFILE, &w, &h);
+	if (!dt->game_menu_img->mlx_img)
+	{
+		fprintf(stderr, "Failed to load menu image\n");
+		return (EXIT_FAILURE);
+	}
+	dt->game_menu_img2->width = w;
+	dt->game_menu_img2->height = h;
+	dt->game_menu_img2->addr = mlx_get_data_addr(dt->game_menu_img2->mlx_img,
+			&dt->game_menu_img2->bpp, &dt->game_menu_img2->line_len,
+			&dt->game_menu_img2->endian);
+	
+	printf("Loaded menu image: %d x %d px\n", w, h);
+	printf(TXT_GREEN "Done!\n" TXT_RESET);
+	
+	return (EXIT_SUCCESS);
+}
+
+
 int	load_sky_image(t_data *dt)
 {
 	int	w;
@@ -20,6 +77,7 @@ int	load_sky_image(t_data *dt)
 	print_separator_default();
 
 	printf(TXT_YELLOW ">>> LOADING SKY IMAGE\n" TXT_RESET);
+
 	dt->sky_image = protected_malloc(sizeof(t_img), dt);
 	dt->sky_image->mlx_img = mlx_xpm_file_to_image(dt->mlx_ptr, SKY_TXT_PATHFILE, &w, &h);
 	if (!dt->sky_image->mlx_img)
@@ -32,6 +90,7 @@ int	load_sky_image(t_data *dt)
 	dt->sky_image->addr = mlx_get_data_addr(dt->sky_image->mlx_img,
 			&dt->sky_image->bpp, &dt->sky_image->line_len,
 			&dt->sky_image->endian);
+	
 	printf("Loaded sky texture: %d x %d px\n", w, h);
 	printf(TXT_GREEN "Done!\n" TXT_RESET);
 	

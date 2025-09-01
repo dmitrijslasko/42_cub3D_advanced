@@ -9,11 +9,15 @@ static int setup_player(t_data *dt)
 
 int	setup_dt(t_data *dt)
 {
+
+	dt->game_status = WELCOME_SCREEN;
+	
 	init_rays(dt);
 	init_keys(dt);
 	
 	// image setup
 	dt->game_menu_img = protected_malloc(sizeof(t_img), dt);
+	dt->game_menu_img2 = protected_malloc(sizeof(t_img), dt);
 
 	dt->raycasting_scene_img = protected_malloc(sizeof(t_img), dt);
 	dt->final_frame_img = protected_malloc(sizeof(t_img), dt);
@@ -22,7 +26,9 @@ int	setup_dt(t_data *dt)
 	dt->ui_img = protected_malloc(sizeof(t_img), dt);
 	dt->view = protected_malloc(sizeof(t_view), dt);
 	
+
 	setup_img(dt, dt->game_menu_img, WINDOW_W, WINDOW_H);
+	setup_img(dt, dt->game_menu_img2, WINDOW_W, WINDOW_H);
 
 	setup_img(dt, dt->final_frame_img, WINDOW_W, WINDOW_H);
 	setup_img(dt, dt->raycasting_scene_img, WINDOW_W, WINDOW_H);
@@ -35,6 +41,9 @@ int	setup_dt(t_data *dt)
 	// wall textures
 	load_textures(dt);
 	load_sky_image(dt);
+
+	load_menu_image(dt);
+	load_menu_image_2(dt);
 	
 	load_ui_messages(dt);
 	
@@ -67,7 +76,9 @@ int	setup_dt(t_data *dt)
 	dt->test_value_4 = 0.0f;
 
 	// ambient light
-	dt->ambient_light = 10.0f;
+	dt->ambient_light = 3000.0f;
+
+	dt->gamescore = 0;
 
 	// if (BONUS)
 	// 	dt->background_music = init_audio();
