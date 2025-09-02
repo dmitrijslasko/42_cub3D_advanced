@@ -18,11 +18,12 @@ void	free_dt(t_data *dt)
 	ft_free(dt->rays);
 	free_array(dt->map.map_data);
 	ft_free(dt->view);
+	
 	free_sprites(dt);
 	free_wall_tile_texture(dt);
 	// free(dt->map.malloc_textures);
 	ft_free(dt->sprites);
-	free_graphic(dt);
+	free_graphic_images(dt);
 	free_mlx(dt);
 	// free_audio(dt->background_music);
 }

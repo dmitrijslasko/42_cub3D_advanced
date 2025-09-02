@@ -10,15 +10,10 @@ static int setup_player(t_data *dt)
 int	setup_dt(t_data *dt)
 {
 
-	dt->game_status = WELCOME_SCREEN;
 	
 	init_rays(dt);
 	init_keys(dt);
 	
-	// image setup
-	dt->game_menu_img = protected_malloc(sizeof(t_img), dt);
-	dt->game_menu_img2 = protected_malloc(sizeof(t_img), dt);
-
 	dt->raycasting_scene_img = protected_malloc(sizeof(t_img), dt);
 	dt->final_frame_img = protected_malloc(sizeof(t_img), dt);
 
@@ -26,10 +21,6 @@ int	setup_dt(t_data *dt)
 	dt->ui_img = protected_malloc(sizeof(t_img), dt);
 	dt->view = protected_malloc(sizeof(t_view), dt);
 	
-
-	setup_img(dt, dt->game_menu_img, WINDOW_W, WINDOW_H);
-	setup_img(dt, dt->game_menu_img2, WINDOW_W, WINDOW_H);
-
 	setup_img(dt, dt->final_frame_img, WINDOW_W, WINDOW_H);
 	setup_img(dt, dt->raycasting_scene_img, WINDOW_W, WINDOW_H);
 	setup_img(dt, dt->minimap_img, MINIMAP_SIZE, MINIMAP_SIZE);
@@ -40,11 +31,18 @@ int	setup_dt(t_data *dt)
 	
 	// wall textures
 	load_textures(dt);
-	load_sky_image(dt);
 
-	load_menu_image(dt);
-	load_menu_image_2(dt);
-	load_menu_image_3(dt);
+	dt->sky_image = protected_malloc(sizeof(t_img), dt);
+	load_image(dt, dt->sky_image, SKY_TXT_PATHFILE);
+
+	// game menu image setup
+	dt->game_menu_img = protected_malloc(sizeof(t_img), dt);
+	dt->game_menu_img2 = protected_malloc(sizeof(t_img), dt);
+	dt->game_won_img = protected_malloc(sizeof(t_img), dt);
+
+	load_image(dt, dt->game_menu_img, MENU_PATHFILE);
+	load_image(dt, dt->game_menu_img2, MENU2_PATHFILE);
+	load_image(dt, dt->game_won_img, GAME_WON_PATHFILE);
 	
 	load_ui_messages(dt);
 	

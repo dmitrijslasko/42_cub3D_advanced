@@ -114,7 +114,6 @@ int process_sprite_pickups(t_data *dt)
 			printf("Game won!\n");
 			print_separator(3, DEF_SEPARATOR_CHAR);
 			dt->game_status = GAME_WON_SCREEN;
-			// keypress_exit(dt);
 		}
 	}
 	return (EXIT_SUCCESS);
@@ -196,7 +195,8 @@ int process_game_status(t_data *dt)
 			return (EXIT_SUCCESS);
 		else 
 			dt->game_status = MENU_SCREEN;
-			dt->keys[XK_space] = 0;
+		dt->keys[XK_space] = 0;
+
 	}
 
 	if (dt->game_status == MENU_SCREEN)
@@ -213,10 +213,10 @@ int process_game_status(t_data *dt)
 		mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr, dt->game_won_img->mlx_img, 0, 0);
 		if (dt->keys[XK_space] == 0)	
 			return (EXIT_SUCCESS);
-		else 
+		else
 			dt->game_status = GAME_SCREEN;
+		dt->keys[XK_space] = 0;
 	}
-
 	return (1);
 }
 

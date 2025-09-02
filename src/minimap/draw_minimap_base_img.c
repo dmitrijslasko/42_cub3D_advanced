@@ -59,6 +59,7 @@ int	draw_minimap_base_img(t_data *dt)
 	t_coor	bottom_right;
 
 	printf(TXT_YELLOW ">>> PREPARING MINIMAP BASE MAP\n" TXT_RESET);
+	
 	dt->minimap_base_img = protected_malloc(sizeof(t_img), dt);
 	setup_img(dt, dt->minimap_base_img,
 		dt->map.map_size_cols * MINIMAP_GRID_SIZE,
@@ -72,5 +73,6 @@ int	draw_minimap_base_img(t_data *dt)
 	if (MINIMAP_GRID_ENABLE)
 		draw_minimap_grid(dt);
 	printf("Finished rendering the minimap base image!\n");
+
 	return (EXIT_SUCCESS);
 }

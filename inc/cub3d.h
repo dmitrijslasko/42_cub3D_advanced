@@ -559,7 +559,7 @@ int			draw_minimap_wall_cell(t_data *dt, size_t curr_col,
 						size_t curr_row);
 
 // 3d render
-int			load_sky_image(t_data *dt);
+int			load_image(t_data *dt, t_img *img, char *filepath);
 int			draw_sky(t_data *dt);
 void		render_3d_scene(t_data *dt);
 int			draw_ceiling(t_data *dt);
@@ -638,7 +638,7 @@ int			move_forward_backward(t_data *dt, int direction);
 int			map_position_is_walkable(t_data *dt, float *new_x, float *new_y);
 
 int			render_ui_message(t_data *dt);
-void		free_graphic(t_data *dt);
+void		free_graphic_images(t_data *dt);
 void	free_mlx(t_data *dt);
 void		free_wall_tile_texture(t_data *dt);
 void		free_texture(t_data *dt, t_texture *texture);
@@ -712,5 +712,8 @@ int	load_menu_image_2(t_data *dt);
 int	load_menu_image_3(t_data *dt);
 
 int	keypress_exit(t_data *dt);
+
+
+void	check_and_parse_map(t_data *dt, int argc, char *mapfile);
 
 #endif

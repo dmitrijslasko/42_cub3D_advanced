@@ -64,7 +64,6 @@ void	init_dt(t_data *dt)
 	dt->welcome_img = NULL;
 	dt->background_music = NULL;
 	dt->frames_drawn_count = 0;
-	dt->has_changed = 1;
 	init_mouse(&dt->mouse);
 	init_map(&dt->map);
 	init_graphic(dt);

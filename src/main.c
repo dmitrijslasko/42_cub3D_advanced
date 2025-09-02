@@ -136,11 +136,18 @@ int	main(int argc, char **argv)
 {
 	t_data	dt;
 
+
+	init_dt(&dt);
+
 	// check and parse command line arguments
-	check_and_parse_args(&dt, argc, argv);
+	// check_and_parse_args(&dt, argc, argv);
 
-	print_level_map(&dt.map);
 
+	char *game_levels[] = {	"./maps/good/01_level.cub",
+							"./maps/good/02_level.cub",
+							NULL};
+
+	check_and_parse_map(&dt, argc, game_levels[1]);
 	// precalculate sin and cos lookup tables
 	precalculate_trig_tables(&dt);
 
@@ -148,7 +155,7 @@ int	main(int argc, char **argv)
 	if (setup_mlx_and_win(&dt))
 		return (MLX_ERROR);
 		
-	// emulates full screen for immersive gameplay
+	// mimic full screen for immersive gameplay
 	system("gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false");
 	mimic_fullscreen();
 	move_mouse_to_center_of_active_window();
@@ -156,21 +163,23 @@ int	main(int argc, char **argv)
 	setup_keyboard_and_mouse_controls(&dt);
 
 	// setup dt - sets up the whole game structure and data
+	dt.game_status = WELCOME_SCREEN;
 	setup_dt(&dt);
+
 	set_sprite_textures(&dt);
 
 	draw_minimap_base_img(&dt);
 
 	print_separator(3, DEF_SEPARATOR_CHAR);
 
-	printf("🎮 Starting game!\n");
+	printf("🎮 Starting level!\n");
 	printf("Consumables to collect in this level: %d\n", dt.level_consumable_count);
 	
 	mlx_loop_hook(dt.mlx_ptr, &render_frame, &dt);
 	mlx_loop(dt.mlx_ptr);
 
-	free_dt(&dt);
-	
+	// free_dt(&dt);
+
 	return (EXIT_SUCCESS);
 }
 
