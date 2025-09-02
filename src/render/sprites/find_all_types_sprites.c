@@ -53,6 +53,7 @@ void	init_sprites(t_data *dt)
 void	find_all_sprites(t_data *dt)
 {
 	size_t	sprite_count;
+	size_t	consumable_count;
 
 	sprite_count = count_elements_in_the_map(&dt->map, SPRITE_TYPES);
 	if (!sprite_count)
@@ -62,4 +63,7 @@ void	find_all_sprites(t_data *dt)
 	dt->sprites = protected_malloc(sprite_count * sizeof(t_sprite), dt);
 	
 	init_sprites(dt);
+
+	consumable_count = count_elements_in_the_map(&dt->map, CONSUMABLE_TYPES);
+	dt->level_consumable_count = consumable_count;
 }

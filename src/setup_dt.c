@@ -78,7 +78,9 @@ int	setup_dt(t_data *dt)
 	// ambient light
 	dt->ambient_light = 3000.0f;
 
+	// gamescore
 	dt->gamescore = 0;
+	dt->consumables_collected = 0;
 
 	// if (BONUS)
 	// 	dt->background_music = init_audio();

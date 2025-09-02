@@ -40,7 +40,8 @@
 # define TILE_SIZE  						128
 
 // bonus part
-# define SKY_TXT_PATHFILE	"./textures/sky_1.xpm"
+# define SKY_TXT_PATHFILE	"./textures/sky/sky_2.xpm"
+
 # define MENU_PATHFILE	    "./sprites/menu-screen-1.xpm"
 # define MENU2_PATHFILE	    "./sprites/menu-screen-2.xpm"
 
@@ -173,7 +174,8 @@
 # define PLAYER_SPAWN_POINT_TYPES			"NSWE"
 # define SPRITE_TYPES     	 	            "ABCDFGHIJKLMOPQRTUVXYZabcdefghijklmnopqrstuvwxyz+$#"
 # define DECORATION_TYPES     	 	        "abcdefghijklmnopqrstuvwxyz"
-# define CONSUMABLE_TYPES     	 	        "+$#"
+# define CONSUMABLE_TYPES     	 	        "+#"
+# define EXIT_TYPES     	 	            "$"
 # define SPRITE_FRAMES						2
 # define WALL_TYPES							"123456789"
 # define VERTICAL_WALL_TYPES				"v"

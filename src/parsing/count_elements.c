@@ -48,9 +48,7 @@ size_t	count_elements_in_the_map(t_map *map, char *element)
 		while (col < map->map_size_cols)
 		{
 			if (ft_strchr(element, map->map_data[row][col].cell_char))
-			{
 				element_count++;
-			}
 			col++;
 		}
 		row++;

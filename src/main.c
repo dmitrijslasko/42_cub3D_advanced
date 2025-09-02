@@ -147,23 +147,24 @@ int	main(int argc, char **argv)
 	// setup minilibx stuff
 	if (setup_mlx_and_win(&dt))
 		return (MLX_ERROR);
-
-	// setup dt - sets up the whole game structure and data
-	setup_dt(&dt);
-	set_sprite_textures(&dt);
-
-	setup_keyboard_and_mouse_controls(&dt);
-
-	draw_minimap_base_img(&dt);
-
-	print_separator(3, DEF_SEPARATOR_CHAR);
-
+		
 	// emulates full screen for immersive gameplay
 	system("gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false");
 	mimic_fullscreen();
 	move_mouse_to_center_of_active_window();
 
+	setup_keyboard_and_mouse_controls(&dt);
+
+	// setup dt - sets up the whole game structure and data
+	setup_dt(&dt);
+	set_sprite_textures(&dt);
+
+	draw_minimap_base_img(&dt);
+
+	print_separator(3, DEF_SEPARATOR_CHAR);
+
 	printf("🎮 Starting game!\n");
+	printf("Consumables to collect in this level: %d\n", dt.level_consumable_count);
 	
 	mlx_loop_hook(dt.mlx_ptr, &render_frame, &dt);
 	mlx_loop(dt.mlx_ptr);

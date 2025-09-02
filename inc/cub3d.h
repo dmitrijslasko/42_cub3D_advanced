@@ -368,6 +368,9 @@ typedef struct s_data
 	float				test_value_2;
 	float				test_value_3;
 	float				test_value_4;
+
+	int					level_consumable_count;
+	int					consumables_collected;
 }	t_data;
 
 static inline int	pixel_is_in_window(int x, int y)

@@ -95,16 +95,21 @@ int process_sprite_pickups(t_data *dt)
 	if (sprite && !sprite->is_hidden && sprite->map_char == '#')
 	{
 		sprite->is_hidden = 1;
+		dt->consumables_collected++;
 		dt->gamescore++;
 	}
 
 	// key pickup pickup - game won!
 	if (sprite && !sprite->is_hidden && sprite->map_char == '$')
 	{
-		// sprite->is_hidden = 1;
-		printf("Game won!\n");
-		print_separator(3, DEF_SEPARATOR_CHAR);
-		keypress_exit(dt);
+		if (dt->level_consumable_count > dt->consumables_collected)
+			mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Not all goodies are collected!");
+		else 
+		{
+			printf("Game won!\n");
+			print_separator(3, DEF_SEPARATOR_CHAR);
+			keypress_exit(dt);
+		}
 	}
 	return (EXIT_SUCCESS);
 }
@@ -175,26 +180,8 @@ int animate_doors(t_data *dt)
     return (EXIT_SUCCESS);
 }
 
-
-int	render_frame(void *param)
+int process_game_status(t_data *dt)
 {
-	t_data		*dt;
-	long		current_time;
-	int 		y_offset;
-
-	dt = (t_data *) param;
-
-	// reset_mouse_position(dt);
-
-	current_time = get_current_time_in_ms();
-	dt->time.delta_time = current_time - dt->time.last_time;
-	if (dt->time.delta_time < (1000 / FPS))
-	{
-		my_sleep();
-		return (0);
-	}
-	dt->time.last_time = current_time;
-
 	// game menu
 	if (dt->game_status == WELCOME_SCREEN)
 	{
@@ -215,14 +202,37 @@ int	render_frame(void *param)
 			dt->game_status = GAME_SCREEN;
 	}
 
+	return (1);
+}
+
+int	render_frame(void *param)
+{
+	t_data		*dt;
+	long		current_time;
+	int 		y_offset;
+
+	dt = (t_data *) param;
+
+	// reset_mouse_position(dt);
+
+	current_time = get_current_time_in_ms();
+	dt->time.delta_time = current_time - dt->time.last_time;
+	if (dt->time.delta_time < (1000 / FPS))
+	{
+		my_sleep();
+		return (0);
+	}
+	dt->time.last_time = current_time;
+
+	if (process_game_status(dt) == 0)
+		return (EXIT_SUCCESS);
+
 	process_keyboard_keypresses(dt);	
 
 	// draw game menu
 	animate_weapon(dt);
 	
 	animate_doors(dt);
-	
-	process_sprite_pickups(dt);
 
 	calculate_all_rays(dt);
 
@@ -249,10 +259,12 @@ int	render_frame(void *param)
  	show_player_info(dt);
 	show_level_info(dt);
 
+	process_sprite_pickups(dt);
+
 	update_prompt_message(dt);
 	if (dt->view->show_door_open_message)
 	{
-		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press E to slide the shoji");
+		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press E to open the shoji");
 		// render_ui_message(dt);
 	}
 

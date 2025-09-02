@@ -1,75 +1,40 @@
-DEF     textures/wolf44.xpm
-F1      textures/wolfenstein/color_stone.xpm
-C1      textures/ceiling.xpm
-W01     textures/simonkraft/bookshelf_02.xpm
-W02     textures/wolfenstein/red_brick.xpm
-W03 	textures/ceiling.xpm
-W04 	textures/ceiling.xpm
-W05     textures/bookshelf.xpm
-W06     textures/simonkraft/respawn_anchor_side3.xpm
-W07     textures/ceiling.xpm
-W08     textures/simonkraft/bookshelf_01.xpm
-W09     textures/wolfenstein/purple_stone.xpm
-D01    	textures/wolf37.xpm
-D02     textures/door-red.xpm
-D03    	textures/wolf37.xpm
-D04     textures/door-red.xpm
-D05    	textures/wolf37.xpm
-D06     textures/door-red.xpm
-ED1    	textures/wolf44.xpm
 
+DEF         textures/default-fallback-texture.xpm
 
+F1          textures/wolfenstein/wood.xpm
+C1          textures/floor-grey-noise.xpm
+
+W01         textures/wolfenstein/grey_stone.xpm
+W02         textures/wolfenstein/red_brick.xpm
+W03 	    textures/wolfenstein/grey_stone.xpm
+W04 	    textures/wolfenstein/grey_stone.xpm
+W05         textures/bookshelf.xpm
+W06         textures/wolfenstein/wood.xpm
+W07         textures/curtain-1.xpm
+W08         textures/shoji-64.xpm
+W09         textures/curtain-3.xpm
+
+DOOR_01    	textures/shoji-64.xpm
+DOOR_01_S   textures/shoji-64-sides.xpm
+DOOR_02     textures/door-orange.xpm
+DOOR_02_S   textures/door-side-orange.xpm
+DOOR_03     textures/bookshelf.xpm
+DOOR_03_S   textures/bookshelf.xpm
+
+ED1    	    textures/wolf44.xpm
 
 111111111111111111111111111111111111111111111111111
-1 E                                                1
+1 E  $                                            1
 1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
+1    #                                            1
 1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
+1                                        #        1
 1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
 1                                                 1
 1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
+1                      #                          1
 1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
+1                                                 1
 1     8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
 1                                                 1
 111111111111111111111111111111111111111111111111111

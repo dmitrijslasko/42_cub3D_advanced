@@ -171,10 +171,14 @@ void	show_level_info(t_data *dt)
 
 	mlx = dt->mlx_ptr;
 	win = dt->win_ptr;
-	mlx_string_put(mlx, win, 20, 20, GOLD, "Collected: ");
-	mlx_string_put(mlx, win, 100, 20, GOLD, ft_itoa(dt->gamescore));
+	size_t y = 20;
 
-	mlx_string_put(mlx, win, 20, 30, GOLD, "Goal: ");
-	mlx_string_put(mlx, win, 100, 30, GOLD, ft_itoa(dt->gamescore));
+	mlx_string_put(mlx, win, 15, y, GOLD, "Score: ");
+	mlx_string_put(mlx, win, 100, y, GOLD, ft_itoa(dt->gamescore));
 
+	mlx_string_put(mlx, win, 15, y += DBG_MN_NL, GOLD, "Collected: ");
+	mlx_string_put(mlx, win, 100, y, GOLD, ft_itoa(dt->consumables_collected));
+
+	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Available: ");
+	mlx_string_put(mlx, win, 100, y, GOLD, ft_itoa(dt->level_consumable_count - dt->consumables_collected));
 }
