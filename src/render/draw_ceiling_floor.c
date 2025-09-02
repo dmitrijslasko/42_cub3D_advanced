@@ -41,7 +41,7 @@ int	draw_floor(t_data *dt)
 								dt->map.textures[FLOOR].color.b);
 	
 								
-	color = GREY;
+	color = DARKGREY;
 	apply_distance_shadow_distance(dt->ambient_light, &color);
 	draw_rectangle(dt->raycasting_scene_img, top_left, bottom_right, color);
 
