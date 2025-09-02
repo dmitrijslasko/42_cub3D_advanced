@@ -92,11 +92,16 @@ int process_sprite_pickups(t_data *dt)
 	}
 
 	// food pickup
-	if (sprite && !sprite->is_hidden && sprite->map_char == '#')
+	if (sprite && !sprite->is_hidden && ft_strchr(CONSUMABLE_TYPES, sprite->map_char))
 	{
 		sprite->is_hidden = 1;
 		dt->consumables_collected++;
-		dt->gamescore++;
+		dt->gamescore += 100 * dt->score_combo;
+		if (!dt->prev_consumable || sprite->map_char == dt->prev_consumable)
+			dt->score_combo += 0.2f;
+		else
+			dt->score_combo = 1.0f;
+		dt->prev_consumable = sprite->map_char;
 	}
 
 	// key pickup pickup - game won!
@@ -108,7 +113,8 @@ int process_sprite_pickups(t_data *dt)
 		{
 			printf("Game won!\n");
 			print_separator(3, DEF_SEPARATOR_CHAR);
-			keypress_exit(dt);
+			dt->game_status = GAME_WON_SCREEN;
+			// keypress_exit(dt);
 		}
 	}
 	return (EXIT_SUCCESS);
@@ -196,6 +202,15 @@ int process_game_status(t_data *dt)
 	if (dt->game_status == MENU_SCREEN)
 	{
 		mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr, dt->game_menu_img2->mlx_img, 0, 0);
+		if (dt->keys[XK_space] == 0)	
+			return (EXIT_SUCCESS);
+		else 
+			dt->game_status = GAME_SCREEN;
+	}
+
+	if (dt->game_status == GAME_WON_SCREEN)
+	{
+		mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr, dt->game_won_img->mlx_img, 0, 0);
 		if (dt->keys[XK_space] == 0)	
 			return (EXIT_SUCCESS);
 		else 

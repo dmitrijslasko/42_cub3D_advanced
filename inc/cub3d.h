@@ -77,7 +77,7 @@ typedef enum e_game_status {
 	MENU_SCREEN,
 	PAUSE_SCREEN,
 	GAME_SCREEN,
-	GAME_OVER_SCREEN,
+	GAME_WON_SCREEN,
 }	t_game_status;
 
 
@@ -320,6 +320,7 @@ typedef struct s_data
 
 	t_img				*game_menu_img;
 	t_img				*game_menu_img2;
+	t_img				*game_won_img;
 	t_img				*raycasting_scene_img;
 	t_img				*final_frame_img;
 	t_img				*minimap_base_img;
@@ -371,6 +372,8 @@ typedef struct s_data
 
 	int					level_consumable_count;
 	int					consumables_collected;
+	float				score_combo;
+	char				prev_consumable;
 }	t_data;
 
 static inline int	pixel_is_in_window(int x, int y)
@@ -627,8 +630,6 @@ void		setup_view(t_data *dt);
 int			create_color_rgba(int r, int g, int b, int a);
 int			create_color_rgb(int r, int g, int b);
 
-void		show_debug_info(t_data *dt);
-
 int			move_sideways(t_data *dt, int to_the_right);
 int			move_forward_backward(t_data *dt, int direction);
 int			map_position_is_walkable(t_data *dt, float *new_x, float *new_y);
@@ -704,6 +705,8 @@ void	draw_flashlight(t_data *dt, t_img *img, int radius, int clr);
 void	show_level_info(t_data *dt);
 
 int	load_menu_image(t_data *dt);
+int	load_menu_image_2(t_data *dt);
+int	load_menu_image_3(t_data *dt);
 
 int	keypress_exit(t_data *dt);
 

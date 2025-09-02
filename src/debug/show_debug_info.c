@@ -181,4 +181,11 @@ void	show_level_info(t_data *dt)
 
 	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Available: ");
 	mlx_string_put(mlx, win, 100, y, GOLD, ft_itoa(dt->level_consumable_count - dt->consumables_collected));
+
+	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Combo: ");
+	
+	char buffer[32];
+	snprintf(buffer, sizeof(buffer), "%.2f", dt->score_combo);
+	mlx_string_put(mlx, win, 100, y, GOLD, buffer);
+
 }

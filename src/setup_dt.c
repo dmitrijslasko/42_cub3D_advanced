@@ -44,6 +44,7 @@ int	setup_dt(t_data *dt)
 
 	load_menu_image(dt);
 	load_menu_image_2(dt);
+	load_menu_image_3(dt);
 	
 	load_ui_messages(dt);
 	
@@ -81,6 +82,8 @@ int	setup_dt(t_data *dt)
 	// gamescore
 	dt->gamescore = 0;
 	dt->consumables_collected = 0;
+	dt->score_combo = 1.0f;
+	dt->prev_consumable = 0;
 
 	// if (BONUS)
 	// 	dt->background_music = init_audio();

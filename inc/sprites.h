@@ -18,6 +18,7 @@ static const t_sprite_file	g_sprites[] = {
 {'+', "SPRITE_01", 0, 0, {		"./sprites/heart.xpm", "./sprites/heart.xpm"}},
 {'$', "SPRITE_02", 0, 0, {		"./sprites/key.xpm", "./sprites/key.xpm"}},
 {'#', "SPRITE_02", 0, 0, {		"./sprites/sushi.xpm", "./sprites/sushi.xpm"}},
+{'&', "SPRITE_02", 0, 0, {		"./sprites/sushi-1.xpm", "./sprites/sushi-1.xpm"}},
 
 // decor
 {'a', "SPRITE_03", 0, 0, {		"./sprites/plant.xpm", "./sprites/plant.xpm"}},

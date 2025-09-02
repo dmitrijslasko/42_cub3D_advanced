@@ -44,6 +44,7 @@
 
 # define MENU_PATHFILE	    "./sprites/menu-screen-1.xpm"
 # define MENU2_PATHFILE	    "./sprites/menu-screen-2.xpm"
+# define GAME_WON_PATHFILE	    "./sprites/menu-game-won.xpm"
 
 // window size
 # define WINDOW_W							640
@@ -172,9 +173,9 @@
 # define WHITESPACE        	            	" \a\b\t\n\v\f\r"
 
 # define PLAYER_SPAWN_POINT_TYPES			"NSWE"
-# define SPRITE_TYPES     	 	            "ABCDFGHIJKLMOPQRTUVXYZabcdefghijklmnopqrstuvwxyz+$#"
+# define SPRITE_TYPES     	 	            "ABCDFGHIJKLMOPQRTUVXYZabcdefghijklmnopqrstuvwxyz+$#&"
 # define DECORATION_TYPES     	 	        "abcdefghijklmnopqrstuvwxyz"
-# define CONSUMABLE_TYPES     	 	        "+#"
+# define CONSUMABLE_TYPES     	 	        "+#&"
 # define EXIT_TYPES     	 	            "$"
 # define SPRITE_FRAMES						2
 # define WALL_TYPES							"123456789"
