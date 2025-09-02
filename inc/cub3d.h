@@ -76,6 +76,9 @@ typedef enum e_game_status {
 	WELCOME_SCREEN,
 	MENU_SCREEN,
 	PAUSE_SCREEN,
+	LEVEL01_START,
+	LEVEL01_GAME,
+	LEVEL01_FINISH,
 	GAME_SCREEN,
 	GAME_WON_SCREEN,
 }	t_game_status;
