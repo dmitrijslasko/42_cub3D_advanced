@@ -1,0 +1,40 @@
+
+DEF         textures/default-fallback-texture.xpm
+
+F1          textures/wolfenstein/wood.xpm
+C1          textures/floor-grey-noise.xpm
+
+W01         textures/wolfenstein/grey_stone.xpm
+W02         textures/wolfenstein/red_brick.xpm
+W03 	    textures/wolfenstein/grey_stone.xpm
+W04 	    textures/wolfenstein/grey_stone.xpm
+W05         textures/bookshelf.xpm
+W06         textures/wolfenstein/wood.xpm
+W07         textures/curtain-1.xpm
+W08         textures/shoji-64.xpm
+W09         textures/curtain-3.xpm
+
+DOOR_01    	textures/shoji-64.xpm
+DOOR_01_S   textures/shoji-64-sides.xpm
+DOOR_02     textures/door-orange.xpm
+DOOR_02_S   textures/door-side-orange.xpm
+DOOR_03     textures/bookshelf.xpm
+DOOR_03_S   textures/bookshelf.xpm
+
+ED1    	    textures/wolf44.xpm
+
+11111111111111111111111111111111111111111111111111
+1 E $                                            1
+1    8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
+1      A                                         1
+1    8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
+1a                                               1
+1    8 8 8 1-1-1 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
+1a         | # |                                 1
+1    8 8 8 1-1-1 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
+1a                                               1
+1    8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
+1a                                               1
+1    8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
+1a                                               1
+11111111111111111111111111111111111111111111111111
