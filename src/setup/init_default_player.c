@@ -30,6 +30,7 @@ bool	init_default_player_values(t_player *player)
 
 bool	init_player(t_map *map, t_player *player)
 {
+	printf("Initialising player...\n");
 	if (init_default_player_values(player))
 		return (1);
 	get_init_player_position(map, player);

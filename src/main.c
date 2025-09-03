@@ -13,6 +13,13 @@
 #include "cub3d.h"
 #include "sound.h"
 
+int	debug_print(char *str)
+{
+	if (!DEBUG_PRINT)
+		return (0);
+	return (printf(str));
+}
+
 static int	setup_keyboard_and_mouse_controls(t_data *dt)
 {
 	setup_keyboard_hooks(dt);
@@ -136,18 +143,18 @@ int	main(int argc, char **argv)
 {
 	t_data	dt;
 
-
 	init_dt(&dt);
-
 	// check and parse command line arguments
 	// check_and_parse_args(&dt, argc, argv);
-
 
 	char *game_levels[] = {	"./maps/good/01_level.cub",
 							"./maps/good/02_level.cub",
 							NULL};
 
-	check_and_parse_map(&dt, argc, game_levels[1]);
+	// check_and_parse_map(&dt, argc, game_levels[0]);
+	// check_and_parse_args(&dt, argc, argv);
+	check_and_parse_all_maps(&dt, argc, game_levels);
+
 	// precalculate sin and cos lookup tables
 	precalculate_trig_tables(&dt);
 
@@ -158,12 +165,16 @@ int	main(int argc, char **argv)
 	// mimic full screen for immersive gameplay
 	system("gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false");
 	mimic_fullscreen();
+
 	move_mouse_to_center_of_active_window();
 
 	setup_keyboard_and_mouse_controls(&dt);
 
 	// setup dt - sets up the whole game structure and data
 	dt.game_status = WELCOME_SCREEN;
+	dt.active_level = 0;
+	dt.map = &dt.maps[dt.active_level];
+
 	setup_dt(&dt);
 
 	set_sprite_textures(&dt);
@@ -172,13 +183,14 @@ int	main(int argc, char **argv)
 
 	print_separator(3, DEF_SEPARATOR_CHAR);
 
-	printf("🎮 Starting level!\n");
-	printf("Consumables to collect in this level: %d\n", dt.level_consumable_count);
+	printf("🎮 Starting game!\n");
+	printf("Consumables to collect in this level: %d\n", dt.levels[dt.active_level].level_consumable_count);
+	
+	dt.player.pos.x = 1.5;
+	dt.player.pos.y = 1.5;
 	
 	mlx_loop_hook(dt.mlx_ptr, &render_frame, &dt);
 	mlx_loop(dt.mlx_ptr);
-
-	// free_dt(&dt);
 
 	return (EXIT_SUCCESS);
 }

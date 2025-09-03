@@ -37,12 +37,12 @@ int	draw_minimap_elements(t_data *dt)
 	t_draw_func	draw;
 
 	row = 0;
-	while (row < dt->map.map_size_rows)
+	while (row < dt->map->map_size_rows)
 	{
 		col = 0;
-		while (col < dt->map.map_size_cols)
+		while (col < dt->map->map_size_cols)
 		{
-			tile = dt->map.map_data[row][col].cell_char;
+			tile = dt->map->map_data[row][col].cell_char;
 			draw = get_draw_func_for_tile(tile);
 			if (draw)
 				draw(dt, col, row);
@@ -62,8 +62,8 @@ int	draw_minimap_base_img(t_data *dt)
 	
 	dt->minimap_base_img = protected_malloc(sizeof(t_img), dt);
 	setup_img(dt, dt->minimap_base_img,
-		dt->map.map_size_cols * MINIMAP_GRID_SIZE,
-		dt->map.map_size_rows * MINIMAP_GRID_SIZE);
+		dt->map->map_size_cols * MINIMAP_GRID_SIZE,
+		dt->map->map_size_rows * MINIMAP_GRID_SIZE);
 	set_coor_values(&top_left, 0, 0);
 	set_coor_values(&bottom_right, dt->minimap_base_img->width,
 		dt->minimap_base_img->height);

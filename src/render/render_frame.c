@@ -16,8 +16,9 @@ int	update_prompt_message(t_data *dt)
 {
 	t_coor	cell_ahead;
 
+	debug_print("Updating prompt messages!\n");
 	cell_ahead = get_cell_ahead(dt);
-	dt->player.cell_type_ahead = get_cell_type(&dt->map, &cell_ahead);
+	dt->player.cell_type_ahead = get_cell_type(dt->map, &cell_ahead);
 	if (ft_strchr(DOOR_TYPES, dt->player.cell_type_ahead))
 		dt->view->show_door_open_message = 1;
 	else
@@ -95,24 +96,24 @@ int process_sprite_pickups(t_data *dt)
 	if (sprite && !sprite->is_hidden && ft_strchr(CONSUMABLE_TYPES, sprite->map_char))
 	{
 		sprite->is_hidden = 1;
-		dt->consumables_collected++;
-		dt->gamescore += 100 * dt->score_combo;
-		if (!dt->prev_consumable || sprite->map_char == dt->prev_consumable)
-			dt->score_combo += 0.2f;
+		dt->levels[dt->active_level].consumables_collected++;
+		dt->gamescore += 100 * dt->levels[dt->active_level].score_combo;
+		if (!dt->levels[dt->active_level].prev_consumable || sprite->map_char == dt->levels[dt->active_level].prev_consumable)
+			dt->levels[dt->active_level].score_combo += 0.2f;
 		else
-			dt->score_combo = 1.0f;
-		dt->prev_consumable = sprite->map_char;
+			dt->levels[dt->active_level].score_combo = 1.0f;
+		dt->levels[dt->active_level].prev_consumable = sprite->map_char;
 	}
 
 	// key pickup pickup - game won!
 	if (sprite && !sprite->is_hidden && sprite->map_char == '$')
 	{
-		if (dt->level_consumable_count > dt->consumables_collected)
+		if (dt->levels[dt->active_level].level_consumable_count > dt->levels[dt->active_level].consumables_collected)
 			mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Not all goodies are collected!");
 		else 
 		{
-			printf("Game won!\n");
-			print_separator(3, DEF_SEPARATOR_CHAR);
+			printf("Level won!\n");
+			print_separator(1, DEF_SEPARATOR_CHAR);
 			dt->game_status = GAME_WON_SCREEN;
 		}
 	}
@@ -146,6 +147,7 @@ int animate_doors(t_data *dt)
     int i;
     t_door *door;
 
+	debug_print("Animating doors...\n");
     i = 0;
     while (i < dt->door_count)
     {
@@ -162,14 +164,10 @@ int animate_doors(t_data *dt)
                 door->opening_finish_time = dt->time.last_time;
             }
         }
-        // Closing after 2 seconds
         else if (dt->time.last_time - door->opening_finish_time > DOOR_AUTOCLOSURE_TIME_MS)
         {
-			// printf("door @ %d %d vs ", door->cell_x, door->cell_y);
-			// printf("player @ %f %f\n", dt->player.pos.x, dt->player.pos.y);
 			if (door->cell_x == (int) dt->player.pos.x && door->cell_y == (int) dt->player.pos.y)
 			{
-				// puts("Door blocked by the player!");
 				i++;
 				continue ;
 			}
@@ -182,17 +180,19 @@ int animate_doors(t_data *dt)
         }
         i++;
     }
+	debug_print("Finished animating doors...\n");
     return (EXIT_SUCCESS);
 }
 
 int process_game_status(t_data *dt)
 {
 	// game menu
+	// printf("Current game status == %d\n", dt->game_status);
 	if (dt->game_status == WELCOME_SCREEN)
 	{
 		mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr, dt->game_menu_img->mlx_img, 0, 0);
 		if (dt->keys[XK_space] == 0)	
-			return (EXIT_SUCCESS);
+			return (dt->game_status);
 		else 
 			dt->game_status = MENU_SCREEN;
 		dt->keys[XK_space] = 0;
@@ -203,21 +203,14 @@ int process_game_status(t_data *dt)
 	{
 		mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr, dt->game_menu_img2->mlx_img, 0, 0);
 		if (dt->keys[XK_space] == 0)	
-			return (EXIT_SUCCESS);
+			return (dt->game_status);
 		else 
 			dt->game_status = GAME_SCREEN;
 	}
 
 	if (dt->game_status == GAME_WON_SCREEN)
-	{
 		mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr, dt->game_won_img->mlx_img, 0, 0);
-		if (dt->keys[XK_space] == 0)	
-			return (EXIT_SUCCESS);
-		else
-			dt->game_status = GAME_SCREEN;
-		dt->keys[XK_space] = 0;
-	}
-	return (1);
+	return (dt->game_status);
 }
 
 int	render_frame(void *param)
@@ -239,17 +232,18 @@ int	render_frame(void *param)
 	}
 	dt->time.last_time = current_time;
 
-	if (process_game_status(dt) == 0)
-		return (EXIT_SUCCESS);
+	int game_status = process_game_status(dt);
+	if (game_status != GAME_SCREEN)
+		return (dt->game_status);
 
 	process_keyboard_keypresses(dt);	
 
-	// draw game menu
 	animate_weapon(dt);
-	
 	animate_doors(dt);
 
+	debug_print("Calculating rays\n");
 	calculate_all_rays(dt);
+	debug_print("All rays are now calculated!\n");
 
 	render_3d_scene(dt);
 	
@@ -262,14 +256,18 @@ int	render_frame(void *param)
 	if (dt->view->show_minimap)
 		update_minimap(dt);
 
-	render_minimap_and_ui(dt);
+	// render_minimap_and_ui(dt);
+	// t_coor coor;
+	// coor.x = 320;
+	// coor.y = 180;
+	// draw_circle(dt->final_frame_img, &coor, 30, WHITE);
 
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr,dt->final_frame_img->mlx_img, 0, 0);
 	
-	// time stats
-	// int y = 20;
-	// print_time_stats(dt, dt->mlx_ptr, dt->win_ptr, &y);
-	
+	// // time stats
+	// // int y = 20;
+	// // print_time_stats(dt, dt->mlx_ptr, dt->win_ptr, &y);
+
 	show_debug_info(dt);
  	show_player_info(dt);
 	show_level_info(dt);
@@ -277,26 +275,26 @@ int	render_frame(void *param)
 	process_sprite_pickups(dt);
 
 	update_prompt_message(dt);
+	// render_ui_message(dt);
 	if (dt->view->show_door_open_message)
 	{
+		printf("Showing door open message!\n");
 		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press E to open the shoji");
-		// render_ui_message(dt);
 	}
-
+	
 	y_offset = 0;
 	if (ENABLE_BOBBING)
 	{
 		bob_walls(dt);
 		y_offset = bob_weapon(dt);
 	}
-	// render weapon
 
-
-	
+	// render weapon	
 	if (dt->player.selected_weapon->type == WEAPON_PISTOL)
 		put_img_to_img(dt->final_frame_img, &dt->weapon_img[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
 	dt->frames_drawn_count++;
 	print_out_sprite_info(dt);
+	// printf("%d\n", dt->time.last_time);
 
 	return (EXIT_SUCCESS);
 }

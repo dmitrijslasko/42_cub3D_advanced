@@ -48,16 +48,18 @@ int	handle_keyrelease(int keycode, t_data *dt)
 		dt->player.selected_weapon = &dt->weapon[3];
 	if (dt->keys[XK_5])
 	{
-		print_level_map(&dt->map);
+		print_level_map(dt->map);
 		dt->player.selected_weapon = &dt->weapon[4];
 	}
+	if (dt->keys[XK_m])
+		dt->map = &dt->maps[1];
 	if (dt->keys[XK_8])
 	{
-		float prev_value = dt->ambient_light;
+		float prev_value = *dt->ambient_light;
 		if (prev_value > 500)
-			dt->ambient_light = 0.0f;
+			*dt->ambient_light = 0.0f;
 		else
-			dt->ambient_light = 1000.0f;
+			*dt->ambient_light = 1000.0f;
 	}
 	if (keycode == XK_Tab)
 		toggle_setting(&dt->view->show_minimap);

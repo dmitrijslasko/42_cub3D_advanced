@@ -17,11 +17,15 @@ void	draw_minimap_grid(t_data *dt)
 	int	col_px;
 	int	row_px;
 
+	t_map	*active_map;
+
+	active_map = dt->map;
+
 	row_px = 0;
-	while (row_px <= dt->map.map_size_rows * MINIMAP_GRID_SIZE + 1)
+	while (row_px <= active_map->map_size_rows * MINIMAP_GRID_SIZE + 1)
 	{
 		col_px = 0;
-		while (col_px <= dt->map.map_size_cols * MINIMAP_GRID_SIZE + 1)
+		while (col_px <= active_map->map_size_cols * MINIMAP_GRID_SIZE + 1)
 		{
 			if (col_px % MINIMAP_GRID_SIZE == 0 || \
 						row_px % MINIMAP_GRID_SIZE == 0)

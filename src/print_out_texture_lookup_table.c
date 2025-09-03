@@ -12,7 +12,7 @@ int print_out_texture_lookup_table(t_data *dt)
 			g_texture_lookup[i].description,
 			g_texture_lookup[i].mapfile_key,
 			g_texture_lookup[i].texture_type,
-			dt->map.textures[i].texture.xpm_file
+			dt->map->textures[i].texture.xpm_file
 			);
 		i++;
 	}

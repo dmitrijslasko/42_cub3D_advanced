@@ -18,7 +18,7 @@ static void	init_a_door(t_data *dt, t_door **door_ptr, \
 	t_door	*door;
 	char 	door_type;
 
-	door_type =  get_cell_type_by_coordinates(&dt->map,
+	door_type =  get_cell_type_by_coordinates(dt->map,
 						curr_row, curr_col);
 
 	door = *door_ptr;
@@ -31,7 +31,7 @@ static void	init_a_door(t_data *dt, t_door **door_ptr, \
 	door->is_opening = 0;
 	door->open_progress = 0.0f;
 	// door->opening_finish_time = dt->time.last_time;
-	if (ft_strchr(VERTICAL_DOOR_TYPES, dt->map.map_data[curr_row][curr_col].cell_char))
+	if (ft_strchr(VERTICAL_DOOR_TYPES, dt->map->map_data[curr_row][curr_col].cell_char))
 		door->orientation = 1;
 	else
 		door->orientation = 0;
@@ -53,17 +53,19 @@ void	init_doors(t_data *dt)
 
 	print_separator_default();
 	printf(TXT_YELLOW ">>> INITIALISING DOORS\n" TXT_RESET);
-	dt->door_count = count_elements_in_the_map(&dt->map, DOOR_TYPES);
+
+	dt->door_count = count_elements_in_the_map(dt->map, DOOR_TYPES);
 	printf("Doors elements found: %zu\n", dt->door_count);
+	
 	dt->doors = protected_malloc(sizeof(t_door) * dt->door_count, dt);
 	door_ptr = dt->doors;
 	curr_row = 0;
-	while (curr_row < dt->map.map_size_rows)
+	while (curr_row < dt->map->map_size_rows)
 	{
 		curr_col = 0;
-		while (curr_col < dt->map.map_size_cols)
+		while (curr_col < dt->map->map_size_cols)
 		{
-			door_type =  get_cell_type_by_coordinates(&dt->map,
+			door_type =  get_cell_type_by_coordinates(dt->map,
 						curr_row, curr_col);
 			if (ft_strchr(DOOR_TYPES, door_type))
 				init_a_door(dt, &door_ptr, curr_row, curr_col);

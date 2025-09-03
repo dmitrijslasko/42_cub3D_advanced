@@ -16,7 +16,7 @@ void	free_dt(t_data *dt)
 {
 	ft_free(dt->doors);
 	ft_free(dt->rays);
-	free_array(dt->map.map_data);
+	// free_array(dt->map.map_data);
 	ft_free(dt->view);
 	
 	free_sprites(dt);

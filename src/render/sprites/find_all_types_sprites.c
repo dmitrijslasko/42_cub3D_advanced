@@ -22,12 +22,12 @@ void	init_sprites(t_data *dt)
 	i = 0;
 	row = 0;
 	
-	while (row < dt->map.map_size_rows && i < dt->sprite_count)
+	while (row < dt->map->map_size_rows && i < dt->sprite_count)
 	{
 		col = 0;
-		while (col < dt->map.map_size_cols && i < dt->sprite_count)
+		while (col < dt->map->map_size_cols && i < dt->sprite_count)
 		{
-			c = get_cell_type_by_coordinates(&dt->map, row, col);
+			c = get_cell_type_by_coordinates(dt->map, row, col);
 			if (ft_strchr(SPRITE_TYPES, c))
 			{
 				dt->sprites[i].id = i;
@@ -55,7 +55,7 @@ void	find_all_sprites(t_data *dt)
 	size_t	sprite_count;
 	size_t	consumable_count;
 
-	sprite_count = count_elements_in_the_map(&dt->map, SPRITE_TYPES);
+	sprite_count = count_elements_in_the_map(dt->map, SPRITE_TYPES);
 	if (!sprite_count)
 		return ;
 	
@@ -64,6 +64,6 @@ void	find_all_sprites(t_data *dt)
 	
 	init_sprites(dt);
 
-	consumable_count = count_elements_in_the_map(&dt->map, CONSUMABLE_TYPES);
-	dt->level_consumable_count = consumable_count;
+	consumable_count = count_elements_in_the_map(dt->map, CONSUMABLE_TYPES);
+	dt->levels[dt->active_level].level_consumable_count = consumable_count;
 }

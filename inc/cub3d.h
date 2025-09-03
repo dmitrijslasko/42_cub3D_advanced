@@ -73,7 +73,7 @@ typedef enum e_active_message
 // } t_sprite_type;
 
 typedef enum e_game_status {
-	WELCOME_SCREEN,
+	WELCOME_SCREEN = 1,
 	MENU_SCREEN,
 	PAUSE_SCREEN,
 	LEVEL01_START,
@@ -314,48 +314,63 @@ typedef struct s_gametime
 // 	int frame_count;
 // }	t_item;
 
+typedef struct s_level
+{
+	int					level_score;
+	int					level_consumable_count;
+	int					consumables_collected;
+	float				score_combo;
+	char				prev_consumable;
+
+	t_map				*map;
+	float				ambient_light;
+}	t_level;
+
 typedef struct s_data
 {
 	void				*mlx_ptr;
 	void				*win_ptr;
+	
+	float				sin_table[PRECALCULATED_TRIG];
+	float				cos_table[PRECALCULATED_TRIG];
 
 	t_game_status		game_status;
 
 	t_img				*game_menu_img;
 	t_img				*game_menu_img2;
 	t_img				*game_won_img;
+
 	t_img				*raycasting_scene_img;
 	t_img				*final_frame_img;
+
 	t_img				*minimap_base_img;
 	t_img				*minimap_img;
 	t_img				*ui_img;
 
 	t_ray				*rays;
 
-	t_map				map;
+	t_map				maps[3];
+	t_map				*map;
 	t_door				*doors;
 	size_t				door_count;
 
 	t_player			player;
-	int					gamescore;
 	
 	t_view				*view;
 	char				keys[TRACKED_KEYS];
 	t_mouse				mouse;
-	float				sin_table[PRECALCULATED_TRIG];
-	float				cos_table[PRECALCULATED_TRIG];
 
-	t_sprite			*sprites;
 	t_sprite_texture	*sprite_textures;
-	size_t				sprite_count;
 	size_t				sprite_texture_count;
+	t_sprite			*sprites;
+	size_t				sprite_count;
 
-	void				*welcome_img;
+	// void				*welcome_img;
 	t_gametime			time;
+
 	t_img				*sky_image;
 	t_img				*message_img;
 
-	float				ambient_light;
 	void				*background_music;
 	int					has_changed;
 	int					frames_drawn_count;
@@ -368,16 +383,18 @@ typedef struct s_data
 
 	t_sprite			*targeted_sprite;
 
+	int					active_level;
+	int					gamescore;
+	t_level				levels[3];
+	float				*ambient_light;
+	
 	float				test_value_1;
 	float				test_value_2;
 	float				test_value_3;
 	float				test_value_4;
-
-	int					level_consumable_count;
-	int					consumables_collected;
-	float				score_combo;
-	char				prev_consumable;
 }	t_data;
+
+int	debug_print(char *str);
 
 static inline int	pixel_is_in_window(int x, int y)
 {
@@ -412,7 +429,10 @@ void		put_img_to_img(t_img *dest, t_img *src, int dx, int dy);
 void		put_img_to_img_circle(t_img *dest, t_img *src, int dx, int dy);
 //parsing
 char		*free_line_get_next(char *line, int fd);
-bool		check_and_parse_mapfile(t_data *dt, char *file);
+bool	check_and_parse_mapfile(t_data *dt, char *map_file, int map_index);
+
+void	check_and_parse_all_maps(t_data *dt, int argc, char *mapfiles[]);
+
 bool		check_valid_identifier_texture(char *identifier);
 bool		check_color(char *one_color);
 bool		check_valid_color(char **color);
@@ -444,6 +464,7 @@ bool		set_color_or_texture(t_map *map, char *identifier, char **value);
 bool		set_color(char *identifier, char **color, t_map *map);
 bool		check_map_is_closed(t_map *map, t_player *player, t_data *dt);
 char		get_cell_type(t_map *map, t_coor *coord);
+
 char		get_cell_type_by_coordinates(t_map *map, size_t y, size_t x);
 t_mapcell	*get_cell_by_coordinates(t_map *map, size_t y, size_t x);
 char		**ft_split_by_multiple_delimiters(const char *s, char *c);
@@ -712,8 +733,5 @@ int	load_menu_image_2(t_data *dt);
 int	load_menu_image_3(t_data *dt);
 
 int	keypress_exit(t_data *dt);
-
-
-void	check_and_parse_map(t_data *dt, int argc, char *mapfile);
 
 #endif

@@ -9,8 +9,7 @@ static int setup_player(t_data *dt)
 
 int	setup_dt(t_data *dt)
 {
-
-	
+	printf("Setting up data struct!\n");
 	init_rays(dt);
 	init_keys(dt);
 	
@@ -75,13 +74,22 @@ int	setup_dt(t_data *dt)
 	dt->test_value_4 = 0.0f;
 
 	// ambient light
-	dt->ambient_light = 3000.0f;
 
 	// gamescore
 	dt->gamescore = 0;
-	dt->consumables_collected = 0;
-	dt->score_combo = 1.0f;
-	dt->prev_consumable = 0;
+	
+	int i = 0;
+	while (i < 3)
+	{
+		dt->levels[i].level_score = 0;
+		dt->levels[i].consumables_collected = 0;
+		dt->levels[i].score_combo = 1.0f;
+		dt->levels[i].prev_consumable = 0;
+		dt->levels[i].ambient_light = 3000.0f;
+		i++;
+	}
+	
+	dt->ambient_light = &dt->levels[dt->active_level].ambient_light;
 
 	// if (BONUS)
 	// 	dt->background_music = init_audio();

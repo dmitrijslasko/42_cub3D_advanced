@@ -25,13 +25,12 @@ void	calculate_ray_distance(t_data *dt, t_ray *ray,
 	hit_side = 0;
 
 	init_raycasting(&step, &map_coor, dt, ray);
-	
 	dda_info.map_coor = &map_coor;
 	dda_info.step = &step;
 	dda_info.delta = delta_dist;
 	dda_info.side = side_dist;
 	dda_info.hit_side = &hit_side;
-
+	
 	door_hit = run_dda_loop(dt, ray, &dda_info);
 	finish_ray_casting(dt, ray, &map_coor, door_hit);
 

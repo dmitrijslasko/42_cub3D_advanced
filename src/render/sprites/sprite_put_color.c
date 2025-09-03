@@ -44,7 +44,7 @@ void	sprite_put_color(t_data *dt, t_sprite *sprite, t_coor *coor, t_coor *tex_co
 
 	// shadowing
 	apply_distance_shadow_distance(sprite->distance_to_player, &color);
-	apply_distance_shadow_distance(dt->ambient_light, &color);
+	apply_distance_shadow_distance(*dt->ambient_light, &color);
 	
 	img_pix_put(dt->final_frame_img, coor->x, coor->y, color);
 }

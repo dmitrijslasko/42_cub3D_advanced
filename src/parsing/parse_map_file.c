@@ -11,8 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-bool	check_and_parse_mapfile(t_data *dt, char *map_file)
+bool	check_and_parse_mapfile(t_data *dt, char *map_file, int map_index)
 {
 	if (!check_mapfile_extension(map_file, REQUIRED_MAP_EXTENSION))
 		return (EXIT_FAILURE);
@@ -23,11 +22,13 @@ bool	check_and_parse_mapfile(t_data *dt, char *map_file)
 	if (parse_mapfile(map_file, dt))
 		return (EXIT_FAILURE);
 
-	if (init_player(&dt->map, &dt->player))
+	dt->map = protected_malloc(sizeof(t_map), dt);
+
+	if (init_player(&dt->maps[map_index], &dt->player))
 		return (EXIT_FAILURE);
 
-	 if (check_map_is_closed(&dt->map, &dt->player, dt) == False)
-	 	return (EXIT_FAILURE);
+	// if (check_map_is_closed(dt->map, &dt->player, dt) == False)
+	//  	return (EXIT_FAILURE);
 
 	return (EXIT_SUCCESS);
 }

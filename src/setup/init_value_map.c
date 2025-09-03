@@ -51,19 +51,20 @@ bool	parse_mapfile(char *file, t_data *dt)
 	//dt->map.m_textures = protected_malloc(dt->map.number_of_textures, dt);
 	//printf("Malloc'ed an array of %d elements.\n", dt->map.number_of_textures);
 
-	if (init_default_map(&dt->map))
+	printf("Parsing mapfile...\n");
+	if (init_default_map(dt->map))
 		return (1);
 	// Sets the map size
-	if (set_map_size_data(&dt->map, file))
+	if (set_map_size_data(dt->map, file))
 		return (1);
 	// Initiliazes the map with empty cell values
-	if (init_map_data(&dt->map, dt))
+	if (init_map_data(dt->map, dt))
 		return (1);
 	// Parses mapfile values - textures and the map itself
-	if (parse_mapfile_values(&dt->map, file))
+	if (parse_mapfile_values(dt->map, file))
 		return (1);
 	//print_out_texture_lookup_table(dt);
-	 if (!check_valid_player(&dt->map))
+	 if (!check_valid_player(dt->map))
 	 	return (1);
 	// NOTE DL: Probably can be removed for advanced part since we don't care about color / texture checks
 	// if (check_all_textures(&dt->map))

@@ -35,8 +35,10 @@ void	init_map(t_map	*map)
 {
 	size_t	i;
 
+	printf("Initialising map...\n");
 	map->map_data = NULL;
 	i = 0;
+	
 	while (i < NUMBER_TEXTURES)
 	{
 		init_texture(&map->textures[i].texture);
@@ -54,17 +56,24 @@ void	init_img(t_img *img)
 
 void	init_dt(t_data *dt)
 {
-	dt->doors = NULL;
+	printf("Initializing data struct...\n");
+	
 	dt->rays = NULL;
-	dt->sprites = NULL;
+	
+	dt->map = &dt->maps;
+	init_map(dt->map);
+	init_map(&dt->maps[1]);
+
+	dt->doors = NULL;
 	dt->sprite_textures = NULL;
-	dt->sprite_count = 0;
 	dt->sprite_texture_count = 0;
+	dt->sprites = NULL;
+	dt->sprite_count = 0;
+
 	dt->view = NULL;
-	dt->welcome_img = NULL;
-	dt->background_music = NULL;
-	dt->frames_drawn_count = 0;
 	init_mouse(&dt->mouse);
-	init_map(&dt->map);
 	init_graphic(dt);
+	
+	dt->frames_drawn_count = 0;
+	dt->background_music = NULL;
 }

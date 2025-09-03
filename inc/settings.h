@@ -26,7 +26,9 @@
 # 	define LINUX_22 0
 # endif
 
-# define MIMIC_FULLSCREEN                   1
+# define DEBUG_PRINT                        0
+
+# define MIMIC_FULLSCREEN                   0
 # define CAPTURE_MOUSE                      0
 
 # define SHOW_TARGETED_SPRITE               1
@@ -40,10 +42,10 @@
 # define TILE_SIZE  						128
 
 // bonus part
-# define SKY_TXT_PATHFILE	"./textures/sky/sky_2.xpm"
+# define SKY_TXT_PATHFILE	    "./textures/sky/sky_2.xpm"
 
-# define MENU_PATHFILE	    "./sprites/menu-screen-1.xpm"
-# define MENU2_PATHFILE	    "./sprites/menu-screen-2.xpm"
+# define MENU_PATHFILE	        "./sprites/menu-screen-1.xpm"
+# define MENU2_PATHFILE	        "./sprites/menu-screen-2.xpm"
 # define GAME_WON_PATHFILE	    "./sprites/menu-game-won.xpm"
 
 // window size
@@ -168,7 +170,7 @@
 
 // all printable ASCII characters + fallback texture
 // maximum
-# define NUMBER_TEXTURES    	            20
+# define NUMBER_TEXTURES    	            40
 
 # define WHITESPACE        	            	" \a\b\t\n\v\f\r"
 

@@ -173,19 +173,25 @@ void	show_level_info(t_data *dt)
 	win = dt->win_ptr;
 	size_t y = 20;
 
-	mlx_string_put(mlx, win, 15, y, GOLD, "Score: ");
+	mlx_string_put(mlx, win, 15, y, GOLD, "Active level: ");
+	mlx_string_put(mlx, win, 100, y, GOLD, ft_itoa(dt->active_level));
+
+	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Level score: ");
+	mlx_string_put(mlx, win, 100, y, GOLD, ft_itoa(dt->levels[dt->active_level].level_score));
+
+	mlx_string_put(mlx, win, 15, y += DBG_MN_NL, GOLD, "Total score: ");
 	mlx_string_put(mlx, win, 100, y, GOLD, ft_itoa(dt->gamescore));
 
 	mlx_string_put(mlx, win, 15, y += DBG_MN_NL, GOLD, "Collected: ");
-	mlx_string_put(mlx, win, 100, y, GOLD, ft_itoa(dt->consumables_collected));
+	mlx_string_put(mlx, win, 100, y, GOLD, ft_itoa(dt->levels[dt->active_level].consumables_collected));
 
 	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Available: ");
-	mlx_string_put(mlx, win, 100, y, GOLD, ft_itoa(dt->level_consumable_count - dt->consumables_collected));
+	mlx_string_put(mlx, win, 100, y, GOLD, ft_itoa(dt->levels[dt->active_level].level_consumable_count - dt->levels[dt->active_level].consumables_collected));
 
 	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Combo: ");
 	
 	char buffer[32];
-	snprintf(buffer, sizeof(buffer), "%.2f", dt->score_combo);
+	snprintf(buffer, sizeof(buffer), "%.2f", dt->levels[dt->active_level].score_combo);
 	mlx_string_put(mlx, win, 100, y, GOLD, buffer);
 
 }

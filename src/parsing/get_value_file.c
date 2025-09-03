@@ -101,6 +101,7 @@ bool	parse_textures(t_map *map, int fd, char **str)
 	print_separator_default();
 	return (EXIT_SUCCESS);
 }
+
 bool	parse_mapfile_values(t_map *map, char *mapfile)
 {
 	int		fd;
