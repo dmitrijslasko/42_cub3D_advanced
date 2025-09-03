@@ -383,9 +383,9 @@ typedef struct s_data
 
 	t_sprite			*targeted_sprite;
 
+	t_level				levels[3];
 	int					active_level;
 	int					gamescore;
-	t_level				levels[3];
 	float				*ambient_light;
 	
 	float				test_value_1;
@@ -594,7 +594,7 @@ float		fix_fish_eye(t_ray *ray, t_player *player);
 int			fix_fish_eye_2(t_ray *ray, t_player *player, float *distance);
 int			load_sprite_textures(t_data *dt);
 int			load_textures(t_data *dt);
-int			load_sprites(t_data *dt);
+int			load_sprites(t_data *dt, t_map *map);
 int			precalculate_trig_tables(t_data *dt);
 
 void		render_3d_each_ray(t_data *dt, t_ray *ray, int screen_slice_width);
@@ -609,7 +609,7 @@ void		calc_texture_coor(t_data *dt, int *texture_y, \
 							float *distance_to_wall, int d);
 
 // inits
-void		init_doors(t_data *dt);
+void		init_doors(t_data *dt, t_map *map);
 
 // controls
 int			set_mouse_to_screen_center(t_data *dt);
@@ -632,7 +632,7 @@ t_door		*find_door_at(t_data *dt, int x, int y);
 t_sprite	*find_sprite_at(t_data *dt, int x, int y);
 
 //sprites
-void		find_all_sprites(t_data *dt);
+void		find_all_sprites(t_data *dt, t_map *map);
 void		sort_sprites(t_sprite *sprites, size_t num_sprites);
 void		sort_sprites_by_distance(t_data *dt);
 void		sort_sprites(t_sprite *sprites, size_t num_sprites);

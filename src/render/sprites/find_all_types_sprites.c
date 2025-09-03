@@ -50,12 +50,12 @@ void	init_sprites(t_data *dt)
 		row++;
 	}
 }
-void	find_all_sprites(t_data *dt)
+void	find_all_sprites(t_data *dt, t_map *map)
 {
 	size_t	sprite_count;
 	size_t	consumable_count;
 
-	sprite_count = count_elements_in_the_map(dt->map, SPRITE_TYPES);
+	sprite_count = count_elements_in_the_map(map, SPRITE_TYPES);
 	if (!sprite_count)
 		return ;
 	
@@ -64,6 +64,6 @@ void	find_all_sprites(t_data *dt)
 	
 	init_sprites(dt);
 
-	consumable_count = count_elements_in_the_map(dt->map, CONSUMABLE_TYPES);
+	consumable_count = count_elements_in_the_map(map, CONSUMABLE_TYPES);
 	dt->levels[dt->active_level].level_consumable_count = consumable_count;
 }

@@ -18,7 +18,7 @@ int	update_minimap(t_data *dt)
 	int	dy;
 	t_coor	minimap_center;
 
-	printf("Updating minimap...\n");
+	debug_print("Updating minimap...\n");
 	dx = MINIMAP_SIZE / 2 - dt->player.pos.x * MINIMAP_GRID_SIZE;
 	dy = MINIMAP_SIZE / 2 - dt->player.pos.y * MINIMAP_GRID_SIZE;
 	if (MINIMAP_STYLE == 0)

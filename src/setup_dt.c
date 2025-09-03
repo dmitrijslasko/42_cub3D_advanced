@@ -46,12 +46,12 @@ int	setup_dt(t_data *dt)
 	load_ui_messages(dt);
 	
 	// doors
-	init_doors(dt);
+	init_doors(dt, dt->map);
 	mark_all_cells_that_neighbour_doors(dt);
 	
 	// sprites
-	load_sprites(dt);
-	// exit (1);
+	load_sprites(dt, dt->map);
+
 	dt->targeted_sprite = dt->sprites;
 	
 	// view
@@ -72,8 +72,6 @@ int	setup_dt(t_data *dt)
 	dt->test_value_2 = 0.0f;
 	dt->test_value_3 = 0.0f;
 	dt->test_value_4 = 0.0f;
-
-	// ambient light
 
 	// gamescore
 	dt->gamescore = 0;

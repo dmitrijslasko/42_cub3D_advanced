@@ -172,7 +172,7 @@ int	main(int argc, char **argv)
 
 	// setup dt - sets up the whole game structure and data
 	dt.game_status = WELCOME_SCREEN;
-	dt.active_level = 0;
+	dt.active_level = 1;
 	dt.map = &dt.maps[dt.active_level];
 
 	setup_dt(&dt);

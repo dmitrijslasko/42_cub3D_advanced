@@ -97,7 +97,11 @@ int process_sprite_pickups(t_data *dt)
 	{
 		sprite->is_hidden = 1;
 		dt->levels[dt->active_level].consumables_collected++;
+		
+		// level score && total game score
+		dt->levels[dt->active_level].level_score += 100 * dt->levels[dt->active_level].score_combo;
 		dt->gamescore += 100 * dt->levels[dt->active_level].score_combo;
+
 		if (!dt->levels[dt->active_level].prev_consumable || sprite->map_char == dt->levels[dt->active_level].prev_consumable)
 			dt->levels[dt->active_level].score_combo += 0.2f;
 		else
@@ -255,8 +259,8 @@ int	render_frame(void *param)
 	// show minimap
 	if (dt->view->show_minimap)
 		update_minimap(dt);
+	render_minimap_and_ui(dt);
 
-	// render_minimap_and_ui(dt);
 	// t_coor coor;
 	// coor.x = 320;
 	// coor.y = 180;

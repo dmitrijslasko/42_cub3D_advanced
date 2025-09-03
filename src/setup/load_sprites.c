@@ -80,14 +80,14 @@ int	load_sprite_images(t_data *dt)
 	return (EXIT_SUCCESS);
 }
 
-int	load_sprites(t_data *dt)
+int	load_sprites(t_data *dt, t_map *map)
 {
 	print_separator_default();
 	printf(TXT_YELLOW ">>> LOADING SPRITES\n" TXT_RESET);
 	
 	load_sprite_textures(dt);
 
-	find_all_sprites(dt);
+	find_all_sprites(dt, map);
 
 	printf(TXT_GREEN "Done!\n" TXT_RESET);
 	return (EXIT_SUCCESS);
