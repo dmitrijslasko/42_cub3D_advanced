@@ -18,7 +18,6 @@ static void	process_vertical_look(t_data *dt)
 		return ;
 	if (dt->keys[XK_Up])
 	{
-		dt->has_changed = 1;
 		dt->view->screen_center_y = ft_min(
 				dt->view->screen_center_y + KEYBOARD_VERTICAL_LOOK_STEP,
 				WINDOW_H / 2 + VERTICAL_LOOK_LOCK_UP);

@@ -152,8 +152,9 @@ int animate_doors(t_data *dt)
     t_door *door;
 
 	debug_print("Animating doors...\n");
+	*dt->door_count = dt->levels[dt->active_level].door_count;
     i = 0;
-    while (i < dt->door_count)
+    while (i < *dt->door_count)
     {
         door = &dt->doors[i];
 
@@ -244,11 +245,10 @@ int	render_frame(void *param)
 
 	animate_weapon(dt);
 	animate_doors(dt);
-
+	
 	debug_print("Calculating rays\n");
 	calculate_all_rays(dt);
-	debug_print("All rays are now calculated!\n");
-
+	
 	render_3d_scene(dt);
 	
 	put_img_to_img(dt->final_frame_img, dt->raycasting_scene_img, 0, 0);
@@ -260,11 +260,6 @@ int	render_frame(void *param)
 	if (dt->view->show_minimap)
 		update_minimap(dt);
 	render_minimap_and_ui(dt);
-
-	// t_coor coor;
-	// coor.x = 320;
-	// coor.y = 180;
-	// draw_circle(dt->final_frame_img, &coor, 30, WHITE);
 
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr,dt->final_frame_img->mlx_img, 0, 0);
 	
@@ -278,26 +273,26 @@ int	render_frame(void *param)
 
 	process_sprite_pickups(dt);
 
-	update_prompt_message(dt);
-	// render_ui_message(dt);
-	if (dt->view->show_door_open_message)
-	{
-		printf("Showing door open message!\n");
-		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press E to open the shoji");
-	}
+	// update_prompt_message(dt);
+	// // render_ui_message(dt);
+	// if (dt->view->show_door_open_message)
+	// {
+	// 	printf("Showing door open message!\n");
+	// 	mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press E to open the shoji");
+	// }
 	
-	y_offset = 0;
-	if (ENABLE_BOBBING)
-	{
-		bob_walls(dt);
-		y_offset = bob_weapon(dt);
-	}
+	// y_offset = 0;
+	// if (ENABLE_BOBBING)
+	// {
+	// 	bob_walls(dt);
+	// 	y_offset = bob_weapon(dt);
+	// }
 
-	// render weapon	
-	if (dt->player.selected_weapon->type == WEAPON_PISTOL)
-		put_img_to_img(dt->final_frame_img, &dt->weapon_img[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
-	dt->frames_drawn_count++;
-	print_out_sprite_info(dt);
+	// // render weapon	
+	// if (dt->player.selected_weapon->type == WEAPON_PISTOL)
+	// 	put_img_to_img(dt->final_frame_img, &dt->weapon_img[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
+	// dt->frames_drawn_count++;
+	// print_out_sprite_info(dt);
 	// printf("%d\n", dt->time.last_time);
 
 	return (EXIT_SUCCESS);

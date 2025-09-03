@@ -16,6 +16,7 @@ void	init_graphic(t_data *dt)
 {
 	dt->mlx_ptr = NULL;
 	dt->win_ptr = NULL;
+	
 	dt->final_frame_img = NULL;
 	dt->raycasting_scene_img = NULL;
 	dt->minimap_base_img = NULL;

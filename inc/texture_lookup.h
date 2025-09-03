@@ -33,6 +33,7 @@ typedef struct s_wall_tile
 	bool		is_color;
 }	t_wall_tile;
 
+
 typedef enum e_texture_type
 {
 	DEFAULT = 0,

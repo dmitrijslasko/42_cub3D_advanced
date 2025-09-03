@@ -60,7 +60,7 @@ int mark_all_cells_that_neighbour_doors(t_data *dt)
 
 	door = dt->doors;
 	i = 0;
-	while (i < dt->door_count)
+	while (i < dt->levels[dt->active_level].door_count)
 	{
 		x = door[i].cell_x;
 		y = door[i].cell_y;
@@ -90,6 +90,7 @@ int mark_all_cells_that_neighbour_doors(t_data *dt)
 		printf("Marked all neighbours of door with ID: %zu\n", door[i].id);
 		i++;
 	}
+	puts("Done!");
 	return (EXIT_SUCCESS);
 }
 

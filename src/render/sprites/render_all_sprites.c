@@ -21,7 +21,7 @@ int	render_all_sprites(t_data *dt)
 	sort_sprites_by_distance(dt);
 
 	i = 0;
-	while (i < dt->sprite_count)
+	while (i < *dt->sprite_count)
 	{
 		get_position_and_render_sprite(dt, &dt->sprites[i]);
 		dt->sprites[i].start_x = -1;

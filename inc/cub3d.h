@@ -165,7 +165,6 @@ typedef struct s_ray
 
 typedef struct s_map
 {
-	//char		**map_data;
 	t_mapcell	**map_data;
 	int			map_size_rows;
 	int			map_size_cols;
@@ -175,17 +174,20 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	t_x_y	pos;
-	t_x_y	direction_vector;
-	float	direction_vector_deg;
-	float	plane_x;
-	float	plane_y;
-	char	cell_type_ahead;
-	bool	can_move;
-	bool	is_moving;
-	float	move_speed_multiplier;
-	int		health_level;
-	int		ammo_level;
+	t_x_y		pos;
+	t_x_y		direction_vector;
+	float		direction_vector_deg;
+	float		plane_x;
+	float		plane_y;
+	char		cell_type_ahead;
+	
+	bool		can_move;
+	bool		is_moving;
+
+	float		move_speed_multiplier;
+	int			health_level;
+	// int			ammo_level;
+	
 	t_weapon	*selected_weapon;
 
 }	t_player;
@@ -321,8 +323,18 @@ typedef struct s_level
 	int					consumables_collected;
 	float				score_combo;
 	char				prev_consumable;
-
+	
 	t_map				*map;
+
+	t_sprite_texture	*sprite_textures;
+	size_t				sprite_texture_count;
+	t_sprite			*sprites;
+	size_t				sprite_count;
+	t_sprite			*targeted_sprite;
+
+	t_door				*doors;
+	size_t				door_count;
+
 	float				ambient_light;
 }	t_level;
 
@@ -333,6 +345,9 @@ typedef struct s_data
 	
 	float				sin_table[PRECALCULATED_TRIG];
 	float				cos_table[PRECALCULATED_TRIG];
+
+	t_player			player;
+	float				*ambient_light;
 
 	t_game_status		game_status;
 
@@ -349,30 +364,29 @@ typedef struct s_data
 
 	t_ray				*rays;
 
-	t_map				maps[3];
 	t_map				*map;
-	t_door				*doors;
-	size_t				door_count;
-
-	t_player			player;
 	
 	t_view				*view;
+
 	char				keys[TRACKED_KEYS];
 	t_mouse				mouse;
 
-	t_sprite_texture	*sprite_textures;
-	size_t				sprite_texture_count;
 	t_sprite			*sprites;
-	size_t				sprite_count;
+	size_t				*sprite_count;
+	t_sprite_texture	*sprite_textures;
+	size_t				*sprite_texture_count;
 
-	// void				*welcome_img;
+	t_door				*doors;
+	size_t				*door_count;
+	
+	t_sprite			*targeted_sprite;
 	t_gametime			time;
 
 	t_img				*sky_image;
 	t_img				*message_img;
 
 	void				*background_music;
-	int					has_changed;
+
 	int					frames_drawn_count;
 
 	t_weapon			*weapon;
@@ -381,12 +395,10 @@ typedef struct s_data
 	int 				weapon_is_animating;
 	long				weapon_last_frame_time;
 
-	t_sprite			*targeted_sprite;
-
 	t_level				levels[3];
 	int					active_level;
+
 	int					gamescore;
-	float				*ambient_light;
 	
 	float				test_value_1;
 	float				test_value_2;
@@ -609,7 +621,7 @@ void		calc_texture_coor(t_data *dt, int *texture_y, \
 							float *distance_to_wall, int d);
 
 // inits
-void		init_doors(t_data *dt, t_map *map);
+void		init_doors(t_data *dt, t_map *map, int index);
 
 // controls
 int			set_mouse_to_screen_center(t_data *dt);

@@ -2,7 +2,9 @@
 
 static int setup_player(t_data *dt)
 {
-	dt->player.ammo_level = STARTING_AMMO_LEVEL;
+	print_separator_default();
+	printf(TXT_YELLOW ">>> SETTING UP PLAYER\n" TXT_RESET);
+	// dt->player.ammo_level = STARTING_AMMO_LEVEL;
 	dt->player.health_level = STARTING_HEALTH_LEVEL;
 	return (EXIT_SUCCESS);
 }
@@ -15,11 +17,9 @@ int	setup_dt(t_data *dt)
 	
 	dt->raycasting_scene_img = protected_malloc(sizeof(t_img), dt);
 	dt->final_frame_img = protected_malloc(sizeof(t_img), dt);
-
 	dt->minimap_img = protected_malloc(sizeof(t_img), dt);
 	dt->ui_img = protected_malloc(sizeof(t_img), dt);
 	dt->view = protected_malloc(sizeof(t_view), dt);
-	
 	setup_img(dt, dt->final_frame_img, WINDOW_W, WINDOW_H);
 	setup_img(dt, dt->raycasting_scene_img, WINDOW_W, WINDOW_H);
 	setup_img(dt, dt->minimap_img, MINIMAP_SIZE, MINIMAP_SIZE);
@@ -46,13 +46,15 @@ int	setup_dt(t_data *dt)
 	load_ui_messages(dt);
 	
 	// doors
-	init_doors(dt, dt->map);
+	init_doors(dt, dt->map, dt->active_level);
+	// *dt->door_count = &dt->levels[dt->active_level].door_count;
 	mark_all_cells_that_neighbour_doors(dt);
 	
 	// sprites
 	load_sprites(dt, dt->map);
 
-	dt->targeted_sprite = dt->sprites;
+	// dt->targeted_sprite = dt->sprites[dt->active_level];
+	dt->targeted_sprite = NULL;
 	
 	// view
 	setup_view(dt);
@@ -88,6 +90,7 @@ int	setup_dt(t_data *dt)
 	}
 	
 	dt->ambient_light = &dt->levels[dt->active_level].ambient_light;
+	printf("Level ambient light set!\n");
 
 	// if (BONUS)
 	// 	dt->background_music = init_audio();

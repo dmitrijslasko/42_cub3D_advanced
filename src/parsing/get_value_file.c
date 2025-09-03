@@ -92,8 +92,8 @@ bool	parse_textures(t_map *map, int fd, char **str)
 			}
 			free_array(array);
 		}
-		printf("Line: %s\n", line);
-		printf(">>> Cleaning........\n", line);
+		// printf("Line: %s\n", line);
+		// printf(">>> Cleaning........\n", line);
 		line = free_line_get_next(line, fd);
 	}
 	printf("[TEXTURE] last line returned: \"%s\"\n", line);

@@ -30,12 +30,10 @@ int	load_sprite_textures(t_data *dt)
 	sprite_element_count = count_elements_in_the_map(dt->map, SPRITE_TYPES);
 	printf("Sprite elements found in the map: %zu\n", sprite_element_count);
 	
-	count_sprite_textures(dt);
-	dt->sprite_texture_count = count_sprite_textures2(dt);
-	printf("Sprite types found in the map: %zu\n", dt->sprite_texture_count);
+	*dt->sprite_texture_count = count_sprite_textures2(dt);
+	printf("Sprite types found in the map: %zu\n", *dt->sprite_texture_count);
 
-	dt->sprite_textures = protected_malloc(sizeof(t_sprite_texture) * \
-		dt->sprite_texture_count, dt);
+	dt->sprite_textures = protected_malloc(sizeof(t_sprite_texture) * *dt->sprite_texture_count, dt);
 	
 	load_sprite_images(dt);
 

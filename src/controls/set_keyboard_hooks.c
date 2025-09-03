@@ -52,7 +52,10 @@ int	handle_keyrelease(int keycode, t_data *dt)
 		dt->player.selected_weapon = &dt->weapon[4];
 	}
 	if (dt->keys[XK_m])
-		dt->map = &dt->maps[1];
+	{
+		puts("Switching level!");
+		dt->active_level = (dt->active_level == 0) * 1;
+	}
 	if (dt->keys[XK_8])
 	{
 		float prev_value = *dt->ambient_light;

@@ -28,7 +28,7 @@
 
 # define DEBUG_PRINT                        0
 
-# define MIMIC_FULLSCREEN                   0
+# define MIMIC_FULLSCREEN                   1
 # define CAPTURE_MOUSE                      0
 
 # define SHOW_TARGETED_SPRITE               1

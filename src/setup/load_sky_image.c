@@ -103,8 +103,7 @@ int	load_image(t_data *dt, t_img *img, char *filepath)
 
 	print_separator_default();
 
-	printf(TXT_YELLOW ">>> LOADING IMAGE\n" TXT_RESET);
-	printf("%s\n", filepath);
+	printf(TXT_YELLOW ">>> LOADING IMAGE: %s\n" TXT_RESET, filepath);
 
 	img->mlx_img = mlx_xpm_file_to_image(dt->mlx_ptr, filepath, &w, &h);
 	if (!img->mlx_img)

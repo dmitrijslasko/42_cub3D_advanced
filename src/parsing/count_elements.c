@@ -42,6 +42,7 @@ size_t	count_elements_in_the_map(t_map *map, char *element)
 
 	element_count = 0;
 	row = 0;
+	
 	while (row < map->map_size_rows)
 	{
 		col = 0;

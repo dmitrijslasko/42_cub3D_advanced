@@ -27,13 +27,14 @@ int	load_texture(t_data *dt, t_texture *texture, char *file)
 			&texture->height);
 	if (!texture->texture_img)
 	{
-		//fprintf(stderr, "Failed to load texture from file: %s\n", texture_file);
+		fprintf(stderr, "Failed to load texture from file: %s\n", texture_file);
 		return (EXIT_FAILURE);
 	}
 	texture->texture_data = (int *)mlx_get_data_addr(texture->texture_img,
 			&texture->bpp,
 			&texture->size_line,
 			&texture->endian);
+
 	return (EXIT_SUCCESS);
 }
 
@@ -44,12 +45,13 @@ int	load_textures(t_data *dt)
 
 	print_separator_default();
 	printf(TXT_YELLOW ">>> LOADING TEXTURES\n" TXT_RESET);
+	
 	i = 0;
-	//int index;
 	while (i < NUMBER_TEXTURES)
 	{
 		texture = &dt->map->textures[i].texture;
-		if (!load_texture(dt, texture, texture->xpm_file))
+		
+		if (load_texture(dt, texture, texture->xpm_file) == EXIT_SUCCESS)
 			printf(TXT_GREEN"Texture [%2zu %4s]: %s loaded!\n"TXT_RESET, i, texture->mapfile_repr, texture->xpm_file);
 		else
 			printf(TXT_RED"Texture [%2zu]: not provided in the mapfile.\n"TXT_RESET, i);

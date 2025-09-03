@@ -60,17 +60,18 @@ void	init_dt(t_data *dt)
 	
 	dt->rays = NULL;
 	
-	dt->map = &dt->maps;
-	init_map(dt->map);
-	init_map(&dt->maps[1]);
+	// dt->map = dt[dt->active_level].map;
+	// 	init_map(dt->map);
 
 	dt->doors = NULL;
-	dt->sprite_textures = NULL;
-	dt->sprite_texture_count = 0;
-	dt->sprites = NULL;
-	dt->sprite_count = 0;
+
+	// dt->sprite_textures = NULL;
+	// dt->sprite_texture_count = 0;
+	// dt->sprites = NULL;
+	// dt->sprite_count = 0;
 
 	dt->view = NULL;
+	
 	init_mouse(&dt->mouse);
 	init_graphic(dt);
 	

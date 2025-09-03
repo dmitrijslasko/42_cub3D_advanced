@@ -54,7 +54,7 @@ int	load_sprite_images(t_data *dt)
 	printf("Number of sprite types to be loaded: %zu\n", dt->sprite_texture_count);
 	
 	i = 0;
-	while (i < dt->sprite_texture_count)
+	while (i < *dt->sprite_texture_count)
 	{
 		printf("Loading sprite texture for map_char %c\n", g_sprites[i].map_char);
 		

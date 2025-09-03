@@ -22,6 +22,7 @@ static void	init_a_door(t_data *dt, t_door **door_ptr, \
 						curr_row, curr_col);
 
 	door = *door_ptr;
+
 	door->id = door - dt->doors;
 	door->side_texture_index = get_lookup_table_index_cell_type_by_map_char(door_type) + 1;
 	door->cell_x = curr_col;
@@ -44,7 +45,7 @@ static void	init_a_door(t_data *dt, t_door **door_ptr, \
 	(*door_ptr)++;
 }
 
-void	init_doors(t_data *dt, t_map *map)
+void	init_doors(t_data *dt, t_map *map, int index)
 {
 	t_door	*door_ptr;
 	int		curr_row;
@@ -54,19 +55,21 @@ void	init_doors(t_data *dt, t_map *map)
 	print_separator_default();
 	printf(TXT_YELLOW ">>> INITIALISING DOORS\n" TXT_RESET);
 
-	dt->door_count = count_elements_in_the_map(map, DOOR_TYPES);
-	printf("Doors elements found: %zu\n", dt->door_count);
+	dt->levels[dt->active_level].door_count = count_elements_in_the_map(map, DOOR_TYPES);
+	dt->door_count = &dt->levels[dt->active_level].door_count;
+	printf("Doors elements found: %zu\n", *dt->door_count);
 
-	dt->doors = protected_malloc(sizeof(t_door) * dt->door_count, dt);
+	dt->doors = protected_malloc(sizeof(t_door) * *dt->door_count, dt);
+	
 	door_ptr = dt->doors;
+
 	curr_row = 0;
 	while (curr_row < map->map_size_rows)
 	{
 		curr_col = 0;
 		while (curr_col < map->map_size_cols)
 		{
-			door_type =  get_cell_type_by_coordinates(map,
-						curr_row, curr_col);
+			door_type =  get_cell_type_by_coordinates(map, curr_row, curr_col);
 			if (ft_strchr(DOOR_TYPES, door_type))
 				init_a_door(dt, &door_ptr, curr_row, curr_col);
 			curr_col++;

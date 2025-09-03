@@ -14,6 +14,10 @@
 
 int	fire_gun(t_data *dt)
 {
+	t_sprite *sprite;
+
+	sprite = &dt->sprites;
+
 	dt->mouse.lmb_is_pressed = 1;
 	dt->mouse.lmb_press_count++;
 
@@ -28,13 +32,13 @@ int	fire_gun(t_data *dt)
 
 		for (int i = 0; i < dt->sprite_count; i++)
 		{
-			if (dt->sprites[i].type != ENEMY)
+			if (sprite->type != ENEMY)
 			{
 				i++;
 				continue ;
 			}
-			if (dt->sprites[i].state != DYING)
-				dt->sprites[i].state = SHOOTING;
+			if (sprite->state != DYING)
+				sprite->state = SHOOTING;
 		}
 	}
 	else

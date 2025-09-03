@@ -56,11 +56,15 @@ void	find_all_sprites(t_data *dt, t_map *map)
 	size_t	consumable_count;
 
 	sprite_count = count_elements_in_the_map(map, SPRITE_TYPES);
+	printf("SPRITE COUNT: %d\n", sprite_count);
 	if (!sprite_count)
 		return ;
 	
-	dt->sprite_count = sprite_count;
+	dt->levels[dt->active_level].sprite_count = sprite_count;
+	dt->sprite_count = &dt->levels[dt->active_level].sprite_count;
+
 	dt->sprites = protected_malloc(sprite_count * sizeof(t_sprite), dt);
+	dt->levels[dt->active_level].sprites = dt->sprites;
 	
 	init_sprites(dt);
 

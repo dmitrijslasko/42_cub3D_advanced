@@ -18,13 +18,13 @@ bool	check_and_parse_mapfile(t_data *dt, char *map_file, int map_index)
 
 	if (!check_textures_are_valid(map_file))
 		return (EXIT_FAILURE);
+		
+	dt->map = protected_malloc(sizeof(t_map), dt);
 
 	if (parse_mapfile(map_file, dt))
 		return (EXIT_FAILURE);
 
-	dt->map = protected_malloc(sizeof(t_map), dt);
-
-	if (init_player(&dt->maps[map_index], &dt->player))
+	if (init_player(dt->map, &dt->player))
 		return (EXIT_FAILURE);
 
 	// if (check_map_is_closed(dt->map, &dt->player, dt) == False)

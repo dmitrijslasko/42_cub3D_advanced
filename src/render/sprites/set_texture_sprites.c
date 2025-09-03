@@ -21,7 +21,7 @@ bool	set_sprite_textures(t_data *dt)
 		return (0);
 	
 	i = 0;
-	while (i < dt->sprite_count)
+	while (i < *dt->sprite_count)
 	{
 		j = 0;
 		while (j < dt->sprite_texture_count)
@@ -35,5 +35,6 @@ bool	set_sprite_textures(t_data *dt)
 		}
 		i++;
 	}
+	printf("Set sprite textures!\n");
 	return (0);
 }

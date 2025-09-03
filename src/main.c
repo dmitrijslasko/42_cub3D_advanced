@@ -149,7 +149,14 @@ int	main(int argc, char **argv)
 
 	char *game_levels[] = {	"./maps/good/01_level.cub",
 							"./maps/good/02_level.cub",
+							"./maps/good/03_level.cub",
 							NULL};
+
+	dt.active_level = 2;
+	dt.map = &dt.levels[dt.active_level].map;
+	dt.sprites = &dt.levels[dt.active_level].sprites;
+	dt.sprite_texture_count = &dt.levels[dt.active_level].sprite_texture_count;
+	dt.doors = &dt.levels[dt.active_level].doors;
 
 	// check_and_parse_map(&dt, argc, game_levels[0]);
 	// check_and_parse_args(&dt, argc, argv);
@@ -157,7 +164,7 @@ int	main(int argc, char **argv)
 
 	// precalculate sin and cos lookup tables
 	precalculate_trig_tables(&dt);
-
+	
 	// setup minilibx stuff
 	if (setup_mlx_and_win(&dt))
 		return (MLX_ERROR);
@@ -172,8 +179,6 @@ int	main(int argc, char **argv)
 
 	// setup dt - sets up the whole game structure and data
 	dt.game_status = WELCOME_SCREEN;
-	dt.active_level = 1;
-	dt.map = &dt.maps[dt.active_level];
 
 	setup_dt(&dt);
 
@@ -185,10 +190,11 @@ int	main(int argc, char **argv)
 
 	printf("🎮 Starting game!\n");
 	printf("Consumables to collect in this level: %d\n", dt.levels[dt.active_level].level_consumable_count);
+	print_separator(1, DEF_SEPARATOR_CHAR);
 	
 	dt.player.pos.x = 1.5;
 	dt.player.pos.y = 1.5;
-	
+
 	mlx_loop_hook(dt.mlx_ptr, &render_frame, &dt);
 	mlx_loop(dt.mlx_ptr);
 
