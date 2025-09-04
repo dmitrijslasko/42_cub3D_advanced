@@ -47,15 +47,13 @@ int	handle_keyrelease(int keycode, t_data *dt)
 	if (dt->keys[XK_4])
 		dt->player.selected_weapon = &dt->weapon[3];
 	if (dt->keys[XK_5])
-	{
-		print_level_map(&get_curr_level(dt)->map);
-		dt->active_level = (dt->active_level == 0) * 2;
 		dt->player.selected_weapon = &dt->weapon[4];
-	}
-	if (dt->keys[XK_m])
+	if (dt->keys[XK_7])
 	{
 		puts("Switching level!");
-		dt->active_level = (dt->active_level == 0) * 1;
+		print_level_map(&get_curr_level(dt)->map);
+		dt->active_level += 1;
+		dt->active_level %= 3;
 	}
 	if (dt->keys[XK_8])
 	{
@@ -85,7 +83,9 @@ void	setup_keyboard_hooks(t_data *dt)
 	mlx_hook(dt->win_ptr, 17, 0, keypress_exit, dt);
 
 	mlx_do_key_autorepeatoff(dt->mlx_ptr);
-	if (BONUS && ENABLE_MOUSE)
+
+	if (ENABLE_MOUSE)
 		mlx_mouse_hide(dt->mlx_ptr, dt->win_ptr);
+
 	printf(" Done!\n");
 }

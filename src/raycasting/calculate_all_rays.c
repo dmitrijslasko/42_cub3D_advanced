@@ -18,6 +18,7 @@ int	calculate_all_rays(t_data *dt)
 	t_x_y	vector;
 	double	angle;
 
+	debug_print("Casting rays...\n");
 	if (CASTED_RAYS_COUNT == 1)
 		angle = 0.0f;
 	else

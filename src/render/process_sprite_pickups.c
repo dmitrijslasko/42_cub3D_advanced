@@ -1,0 +1,48 @@
+#include "cub3d.h"
+
+int process_sprite_pickups(t_data *dt)
+{
+	t_sprite *sprite = find_sprite_at(dt, (size_t)dt->player.pos.x, (size_t)dt->player.pos.y);
+
+	// health pickup
+	if (sprite && !sprite->is_hidden && sprite->map_char == '+')
+	{
+		sprite->is_hidden = 1;
+		system("aplay sounds/health.wav &");
+		dt->player.health_level = ft_min(100, dt->player.health_level += 10);
+	}
+
+	// food pickup
+	if (sprite && !sprite->is_hidden && ft_strchr(CONSUMABLE_TYPES, sprite->map_char))
+	{
+		sprite->is_hidden = 1;
+		dt->levels[dt->active_level].consumables_collected++;
+		
+		// level score && total game score
+		dt->levels[dt->active_level].level_score += 100 * dt->levels[dt->active_level].score_combo;
+		dt->gamescore += 100 * dt->levels[dt->active_level].score_combo;
+
+		if (!dt->levels[dt->active_level].prev_consumable || sprite->map_char == dt->levels[dt->active_level].prev_consumable)
+			dt->levels[dt->active_level].score_combo += 0.2f;
+		else
+			dt->levels[dt->active_level].score_combo = 1.0f;
+		dt->levels[dt->active_level].prev_consumable = sprite->map_char;
+	}
+
+	// key pickup pickup - game won!
+	if (sprite && !sprite->is_hidden && sprite->map_char == '$')
+	{
+		if (dt->levels[dt->active_level].level_consumable_count > dt->levels[dt->active_level].consumables_collected)
+			mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Not all goodies are collected!");
+		else 
+		{
+			printf("Level #%d finished!\n", dt->active_level);
+			print_separator(1, DEF_SEPARATOR_CHAR);
+			if (dt->active_level == 3)
+				dt->game_status = GAME_WON_SCREEN;
+			else
+				dt->game_status = LEVEL_FINISH;
+		}
+	}
+	return (EXIT_SUCCESS);
+}

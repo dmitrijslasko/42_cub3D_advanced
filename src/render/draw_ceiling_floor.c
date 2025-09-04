@@ -64,7 +64,9 @@ int	apply_distance_shadow_distance(int distance, int *color)
 	r = ((*color >> 16) & 0xFF) * shade;
 	g = ((*color >> 8) & 0xFF) * shade;
 	b = ((*color >> 0) & 0xFF) * shade;
+	
 	*color = (r << 16) | (g << 8) | (b << 0);
+	
 	return (EXIT_SUCCESS);
 }
 

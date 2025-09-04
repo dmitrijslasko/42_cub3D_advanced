@@ -31,13 +31,14 @@ t_sprite	*find_sprite_at(t_data *dt, int x, int y)
 {
 	size_t	i;
 
+	size_t	sprite_count = get_curr_level(dt)->sprite_count;
+	t_sprite	*sprites = get_curr_level(dt)->sprites;
+
 	i = 0;
-	// printf("Sprite count: %d\n", *dt->sprite_count);
-	// printf("Sprite count: %d\n", dt->levels[dt->active_level].sprite_count);
-	while (i < *dt->sprite_count)
+	while (i < sprite_count)
 	{
-		if ((int)dt->sprites[i].pos.x == x && (int)dt->sprites[i].pos.y == y)
-			return (&dt->sprites[i]);
+		if ((int)sprites[i].pos.x == x && (int)sprites[i].pos.y == y)
+			return (&sprites[i]);
 		i++;
 	}
 	return (NULL);

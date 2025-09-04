@@ -31,6 +31,8 @@
 # define MIMIC_FULLSCREEN                   0
 # define CAPTURE_MOUSE                      0
 
+# define NUMBER_OF_LEVELS                   3
+
 # define SHOW_TARGETED_SPRITE               0
 // window name
 # define WINDOW_NAME       "cub3D - dmlasko @ 42Berlin"
@@ -47,6 +49,7 @@
 # define MENU_PATHFILE	        "./sprites/menu-screen-1.xpm"
 # define MENU2_PATHFILE	        "./sprites/menu-screen-2.xpm"
 # define GAME_WON_PATHFILE	    "./sprites/menu-game-won.xpm"
+# define LEVEL_CLEARED_PATHFILE	    "./sprites/menu-level-cleared.xpm"
 
 // window size
 # define WINDOW_W							640
@@ -192,7 +195,7 @@
 
 // shaders
 # define ENABLE_SHADERS						1
-# define DISTANCE_SHADOW_STRENGTH 			0.1f
+# define DISTANCE_SHADOW_STRENGTH 			0.4f
 # define WALL_ORIENTATION_SHADOW_STRENGTH   0.4f
 
 # define ENABLE_MOVING_SKY					1

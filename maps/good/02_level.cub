@@ -4,7 +4,7 @@ DEF         textures/default-fallback-texture.xpm
 F1          textures/wolfenstein/wood.xpm
 C1          textures/floor-grey-noise.xpm
 
-W01         textures/wolfenstein/grey_stone.xpm
+W01         textures/wolfenstein/blue-wall.xpm
 W02         textures/wolfenstein/red_brick.xpm
 W03 	    textures/wolfenstein/grey_stone.xpm
 W04 	    textures/wolfenstein/grey_stone.xpm

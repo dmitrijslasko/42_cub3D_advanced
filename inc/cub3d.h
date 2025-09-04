@@ -76,9 +76,9 @@ typedef enum e_game_status {
 	WELCOME_SCREEN = 1,
 	MENU_SCREEN,
 	PAUSE_SCREEN,
-	LEVEL01_START,
-	LEVEL01_GAME,
-	LEVEL01_FINISH,
+	LEVEL_START,
+	LEVEL_GAME,
+	LEVEL_FINISH,
 	GAME_SCREEN,
 	GAME_WON_SCREEN,
 }	t_game_status;
@@ -277,10 +277,6 @@ typedef struct s_sprite
 	
 	int					is_hidden;
 	char				is_blocking;
-
-	// char				*path;
-	// float			width;
-	// float			height;
 	
 	t_x_y				pos;
 	t_coor				size;
@@ -291,6 +287,7 @@ typedef struct s_sprite
 	int					health_level;
 	t_sprite_state		state;
 
+	// int				total_frame_count;
 	int					starting_frame;
 	int					current_frame;
 	long				last_frame_time;
@@ -298,8 +295,7 @@ typedef struct s_sprite
 	int					start_x;
 	int					center_x;
 	int					aim;
-/*  */
-	// int				total_frame_count;
+
 }	t_sprite;
 
 typedef struct s_gametime
@@ -309,12 +305,6 @@ typedef struct s_gametime
 	long				start_time;
 }	t_gametime;
 
-// typedef struct s_item
-// {
-// 	int	is_weapon;
-// 	int ammo_level;
-// 	int frame_count;
-// }	t_item;
 
 typedef struct s_level
 {
@@ -354,6 +344,7 @@ typedef struct s_data
 
 	t_img				*game_menu_img;
 	t_img				*game_menu_img2;
+	t_img				*game_level_cleared_img;
 	t_img				*game_won_img;
 
 	t_img				*raycasting_scene_img;
@@ -396,7 +387,7 @@ typedef struct s_data
 	int 				weapon_is_animating;
 	long				weapon_last_frame_time;
 
-	t_level				levels[3];
+	t_level				levels[NUMBER_OF_LEVELS];
 	int					active_level;
 
 	int					gamescore;
@@ -731,22 +722,31 @@ int mark_all_cells_that_neighbour_doors(t_data *dt);
 
 int is_in_list(char *str, char *list);
 
-int	fire_gun(t_data *dt);
+int		fire_gun(t_data *dt);
 
-int print_out_texture_lookup_table(t_data *dt);
+int		print_out_texture_lookup_table(t_data *dt);
 
-int	setup_dt(t_data *dt);
+int		setup_dt(t_data *dt);
 
 void	draw_flashlight(t_data *dt, t_img *img, int radius, int clr);
 
 void	show_level_info(t_data *dt);
 
-int	load_menu_image(t_data *dt);
-int	load_menu_image_2(t_data *dt);
-int	load_menu_image_3(t_data *dt);
-
-int	keypress_exit(t_data *dt);
+int		keypress_exit(t_data *dt);
 
 t_level *get_curr_level(t_data *dt);
+
+int				debug_print(char *str);
+unsigned long	get_focused_window_id(void);;
+int				move_active_window_to_mouse_position_with_xdotool(void);
+int				move_mouse_to_center_of_active_window(void);
+int				setup_keyboard_and_mouse_controls(t_data *dt);
+
+int 		process_sprite_pickups(t_data *dt);
+int process_game_status(t_data *dt);
+int	bob_weapon(t_data *dt);
+void	bob_walls(t_data *dt);
+int	update_prompt_message(t_data *dt);
+
 
 #endif

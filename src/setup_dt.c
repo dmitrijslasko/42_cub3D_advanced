@@ -15,11 +15,11 @@ int	setup_dt(t_data *dt)
 	init_rays(dt);
 	init_keys(dt);
 	
-	dt->raycasting_scene_img = protected_malloc(sizeof(t_img), dt);
 	dt->final_frame_img = protected_malloc(sizeof(t_img), dt);
+	dt->raycasting_scene_img = protected_malloc(sizeof(t_img), dt);
 	dt->minimap_img = protected_malloc(sizeof(t_img), dt);
 	dt->ui_img = protected_malloc(sizeof(t_img), dt);
-	dt->view = protected_malloc(sizeof(t_view), dt);
+
 	setup_img(dt, dt->final_frame_img, WINDOW_W, WINDOW_H);
 	setup_img(dt, dt->raycasting_scene_img, WINDOW_W, WINDOW_H);
 	setup_img(dt, dt->minimap_img, MINIMAP_SIZE, MINIMAP_SIZE);
@@ -28,16 +28,20 @@ int	setup_dt(t_data *dt)
 	// player
 	setup_player(dt);
 	
+	dt->view = protected_malloc(sizeof(t_view), dt);
+	
 	dt->sky_image = protected_malloc(sizeof(t_img), dt);
 	load_image(dt, dt->sky_image, SKY_TXT_PATHFILE);
 
 	// game menu image setup
 	dt->game_menu_img = protected_malloc(sizeof(t_img), dt);
 	dt->game_menu_img2 = protected_malloc(sizeof(t_img), dt);
+	dt->game_level_cleared_img = protected_malloc(sizeof(t_img), dt);
 	dt->game_won_img = protected_malloc(sizeof(t_img), dt);
 
 	load_image(dt, dt->game_menu_img, MENU_PATHFILE);
 	load_image(dt, dt->game_menu_img2, MENU2_PATHFILE);
+	load_image(dt, dt->game_level_cleared_img, LEVEL_CLEARED_PATHFILE);
 	load_image(dt, dt->game_won_img, GAME_WON_PATHFILE);
 	
 	load_ui_messages(dt);
@@ -67,7 +71,7 @@ int	setup_dt(t_data *dt)
 	dt->gamescore = 0;
 	
 	int i = 0;
-	while (i < 3)
+	while (i < NUMBER_OF_LEVELS)
 	{
 		printf(">>>>>>>> %d <<<<<<<<\n", i);
 		dt->levels[i].id = i;
@@ -81,11 +85,6 @@ int	setup_dt(t_data *dt)
 		
 		// sprites - map level
 		load_sprites(dt, &dt->levels[i], &dt->levels[i].map, i);
-
-		printf("MAP CHAR 0: %c\n", dt->levels[0].sprites[0].map_char);
-		printf("MAP CHAR 1: %c\n", dt->levels[0].sprites[1].map_char);
-		printf("MAP CHAR 2: %c\n", dt->levels[0].sprites[2].map_char);
-		printf("MAP CHAR 3: %c\n", dt->levels[0].sprites[3].map_char);
 		
 		int sprite_count = dt->levels[0].sprite_count;
 		int texture_count = dt->levels[0].sprite_texture_count;
@@ -95,7 +94,7 @@ int	setup_dt(t_data *dt)
 		dt->levels[i].level_score = 0;
 		dt->levels[i].score_combo = 1.0f;
 		dt->levels[i].prev_consumable = 0;
-		dt->levels[i].ambient_light = i * 1000.0f;
+		dt->levels[i].ambient_light = i * 100.0f;
 		i++;
 	}
 	

@@ -12,59 +12,6 @@
 
 #include "cub3d.h"
 
-int	update_prompt_message(t_data *dt)
-{
-	t_coor	cell_ahead;
-	t_map	*map = &get_curr_level(dt)->map;
-
-	debug_print("Updating prompt messages!\n");
-	cell_ahead = get_cell_ahead(dt);
-	dt->player.cell_type_ahead = get_cell_type(map, &cell_ahead);
-	if (ft_strchr(DOOR_TYPES, dt->player.cell_type_ahead))
-		dt->view->show_door_open_message = 1;
-	else
-		dt->view->show_door_open_message = 0;
-	return (EXIT_SUCCESS);
-}
-
-static int	render_minimap_and_ui(t_data *dt)
-{
-	if (dt->view->show_minimap)
-		put_img_to_img(dt->final_frame_img, dt->minimap_img, MINIMAP_OFFSET_X, MINIMAP_OFFSET_Y);
-	render_ui(dt);
-	return (EXIT_SUCCESS);
-}
-
-void	bob_walls(t_data *dt)
-{
-		float speed;
-		float amplitude;
-		int y_offset;
-		if (dt->player.is_moving == 1)
-		{
-			amplitude = 2.0f;
-			speed = 0.008f;
-			y_offset = amplitude * sin((dt->time.last_time - dt->time.start_time) * speed); // total_time in seconds, or use a step counter
-			dt->view->screen_center_y += y_offset;
-		}
-
-}
-
-int	bob_weapon(t_data *dt)
-{
-	float speed;
-	int amplitude;
-	int y_offset;
-
-	speed = 0.004f; // higher = faster oscillation (tweak to taste)
-	if (dt->player.move_speed_multiplier == 1)
-		amplitude = 10;
-	else
-		amplitude = 2;
-	y_offset = amplitude * sin((dt->time.last_time - dt->time.start_time) * speed); // total_time in seconds, or use a step counter;
-	return (y_offset);
-}
-
 int print_out_sprite_info(t_data *dt)
 {
 	t_sprite 	*sprites;
@@ -81,54 +28,11 @@ int print_out_sprite_info(t_data *dt)
 	}
 }
 
-int process_sprite_pickups(t_data *dt)
-{
-	t_sprite *sprite = find_sprite_at(dt, (size_t)dt->player.pos.x, (size_t)dt->player.pos.y);
-
-	// health pickup
-	if (sprite && !sprite->is_hidden && sprite->map_char == '+')
-	{
-		sprite->is_hidden = 1;
-		system("aplay sounds/health.wav &");
-		dt->player.health_level = ft_min(100, dt->player.health_level += 10);
-	}
-
-	// food pickup
-	if (sprite && !sprite->is_hidden && ft_strchr(CONSUMABLE_TYPES, sprite->map_char))
-	{
-		sprite->is_hidden = 1;
-		dt->levels[dt->active_level].consumables_collected++;
-		
-		// level score && total game score
-		dt->levels[dt->active_level].level_score += 100 * dt->levels[dt->active_level].score_combo;
-		dt->gamescore += 100 * dt->levels[dt->active_level].score_combo;
-
-		if (!dt->levels[dt->active_level].prev_consumable || sprite->map_char == dt->levels[dt->active_level].prev_consumable)
-			dt->levels[dt->active_level].score_combo += 0.2f;
-		else
-			dt->levels[dt->active_level].score_combo = 1.0f;
-		dt->levels[dt->active_level].prev_consumable = sprite->map_char;
-	}
-
-	// key pickup pickup - game won!
-	if (sprite && !sprite->is_hidden && sprite->map_char == '$')
-	{
-		if (dt->levels[dt->active_level].level_consumable_count > dt->levels[dt->active_level].consumables_collected)
-			mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Not all goodies are collected!");
-		else 
-		{
-			printf("Level won!\n");
-			print_separator(1, DEF_SEPARATOR_CHAR);
-			dt->game_status = GAME_WON_SCREEN;
-		}
-	}
-	return (EXIT_SUCCESS);
-}
-
 int animate_weapon(t_data *dt)
 {
 	long now;
 
+	debug_print("Animating weapons...");
 	if (dt->weapon_is_animating == 1)
 	{
 		now = dt->time.last_time;
@@ -193,35 +97,6 @@ int animate_doors(t_data *dt)
     return (EXIT_SUCCESS);
 }
 
-int process_game_status(t_data *dt)
-{
-	// game menu
-	// printf("Current game status == %d\n", dt->game_status);
-	if (dt->game_status == WELCOME_SCREEN)
-	{
-		mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr, dt->game_menu_img->mlx_img, 0, 0);
-		if (dt->keys[XK_space] == 0)	
-			return (dt->game_status);
-		else 
-			dt->game_status = MENU_SCREEN;
-		dt->keys[XK_space] = 0;
-
-	}
-
-	if (dt->game_status == MENU_SCREEN)
-	{
-		mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr, dt->game_menu_img2->mlx_img, 0, 0);
-		if (dt->keys[XK_space] == 0)	
-			return (dt->game_status);
-		else 
-			dt->game_status = GAME_SCREEN;
-	}
-
-	if (dt->game_status == GAME_WON_SCREEN)
-		mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr, dt->game_won_img->mlx_img, 0, 0);
-	return (dt->game_status);
-}
-
 int	render_frame(void *param)
 {
 	t_data		*dt;
@@ -230,7 +105,7 @@ int	render_frame(void *param)
 
 	dt = (t_data *) param;
 
-	// reset_mouse_position(dt);
+	reset_mouse_position(dt);
 
 	current_time = get_current_time_in_ms();
 	dt->time.delta_time = current_time - dt->time.last_time;
@@ -244,13 +119,11 @@ int	render_frame(void *param)
 	if (process_game_status(dt) != GAME_SCREEN)
 		return (dt->game_status);
 
-	// printf("\rPLAYER: %f %f\n", dt->player.pos.x, dt->player.pos.y);
 	process_keyboard_keypresses(dt);
 
 	animate_weapon(dt);
 	animate_doors(dt);
-	
-	debug_print("Calculating rays\n");
+
 	calculate_all_rays(dt);
 
 	render_3d_scene(dt);
@@ -267,19 +140,17 @@ int	render_frame(void *param)
 
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr,dt->final_frame_img->mlx_img, 0, 0);
 	
-	// show_debug_info(dt);
+	show_debug_info(dt);
  	show_player_info(dt);
 	show_level_info(dt);
 
-	// process_sprite_pickups(dt);
+	process_sprite_pickups(dt);
 
-	update_prompt_message(dt);
+
 	// render_ui_message(dt);
+	update_prompt_message(dt);
 	if (dt->view->show_door_open_message)
-	{
-		printf("Showing door open message!\n");
 		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press E to open the shoji");
-	}
 	
 	y_offset = 0;
 	if (ENABLE_BOBBING)

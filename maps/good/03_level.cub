@@ -1,10 +1,10 @@
 
 DEF         textures/default-fallback-texture.xpm
 
-F1          textures/wolfenstein/wood.xpm
+F1          textures/wolfenstein/red_brick.xpm
 C1          textures/floor-grey-noise.xpm
 
-W01         textures/wolfenstein/grey_stone.xpm
+W01         textures/wolfenstein/red_brick.xpm
 W02         textures/wolfenstein/red_brick.xpm
 W03 	    textures/wolfenstein/grey_stone.xpm
 W04 	    textures/wolfenstein/grey_stone.xpm
@@ -23,12 +23,18 @@ DOOR_03_S   textures/bookshelf.xpm
 
 ED1    	    textures/wolf44.xpm
 
-2222222222222222222
-1 E $    |        1
-1    8 8 8 8 8 8 81
-1####             1
-1    8 8 8 8 8 8 81
-1####             1
-1    8 8 8 8 8 8 81
-1####             1
-2222222222222222222
+11111111111111111111111111111111111111111111111111
+1 E $                                            1
+1    8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
+1#### A                                          1
+1    8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
+1a                                               1
+1    8 8 8 1-1-1 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
+1a         | # |                                 1
+1    8 8 8 1-1-1 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
+1a                                               1
+1    8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
+1a                                               1
+1    8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
+1a                                               1
+11111111111111111111111111111111111111111111111111
