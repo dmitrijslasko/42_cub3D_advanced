@@ -21,14 +21,15 @@ static void	init_sprites(t_data *dt, int j)
 	t_level *level = &dt->levels[j];
 
 	i = 0;
+
 	row = 0;
-	
 	while (row < level->map.map_size_rows && i < level->sprite_count)
 	{
 		col = 0;
 		while (col < level->map.map_size_cols && i < level->sprite_count)
 		{
 			c = get_cell_type_by_coordinates(&level->map, row, col);
+			
 			if (ft_strchr(SPRITE_TYPES, c))
 			{
 				level->sprites[i].id = i;
@@ -36,14 +37,16 @@ static void	init_sprites(t_data *dt, int j)
 				level->sprites[i].type = STATIC;
 				if (ft_strchr("ABC", c))
 					level->sprites[i].type = ENEMY;
+
 				level->sprites[i].pos.x = col + 0.5;
 				level->sprites[i].pos.y = row + 0.5;
+
 				level->sprites[i].is_hidden = 0;
 				level->sprites[i].orientation = 180.0f;
 				level->sprites[i].state = 0;
 				level->sprites[i].current_frame = 0;
 				level->sprites[i].last_frame_time = 0;
-				// dt->sprites[i].orientation = dt->sprites[i].texture->orientation;
+				
 				i++;
 			}
 			col++;

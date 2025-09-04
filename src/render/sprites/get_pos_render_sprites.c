@@ -49,7 +49,10 @@ int	get_position_and_render_sprite(t_data *dt, t_sprite *sprite)
 	offset.x = sprite_screen_x - sprite_size.x / 3;
 	offset.y = dt->view->screen_center_y - sprite_size.y / 3;
 
+	// print_separator_default();
+	// printf("SIZE: %d %d\n", sprite_size.x, sprite_size.y);
+	// printf("OFFSET: %d %d\n", offset.x, offset.y);
+	// printf("SPRITE CHAR: %c\n", sprite->map_char);
 	render_sprite(dt, sprite, &offset, &sprite_size);
-	
 	return (EXIT_SUCCESS);
 }

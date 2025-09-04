@@ -82,6 +82,16 @@ int	setup_dt(t_data *dt)
 		// sprites - map level
 		load_sprites(dt, &dt->levels[i], &dt->levels[i].map, i);
 
+		printf("MAP CHAR 0: %c\n", dt->levels[0].sprites[0].map_char);
+		printf("MAP CHAR 1: %c\n", dt->levels[0].sprites[1].map_char);
+		printf("MAP CHAR 2: %c\n", dt->levels[0].sprites[2].map_char);
+		printf("MAP CHAR 3: %c\n", dt->levels[0].sprites[3].map_char);
+		
+		int sprite_count = dt->levels[0].sprite_count;
+		int texture_count = dt->levels[0].sprite_texture_count;
+
+		set_sprite_textures(dt, i);
+
 		dt->levels[i].level_score = 0;
 		dt->levels[i].score_combo = 1.0f;
 		dt->levels[i].prev_consumable = 0;

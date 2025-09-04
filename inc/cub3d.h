@@ -651,7 +651,7 @@ void		sort_sprites_by_distance(t_data *dt);
 void		sort_sprites(t_sprite *sprites, size_t num_sprites);
 int			render_all_sprites(t_data *dt);
 int			get_position_and_render_sprite(t_data *dt, t_sprite *sprite);
-bool		set_sprite_textures(t_data *dt);
+bool		set_sprite_textures(t_data *dt, int i);
 void		sprite_put_color(t_data *dt, t_sprite *sprite, \
 										t_coor *coor, t_coor *tex_coor);
 t_coor		calculate_tex_x_y(t_sprite_texture *texture, t_coor *coor, \
@@ -679,7 +679,7 @@ void		free_texture(t_data *dt, t_texture *texture);
 void		free_img(t_img *img, void *mlx_ptr);
 void		free_sprites(t_data *dt);
 void		ft_free(void *ptr);
-int			count_sprite_textures(t_data *dt);
+// int			count_sprite_textures(t_data *dt);
 size_t		count_if_there_is_others_elements(t_map *map, char *element);
 
 //dda
@@ -708,7 +708,7 @@ void		print_obstacle_info(t_data *dt, void *mlx, void *win, int *y);
 void		print_player_position(t_data *dt, void *mlx, void *win, int *y);
 void		print_enemy_info(t_data *dt, void *mlx, void *win, int *y);
 
-int			load_sprite_images(t_data *dt);
+int	load_sprite_images(t_data *dt, int i);
 int			load_weapons(t_data *dt);
 
 void		show_player_info(t_data *dt);

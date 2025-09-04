@@ -244,10 +244,11 @@ int	render_frame(void *param)
 	if (process_game_status(dt) != GAME_SCREEN)
 		return (dt->game_status);
 
+	// printf("\rPLAYER: %f %f\n", dt->player.pos.x, dt->player.pos.y);
 	process_keyboard_keypresses(dt);
 
-	// animate_weapon(dt);
-	// animate_doors(dt);
+	animate_weapon(dt);
+	animate_doors(dt);
 	
 	debug_print("Calculating rays\n");
 	calculate_all_rays(dt);
@@ -256,8 +257,8 @@ int	render_frame(void *param)
 	
 	put_img_to_img(dt->final_frame_img, dt->raycasting_scene_img, 0, 0);
 
-	// if (RENDER_SPRITES)
-	// 	render_all_sprites(dt);
+	if (RENDER_SPRITES)
+		render_all_sprites(dt);
 	
 	// show minimap
 	// if (dt->view->show_minimap)
@@ -267,30 +268,30 @@ int	render_frame(void *param)
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr,dt->final_frame_img->mlx_img, 0, 0);
 	
 	// show_debug_info(dt);
- 	// show_player_info(dt);
+ 	show_player_info(dt);
 	show_level_info(dt);
 
 	// process_sprite_pickups(dt);
 
-	// update_prompt_message(dt);
-	// // render_ui_message(dt);
-	// if (dt->view->show_door_open_message)
-	// {
-	// 	printf("Showing door open message!\n");
-	// 	mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press E to open the shoji");
-	// }
+	update_prompt_message(dt);
+	// render_ui_message(dt);
+	if (dt->view->show_door_open_message)
+	{
+		printf("Showing door open message!\n");
+		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press E to open the shoji");
+	}
 	
-	// y_offset = 0;
-	// if (ENABLE_BOBBING)
-	// {
-	// 	bob_walls(dt);
-	// 	y_offset = bob_weapon(dt);
-	// }
+	y_offset = 0;
+	if (ENABLE_BOBBING)
+	{
+		bob_walls(dt);
+		y_offset = bob_weapon(dt);
+	}
 
-	// // render weapon	
-	// if (dt->player.selected_weapon->type == WEAPON_PISTOL)
-	// 	put_img_to_img(dt->final_frame_img, &dt->weapon_img[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
-	// dt->frames_drawn_count++;
+	// render weapon	
+	if (dt->player.selected_weapon->type == WEAPON_PISTOL)
+		put_img_to_img(dt->final_frame_img, &dt->weapon_img[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
+	dt->frames_drawn_count++;
 	// print_out_sprite_info(dt);
 
 	return (EXIT_SUCCESS);

@@ -20,15 +20,14 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 	t_coor  coor;
 	t_coor  sprite_texture_coor;
 	int		targets_sprite;
+	int 	sprite_animation_speed;
 
 	targets_sprite = 0;
 
 	// skip if sprite is not shown
 	if (sprite->is_hidden)
 		return (0);
-
-	int sprite_animation_speed;
-
+	
 	set_animation_speed(sprite, &sprite_animation_speed);
 	if (dt->time.last_time - sprite->last_frame_time > (1000 / FPS) * sprite_animation_speed)
 	{
@@ -59,7 +58,6 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 	while (coor.y < sprite_size->y + offset->y && coor.y < WINDOW_H)
 	{
 		coor.x = ft_max(offset->x, 0);
-
 		while (coor.x < sprite_size->x + offset->x && coor.x < WINDOW_W)
 		{
 			if (sprite_is_closer_than_wall(dt, &coor, sprite))
@@ -72,6 +70,7 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 				if (sprite->state == MOVING)
 				{
 					row = sprite->current_frame;
+
 					float angle = 180.0f - sprite->orientation_to_player;
 					col = (int)lroundf(angle / 45.0f);
 				}
@@ -90,9 +89,8 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 					float angle = 180.0f - sprite->orientation_to_player;
 					col = (int)lroundf(angle / 45.0f);		
 				}
-
+				
 				sprite_texture_coor = calculate_tex_x_y(sprite->texture, &coor, offset, sprite, row, col);
-
 				sprite_put_color(dt, sprite, &coor, &sprite_texture_coor);
 				
 				if (sprite->start_x == -1)
@@ -100,6 +98,7 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 					sprite->start_x = coor.x;
 					sprite->center_x = coor.x + sprite_size->x / 2;
 				}
+
 				float aim;
 				float distance;
 					
@@ -115,7 +114,6 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 		}
 		coor.y++;
 	}
-
 
 	if (targets_sprite && sprite->type == ENEMY)
 		dt->targeted_sprite = sprite;

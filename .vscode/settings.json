@@ -39,6 +39,7 @@
 		"vector": "c",
 		"iterator": "c",
 		"format": "c",
-		"cstdint": "c"
+		"cstdint": "c",
+		"variant": "c"
 	}
 }

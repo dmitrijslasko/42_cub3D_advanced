@@ -176,8 +176,6 @@ int	main(int argc, char **argv)
 	// setup dt - sets up the whole game structure and data
 	setup_dt(&dt);
 
-	// set_sprite_textures(&dt);
-
 	// draw_minimap_base_img(&dt);
 
 	print_separator(3, DEF_SEPARATOR_CHAR);
