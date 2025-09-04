@@ -146,11 +146,10 @@ int	render_frame(void *param)
 
 	process_sprite_pickups(dt);
 
-
 	// render_ui_message(dt);
 	update_prompt_message(dt);
 	if (dt->view->show_door_open_message)
-		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press E to open the shoji");
+		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, OPEN_DOOR_PROMPT);
 	
 	y_offset = 0;
 	if (ENABLE_BOBBING)

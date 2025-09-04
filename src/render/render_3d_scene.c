@@ -3,6 +3,7 @@
 static int	render_floor_and_ceiling(t_data *dt)
 {
 	draw_sky(dt);
+	
 	draw_ceiling(dt);
 	draw_floor(dt);
 	

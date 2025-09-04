@@ -49,6 +49,7 @@ int	main(int argc, char **argv)
 
 	dt.game_status = WELCOME_SCREEN;
 	dt.active_level = 0;
+	update_current_level_pointers(&dt);
 	printf("Game status set!\n");
 	printf("Current level: %d\n", dt.active_level);
 	printf("🎮 Starting game!\n");

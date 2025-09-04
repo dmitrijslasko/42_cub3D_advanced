@@ -25,7 +25,7 @@ int draw_textured_floor(t_data *dt)
 		float fov_factor = tanf((FIELD_OF_VIEW_DEG * adjustment) * (M_PI / 180.0f));
 
         int p = current_row - dt->view->screen_center_y;
-        float rowDistance = ((0.5f * WINDOW_H) / p) / fov_factor - dt->test_value_2;
+        float rowDistance = ((0.5f * WINDOW_H) / p) / fov_factor;
 
         // Calculate step size for each screen pixel
         float floorStepX = rowDistance * (rayDirX1 - rayDirX0) / WINDOW_W;
@@ -45,12 +45,14 @@ int draw_textured_floor(t_data *dt)
             // Calculate texture coordinates within cell
             int texX = (int)(TILE_SIZE * (floorX - cellX)) & (TILE_SIZE - 1);
             int texY = (int)(TILE_SIZE * (floorY - cellY)) & (TILE_SIZE - 1);
-
-            texture = dt->map->textures[FLOOR].texture;
+            
+            // texture = get_curr_level(dt)->map.textures[FLOOR].texture;
+            texture = dt->levels[0].map.textures->texture;
 
             // Get color and draw pixel
             color = texture.texture_data[TILE_SIZE * texY + texX];
-			apply_distance_shadow_distance(*dt->ambient_light, &color);
+            // color = BLUE;
+			// apply_distance_shadow_distance(*dt->ambient_light, &color);
             img_pix_put(dt->raycasting_scene_img, x, current_row, color);
 
             floorX += floorStepX;

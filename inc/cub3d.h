@@ -43,6 +43,8 @@
 # include "texture_lookup.h"
 # include "weapons.h"
 # include "sprites.h"
+# include "messages.h"
+
 //# include "sound.h"
 
 // structs
@@ -747,6 +749,8 @@ int process_game_status(t_data *dt);
 int	bob_weapon(t_data *dt);
 void	bob_walls(t_data *dt);
 int	update_prompt_message(t_data *dt);
+
+int update_current_level_pointers(t_data *dt);
 
 
 #endif
