@@ -318,13 +318,14 @@ typedef struct s_gametime
 
 typedef struct s_level
 {
+	int					id;
 	int					level_score;
 	int					level_consumable_count;
 	int					consumables_collected;
 	float				score_combo;
 	char				prev_consumable;
 	
-	t_map				*map;
+	t_map				map;
 
 	t_sprite_texture	*sprite_textures;
 	size_t				sprite_texture_count;
@@ -462,7 +463,7 @@ bool		init_2d_map(char ***array, size_t max_row,
 bool		check_mapfile_extension(char *file, char *type);
 void		remove_new_line(char *str);
 char		*remove_space_beginner(char *str);
-bool		parse_mapfile(char *file, t_data *dt);
+bool		parse_mapfile(char *file, t_data *dt, int i);
 bool		init_default_map(t_map *map);
 bool		init_player(t_map *map, t_player *player);
 int			ft_open(char *file);
@@ -604,9 +605,9 @@ int			render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset,
 						t_coor *sprite_size);
 float		fix_fish_eye(t_ray *ray, t_player *player);
 int			fix_fish_eye_2(t_ray *ray, t_player *player, float *distance);
-int			load_sprite_textures(t_data *dt);
-int			load_textures(t_data *dt);
-int			load_sprites(t_data *dt, t_map *map);
+int			load_sprite_textures(t_data *dt, int i);
+int			load_textures(t_data *dt, t_level *level);
+int			load_sprites(t_data *dt, t_level *level, t_map *map, int i);
 int			precalculate_trig_tables(t_data *dt);
 
 void		render_3d_each_ray(t_data *dt, t_ray *ray, int screen_slice_width);
@@ -621,7 +622,7 @@ void		calc_texture_coor(t_data *dt, int *texture_y, \
 							float *distance_to_wall, int d);
 
 // inits
-void		init_doors(t_data *dt, t_map *map, int index);
+void		init_doors(t_data *dt, t_level *level, t_map *map);
 
 // controls
 int			set_mouse_to_screen_center(t_data *dt);
@@ -644,7 +645,7 @@ t_door		*find_door_at(t_data *dt, int x, int y);
 t_sprite	*find_sprite_at(t_data *dt, int x, int y);
 
 //sprites
-void		find_all_sprites(t_data *dt, t_map *map);
+void		find_all_sprites(t_data *dt, t_map *map, int i);
 void		sort_sprites(t_sprite *sprites, size_t num_sprites);
 void		sort_sprites_by_distance(t_data *dt);
 void		sort_sprites(t_sprite *sprites, size_t num_sprites);
@@ -745,5 +746,7 @@ int	load_menu_image_2(t_data *dt);
 int	load_menu_image_3(t_data *dt);
 
 int	keypress_exit(t_data *dt);
+
+t_level *get_curr_level(t_data *dt);
 
 #endif

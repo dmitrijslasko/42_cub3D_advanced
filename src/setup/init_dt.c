@@ -58,23 +58,12 @@ void	init_dt(t_data *dt)
 {
 	printf("Initializing data struct...\n");
 	
+	dt->map = NULL;
 	dt->rays = NULL;
-	
-	// dt->map = dt[dt->active_level].map;
-	// 	init_map(dt->map);
-
 	dt->doors = NULL;
-
-	// dt->sprite_textures = NULL;
-	// dt->sprite_texture_count = 0;
-	// dt->sprites = NULL;
-	// dt->sprite_count = 0;
-
 	dt->view = NULL;
-	
 	init_mouse(&dt->mouse);
 	init_graphic(dt);
-	
 	dt->frames_drawn_count = 0;
 	dt->background_music = NULL;
 }

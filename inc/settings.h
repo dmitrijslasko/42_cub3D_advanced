@@ -28,7 +28,7 @@
 
 # define DEBUG_PRINT                        0
 
-# define MIMIC_FULLSCREEN                   1
+# define MIMIC_FULLSCREEN                   0
 # define CAPTURE_MOUSE                      0
 
 # define SHOW_TARGETED_SPRITE               1
@@ -199,7 +199,7 @@
 # define ROTATION_SCALE					    1
 # define ENABLE_BOBBING                     1
 
-# define RENDER_SPRITES                     1
+# define RENDER_SPRITES                     0
 
 # define DOOR_AUTOCLOSURE_TIME_MS           4000        // 4s
 

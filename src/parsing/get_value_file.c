@@ -72,7 +72,7 @@ bool	parse_textures(t_map *map, int fd, char **str)
 	// Parse textures till there is something to parse...
 	while (line && is_valid_line_texture(line) || (line_is_empty(line)))
 	{
-		printf("[TEXTURE] current line: \"%s\"\n", line);
+		// printf("[TEXTURE] current line: \"%s\"\n", line);
 		if (is_valid_line_texture(line))
 		{
 			array = ft_split_by_multiple_delimiters(line, WHITESPACE);
@@ -84,7 +84,7 @@ bool	parse_textures(t_map *map, int fd, char **str)
 			//	printf(TXT_YELLOW">>>Key not found in the lookup table: %s\n"TXT_RESET, array[0]);
 			//	continue;
 			//}
-			printf(TXT_YELLOW">>> Index in the texture lookup table: %d\n---\n"TXT_RESET, index);
+			// printf(TXT_YELLOW">>> Index in the texture lookup table: %d\n---\n"TXT_RESET, index);
 			if (set_color_or_texture(map, array[0], &array[1]))
 			{
 				free_line_get_next(line, -1);
@@ -96,7 +96,7 @@ bool	parse_textures(t_map *map, int fd, char **str)
 		// printf(">>> Cleaning........\n", line);
 		line = free_line_get_next(line, fd);
 	}
-	printf("[TEXTURE] last line returned: \"%s\"\n", line);
+	// printf("[TEXTURE] last line returned: \"%s\"\n", line);
 	*str = line;
 	print_separator_default();
 	return (EXIT_SUCCESS);

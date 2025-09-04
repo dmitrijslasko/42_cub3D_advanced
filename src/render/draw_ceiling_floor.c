@@ -20,9 +20,10 @@ int	draw_ceiling(t_data *dt)
 
 	set_coor_values(&top_left, 0, 0);
 	set_coor_values(&bottom_right, WINDOW_W, dt->view->screen_center_y);
-	color = create_color_rgb(dt->map->textures[CEILING].color.r, \
-							dt->map->textures[CEILING].color.g, \
-							dt->map->textures[CEILING].color.b);
+	// color = create_color_rgb(dt->map->textures[CEILING].color.r, \
+	// 						dt->map->textures[CEILING].color.g, \
+	// 						dt->map->textures[CEILING].color.b);
+	color = BLUE;
 	draw_rectangle(dt->raycasting_scene_img, top_left, bottom_right, color);
 	return (EXIT_SUCCESS);
 }
@@ -36,9 +37,9 @@ int	draw_floor(t_data *dt)
 	set_coor_values(&top_left, 0, dt->view->screen_center_y);
 	set_coor_values(&bottom_right, WINDOW_W, WINDOW_H);
 
-	color = create_color_rgb(	dt->map->textures[FLOOR].color.r, \
-								dt->map->textures[FLOOR].color.g,
-								dt->map->textures[FLOOR].color.b);
+	// color = create_color_rgb(	dt->map->textures[FLOOR].color.r, \
+	// 							dt->map->textures[FLOOR].color.g,
+	// 							dt->map->textures[FLOOR].color.b);
 	
 								
 	color = DARKGREY;

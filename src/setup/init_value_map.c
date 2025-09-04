@@ -41,30 +41,23 @@ int		init_textures(t_texture *textures, int len)
 	return (EXIT_SUCCESS);
 }
 
-bool	parse_mapfile(char *file, t_data *dt)
+bool	parse_mapfile(char *file, t_data *dt, int i)
 {
-	//int	possible_textures;
-
-	//possible_textures = count_possible_textures();
-	//printf("Possible textures (based on the texture lookup table): %d\n", possible_textures);
-	//dt->map.number_of_textures = possible_textures;
-	//dt->map.m_textures = protected_malloc(dt->map.number_of_textures, dt);
-	//printf("Malloc'ed an array of %d elements.\n", dt->map.number_of_textures);
-
+	print_separator_default();
 	printf("Parsing mapfile...\n");
-	if (init_default_map(dt->map))
+	if (init_default_map(&dt->levels[i].map))
 		return (1);
 	// Sets the map size
-	if (set_map_size_data(dt->map, file))
+	if (set_map_size_data(&dt->levels[i].map, file))
 		return (1);
 	// Initiliazes the map with empty cell values
-	if (init_map_data(dt->map, dt))
+	if (init_map_data(&dt->levels[i].map, dt))
 		return (1);
 	// Parses mapfile values - textures and the map itself
-	if (parse_mapfile_values(dt->map, file))
+	if (parse_mapfile_values(&dt->levels[i].map, file))
 		return (1);
 	//print_out_texture_lookup_table(dt);
-	 if (!check_valid_player(dt->map))
+	 if (!check_valid_player(&dt->levels[i].map))
 	 	return (1);
 	// NOTE DL: Probably can be removed for advanced part since we don't care about color / texture checks
 	// if (check_all_textures(&dt->map))

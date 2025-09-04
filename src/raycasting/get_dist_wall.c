@@ -18,7 +18,7 @@ void	set_cell_type(t_data *dt, t_ray *ray, t_coor *map_coor)
 	int		cell_type;
 	size_t	i;
 
-	map_cell_char = get_cell_type(dt->map, map_coor);
+	map_cell_char = get_cell_type(&get_curr_level(dt)->map, map_coor);
 	cell_type = 0;
 	i = 0;
 	while (g_texture_lookup[i].mapfile_key)

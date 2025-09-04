@@ -2,6 +2,7 @@
 
 int	mimic_fullscreen(void)
 {
+	printf("Entering fullscreen mode (if set so)...\n");
 	if (MIMIC_FULLSCREEN)
 	{
 		if (LINUX_22)

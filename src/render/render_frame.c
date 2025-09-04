@@ -15,10 +15,11 @@
 int	update_prompt_message(t_data *dt)
 {
 	t_coor	cell_ahead;
+	t_map	*map = &get_curr_level(dt)->map;
 
 	debug_print("Updating prompt messages!\n");
 	cell_ahead = get_cell_ahead(dt);
-	dt->player.cell_type_ahead = get_cell_type(dt->map, &cell_ahead);
+	dt->player.cell_type_ahead = get_cell_type(map, &cell_ahead);
 	if (ft_strchr(DOOR_TYPES, dt->player.cell_type_ahead))
 		dt->view->show_door_open_message = 1;
 	else
@@ -150,13 +151,16 @@ int animate_doors(t_data *dt)
 {
     int i;
     t_door *door;
+	int		door_count;
 
 	debug_print("Animating doors...\n");
-	*dt->door_count = dt->levels[dt->active_level].door_count;
+
+	door_count = get_curr_level(dt)->door_count;
+
     i = 0;
-    while (i < *dt->door_count)
+    while (i < door_count)
     {
-        door = &dt->doors[i];
+		door = &get_curr_level(dt)->doors[i];
 
         // Opening
         if (door->is_opening)
@@ -185,7 +189,7 @@ int animate_doors(t_data *dt)
         }
         i++;
     }
-	debug_print("Finished animating doors...\n");
+	// printf("Finished animating doors...\n");
     return (EXIT_SUCCESS);
 }
 
@@ -236,42 +240,37 @@ int	render_frame(void *param)
 		return (0);
 	}
 	dt->time.last_time = current_time;
-
-	int game_status = process_game_status(dt);
-	if (game_status != GAME_SCREEN)
+	
+	if (process_game_status(dt) != GAME_SCREEN)
 		return (dt->game_status);
 
-	process_keyboard_keypresses(dt);	
+	process_keyboard_keypresses(dt);
 
-	animate_weapon(dt);
-	animate_doors(dt);
+	// animate_weapon(dt);
+	// animate_doors(dt);
 	
 	debug_print("Calculating rays\n");
 	calculate_all_rays(dt);
-	
+
 	render_3d_scene(dt);
 	
 	put_img_to_img(dt->final_frame_img, dt->raycasting_scene_img, 0, 0);
 
-	if (RENDER_SPRITES)
-		render_all_sprites(dt);
+	// if (RENDER_SPRITES)
+	// 	render_all_sprites(dt);
 	
 	// show minimap
-	if (dt->view->show_minimap)
-		update_minimap(dt);
-	render_minimap_and_ui(dt);
+	// if (dt->view->show_minimap)
+	// 	update_minimap(dt);
+	// render_minimap_and_ui(dt);
 
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr,dt->final_frame_img->mlx_img, 0, 0);
 	
-	// // time stats
-	// // int y = 20;
-	// // print_time_stats(dt, dt->mlx_ptr, dt->win_ptr, &y);
-
-	show_debug_info(dt);
- 	show_player_info(dt);
+	// show_debug_info(dt);
+ 	// show_player_info(dt);
 	show_level_info(dt);
 
-	process_sprite_pickups(dt);
+	// process_sprite_pickups(dt);
 
 	// update_prompt_message(dt);
 	// // render_ui_message(dt);
@@ -293,7 +292,6 @@ int	render_frame(void *param)
 	// 	put_img_to_img(dt->final_frame_img, &dt->weapon_img[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
 	// dt->frames_drawn_count++;
 	// print_out_sprite_info(dt);
-	// printf("%d\n", dt->time.last_time);
 
 	return (EXIT_SUCCESS);
 }

@@ -28,9 +28,6 @@ int	setup_dt(t_data *dt)
 	// player
 	setup_player(dt);
 	
-	// wall textures
-	load_textures(dt);
-
 	dt->sky_image = protected_malloc(sizeof(t_img), dt);
 	load_image(dt, dt->sky_image, SKY_TXT_PATHFILE);
 
@@ -45,15 +42,6 @@ int	setup_dt(t_data *dt)
 	
 	load_ui_messages(dt);
 	
-	// doors
-	init_doors(dt, dt->map, dt->active_level);
-	// *dt->door_count = &dt->levels[dt->active_level].door_count;
-	mark_all_cells_that_neighbour_doors(dt);
-	
-	// sprites
-	load_sprites(dt, dt->map);
-
-	// dt->targeted_sprite = dt->sprites[dt->active_level];
 	dt->targeted_sprite = NULL;
 	
 	// view
@@ -81,11 +69,23 @@ int	setup_dt(t_data *dt)
 	int i = 0;
 	while (i < 3)
 	{
+		printf(">>>>>>>> %d <<<<<<<<\n", i);
+		dt->levels[i].id = i;
+
+		// wall textures
+		load_textures(dt, &dt->levels[i]);
+
+		// doors
+		init_doors(dt, &dt->levels[i], &dt->levels[i].map);
+		// mark_all_cells_that_neighbour_doors(dt);
+		
+		// sprites - map level
+		load_sprites(dt, &dt->levels[i], &dt->levels[i].map, i);
+
 		dt->levels[i].level_score = 0;
-		dt->levels[i].consumables_collected = 0;
 		dt->levels[i].score_combo = 1.0f;
 		dt->levels[i].prev_consumable = 0;
-		dt->levels[i].ambient_light = 3000.0f;
+		dt->levels[i].ambient_light = i * 1000.0f;
 		i++;
 	}
 	

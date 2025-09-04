@@ -12,36 +12,37 @@
 
 #include "cub3d.h"
 
-void	init_sprites(t_data *dt)
+static void	init_sprites(t_data *dt, int j)
 {
 	int		row;
 	int		col;
 	size_t	i;
 	char	c;
+	t_level *level = &dt->levels[j];
 
 	i = 0;
 	row = 0;
 	
-	while (row < dt->map->map_size_rows && i < dt->sprite_count)
+	while (row < level->map.map_size_rows && i < level->sprite_count)
 	{
 		col = 0;
-		while (col < dt->map->map_size_cols && i < dt->sprite_count)
+		while (col < level->map.map_size_cols && i < level->sprite_count)
 		{
-			c = get_cell_type_by_coordinates(dt->map, row, col);
+			c = get_cell_type_by_coordinates(&level->map, row, col);
 			if (ft_strchr(SPRITE_TYPES, c))
 			{
-				dt->sprites[i].id = i;
-				dt->sprites[i].map_char = c;
-				dt->sprites[i].type = STATIC;
+				level->sprites[i].id = i;
+				level->sprites[i].map_char = c;
+				level->sprites[i].type = STATIC;
 				if (ft_strchr("ABC", c))
-					dt->sprites[i].type = ENEMY;
-				dt->sprites[i].pos.x = col + 0.5;
-				dt->sprites[i].pos.y = row + 0.5;
-				dt->sprites[i].is_hidden = 0;
-				dt->sprites[i].orientation = 180.0f;
-				dt->sprites[i].state = 0;
-				dt->sprites[i].current_frame = 0;
-				dt->sprites[i].last_frame_time = 0;
+					level->sprites[i].type = ENEMY;
+				level->sprites[i].pos.x = col + 0.5;
+				level->sprites[i].pos.y = row + 0.5;
+				level->sprites[i].is_hidden = 0;
+				level->sprites[i].orientation = 180.0f;
+				level->sprites[i].state = 0;
+				level->sprites[i].current_frame = 0;
+				level->sprites[i].last_frame_time = 0;
 				// dt->sprites[i].orientation = dt->sprites[i].texture->orientation;
 				i++;
 			}
@@ -50,24 +51,22 @@ void	init_sprites(t_data *dt)
 		row++;
 	}
 }
-void	find_all_sprites(t_data *dt, t_map *map)
+void	find_all_sprites(t_data *dt, t_map *map, int i)
 {
 	size_t	sprite_count;
 	size_t	consumable_count;
 
 	sprite_count = count_elements_in_the_map(map, SPRITE_TYPES);
-	printf("SPRITE COUNT: %d\n", sprite_count);
+
 	if (!sprite_count)
 		return ;
 	
-	dt->levels[dt->active_level].sprite_count = sprite_count;
-	dt->sprite_count = &dt->levels[dt->active_level].sprite_count;
-
-	dt->sprites = protected_malloc(sprite_count * sizeof(t_sprite), dt);
-	dt->levels[dt->active_level].sprites = dt->sprites;
+	dt->levels[i].sprite_count = sprite_count;
+	dt->levels[i].sprites = protected_malloc(sprite_count * sizeof(t_sprite), dt);
 	
-	init_sprites(dt);
+	init_sprites(dt, i);
 
 	consumable_count = count_elements_in_the_map(map, CONSUMABLE_TYPES);
-	dt->levels[dt->active_level].level_consumable_count = consumable_count;
+	printf("CONSUMABLES: %ld\n", consumable_count);
+	dt->levels[i].level_consumable_count = consumable_count;
 }

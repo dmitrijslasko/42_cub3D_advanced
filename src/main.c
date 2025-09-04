@@ -22,8 +22,9 @@ int	debug_print(char *str)
 
 static int	setup_keyboard_and_mouse_controls(t_data *dt)
 {
+	printf("Setting keyboard and mouse hooks...\n");
 	setup_keyboard_hooks(dt);
-	if (BONUS && ENABLE_MOUSE)
+	if (ENABLE_MOUSE)
 		setup_mouse_hooks(dt);
 	return (EXIT_SUCCESS);
 }
@@ -139,27 +140,22 @@ int move_mouse_to_center_of_active_window(void) {
 	return 0;
 }
 
+t_level *get_curr_level(t_data *dt)
+{
+	return (&dt->levels[dt->active_level]);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	dt;
 
 	init_dt(&dt);
-	// check and parse command line arguments
-	// check_and_parse_args(&dt, argc, argv);
 
 	char *game_levels[] = {	"./maps/good/01_level.cub",
 							"./maps/good/02_level.cub",
 							"./maps/good/03_level.cub",
-							NULL};
-
-	dt.active_level = 2;
-	dt.map = &dt.levels[dt.active_level].map;
-	dt.sprites = &dt.levels[dt.active_level].sprites;
-	dt.sprite_texture_count = &dt.levels[dt.active_level].sprite_texture_count;
-	dt.doors = &dt.levels[dt.active_level].doors;
-
-	// check_and_parse_map(&dt, argc, game_levels[0]);
-	// check_and_parse_args(&dt, argc, argv);
+							NULL}; 
+	
 	check_and_parse_all_maps(&dt, argc, game_levels);
 
 	// precalculate sin and cos lookup tables
@@ -178,23 +174,26 @@ int	main(int argc, char **argv)
 	setup_keyboard_and_mouse_controls(&dt);
 
 	// setup dt - sets up the whole game structure and data
-	dt.game_status = WELCOME_SCREEN;
-
 	setup_dt(&dt);
 
-	set_sprite_textures(&dt);
+	// set_sprite_textures(&dt);
 
-	draw_minimap_base_img(&dt);
+	// draw_minimap_base_img(&dt);
 
 	print_separator(3, DEF_SEPARATOR_CHAR);
 
-	printf("🎮 Starting game!\n");
-	printf("Consumables to collect in this level: %d\n", dt.levels[dt.active_level].level_consumable_count);
-	print_separator(1, DEF_SEPARATOR_CHAR);
-	
 	dt.player.pos.x = 1.5;
 	dt.player.pos.y = 1.5;
 
+	dt.game_status = WELCOME_SCREEN;
+	dt.active_level = 0;
+	printf("Game status set!\n");
+	printf("Current level: %d\n", dt.active_level);
+	printf("🎮 Starting game!\n");
+
+	printf("Consumables to collect in this level: %d\n", get_curr_level(&dt)->level_consumable_count);
+	print_separator(1, DEF_SEPARATOR_CHAR);
+	
 	mlx_loop_hook(dt.mlx_ptr, &render_frame, &dt);
 	mlx_loop(dt.mlx_ptr);
 

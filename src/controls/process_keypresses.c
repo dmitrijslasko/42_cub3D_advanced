@@ -35,10 +35,11 @@ void	open_close_door(t_data *dt, int dir)
 {
 	t_coor	cell_ahead;
 	t_door	*door;
+	t_map	*map = &get_curr_level(dt)->map;
 
 	// dt->has_changed = 1;
 	cell_ahead = get_cell_ahead(dt);
-	if (ft_strchr(DOOR_TYPES, get_cell_type(dt->map, &cell_ahead)))
+	if (ft_strchr(DOOR_TYPES, get_cell_type(map, &cell_ahead)))
 	{
 		// dt->view->show_door_open_message = 1;
 		door = find_door_at(dt, cell_ahead.x, cell_ahead.y);
@@ -53,9 +54,10 @@ void	open_close_door2(t_data *dt)
 {
 	t_coor	cell_ahead;
 	t_door	*door;
+	t_map	*map = &get_curr_level(dt)->map;
 
 	cell_ahead = get_cell_ahead(dt);
-	if (ft_strchr(DOOR_TYPES, get_cell_type(dt->map, &cell_ahead)))
+	if (ft_strchr(DOOR_TYPES, get_cell_type(map, &cell_ahead)))
 	{
 		door = find_door_at(dt, cell_ahead.x, cell_ahead.y);
 			door->is_opening = 1;

@@ -26,6 +26,8 @@ t_texture *handle_door(int *tex_index, t_ray *ray, t_coor *tex_coor, t_data *dt)
 	t_texture	*texture;
 	int			index;
 
+	t_map *map = &get_curr_level(dt)->map;
+
 	index = get_lookup_table_index_cell_type(ray->cell_type);
 
 	if (index == -1)
@@ -41,7 +43,7 @@ t_texture *handle_door(int *tex_index, t_ray *ray, t_coor *tex_coor, t_data *dt)
 	else
 		return NULL;
 
-	texture = &dt->map->textures[ray->cell_type].texture;
+	texture = &map->textures[ray->cell_type].texture;
 
 	if (side > 0)
 		*tex_index = texture->width * (tex_coor->y + (ray->percentage_of_image - ray->door->open_progress));
@@ -57,6 +59,7 @@ int mark_all_cells_that_neighbour_doors(t_data *dt)
 	int 	x;
 	int		y;
 	int	i;
+	t_map *map = &get_curr_level(dt)->map;
 
 	door = dt->doors;
 	i = 0;
@@ -64,28 +67,28 @@ int mark_all_cells_that_neighbour_doors(t_data *dt)
 	{
 		x = door[i].cell_x;
 		y = door[i].cell_y;
-		if (x == 0 || y == 0 || x == (dt->map->map_size_cols - 1) || y == (dt->map->map_size_rows - 1))
+		if (x == 0 || y == 0 || x == (map->map_size_cols - 1) || y == (map->map_size_rows - 1))
 		{
 			i++;
 			continue ;
 		}
 		if (door[i].orientation == 1)
 		{
-			dt->map->map_data[y - 1][x].is_near_door = 1;
-			dt->map->map_data[y + 1][x].is_near_door = 1;
+			map->map_data[y - 1][x].is_near_door = 1;
+			map->map_data[y + 1][x].is_near_door = 1;
 			printf("Marked cell: %d %d\n", x, y - 1);
 			printf("Marked cell: %d %d\n", x, y + 1);
-			dt->map->map_data[y - 1][x].door = &door[i];
-			dt->map->map_data[y + 1][x].door = &door[i];
+			map->map_data[y - 1][x].door = &door[i];
+			map->map_data[y + 1][x].door = &door[i];
 		}
 		else if (door[i].orientation == 0)
 		{
-			dt->map->map_data[y][x - 1].is_near_door = 1;
-			dt->map->map_data[y][x + 1].is_near_door = 1;
+			map->map_data[y][x - 1].is_near_door = 1;
+			map->map_data[y][x + 1].is_near_door = 1;
 			printf("Marked cell: %d %d\n", x - 1, y);
 			printf("Marked cell: %d %d\n", x + 1, y);
-			dt->map->map_data[y][x + 1].door = &door[i];
-			dt->map->map_data[y][x - 1].door = &door[i];
+			map->map_data[y][x + 1].door = &door[i];
+			map->map_data[y][x - 1].door = &door[i];
 		}
 		printf("Marked all neighbours of door with ID: %zu\n", door[i].id);
 		i++;
@@ -99,19 +102,20 @@ int	get_color_render3d(t_data *dt, t_ray *ray, t_coor *tex_coor)
 	int			color;
 	int			tex_index;
 	int			side_texture_index;
-	t_texture *texture = NULL;
+	t_texture  *texture = NULL;
+	t_map		*map = &get_curr_level(dt)->map;
 
 	if (ray->hit_cell->is_near_door && ray->hit_side == 'y' && ray->door && ray->door->orientation == 1)
 	{
 		side_texture_index = ray->door->side_texture_index;
-		texture = &dt->map->textures[side_texture_index].texture;
+		texture = &map->textures[side_texture_index].texture;
 		tex_coor->x = texture->width * ray->percentage_of_image;
 		tex_index = texture->width * tex_coor->y + tex_coor->x;
 	}
 	else if (ray->hit_cell->is_near_door && ray->hit_side == 'x' && ray->door && ray->door->orientation == 0)
 	{
 		side_texture_index = ray->door->side_texture_index;
-		texture = &dt->map->textures[side_texture_index].texture;
+		texture = &map->textures[side_texture_index].texture;
 		tex_coor->x = texture->width * ray->percentage_of_image;
 		tex_index = texture->width * tex_coor->y + tex_coor->x;
 	}
@@ -119,11 +123,11 @@ int	get_color_render3d(t_data *dt, t_ray *ray, t_coor *tex_coor)
 	{
 		texture = handle_door(&tex_index, ray, tex_coor, dt);
 		if (!texture)
-			texture = &dt->map->textures[ray->cell_type].texture;
+			texture = &map->textures[ray->cell_type].texture;
 	}
 	else
 	{
-		texture = &dt->map->textures[ray->cell_type].texture;
+		texture = &map->textures[ray->cell_type].texture;
 		tex_coor->x = texture->width * ray->percentage_of_image;
 		tex_index = texture->width * tex_coor->y + tex_coor->x;
 	}

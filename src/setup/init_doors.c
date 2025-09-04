@@ -12,14 +12,13 @@
 
 #include <cub3d.h>
 
-static void	init_a_door(t_data *dt, t_door **door_ptr, \
+static void	init_a_door(t_data *dt, t_map *map, t_door **door_ptr, \
 						int curr_row, int curr_col)
 {
 	t_door	*door;
 	char 	door_type;
 
-	door_type =  get_cell_type_by_coordinates(dt->map,
-						curr_row, curr_col);
+	door_type =  get_cell_type_by_coordinates(map, curr_row, curr_col);
 
 	door = *door_ptr;
 
@@ -31,8 +30,7 @@ static void	init_a_door(t_data *dt, t_door **door_ptr, \
 	door->pos_y = DEF_DOOR_OFFSET_Y;
 	door->is_opening = 0;
 	door->open_progress = 0.0f;
-	// door->opening_finish_time = dt->time.last_time;
-	if (ft_strchr(VERTICAL_DOOR_TYPES, dt->map->map_data[curr_row][curr_col].cell_char))
+	if (ft_strchr(VERTICAL_DOOR_TYPES, map->map_data[curr_row][curr_col].cell_char))
 		door->orientation = 1;
 	else
 		door->orientation = 0;
@@ -45,23 +43,25 @@ static void	init_a_door(t_data *dt, t_door **door_ptr, \
 	(*door_ptr)++;
 }
 
-void	init_doors(t_data *dt, t_map *map, int index)
+void	init_doors(t_data *dt, t_level *level, t_map *map)
 {
 	t_door	*door_ptr;
 	int		curr_row;
 	int		curr_col;
 	char	door_type;
+	size_t	door_count;
 
 	print_separator_default();
 	printf(TXT_YELLOW ">>> INITIALISING DOORS\n" TXT_RESET);
+	printf("Level: #%d\n", level->id);
 
-	dt->levels[dt->active_level].door_count = count_elements_in_the_map(map, DOOR_TYPES);
-	dt->door_count = &dt->levels[dt->active_level].door_count;
-	printf("Doors elements found: %zu\n", *dt->door_count);
+	door_count = count_elements_in_the_map(map, DOOR_TYPES);
+	level->door_count = door_count;
+	printf("Doors elements found: %zu\n", door_count);
 
-	dt->doors = protected_malloc(sizeof(t_door) * *dt->door_count, dt);
+	level->doors = protected_malloc(sizeof(t_door) * door_count, dt);
 	
-	door_ptr = dt->doors;
+	door_ptr = level->doors;
 
 	curr_row = 0;
 	while (curr_row < map->map_size_rows)
@@ -71,7 +71,7 @@ void	init_doors(t_data *dt, t_map *map, int index)
 		{
 			door_type =  get_cell_type_by_coordinates(map, curr_row, curr_col);
 			if (ft_strchr(DOOR_TYPES, door_type))
-				init_a_door(dt, &door_ptr, curr_row, curr_col);
+				init_a_door(dt, map, &door_ptr, curr_row, curr_col);
 			curr_col++;
 		}
 		curr_row++;

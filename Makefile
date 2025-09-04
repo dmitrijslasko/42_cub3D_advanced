@@ -53,6 +53,7 @@ MINILIBX_DIR = $(LIBDIRS)/minilibx/
 # COMPILATION FLAGS
 # CFLAGS = -Wall -Wextra -Werror
 CFLAGS += -g
+# CFLAGS += -fsanitize=address -fstack-protector-all
 CFLAGS += -I$(INC_DIR)
 CFLAGS += -I$(MINILIBX_DIR)
 CFLAGS += -std=c99

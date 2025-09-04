@@ -51,7 +51,7 @@ int	load_sprite_images(t_data *dt)
 	size_t				frame;
 
 	sprite_textures = dt->sprite_textures;
-	printf("Number of sprite types to be loaded: %zu\n", dt->sprite_texture_count);
+	printf("Number of sprite types to be loaded: %zu\n", *dt->sprite_texture_count);
 	
 	i = 0;
 	while (i < *dt->sprite_texture_count)
@@ -80,14 +80,14 @@ int	load_sprite_images(t_data *dt)
 	return (EXIT_SUCCESS);
 }
 
-int	load_sprites(t_data *dt, t_map *map)
+int	load_sprites(t_data *dt, t_level *level, t_map *map, int i)
 {
 	print_separator_default();
 	printf(TXT_YELLOW ">>> LOADING SPRITES\n" TXT_RESET);
 	
-	load_sprite_textures(dt);
+	load_sprite_textures(dt, i);
 
-	find_all_sprites(dt, map);
+	find_all_sprites(dt, map, i);
 
 	printf(TXT_GREEN "Done!\n" TXT_RESET);
 	return (EXIT_SUCCESS);

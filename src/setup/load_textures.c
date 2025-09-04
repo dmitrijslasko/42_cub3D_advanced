@@ -38,7 +38,7 @@ int	load_texture(t_data *dt, t_texture *texture, char *file)
 	return (EXIT_SUCCESS);
 }
 
-int	load_textures(t_data *dt)
+int	load_textures(t_data *dt, t_level *level)
 {
 	t_texture	*texture;
 	size_t		i;
@@ -49,7 +49,8 @@ int	load_textures(t_data *dt)
 	i = 0;
 	while (i < NUMBER_TEXTURES)
 	{
-		texture = &dt->map->textures[i].texture;
+		texture = &level->map.textures[i].texture;
+		// texture = &dt->map->textures[i].texture;
 		
 		if (load_texture(dt, texture, texture->xpm_file) == EXIT_SUCCESS)
 			printf(TXT_GREEN"Texture [%2zu %4s]: %s loaded!\n"TXT_RESET, i, texture->mapfile_repr, texture->xpm_file);

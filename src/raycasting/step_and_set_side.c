@@ -12,18 +12,18 @@
 
 #include "cub3d.h"
 
-void	step_and_set_side(t_dda_info *info)
+void	step_and_set_side(t_dda_info *dda_info)
 {
-	if (info->side->x < info->side->y)
+	if (dda_info->side->x < dda_info->side->y)
 	{
-		info->side->x += info->delta->x;
-		info->map_coor->x += info->step->x;
-		*(info->hit_side) = 'x';
+		dda_info->side->x += dda_info->delta->x;
+		dda_info->map_coor->x += dda_info->step->x;
+		*(dda_info->hit_side) = 'x';
 	}
 	else
 	{
-		info->side->y += info->delta->y;
-		info->map_coor->y += info->step->y;
-		*(info->hit_side) = 'y';
+		dda_info->side->y += dda_info->delta->y;
+		dda_info->map_coor->y += dda_info->step->y;
+		*(dda_info->hit_side) = 'y';
 	}
 }

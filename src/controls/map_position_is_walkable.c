@@ -39,15 +39,16 @@ static int	handle_wall(t_data *dt, float *new_x, float *new_y)
 {
 	t_coor	min;
 	t_coor	max;
+	t_map 	*map = &get_curr_level(dt)->map;
 
 	min.x = (int)(*new_x - MIN_DISTANCE_TO_WALL);
 	max.x = (int)(*new_x + MIN_DISTANCE_TO_WALL);
 	min.y = (int)(*new_y - MIN_DISTANCE_TO_WALL);
 	max.y = (int)(*new_y + MIN_DISTANCE_TO_WALL);
-	if (ft_strchr(WALL_TYPES, dt->map->map_data[min.y][min.x].cell_char) ||
-	ft_strchr(WALL_TYPES, dt->map->map_data[min.y][max.x].cell_char) ||
-	ft_strchr(WALL_TYPES, dt->map->map_data[max.y][min.x].cell_char) ||
-	ft_strchr(WALL_TYPES, dt->map->map_data[max.y][max.x].cell_char))
+	if (ft_strchr(WALL_TYPES, map->map_data[min.y][min.x].cell_char) ||
+	ft_strchr(WALL_TYPES, map->map_data[min.y][max.x].cell_char) ||
+	ft_strchr(WALL_TYPES, map->map_data[max.y][min.x].cell_char) ||
+	ft_strchr(WALL_TYPES, map->map_data[max.y][max.x].cell_char))
 		return (0);
 	return (1);
 }
@@ -56,15 +57,16 @@ static int	handle_sprites(t_data *dt, float *new_x, float *new_y)
 {
 	t_coor	min;
 	t_coor	max;
+	t_map 	*map = &get_curr_level(dt)->map;
 
 	min.x = (int)(*new_x - MIN_DISTANCE_TO_WALL / 2);
 	max.x = (int)(*new_x + MIN_DISTANCE_TO_WALL / 2);
 	min.y = (int)(*new_y - MIN_DISTANCE_TO_WALL / 2);
 	max.y = (int)(*new_y + MIN_DISTANCE_TO_WALL / 2);
-	if (ft_strchr(DECORATION_TYPES, dt->map->map_data[min.y][min.x].cell_char) ||
-	ft_strchr(DECORATION_TYPES, dt->map->map_data[min.y][max.x].cell_char) ||
-	ft_strchr(DECORATION_TYPES, dt->map->map_data[max.y][min.x].cell_char) ||
-	ft_strchr(DECORATION_TYPES, dt->map->map_data[max.y][max.x].cell_char))
+	if (ft_strchr(DECORATION_TYPES, map->map_data[min.y][min.x].cell_char) ||
+	ft_strchr(DECORATION_TYPES, map->map_data[min.y][max.x].cell_char) ||
+	ft_strchr(DECORATION_TYPES, map->map_data[max.y][min.x].cell_char) ||
+	ft_strchr(DECORATION_TYPES, map->map_data[max.y][max.x].cell_char))
 	{
 		return (0);
 	}
@@ -77,6 +79,7 @@ static int	handle_door2(t_data *dt, float *new_x, float *new_y)
 	t_coor	max;
 	t_coor	new_pos;
 	t_door	*door;
+	t_map 	*map = &get_curr_level(dt)->map;
 
 	min.x = (int)(*new_x - MIN_DISTANCE_TO_WALL);
 	max.x = (int)(*new_x + MIN_DISTANCE_TO_WALL);
@@ -84,10 +87,10 @@ static int	handle_door2(t_data *dt, float *new_x, float *new_y)
 	max.y = (int)(*new_y + MIN_DISTANCE_TO_WALL);
 	set_coor_values(&new_pos, (int)*new_x, (int)*new_y);
 	door = find_door_at(dt, new_pos.x, new_pos.y);
-	if (ft_strchr(DOOR_TYPES, dt->map->map_data[min.y][min.x].cell_char) ||
-	ft_strchr(DOOR_TYPES, dt->map->map_data[min.y][max.x].cell_char) ||
-	ft_strchr(DOOR_TYPES, dt->map->map_data[max.y][min.x].cell_char) ||
-	ft_strchr(DOOR_TYPES, dt->map->map_data[max.y][max.x].cell_char))
+	if (ft_strchr(DOOR_TYPES, map->map_data[min.y][min.x].cell_char) ||
+	ft_strchr(DOOR_TYPES, map->map_data[min.y][max.x].cell_char) ||
+	ft_strchr(DOOR_TYPES, map->map_data[max.y][min.x].cell_char) ||
+	ft_strchr(DOOR_TYPES, map->map_data[max.y][max.x].cell_char))
 	{
 		if (door && door->open_progress < DOOR_OPEN_VALUE)
 			return (0);

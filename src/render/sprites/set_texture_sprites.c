@@ -16,15 +16,21 @@ bool	set_sprite_textures(t_data *dt)
 {
 	size_t	i;
 	size_t	j;
+	
 
+	print_separator_default();
+	printf(">>> SETTING SPRITE TEXTURES!\n");
+	
 	if (!dt->sprites || !dt->sprite_textures)
 		return (0);
 	
 	i = 0;
+	dt->sprite_count = &get_curr_level(dt)->sprite_count;
+	printf("%d\n", *dt->sprite_count);
 	while (i < *dt->sprite_count)
 	{
 		j = 0;
-		while (j < dt->sprite_texture_count)
+		while (j < get_curr_level(dt)->sprite_texture_count)
 		{
 			if (dt->sprites[i].map_char == dt->sprite_textures[j].map_char)
 			{
@@ -35,6 +41,5 @@ bool	set_sprite_textures(t_data *dt)
 		}
 		i++;
 	}
-	printf("Set sprite textures!\n");
 	return (0);
 }

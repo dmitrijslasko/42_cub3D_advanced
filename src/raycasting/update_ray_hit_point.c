@@ -34,7 +34,7 @@ void	update_ray_hit_point(t_data *dt, t_ray *ray)
 	size_t map_y = get_cell_index(ray->wall_hit.y, ray->vector.y);
 	size_t map_x = get_cell_index(ray->wall_hit.x, ray->vector.x);
 
-	cell = get_cell_by_coordinates(dt->map, map_y, map_x);
+	cell = get_cell_by_coordinates(&get_curr_level(dt)->map, map_y, map_x);
 	ray->hit_cell = cell;
 	if (cell->is_near_door)
 		ray->door = cell->door;

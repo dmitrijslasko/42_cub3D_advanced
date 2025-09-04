@@ -48,7 +48,8 @@ int	handle_keyrelease(int keycode, t_data *dt)
 		dt->player.selected_weapon = &dt->weapon[3];
 	if (dt->keys[XK_5])
 	{
-		print_level_map(dt->map);
+		print_level_map(&get_curr_level(dt)->map);
+		dt->active_level = (dt->active_level == 0) * 2;
 		dt->player.selected_weapon = &dt->weapon[4];
 	}
 	if (dt->keys[XK_m])
