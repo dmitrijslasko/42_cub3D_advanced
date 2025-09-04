@@ -39,16 +39,15 @@ static int	handle_wall(t_data *dt, float *new_x, float *new_y)
 {
 	t_coor	min;
 	t_coor	max;
-	t_map 	*map = &get_curr_level(dt)->map;
 
 	min.x = (int)(*new_x - MIN_DISTANCE_TO_WALL);
 	max.x = (int)(*new_x + MIN_DISTANCE_TO_WALL);
 	min.y = (int)(*new_y - MIN_DISTANCE_TO_WALL);
 	max.y = (int)(*new_y + MIN_DISTANCE_TO_WALL);
-	if (ft_strchr(WALL_TYPES, map->map_data[min.y][min.x].cell_char) ||
-	ft_strchr(WALL_TYPES, map->map_data[min.y][max.x].cell_char) ||
-	ft_strchr(WALL_TYPES, map->map_data[max.y][min.x].cell_char) ||
-	ft_strchr(WALL_TYPES, map->map_data[max.y][max.x].cell_char))
+	if (ft_strchr(WALL_TYPES, dt->map->map_data[min.y][min.x].cell_char) ||
+	ft_strchr(WALL_TYPES, dt->map->map_data[min.y][max.x].cell_char) ||
+	ft_strchr(WALL_TYPES, dt->map->map_data[max.y][min.x].cell_char) ||
+	ft_strchr(WALL_TYPES, dt->map->map_data[max.y][max.x].cell_char))
 		return (0);
 	return (1);
 }
@@ -57,16 +56,15 @@ static int	handle_sprites(t_data *dt, float *new_x, float *new_y)
 {
 	t_coor	min;
 	t_coor	max;
-	t_map 	*map = &get_curr_level(dt)->map;
 
 	min.x = (int)(*new_x - MIN_DISTANCE_TO_WALL / 2);
 	max.x = (int)(*new_x + MIN_DISTANCE_TO_WALL / 2);
 	min.y = (int)(*new_y - MIN_DISTANCE_TO_WALL / 2);
 	max.y = (int)(*new_y + MIN_DISTANCE_TO_WALL / 2);
-	if (ft_strchr(DECORATION_TYPES, map->map_data[min.y][min.x].cell_char) ||
-	ft_strchr(DECORATION_TYPES, map->map_data[min.y][max.x].cell_char) ||
-	ft_strchr(DECORATION_TYPES, map->map_data[max.y][min.x].cell_char) ||
-	ft_strchr(DECORATION_TYPES, map->map_data[max.y][max.x].cell_char))
+	if (ft_strchr(DECORATION_TYPES, dt->map->map_data[min.y][min.x].cell_char) ||
+	ft_strchr(DECORATION_TYPES, dt->map->map_data[min.y][max.x].cell_char) ||
+	ft_strchr(DECORATION_TYPES, dt->map->map_data[max.y][min.x].cell_char) ||
+	ft_strchr(DECORATION_TYPES, dt->map->map_data[max.y][max.x].cell_char))
 	{
 		return (0);
 	}

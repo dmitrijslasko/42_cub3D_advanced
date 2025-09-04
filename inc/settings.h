@@ -31,7 +31,7 @@
 # define MIMIC_FULLSCREEN                   0
 # define CAPTURE_MOUSE                      0
 
-# define NUMBER_OF_LEVELS                   3
+# define NUMBER_OF_LEVELS                   4
 
 # define SHOW_TARGETED_SPRITE               0
 // window name

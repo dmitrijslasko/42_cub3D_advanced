@@ -53,7 +53,7 @@ int	handle_keyrelease(int keycode, t_data *dt)
 		puts("Switching level!");
 		print_level_map(&get_curr_level(dt)->map);
 		dt->active_level += 1;
-		dt->active_level %= 3;
+		dt->active_level %= NUMBER_OF_LEVELS;
 	}
 	if (dt->keys[XK_8])
 	{

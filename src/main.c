@@ -20,6 +20,7 @@ int	main(int argc, char **argv)
 	const char *game_levels[] = {	"./maps/good/01_level.cub",
 									"./maps/good/02_level.cub",
 									"./maps/good/03_level.cub",
+									"./maps/good/04_level.cub",
 									NULL}; 
 	
 	init_dt(&dt);
