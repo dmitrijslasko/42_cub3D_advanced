@@ -14,17 +14,17 @@
 
 char	get_cell_type(t_map *map, t_coor *map_coor)
 {
-	return (map->map_data[map_coor->y][map_coor->x].cell_char);
-}
-
-char	get_cell_type_by_coordinates(t_map *map, size_t y, size_t x)
-{
-	return (map->map_data[y][x].cell_char);
+	return (map->map_data[map_coor->y][map_coor->x].map_char);
 }
 
 t_mapcell	*get_cell_by_coordinates(t_map *map, size_t y, size_t x)
 {
 	return (&map->map_data[y][x]);
+}
+
+t_mapcell	*get_cell_by_coordinates_float(t_map *map, float y, float x)
+{
+	return (&map->map_data[(size_t)y][(size_t)x]);
 }
 
 // NOTE DL: should we remove the first if?
@@ -34,7 +34,8 @@ bool	check_hit_wall(t_coor *coord, t_map *map, t_ray *ray, char side)
 	char	neighbour_right;
 
 	tile = get_cell_type(map, coord);
-	neighbour_right = get_cell_type_by_coordinates(map, coord->y, coord->x + 1);
+	neighbour_right = get_cell_by_coordinates(map, coord->y, coord->x + 1)->map_char;
+	
 	// NOTE DL: thin wall functionality
 	if (side == 'x' && ray->vector.x > 0)
 	{
@@ -46,6 +47,8 @@ bool	check_hit_wall(t_coor *coord, t_map *map, t_ray *ray, char side)
 		if (neighbour_right == 'v')
 			return (1);
 	}
+
+	// NOTE: Regular walls
 	if (ft_strchr(WALL_TYPES, tile))
 		return (1);
 	return (0);

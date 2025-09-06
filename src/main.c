@@ -44,14 +44,16 @@ int	main(int argc, char **argv)
 	// setup dt - sets up the whole game structure and data
 	setup_dt(&dt);
 
-	// draw_minimap_base_img(&dt);
-
-	print_separator(3, DEF_SEPARATOR_CHAR);
-
 	dt.game_status = WELCOME_SCREEN;
 	dt.active_level = 0;
 	update_current_level_pointers(&dt);
+	get_init_player_position(dt.map, &dt.player);
 	printf("Game status set!\n");
+
+	draw_minimap_base_img(&dt);
+
+	print_separator(3, DEF_SEPARATOR_CHAR);
+
 	printf("Current level: %d\n", dt.active_level);
 	printf("🎮 Starting game!\n");
 

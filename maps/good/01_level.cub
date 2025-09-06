@@ -1,12 +1,14 @@
 
 DEF         textures/default-fallback-texture.xpm
 
-F1          textures/wolfenstein/grey_stone.xpm
+SKY         textures/sky/sky_3.xpm
+
+F1          textures/shoji-64.xpm
 C1          textures/floor-grey-noise.xpm
 
 W01         textures/wolfenstein/grey_stone.xpm
 W02         textures/wolfenstein/red_brick.xpm
-W03 	    textures/wolfenstein/grey_stone.xpm
+W03 	    textures/wolfenstein/blue-wall.xpm
 W04 	    textures/wolfenstein/grey_stone.xpm
 W05         textures/bookshelf.xpm
 W06         textures/wolfenstein/wood.xpm
@@ -23,11 +25,14 @@ DOOR_03_S   textures/bookshelf.xpm
 
 ED1    	    textures/wolf44.xpm
 
-11111111111111111
-1 E $           1
-1           &   1
-1               1
-1             & 1
-1             & 1
-1             & 1
+333333333311111111
+1  $     1       1
+1     a  2  A   1
+1      q 1  B    1
+1  q    a2      1
+1        1    C  1
+1 E  a   1   q A1
+1    b a 1    A  1
+1    c   1     A1
+1    d   |     A 1
 11111111111111111

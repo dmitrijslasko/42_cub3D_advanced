@@ -25,7 +25,7 @@ size_t	count_if_there_is_others_elements(t_map *map, char *element)
 		col = 0;
 		while (col < map->map_size_cols)
 		{
-			if (!ft_strchr(element, map->map_data[row][col].cell_char))
+			if (!ft_strchr(element, map->map_data[row][col].map_char))
 				return (1);
 			col++;
 		}
@@ -49,7 +49,7 @@ size_t	count_elements_in_the_map(t_map *map, char *element)
 		col = 0;
 		while (col < map->map_size_cols)
 		{
-			if (ft_strchr(element, map->map_data[row][col].cell_char))
+			if (ft_strchr(element, map->map_data[row][col].map_char))
 				element_count++;
 			col++;
 		}

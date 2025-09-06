@@ -37,6 +37,7 @@ typedef struct s_wall_tile
 typedef enum e_texture_type
 {
 	DEFAULT = 0,
+	SKY,
 	FLOOR,
 	CEILING,
 	WALL_1,
@@ -77,6 +78,8 @@ typedef struct s_texture_match
 
 static const t_texture_match	g_texture_lookup[] = {
 {"DEF", "default fallback texture", 	DEFAULT, 				NULL},
+
+{"SKY", "sky texture", 					SKY, 					NULL},
 
 // floor / ceiling
 {"F1", "floor 1 texture", 				FLOOR, 					" "},

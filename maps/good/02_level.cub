@@ -11,7 +11,7 @@ W04 	    textures/wolfenstein/grey_stone.xpm
 W05         textures/bookshelf.xpm
 W06         textures/wolfenstein/wood.xpm
 W07         textures/curtain-1.xpm
-W08         textures/shoji-64.xpm
+W08         textures/wolfenstein/grey_stone.xpm
 W09         textures/curtain-3.xpm
 
 DOOR_01    	textures/shoji-64.xpm
@@ -23,18 +23,14 @@ DOOR_03_S   textures/bookshelf.xpm
 
 ED1    	    textures/wolf44.xpm
 
-11111111111111111111111111111111111111111111111111
-1 E $                                            1
-1    8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1#### A                                          1
-1    8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1a                                               1
-1    8 8 8 1-1-1 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1a         | # |                                 1
-1    8 8 8 1-1-1 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1a                                               1
-1    8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1a                                               1
-1    8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8   1
-1a                                               1
-11111111111111111111111111111111111111111111111111
+11111111111111111
+1  $            1
+1     a         1
+1a     q        1
+1  q    a       1
+1        q      1
+1 E A       q   1
+1      a        1
+1               1
+1               1
+11111111111111111

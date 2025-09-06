@@ -14,7 +14,7 @@
 
 int	check_hit_door_cell(t_coor *coor, t_data *dt)
 {
-	return (ft_strchr(DOOR_TYPES, get_curr_level(dt)->map.map_data[coor->y][coor->x].cell_char));
+	return (ft_strchr(DOOR_TYPES, dt->map->map_data[coor->y][coor->x].map_char));
 }
 
 int	run_dda_loop(t_data *dt, t_ray *ray, t_dda_info *dda_info)
@@ -24,6 +24,7 @@ int	run_dda_loop(t_data *dt, t_ray *ray, t_dda_info *dda_info)
 	debug_print("Running DDA loop...\n");
 	door_hit = 0;
 	ray->door = NULL;
+
 	debug_print("Checking door hit!\n");
 	if (check_hit_door_cell(dda_info->map_coor, dt))
 	{
@@ -32,8 +33,8 @@ int	run_dda_loop(t_data *dt, t_ray *ray, t_dda_info *dda_info)
 			return (door_hit);
 	}
 	debug_print("Checked door hit!\n");
-	while (dda_info->map_coor->x < get_curr_level(dt)->map.map_size_cols
-		&& dda_info->map_coor->y < get_curr_level(dt)->map.map_size_cols)
+	while (dda_info->map_coor->x < dt->map->map_size_cols
+		&& dda_info->map_coor->y < dt->map->map_size_cols)
 	{
 		step_and_set_side(dda_info);
 		ray->hit_side = *(dda_info->hit_side);
@@ -47,7 +48,7 @@ int	run_dda_loop(t_data *dt, t_ray *ray, t_dda_info *dda_info)
 			if (door_hit)
 				break ;
 		}
-		if (check_hit_wall(dda_info->map_coor, &get_curr_level(dt)->map, ray, *(dda_info->hit_side)))
+		if (check_hit_wall(dda_info->map_coor, dt->map, ray, *(dda_info->hit_side)))
 			break ;
 	}
 	return (door_hit);

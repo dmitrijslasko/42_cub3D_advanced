@@ -33,7 +33,7 @@ bool	copy_map_row(t_map *map, int row, char *line)
 		c = line[col];
 		 if (!check_valid_character_map(c))
 		 	return (EXIT_FAILURE);
-		map->map_data[row][col].cell_char = c;
+		map->map_data[row][col].map_char = c;
 		col++;
 	}
 	return (EXIT_SUCCESS);

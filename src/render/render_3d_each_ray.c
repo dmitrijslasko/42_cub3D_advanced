@@ -17,7 +17,7 @@ void	apply_wall_orientation_shading(t_ray *ray, int *color)
 {
 	if (ray->wall_orientation == EAST || ray->wall_orientation == WEST)
 	{
-		apply_shadow(ray, &color, WALL_ORIENTATION_SHADOW_STRENGTH);
+		apply_shadow(ray, color, WALL_ORIENTATION_SHADOW_STRENGTH);
 	}
 }
 void	put_pix_img(t_data *dt, t_ray *ray, t_coor *texture, t_coor *coor)
@@ -28,8 +28,8 @@ void	put_pix_img(t_data *dt, t_ray *ray, t_coor *texture, t_coor *coor)
 	if (ENABLE_SHADERS)
 	{
 		apply_wall_orientation_shading(ray, &color);
-		apply_distance_shadow_distance(*dt->ambient_light, &color);
 		apply_distance_shadow(ray, &color);
+		apply_ambient_light_shading(*dt->ambient_light, &color);
 	}
 	img_pix_put(dt->raycasting_scene_img, coor->x, coor->y, color);
 }

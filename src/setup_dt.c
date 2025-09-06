@@ -85,22 +85,14 @@ int	setup_dt(t_data *dt)
 		
 		// sprites - map level
 		load_sprites(dt, &dt->levels[i], &dt->levels[i].map, i);
-		
-		int sprite_count = dt->levels[0].sprite_count;
-		int texture_count = dt->levels[0].sprite_texture_count;
-
 		set_sprite_textures(dt, i);
 
 		dt->levels[i].level_score = 0;
 		dt->levels[i].score_combo = 1.0f;
 		dt->levels[i].prev_consumable = 0;
-		dt->levels[i].ambient_light = i * 100.0f;
+		dt->levels[i].ambient_light = 10.0f;
 		i++;
 	}
-	
-	dt->ambient_light = &dt->levels[dt->active_level].ambient_light;
-	printf("Level ambient light set!\n");
-
 	// if (BONUS)
 	// 	dt->background_music = init_audio();
 

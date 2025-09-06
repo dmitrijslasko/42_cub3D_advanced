@@ -66,4 +66,6 @@ void	init_dt(t_data *dt)
 	init_graphic(dt);
 	dt->frames_drawn_count = 0;
 	dt->background_music = NULL;
+	dt->sprite_pulse_coef = 0;
+	dt->sprite_pulse_step = 1;
 }

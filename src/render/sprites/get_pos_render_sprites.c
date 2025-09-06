@@ -44,6 +44,9 @@ int	get_position_and_render_sprite(t_data *dt, t_sprite *sprite)
 	sprite_size.y = fmin(WINDOW_H * 8, WINDOW_H / transform.y);
 	sprite_size.x = fmin(WINDOW_W * 8, sprite_size.y);
 
+	// sprite_size.y += dt->sprite_pulse_coef;
+	// sprite_size.x += dt->sprite_pulse_coef;
+
 	sprite_screen_x = (WINDOW_W / 2) * (1 + transform.x / transform.y);
 	
 	offset.x = sprite_screen_x - sprite_size.x / 3;

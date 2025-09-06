@@ -33,7 +33,7 @@ int process_game_status(t_data *dt)
 			dt->active_level++;
 			dt->active_level %= NUMBER_OF_LEVELS;
 			update_current_level_pointers(dt);
-			get_init_player_position(&get_curr_level(dt)->map, &dt->player);
+			get_init_player_position(dt->map, &dt->player);
 			dt->game_status = GAME_SCREEN;
 		}
 	}

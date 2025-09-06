@@ -2,20 +2,24 @@
 
 int process_sprite_pickups(t_data *dt)
 {
-	t_sprite *sprite = find_sprite_at(dt, (size_t)dt->player.pos.x, (size_t)dt->player.pos.y);
+	t_sprite *sprite;
+	
+	sprite = find_sprite_at(dt, (size_t)dt->player.pos.x, (size_t)dt->player.pos.y);
 
 	// health pickup
 	if (sprite && !sprite->is_hidden && sprite->map_char == '+')
 	{
 		sprite->is_hidden = 1;
-		system("aplay sounds/health.wav &");
+		system(HEALTH_PICKUP_SYSTEM_CALL);
 		dt->player.health_level = ft_min(100, dt->player.health_level += 10);
 	}
 
 	// food pickup
 	if (sprite && !sprite->is_hidden && ft_strchr(CONSUMABLE_TYPES, sprite->map_char))
 	{
+		flash_color(dt, WHITE);
 		sprite->is_hidden = 1;
+		system(EATING_SOUND_SYSTEM_CALL);
 		dt->levels[dt->active_level].consumables_collected++;
 		
 		// level score && total game score
@@ -31,11 +35,15 @@ int process_sprite_pickups(t_data *dt)
 
 	// key pickup pickup - game won!
 	if (sprite && !sprite->is_hidden && ft_strchr(EXIT_TYPES, sprite->map_char))
-	{
+	{	
 		if (dt->levels[dt->active_level].level_consumable_count > dt->levels[dt->active_level].consumables_collected)
+		{
+			// system(ALERT_SYSTEM_CALL);
 			mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, NOT_ALL_FOOD_COLLECTED);
+		}
 		else 
 		{
+			play_sound(LEVEL_CLEARED_SYSTEM_CALL);
 			printf("Level #%d finished!\n", dt->active_level);
 			print_separator(1, DEF_SEPARATOR_CHAR);
 			if (dt->active_level == NUMBER_OF_LEVELS)
@@ -43,7 +51,7 @@ int process_sprite_pickups(t_data *dt)
 			else
 			{
 				dt->game_status = LEVEL_FINISH;
-				update_current_level_pointers(dt);
+				// update_current_level_pointers(dt);
 			}
 		}
 	}

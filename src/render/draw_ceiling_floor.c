@@ -23,7 +23,7 @@ int	draw_ceiling(t_data *dt)
 	// color = create_color_rgb(dt->map->textures[CEILING].color.r, \
 	// 						dt->map->textures[CEILING].color.g, \
 	// 						dt->map->textures[CEILING].color.b);
-	color = BLUE;
+	color = DARKGREY;
 	draw_rectangle(dt->raycasting_scene_img, top_left, bottom_right, color);
 	return (EXIT_SUCCESS);
 }
@@ -43,13 +43,13 @@ int	draw_floor(t_data *dt)
 	
 								
 	color = DARKGREY;
-	apply_distance_shadow_distance(*dt->ambient_light, &color);
+	apply_ambient_light_shading(*dt->ambient_light, &color);
 	draw_rectangle(dt->raycasting_scene_img, top_left, bottom_right, color);
 
 	return (EXIT_SUCCESS);
 }
 
-int	apply_distance_shadow_distance(int distance, int *color)
+int	apply_ambient_light_shading(int ambient_light, int *color)
 {
 	float	shade;
 	int		r;
@@ -58,8 +58,9 @@ int	apply_distance_shadow_distance(int distance, int *color)
 
 	if (*color == BLACK)
 		return (0);
-	distance = ft_max(0, distance);
-	shade = fmax(0.1f, 1.0f / (1.0f + distance * 0.01f * DISTANCE_SHADOW_STRENGTH));
+	ambient_light = ft_max(0, ambient_light);
+	
+	shade = fmax(0.1f, 1.0f / (1.0f + ambient_light * 0.01f * DISTANCE_SHADOW_STRENGTH));
 
 	r = ((*color >> 16) & 0xFF) * shade;
 	g = ((*color >> 8) & 0xFF) * shade;

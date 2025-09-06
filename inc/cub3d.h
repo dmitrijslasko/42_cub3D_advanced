@@ -44,6 +44,7 @@
 # include "weapons.h"
 # include "sprites.h"
 # include "messages.h"
+# include "sounds.h"
 
 //# include "sound.h"
 
@@ -140,7 +141,7 @@ typedef struct s_dda_info
 
 typedef struct s_mapcell
 {
-	char		cell_char;
+	char		map_char;
 	int			is_near_door;
 	t_door		*door;
 }	t_mapcell;
@@ -286,6 +287,7 @@ typedef struct s_sprite
 	float				distance_to_player;
 	float				orientation_to_player;
 
+	float				speed;
 	int					health_level;
 	t_sprite_state		state;
 
@@ -324,6 +326,8 @@ typedef struct s_level
 	t_sprite			*sprites;
 	size_t				sprite_count;
 	t_sprite			*targeted_sprite;
+
+	char				*sky_pathfile;
 
 	t_door				*doors;
 	size_t				door_count;
@@ -398,6 +402,10 @@ typedef struct s_data
 	float				test_value_2;
 	float				test_value_3;
 	float				test_value_4;
+
+	int					sprite_pulse_coef;
+	int					sprite_pulse_step;
+
 }	t_data;
 
 int	debug_print(char *str);
@@ -466,13 +474,14 @@ bool		parse_mapfile_values(t_map *map, char *file);
 void		parse_map(t_map *map, int fd, char **line);
 void		get_init_player_position(t_map *map, t_player *player);
 bool		set_color_or_texture(t_map *map, char *identifier, char **value);
-//bool		set_texture(t_map *map, char *identifier, char *texture_file);
 bool		set_color(char *identifier, char **color, t_map *map);
 bool		check_map_is_closed(t_map *map, t_player *player, t_data *dt);
-char		get_cell_type(t_map *map, t_coor *coord);
 
-char		get_cell_type_by_coordinates(t_map *map, size_t y, size_t x);
+char		get_cell_type(t_map *map, t_coor *coord);
 t_mapcell	*get_cell_by_coordinates(t_map *map, size_t y, size_t x);
+t_mapcell	*get_cell_by_coordinates_float(t_map *map, float y, float x);
+
+
 char		**ft_split_by_multiple_delimiters(const char *s, char *c);
 
 // player movements
@@ -706,7 +715,7 @@ int			load_weapons(t_data *dt);
 
 void		show_player_info(t_data *dt);
 
-int	apply_distance_shadow_distance(int distance, int *color);
+int	apply_ambient_light_shading(int distance, int *color);
 
 int	mimic_fullscreen(void);
 
@@ -751,6 +760,10 @@ void	bob_walls(t_data *dt);
 int	update_prompt_message(t_data *dt);
 
 int update_current_level_pointers(t_data *dt);
+
+int play_sound(char *system_call);
+
+int flash_color(t_data *dt, int color);
 
 
 #endif

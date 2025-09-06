@@ -26,11 +26,11 @@ bool	is_invalid_map(t_map *map)
 
 bool	is_open_map(t_mapcell **map, t_mapcell **visited, int row, int col)
 {
-	if (row < 0 || col < 0 || map[row] == NULL || map[row][col].cell_char == '\0')
+	if (row < 0 || col < 0 || map[row] == NULL || map[row][col].map_char == '\0')
 		return (1);
-	if (ft_strchr(WALL_TYPES, map[row][col].cell_char) || visited[row][col].cell_char == 'V')
+	if (ft_strchr(WALL_TYPES, map[row][col].map_char) || visited[row][col].map_char == 'V')
 		return (0);
-	visited[row][col].cell_char = 'V';
+	visited[row][col].map_char = 'V';
 	if (is_open_map(map, visited, row + 1, col))
 		return (1);
 	if (is_open_map(map, visited, row - 1, col))

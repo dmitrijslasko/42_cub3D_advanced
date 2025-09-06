@@ -36,14 +36,15 @@ void	open_close_door(t_data *dt, int dir)
 	t_coor	cell_ahead;
 	t_door	*door;
 
-	// dt->has_changed = 1;
 	cell_ahead = get_cell_ahead(dt);
 	if (ft_strchr(DOOR_TYPES, get_cell_type(dt->map, &cell_ahead)))
 	{
-		// dt->view->show_door_open_message = 1;
 		door = find_door_at(dt, cell_ahead.x, cell_ahead.y);
 		if (dir == 1)
+		{
 			door->open_progress = fmax(0.0f, door->open_progress - door->speed);
+			door->opening_finish_time = dt->time.last_time;
+		}
 		else
 			door->open_progress = fmin(1.0f, door->open_progress + door->speed);
 	}
@@ -53,21 +54,23 @@ void	open_close_door2(t_data *dt)
 {
 	t_coor	cell_ahead;
 	t_door	*door;
-	t_map	*map = &get_curr_level(dt)->map;
 
 	cell_ahead = get_cell_ahead(dt);
-	if (ft_strchr(DOOR_TYPES, get_cell_type(map, &cell_ahead)))
+	if (ft_strchr(DOOR_TYPES, get_cell_type(dt->map, &cell_ahead)))
 	{
 		door = find_door_at(dt, cell_ahead.x, cell_ahead.y);
-			door->is_opening = 1;
+		if (door->open_progress == 0.0f)
+			system(SLIDING_DOOR_SYSTEM_CALL);
+		door->is_opening = 1;
 	}
-	// dt->doors[9].is_opening = 1;
 }
 
 static void	process_door(t_data *dt)
 {
 	if (dt->keys[XK_bracketleft])
+	{
 		open_close_door(dt, -1);
+	}
 	if (dt->keys[XK_bracketright])
 		open_close_door(dt, 1);
 	if (dt->keys[XK_e])

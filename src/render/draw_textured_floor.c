@@ -46,13 +46,12 @@ int draw_textured_floor(t_data *dt)
             int texX = (int)(TILE_SIZE * (floorX - cellX)) & (TILE_SIZE - 1);
             int texY = (int)(TILE_SIZE * (floorY - cellY)) & (TILE_SIZE - 1);
             
-            // texture = get_curr_level(dt)->map.textures[FLOOR].texture;
-            texture = dt->levels[0].map.textures->texture;
+            texture = dt->map->textures[0].texture;
 
             // Get color and draw pixel
-            color = texture.texture_data[TILE_SIZE * texY + texX];
-            // color = BLUE;
-			// apply_distance_shadow_distance(*dt->ambient_light, &color);
+            // color = texture.texture_data[TILE_SIZE * texY + texX];
+            color = texture.texture_data[100];
+            // printf("COLOR: %d\n", color);
             img_pix_put(dt->raycasting_scene_img, x, current_row, color);
 
             floorX += floorStepX;

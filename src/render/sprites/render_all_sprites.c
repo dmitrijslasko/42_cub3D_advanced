@@ -12,39 +12,41 @@
 
 #include "cub3d.h"
 
+static int show_targeted_sprite(t_data *dt, t_sprite *sprite)
+{
+	int center_x;
+	int aim;
+
+	sprite->start_x = -1;
+	if (SHOW_TARGETED_SPRITE)
+	{
+		if (sprite == dt->targeted_sprite)
+		{
+			center_x = sprite->center_x;
+			draw_line(dt->final_frame_img, (t_coor){center_x, 100}, (t_coor){center_x, WINDOW_H - 100}, CYAN);
+			aim = sprite->aim;
+			
+			draw_line(dt->final_frame_img, (t_coor){center_x - aim, 100}, (t_coor){center_x - aim, WINDOW_H - 100}, MAGENTA);
+			draw_line(dt->final_frame_img, (t_coor){center_x + aim, 100}, (t_coor){center_x + aim, WINDOW_H - 100}, MAGENTA);
+		}
+	}
+	sprite->center_x = -1;
+	return (EXIT_SUCCESS);
+}
+
 int	render_all_sprites(t_data *dt)
 {
 	size_t	i;
 	float	distance_to_player;
-	int		sprite_count;
-
-	t_sprite *sprites = get_curr_level(dt)->sprites;
 
 	dt->targeted_sprite = NULL;
-
 	sort_sprites_by_distance(dt);
-
-	sprite_count = get_curr_level(dt)->sprite_count;
+	
 	i = 0;
-	while (i < sprite_count)
+	while (i < dt->sprite_count)
 	{	
-		get_position_and_render_sprite(dt, &sprites[i]);
-
-		sprites[i].start_x = -1;
-
-		if (SHOW_TARGETED_SPRITE)
-		{
-			if (&sprites[i] == dt->targeted_sprite)
-			{
-				int center_x = sprites[i].center_x;
-				draw_line(dt->final_frame_img, (t_coor){center_x, 100}, (t_coor){center_x, WINDOW_H - 100}, CYAN);
-				
-				int aim = sprites[i].aim;
-				draw_line(dt->final_frame_img, (t_coor){center_x - aim, 100}, (t_coor){center_x - aim, WINDOW_H - 100}, MAGENTA);
-				draw_line(dt->final_frame_img, (t_coor){center_x + aim, 100}, (t_coor){center_x + aim, WINDOW_H - 100}, MAGENTA);
-			}
-		}
-		sprites[i].center_x = -1;
+		get_position_and_render_sprite(dt, &dt->sprites[i]);
+		show_targeted_sprite(dt, &dt->sprites[i]);
 		i++;
 	}
 	return (EXIT_SUCCESS);

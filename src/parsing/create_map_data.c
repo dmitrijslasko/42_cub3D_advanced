@@ -29,12 +29,12 @@ bool	init_2d_map(char ***array, size_t size_row,
 	while (curr_row < size_row)
 	{
 		new[curr_row] = protected_malloc((size_col + 1) * sizeof(t_mapcell), dt);
-		new[curr_row][size_col].cell_char = '\0';
+		new[curr_row][size_col].map_char = '\0';
 		new[curr_row][size_col].is_near_door = 0;
 		curr_col = 0;
 		while (curr_col < size_col)
 		{
-			new[curr_row][curr_col].cell_char = ' ';
+			new[curr_row][curr_col].map_char = ' ';
 			new[curr_row][curr_col++].is_near_door = 0;
 			cell_count++;
 		}

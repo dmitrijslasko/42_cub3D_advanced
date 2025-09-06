@@ -93,7 +93,6 @@ int	load_sprites(t_data *dt, t_level *level, t_map *map, int i)
 	load_sprite_textures(dt, i);
 
 	find_all_sprites(dt, map, i);
-	printf("%d %d\n", dt->levels[0].sprite_count, dt->levels[0].sprite_texture_count);
 
 	printf(TXT_GREEN "Done!\n" TXT_RESET);
 	return (EXIT_SUCCESS);

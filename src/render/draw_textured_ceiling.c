@@ -46,7 +46,7 @@ int draw_textured_ceiling(t_data *dt)
 
             // Get color and draw pixel
             uint32_t color = texture.texture_data[TILE_SIZE * texY + texX];
-			apply_distance_shadow_distance(rowDistance + dt->test_value_3, &color);
+			apply_ambient_light_shading(rowDistance + dt->test_value_3, &color);
             img_pix_put(dt->raycasting_scene_img, x, y, color);
 
             floorX += floorStepX;

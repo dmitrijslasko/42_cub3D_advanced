@@ -33,7 +33,7 @@
 
 # define NUMBER_OF_LEVELS                   4
 
-# define SHOW_TARGETED_SPRITE               0
+# define SHOW_TARGETED_SPRITE               1
 // window name
 # define WINDOW_NAME       "cub3D - dmlasko @ 42Berlin"
 # define VERSION_INFO      "cub3D project - 42 Berlin - dmlasko, v2.0"
@@ -44,12 +44,12 @@
 # define TILE_SIZE  						128
 
 // bonus part
-# define SKY_TXT_PATHFILE	    "./textures/sky/sky_2.xpm"
+# define SKY_TXT_PATHFILE	    "./textures/sky/sky_3.xpm"
 
-# define MENU_PATHFILE	        "./sprites/menu-screen-1.xpm"
-# define MENU2_PATHFILE	        "./sprites/menu-screen-2.xpm"
-# define GAME_WON_PATHFILE	    "./sprites/menu-game-won.xpm"
-# define LEVEL_CLEARED_PATHFILE	    "./sprites/menu-level-cleared.xpm"
+# define MENU_PATHFILE	        "./assets/menu/menu-screen-1.xpm"
+# define MENU2_PATHFILE	        "./assets/menu/menu-screen-2.xpm"
+# define GAME_WON_PATHFILE	    "./assets/menu/menu-game-won.xpm"
+# define LEVEL_CLEARED_PATHFILE "./assets/menu/menu-level-cleared.xpm"
 
 // window size
 # define WINDOW_W							640
@@ -123,6 +123,7 @@
 # define DEF_WALL_COLOR						PINK
 
 # define MIN_DISTANCE_TO_WALL				0.4f
+# define MIN_DISTANCE_TO_SPRITE				0.2f
 # define DOOR_OPEN_VALUE                    1.0f
 
 // default scale
@@ -178,11 +179,14 @@
 # define WHITESPACE        	            	" \a\b\t\n\v\f\r"
 
 # define PLAYER_SPAWN_POINT_TYPES			"NSWE"
-# define SPRITE_TYPES     	 	            "ABCDFGHIJKLMOPQRTUVXYZabcdefghijklmnopqrstuvwxyz+$#&"
-# define DECORATION_TYPES     	 	        "abcdefghijklmnopqrstuvwxyz"
-# define CONSUMABLE_TYPES     	 	        "+#&"
+# define SPRITE_TYPES     	 	            "ABCDFGHIJKLMOPQRTUVXYZabcdefghijklmnopqrstuvwxyz+$#&@"
+# define CONSUMABLE_TYPES     	 	        "ABC"
+# define DECORATION_TYPES     	 	        "MO"
+# define ENEMY_SPRITES                      "abcdiq"
+# define ENEMY_SPRITE_MOVE_SPEED            0.02f
 # define EXIT_TYPES     	 	            "$"
 # define SPRITE_FRAMES						2
+
 # define WALL_TYPES							"123456789"
 # define VERTICAL_WALL_TYPES				"v"
 # define HORIZONTAL_WALL_TYPES				"h"
@@ -194,9 +198,9 @@
 # define NO_OF_ACTION                       8
 
 // shaders
-# define ENABLE_SHADERS						1
-# define DISTANCE_SHADOW_STRENGTH 			0.4f
-# define WALL_ORIENTATION_SHADOW_STRENGTH   0.4f
+# define ENABLE_SHADERS						0
+# define DISTANCE_SHADOW_STRENGTH 			0.1f
+# define WALL_ORIENTATION_SHADOW_STRENGTH   0.5f
 
 # define ENABLE_MOVING_SKY					1
 # define ROTATION_SCALE					    1

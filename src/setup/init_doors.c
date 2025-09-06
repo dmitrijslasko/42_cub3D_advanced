@@ -18,7 +18,7 @@ static void	init_a_door(t_data *dt, t_map *map, t_door **door_ptr, \
 	t_door	*door;
 	char 	door_type;
 
-	door_type =  get_cell_type_by_coordinates(map, curr_row, curr_col);
+	door_type =  get_cell_by_coordinates(map, curr_row, curr_col)->map_char;
 
 	door = *door_ptr;
 
@@ -30,7 +30,7 @@ static void	init_a_door(t_data *dt, t_map *map, t_door **door_ptr, \
 	door->pos_y = DEF_DOOR_OFFSET_Y;
 	door->is_opening = 0;
 	door->open_progress = 0.0f;
-	if (ft_strchr(VERTICAL_DOOR_TYPES, map->map_data[curr_row][curr_col].cell_char))
+	if (ft_strchr(VERTICAL_DOOR_TYPES, map->map_data[curr_row][curr_col].map_char))
 		door->orientation = 1;
 	else
 		door->orientation = 0;
@@ -69,7 +69,7 @@ void	init_doors(t_data *dt, t_level *level, t_map *map)
 		curr_col = 0;
 		while (curr_col < map->map_size_cols)
 		{
-			door_type =  get_cell_type_by_coordinates(map, curr_row, curr_col);
+			door_type = get_cell_by_coordinates(map, curr_row, curr_col)->map_char;
 			if (ft_strchr(DOOR_TYPES, door_type))
 				init_a_door(dt, map, &door_ptr, curr_row, curr_col);
 			curr_col++;

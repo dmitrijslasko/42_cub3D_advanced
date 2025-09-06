@@ -4,11 +4,11 @@ static int	render_floor_and_ceiling(t_data *dt)
 {
 	draw_sky(dt);
 	
-	draw_ceiling(dt);
+	// draw_ceiling(dt);
 	draw_floor(dt);
 	
 	// draw_textured_ceiling(dt);
-	// draw_textured_floor(dt);
+	draw_textured_floor(dt);
 
 	return (EXIT_SUCCESS);
 }

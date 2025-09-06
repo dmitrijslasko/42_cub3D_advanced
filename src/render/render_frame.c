@@ -58,15 +58,11 @@ int animate_doors(t_data *dt)
 	int		door_count;
 
 	debug_print("Animating doors...\n");
-
-	door_count = get_curr_level(dt)->door_count;
-
     i = 0;
-    while (i < door_count)
+    while (i < dt->door_count)
     {
-		door = &get_curr_level(dt)->doors[i];
+		door = &dt->doors[i];
 
-        // Opening
         if (door->is_opening)
         {
             door->open_progress += door->speed;
@@ -97,6 +93,66 @@ int animate_doors(t_data *dt)
     return (EXIT_SUCCESS);
 }
 
+int animate_sprites(t_data *dt)
+{
+	size_t	i;
+	t_x_y	*pos;
+	float	*speed;
+	float	distance_to_wall;
+
+	i = 0;
+	while (i < dt->sprite_count)
+	{
+		if (!ft_strchr(ENEMY_SPRITES, dt->sprites[i].map_char))
+		{
+			i++;
+			continue ;
+		}
+		
+		speed = &dt->sprites[i].speed;
+		pos = &dt->sprites[i].pos;
+
+		if (dt->sprites[i].state == DYING)
+		{
+			i++;
+			continue ;
+		}
+			
+		dt->sprites[i].state = MOVING;
+
+		distance_to_wall = 0.5f * (1 - 2 * (*speed < 0));
+
+		t_x_y test_pos;
+		test_pos.x = pos->x;
+		test_pos.y = pos->y;
+
+		if (dt->sprites[i].orientation == 0.0f || dt->sprites[i].orientation == 180.0f)
+			test_pos.x += *speed + distance_to_wall;
+		
+		if (dt->sprites[i].orientation == 90.0f || dt->sprites[i].orientation == 270.0f)
+			test_pos.y += *speed + distance_to_wall;
+
+		char cell_type = get_cell_by_coordinates_float(dt->map, test_pos.y, test_pos.x)->map_char;
+
+		if (ft_strchr(WALL_TYPES, cell_type))
+		{
+			dt->sprites[i].orientation += 180.0f;
+			if (dt->sprites[i].orientation >= 360.0f)
+				dt->sprites[i].orientation -= 360.f;
+			*speed *= -1;
+		}
+		else
+		{
+			if (dt->sprites[i].orientation == 0.0f || dt->sprites[i].orientation == 180.0f)
+				pos->x += *speed;
+			if (dt->sprites[i].orientation == 90.0f || dt->sprites[i].orientation == 270.0f)
+				pos->y += *speed;
+		}
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	render_frame(void *param)
 {
 	t_data		*dt;
@@ -115,6 +171,10 @@ int	render_frame(void *param)
 		return (0);
 	}
 	dt->time.last_time = current_time;
+
+	dt->sprite_pulse_coef += dt->sprite_pulse_step;
+	if (dt->sprite_pulse_coef <= -10 || dt->sprite_pulse_coef >= 10)
+		dt->sprite_pulse_step *= -1;
 	
 	if (process_game_status(dt) != GAME_SCREEN)
 		return (dt->game_status);
@@ -131,12 +191,15 @@ int	render_frame(void *param)
 	put_img_to_img(dt->final_frame_img, dt->raycasting_scene_img, 0, 0);
 
 	if (RENDER_SPRITES)
+	{
+		animate_sprites(dt);
 		render_all_sprites(dt);
+	}
 	
 	// show minimap
-	// if (dt->view->show_minimap)
-	// 	update_minimap(dt);
-	// render_minimap_and_ui(dt);
+	if (dt->view->show_minimap)
+		update_minimap(dt);
+	render_minimap_and_ui(dt);
 
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr,dt->final_frame_img->mlx_img, 0, 0);
 	

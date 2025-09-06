@@ -24,7 +24,7 @@ int	fire_gun(t_data *dt)
 	if (dt->player.selected_weapon->total_ammo > 0)
 	{
 		dt->weapon_is_animating = 1;
-		system("aplay sounds/shot.wav > /dev/null 2>&1 &");
+		play_sound(SHOT_SOUND_SYSTEM_CALL);
 		dt->player.selected_weapon->total_ammo = ft_max(0, --dt->player.selected_weapon->total_ammo);
 
 		if (dt->targeted_sprite)

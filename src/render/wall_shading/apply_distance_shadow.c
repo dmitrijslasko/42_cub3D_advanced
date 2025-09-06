@@ -30,6 +30,7 @@ int	apply_distance_shadow(t_ray *ray, int *color)
 	return (EXIT_SUCCESS);
 }
 
+// BUG: Strange behaviour for the return 1 statement
 int	apply_shadow(t_ray *ray, int *color, float strength)
 {
 	float	shade;
@@ -37,14 +38,14 @@ int	apply_shadow(t_ray *ray, int *color, float strength)
 	int		g;
 	int		b;
 
-	if (!ft_strchr(WALL_TYPES, ray->cell_type))
-		return (EXIT_SUCCESS);
+	if (ft_strchr(WALL_TYPES, ray->cell_type - '0'))
+		return (1);
 	shade = 1.0f / (1.0f + strength);
 	if (shade < 0.1f)
 		shade = 0.1f;
 	r = ((*color >> 16) & 0xFF) * shade;
 	g = ((*color >> 8) & 0xFF) * shade;
 	b = ((*color >> 0) & 0xFF) * shade;
-	*color = (r << 16) | (g << 8) | (b << 0);
+	*color = (r << 16) | (g << 8) | (b << 0);	
 	return (EXIT_SUCCESS);
 }
