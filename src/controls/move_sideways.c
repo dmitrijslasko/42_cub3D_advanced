@@ -22,7 +22,7 @@ int	move_sideways(t_data *dt, int to_the_right)
 
 	dt->player.is_moving = 1;
 	player_pos = &(dt->player.pos);
-	rotated_vector = rotate_vector(&dt->player.direction_vector, \
+	rotated_vector = rotate_vector(&dt->player.orientation_vector, \
 									90.0f * to_the_right, dt);
 	new_x = player_pos->x + rotated_vector.x * \
 				KEYBOARD_PLAYER_STEP_SIDE * dt->player.move_speed_multiplier;

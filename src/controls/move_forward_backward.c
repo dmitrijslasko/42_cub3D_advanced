@@ -25,8 +25,8 @@ int	move_forward_backward(t_data *dt, int direction)
 	if (direction == -1)
 		speed = KEYBOARD_PLAYER_STEP_BACKWARD;
 	speed *= dt->player.move_speed_multiplier;
-	new_x = player_pos->x + dt->player.direction_vector.x * speed * direction;
-	new_y = player_pos->y + dt->player.direction_vector.y * speed * direction;
+	new_x = player_pos->x + dt->player.orientation_vector.x * speed * direction;
+	new_y = player_pos->y + dt->player.orientation_vector.y * speed * direction;
 	if (map_position_is_walkable(dt, &new_x, &new_y))
 	{
 		player_pos->x = new_x;

@@ -59,13 +59,6 @@ int	main(int argc, char **argv)
 
 	printf("Consumables to collect in this level: %d\n", get_curr_level(&dt)->level_consumable_count);
 	print_separator(1, DEF_SEPARATOR_CHAR);
-
-	// for (int i = 0; i < 4; i++)
-	// {
-	// 	for (int j = 0; j < dt.levels[i].sprite_count; j++)
-	// 		printf("%f\n", dt.levels[i].sprites[i].orientation);
-	// 	print_separator_default();
-	// }
 	
 	mlx_loop_hook(dt.mlx_ptr, &render_frame, &dt);
 	mlx_loop(dt.mlx_ptr);

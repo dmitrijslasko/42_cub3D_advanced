@@ -106,8 +106,8 @@ void	setup_mouse_hooks(t_data *dt)
 	dt->mouse.prev_y = 0;
 	dt->mouse.x = 0;
 	dt->mouse.y = 0;
-	dt->player.plane_x = dt->player.direction_vector.y * (FIELD_OF_VIEW_SCALE);
-	dt->player.plane_y = dt->player.direction_vector.x * (FIELD_OF_VIEW_SCALE);
+	dt->player.plane_x = dt->player.orientation_vector.y * (FIELD_OF_VIEW_SCALE);
+	dt->player.plane_y = dt->player.orientation_vector.x * (FIELD_OF_VIEW_SCALE);
 
 	mlx_hook(dt->win_ptr, 4, 1L << 2, mouse_press, dt);
 	mlx_hook(dt->win_ptr, 5, 1L << 3, mouse_release, dt);

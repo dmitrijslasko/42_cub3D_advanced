@@ -28,7 +28,7 @@ float	calculate_angle_offset(t_data *dt)
 	float	angle_offset;
 	float	angle_rad;
 
-	angle_rad = dt->player.direction_vector_deg * (M_PI / 180.0f);
+	angle_rad = dt->player.orientation * (M_PI / 180.0f);
 	angle_offset = fmodf((angle_rad * 6.0f) / (2 * M_PI), 1.0f);
 	if (angle_offset < 0)
 		angle_offset += 1.0f;

@@ -17,10 +17,10 @@ int draw_textured_ceiling(t_data *dt)
 		float plane_y = dt->player.plane_y;
 
         // Calculate ray position relative to camera plane
-        float rayDirX0 = dt->player.direction_vector.x + plane_x;
-        float rayDirY0 = dt->player.direction_vector.y - plane_y;
-        float rayDirX1 = dt->player.direction_vector.x - plane_x;
-        float rayDirY1 = dt->player.direction_vector.y + plane_y;
+        float rayDirX0 = dt->player.orientation_vector.x + plane_x;
+        float rayDirY0 = dt->player.orientation_vector.y - plane_y;
+        float rayDirX1 = dt->player.orientation_vector.x - plane_x;
+        float rayDirY1 = dt->player.orientation_vector.y + plane_y;
 
         int p = y - dt->view->screen_center_y;
         rowDistance = ((0.5f * WINDOW_H) / p) / fov_factor - dt->test_value_2;

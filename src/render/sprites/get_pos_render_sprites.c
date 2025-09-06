@@ -24,22 +24,22 @@ int	get_position_and_render_sprite(t_data *dt, t_sprite *sprite)
 	dist_to_player.x = sprite->pos.x - dt->player.pos.x;
 	dist_to_player.y = sprite->pos.y - dt->player.pos.y;
 
-	relative_orientation = fmodf(dt->player.direction_vector_deg - sprite->orientation, 360.0f);
+	relative_orientation = fmodf(dt->player.orientation - sprite->orientation, 360.0f);
 
 	if (relative_orientation < 0)
 		relative_orientation += 360.0f;
 	
 	sprite->orientation_to_player = relative_orientation;
 
-	transform.y = (dt->player.direction_vector.x * dist_to_player.x + \
-					dt->player.direction_vector.y * dist_to_player.y);
+	transform.y = (dt->player.orientation_vector.x * dist_to_player.x + \
+					dt->player.orientation_vector.y * dist_to_player.y);
 
 	// if (transform.y <= 0.1f)
 	// 	return (EXIT_SUCCESS);
 
 	transform.x = (-1.0f / FIELD_OF_VIEW_SCALE) * \
-					(dt->player.direction_vector.y * dist_to_player.x - \
-								dt->player.direction_vector.x * dist_to_player.y);
+					(dt->player.orientation_vector.y * dist_to_player.x - \
+								dt->player.orientation_vector.x * dist_to_player.y);
 
 	sprite_size.y = fmin(WINDOW_H * 8, WINDOW_H / transform.y);
 	sprite_size.x = fmin(WINDOW_W * 8, sprite_size.y);

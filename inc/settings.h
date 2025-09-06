@@ -198,7 +198,7 @@
 # define NO_OF_ACTION                       8
 
 // shaders
-# define ENABLE_SHADERS						0
+# define ENABLE_SHADERS						1
 # define DISTANCE_SHADOW_STRENGTH 			0.1f
 # define WALL_ORIENTATION_SHADOW_STRENGTH   0.5f
 

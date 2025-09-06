@@ -178,8 +178,8 @@ typedef struct s_map
 typedef struct s_player
 {
 	t_x_y		pos;
-	t_x_y		direction_vector;
-	float		direction_vector_deg;
+	t_x_y		orientation_vector;
+	float		orientation;
 	float		plane_x;
 	float		plane_y;
 	char		cell_type_ahead;

@@ -14,10 +14,10 @@ int draw_textured_floor(t_data *dt)
     float plane_y = dt->player.plane_y;
 
     // Calculate ray position relative to camera plane
-    float rayDirX0 = dt->player.direction_vector.x + plane_x;
-    float rayDirY0 = dt->player.direction_vector.y - plane_y;
-    float rayDirX1 = dt->player.direction_vector.x - plane_x;
-    float rayDirY1 = dt->player.direction_vector.y + plane_y;
+    float rayDirX0 = dt->player.orientation_vector.x + plane_x;
+    float rayDirY0 = dt->player.orientation_vector.y - plane_y;
+    float rayDirX1 = dt->player.orientation_vector.x - plane_x;
+    float rayDirY1 = dt->player.orientation_vector.y + plane_y;
 
     while (current_row < WINDOW_H)
     {

@@ -40,7 +40,7 @@ void	print_player_position(t_data *dt, void *mlx, void *win, int *y)
 	snprintf(buffer, sizeof(buffer), "%.2f", dt->player.pos.y);
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1, "Player position Y:");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
-	snprintf(buffer, sizeof(buffer), "%.2f", dt->player.direction_vector_deg);
+	snprintf(buffer, sizeof(buffer), "%.2f", dt->player.orientation);
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_1,
 		"Player orientation (deg):");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);

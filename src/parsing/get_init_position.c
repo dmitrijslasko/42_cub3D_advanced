@@ -21,23 +21,27 @@ void	find_and_set_player_position(t_player *player, size_t col, size_t row, char
 	{
 		dir_x = 0;
 		dir_y = -1;
+		player->orientation = 270.0f;
 	}
 	else if (c == 'S')
 	{
 		dir_x = 0;
 		dir_y = 1;
+		player->orientation = 90.0f;
 	}
 	else if (c == 'E')
 	{
 		dir_x = 1;
 		dir_y = 0;
+		player->orientation = 0.0f;
 	}
 	else
 	{
 		dir_x = -1;
 		dir_y = 0;
+		player->orientation = 180.0f;
 	}
-	set_values_x_y(&player->direction_vector, dir_x, dir_y);
+	set_values_x_y(&player->orientation_vector, dir_x, dir_y);
 	printf("%f %f\n", col+0.5, row+0.5);
 	set_values_x_y(&player->pos, col + 0.5, row + 0.5);
 }

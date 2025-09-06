@@ -21,8 +21,8 @@ t_coor	get_cell_ahead(t_data *dt)
 
 	player_pos.x = (int) dt->player.pos.x;
 	player_pos.y = (int) dt->player.pos.y;
-	set_step(&step, &dt->player.direction_vector);
-	if (fabs(dt->player.direction_vector.x) > fabs(dt->player.direction_vector.y))
+	set_step(&step, &dt->player.orientation_vector);
+	if (fabs(dt->player.orientation_vector.x) > fabs(dt->player.orientation_vector.y))
 	{
 		cell_ahead.x = player_pos.x + step.x;
 		cell_ahead.y = player_pos.y + 0;
