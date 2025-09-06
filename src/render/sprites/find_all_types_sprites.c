@@ -44,7 +44,6 @@ static void	init_sprites(t_data *dt, int index)
 				level->sprites[i].is_hidden = 0;
 
 				level->sprites[i].state = IDLE;
-				level->sprites[i].speed = ENEMY_SPRITE_MOVE_SPEED;
 
 				level->sprites[i].current_frame = 0;
 				level->sprites[i].last_frame_time = 0;

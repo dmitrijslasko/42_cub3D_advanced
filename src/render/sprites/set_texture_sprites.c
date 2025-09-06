@@ -41,9 +41,10 @@ bool	set_sprite_textures(t_data *dt, int index)
 			if (dt->levels[index].sprites[i].map_char == dt->levels[index].sprite_textures[j].map_char)
 			{
 				dt->levels[index].sprites[i].orientation = dt->levels[index].sprite_textures[j].orientation;
-				// if (dt->levels[index].sprites[i].orientation == 180.0f || dt->levels[index].sprites[i].orientation == 270.0f)
-				// 	dt->levels[index].sprites[i].speed *= -1;
 				dt->levels[index].sprites[i].texture = &dt->levels[index].sprite_textures[j];
+								dt->levels[index].sprites[i].speed = ENEMY_SPRITE_MOVE_SPEED;
+				if (dt->levels[index].sprites[i].orientation == 180.0f || dt->levels[index].sprites[i].orientation == 270.0f)
+					dt->levels[index].sprites[i].speed = -ENEMY_SPRITE_MOVE_SPEED;
 				break ;
 			}
 			j++;

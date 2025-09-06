@@ -188,6 +188,13 @@ int	render_frame(void *param)
 
 	render_3d_scene(dt);
 	
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < dt->levels[i].sprite_count; j++)
+			printf("%f\n", dt->levels[i].sprites[i].speed);
+		print_separator_default();
+	}
+
 	put_img_to_img(dt->final_frame_img, dt->raycasting_scene_img, 0, 0);
 
 	if (RENDER_SPRITES)
