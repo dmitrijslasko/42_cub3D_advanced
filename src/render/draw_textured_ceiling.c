@@ -2,7 +2,7 @@
 
 int draw_textured_ceiling(t_data *dt)
 {
-    t_texture texture = dt->map->textures[CEILING].texture;
+    t_texture texture = dt->map->textures[4].texture;
     int x;
     int y;
     float rowDistance;
@@ -23,7 +23,7 @@ int draw_textured_ceiling(t_data *dt)
         float rayDirY1 = dt->player.orientation_vector.y + plane_y;
 
         int p = y - dt->view->screen_center_y;
-        rowDistance = ((0.5f * WINDOW_H) / p) / fov_factor - dt->test_value_2;
+        rowDistance = ((0.5f * WINDOW_H) / p) / fov_factor;
 
         // Calculate step size for each screen pixel
         float floorStepX = rowDistance * (rayDirX1 - rayDirX0) / WINDOW_W;
@@ -46,7 +46,8 @@ int draw_textured_ceiling(t_data *dt)
 
             // Get color and draw pixel
             uint32_t color = texture.texture_data[TILE_SIZE * texY + texX];
-			apply_ambient_light_shading(rowDistance + dt->test_value_3, &color);
+			// apply_ambient_light_shading(rowDistance + dt->test_value_3, &color);
+            apply_distance_shadow(y / 4.0f, &color);
             img_pix_put(dt->raycasting_scene_img, x, y, color);
 
             floorX += floorStepX;

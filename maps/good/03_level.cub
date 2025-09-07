@@ -1,6 +1,8 @@
 
 DEF         textures/default-fallback-texture.xpm
 
+SKY         textures/sky/sky_4.xpm
+
 F1          textures/wolfenstein/red_brick.xpm
 C1          textures/floor-grey-noise.xpm
 

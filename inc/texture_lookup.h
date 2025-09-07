@@ -13,7 +13,7 @@ typedef struct s_color
 
 typedef struct s_texture
 {
-	char		*xpm_file;
+	char		*xpm_file_pathfile;
 	void		*texture_img;
 	int			*texture_data;
 	int			width;

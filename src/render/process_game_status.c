@@ -2,6 +2,10 @@
 
 int process_game_status(t_data *dt)
 {
+
+	dt->player.plane_x = dt->player.orientation_vector.y * (FIELD_OF_VIEW_SCALE);
+	dt->player.plane_y = dt->player.orientation_vector.x * (FIELD_OF_VIEW_SCALE);
+
 	// game menu
 	// printf("Current game status == %d\n", dt->game_status);
 	if (dt->game_status == WELCOME_SCREEN)

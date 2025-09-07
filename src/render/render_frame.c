@@ -179,6 +179,7 @@ int	render_frame(void *param)
 	if (process_game_status(dt) != GAME_SCREEN)
 		return (dt->game_status);
 
+	printf("SKY: %s\n", dt->map->textures[SKY].texture.xpm_file_pathfile);
 	process_keyboard_keypresses(dt);
 
 	animate_weapon(dt);

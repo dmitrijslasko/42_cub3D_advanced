@@ -41,7 +41,7 @@
 # define SHOW_CALCULATION_LOGS				1
 # define SHOW_DEBUG_INFO 					0
 
-# define TILE_SIZE  						128
+# define TILE_SIZE  						64
 
 // bonus part
 # define SKY_TXT_PATHFILE	    "./textures/sky/sky_3.xpm"
@@ -57,7 +57,7 @@
 
 # define CASTED_RAYS_COUNT					640
 # define FPS								60
-# define SCALING				            250
+# define SCALING				            255
 
 # define STARTING_AMMO_LEVEL				999
 # define STARTING_HEALTH_LEVEL              50
@@ -110,11 +110,11 @@
 
 // gameplay
 # define FIELD_OF_VIEW_DEG					60.0f
-# define FIELD_OF_VIEW_SCALE				0.5774f //tan(FIELD_OF_VIEW_DEG / 2)
+# define FIELD_OF_VIEW_SCALE				0.57735026919f //tan(FIELD_OF_VIEW_DEG / 2)
 
 # define DEF_DOOR_OFFSET_X					0.5f
 # define DEF_DOOR_OFFSET_Y					0.5f
-# define DEF_DOOR_SPEED                 0.05f
+# define DEF_DOOR_SPEED                     0.05f
 
 // colors
 # define DEF_BG_COLOR			    		BLACK

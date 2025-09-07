@@ -34,7 +34,7 @@ int		init_textures(t_texture *textures, int len)
 	i = 0;
 	while (i < len)
 	{
-		textures[i].xpm_file = NULL;
+		textures[i].xpm_file_pathfile = NULL;
 		textures[i].type = g_texture_lookup[i].mapfile_key;
 		i++;
 	}

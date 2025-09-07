@@ -114,9 +114,9 @@ void	process_keyboard_keypresses(t_data *dt)
 		printf("%f\n", dt->test_value_1);
 	}
 	if (dt->keys[XK_h])
-		dt->test_value_3 -= 10.0f;
+		dt->test_value_2 -= 10;
 	if (dt->keys[XK_j])
-		dt->test_value_3 += 10.0f;
+		dt->test_value_2 += 10;
 	if (dt->keys[XK_n])
 		dt->test_value_4 -= 0.001f;
 	if (dt->keys[XK_m])

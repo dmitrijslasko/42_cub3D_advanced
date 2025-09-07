@@ -63,8 +63,8 @@ int	load_weapons(t_data *dt)
 	while (i < 5)
 	{
 		char path[64];
-		snprintf(path, sizeof(path), "./ui/pistol/frame%d.xpm", i);
-		// snprintf(path, sizeof(path), "./ui/hands/frame.xpm", i);
+		// snprintf(path, sizeof(path), "./ui/knife/frame%d.xpm", i);
+		snprintf(path, sizeof(path), "./ui/hands/frame.xpm", i);
 		load_weapon_frame(dt, i, path);
 		i++;
 	}

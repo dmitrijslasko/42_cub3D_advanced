@@ -19,7 +19,7 @@ int	load_texture(t_data *dt, t_texture *texture, char *file)
 	if (file != NULL)
 		texture_file = file;
 	else
-		texture_file = texture->xpm_file;
+		texture_file = texture->xpm_file_pathfile;
 
 	texture->texture_img = mlx_xpm_file_to_image(dt->mlx_ptr,
 			texture_file,
@@ -52,8 +52,8 @@ int	load_textures(t_data *dt, t_level *level)
 		texture = &level->map.textures[i].texture;
 		// texture = &dt->map->textures[i].texture;
 		
-		if (load_texture(dt, texture, texture->xpm_file) == EXIT_SUCCESS)
-			printf(TXT_GREEN"Texture [%2zu %4s]: %s loaded!\n"TXT_RESET, i, texture->mapfile_repr, texture->xpm_file);
+		if (load_texture(dt, texture, texture->xpm_file_pathfile) == EXIT_SUCCESS)
+			printf(TXT_GREEN"Texture [%2zu %4s]: %s loaded!\n"TXT_RESET, i, texture->mapfile_repr, texture->xpm_file_pathfile);
 		else
 			printf(TXT_RED"Texture [%2zu]: not provided in the mapfile.\n"TXT_RESET, i);
 		i++;

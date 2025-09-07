@@ -1,7 +1,7 @@
 
 DEF         textures/default-fallback-texture.xpm
 
-SKY         textures/sky/sky_3.xpm
+SKY         textures/sky/sky_night.xpm
 
 F1          textures/shoji-64.xpm
 C1          textures/floor-grey-noise.xpm

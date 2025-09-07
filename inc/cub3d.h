@@ -399,7 +399,7 @@ typedef struct s_data
 	int					gamescore;
 	
 	float				test_value_1;
-	float				test_value_2;
+	int					test_value_2;
 	float				test_value_3;
 	float				test_value_4;
 
@@ -614,7 +614,7 @@ int			precalculate_trig_tables(t_data *dt);
 
 void		render_3d_each_ray(t_data *dt, t_ray *ray, int screen_slice_width);
 
-int			apply_distance_shadow(t_ray *ray, int *color);
+int			apply_distance_shadow(float distance, int *color);
 int			apply_shadow(t_ray *ray, int *color, float strength);
 
 int			reset_mouse_position(t_data *dt);
@@ -764,6 +764,8 @@ int update_current_level_pointers(t_data *dt);
 int play_sound(char *system_call);
 
 int flash_color(t_data *dt, int color);
+
+uint32_t reduce_saturation(uint32_t color, float factor);
 
 
 #endif
