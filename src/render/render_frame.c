@@ -38,6 +38,8 @@ int animate_weapon(t_data *dt)
 	debug_print("Animating weapons...");
 	if (dt->weapon_is_animating == 1)
 	{
+		if (dt->targeted_sprite && weapon->total_ammo > 0)
+			dt->targeted_sprite->state = DYING;
 		now = dt->time.last_time;
 		if (now - dt->weapon_last_frame_time > (1000 / FPS) * 2)
 		{
@@ -47,14 +49,12 @@ int animate_weapon(t_data *dt)
 				dt->rounds_fired++;
 			}
 			dt->weapon_current_frame++;
-			if (dt->weapon_current_frame == 5)
+			if (dt->weapon_current_frame == 5 || (dt->weapon_current_frame == 1 && weapon->total_ammo == 0))
 			{
 				dt->weapon_is_animating = 0;
 				dt->weapon_current_frame = 0;
 				dt->rounds_fired = 0;
 			}
-			if (dt->targeted_sprite)
-				dt->targeted_sprite->state = DYING;
 			dt->weapon_last_frame_time = now;
 		}
 	}

@@ -45,7 +45,7 @@ int	main(int argc, char **argv)
 	setup_dt(&dt);
 
 	dt.game_status = WELCOME_SCREEN;
-	dt.active_level = 0;
+	dt.active_level = 3;
 	update_current_level_pointers(&dt);
 	get_init_player_position(dt.map, &dt.player);
 	printf("Game status set!\n");

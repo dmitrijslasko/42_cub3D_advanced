@@ -36,18 +36,25 @@ int	handle_keypress(int keycode, t_data *dt)
 	return (0);
 }
 
+int switch_weapon(t_data *dt, int new_weapon)
+{
+	dt->player.selected_weapon = &dt->weapon[new_weapon];
+	dt->weapon_is_animating = 0;
+	return (EXIT_SUCCESS);
+}
+
 int	handle_keyrelease(int keycode, t_data *dt)
 {
 	if (dt->keys[XK_1])
-		dt->player.selected_weapon = &dt->weapon[0];
+		switch_weapon(dt, WEAPON_NO_WEAPON);
 	if (dt->keys[XK_2])
-		dt->player.selected_weapon = &dt->weapon[1];
+		switch_weapon(dt, WEAPON_KNIFE);
 	if (dt->keys[XK_3])
-		dt->player.selected_weapon = &dt->weapon[2];
+		switch_weapon(dt, WEAPON_PISTOL);
 	if (dt->keys[XK_4])
-		dt->player.selected_weapon = &dt->weapon[3];
+		switch_weapon(dt, WEAPON_RIFLE);
 	if (dt->keys[XK_5])
-		dt->player.selected_weapon = &dt->weapon[4];
+		switch_weapon(dt, WEAPON_MACHINE_GUN);
 	if (dt->keys[XK_7])
 	{
 		puts("Switching level!");

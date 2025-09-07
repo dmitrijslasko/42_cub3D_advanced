@@ -270,7 +270,8 @@ typedef enum e_sprite_status
 	MOVING,
 	SHOOTING,
 	HURT,
-	DYING
+	DYING,
+	DEAD
 }	t_sprite_state;
 
 typedef struct s_sprite

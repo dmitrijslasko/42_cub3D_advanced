@@ -2,11 +2,10 @@
 
 static int set_animation_speed(t_sprite *sprite, int *sprite_animation_speed)
 {
-	
 	if (sprite->state == MOVING)
 		*sprite_animation_speed = 15;
 	else if (sprite->state == DYING)
-		*sprite_animation_speed = 5;
+		*sprite_animation_speed = 15;
 	else if (sprite->state == SHOOTING)
 		*sprite_animation_speed = 5;
 	else
@@ -47,7 +46,10 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 		{
 			sprite->current_frame++;
 			if (sprite->current_frame > 5)
+			{
 				sprite->current_frame = 5;
+				play_sound(DEATH_SOUND);
+			}
 		}
 		else
 			sprite->current_frame = 0;
