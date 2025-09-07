@@ -39,7 +39,10 @@ int animate_weapon(t_data *dt)
 	if (dt->weapon_is_animating == 1)
 	{
 		if (dt->targeted_sprite && weapon->total_ammo > 0)
+		{
 			dt->targeted_sprite->state = DYING;
+			dt->targeted_sprite->current_frame = 0;
+		}
 		now = dt->time.last_time;
 		if (now - dt->weapon_last_frame_time > (1000 / FPS) * 2)
 		{
@@ -242,11 +245,11 @@ int	render_frame(void *param)
 	{
 		animate_weapon(dt);
 		put_img_to_img(dt->final_frame_img, &dt->weapon[dt->player.selected_weapon->type].frames[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
-		
 		if (dt->weapon_current_frame == 3 && dt->rounds_fired < dt->player.selected_weapon->rounds_fired)
 			dt->weapon_current_frame--;
 	}
 
+	dt->time.last_time = get_current_time_in_ms();
 	dt->frames_drawn_count++;
 	// print_out_sprite_info(dt);
 

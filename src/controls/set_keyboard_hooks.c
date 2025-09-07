@@ -40,6 +40,7 @@ int switch_weapon(t_data *dt, int new_weapon)
 {
 	dt->player.selected_weapon = &dt->weapon[new_weapon];
 	dt->weapon_is_animating = 0;
+	dt->weapon_current_frame = 0;
 	return (EXIT_SUCCESS);
 }
 

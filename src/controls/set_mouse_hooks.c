@@ -37,9 +37,11 @@ int	fire_gun(t_data *dt)
 
 	sprite = &dt->sprites;
 
-	dt->mouse.lmb_is_pressed = 1;
-	dt->mouse.lmb_press_count++;
+	// dt->mouse.lmb_is_pressed = 1;
+	// dt->mouse.lmb_press_count++;
 
+	dt->weapon_is_animating = 0;
+	dt->weapon_current_frame = 0;
 	dt->weapon_is_animating = 1;
 	play_weapon_sound(dt);
 

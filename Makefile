@@ -44,8 +44,8 @@ LIBDIRS = ./lib
 LIBFT_DIR = $(LIBDIRS)/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SDL2_INC := lib/SDL2/build/include/SDL2
-SDL2_MIXER_INC := lib/SDL2_mixer/build/include
+# SDL2_INC := ./lib/SDL2/build/include/SDL2
+# SDL2_MIXER_INC := ./lib/SDL2_mixer/build/include
 
 MINILIBX = $(MINILIBX_DIR)libmlx.a
 MINILIBX_DIR = $(LIBDIRS)/minilibx/
@@ -59,13 +59,13 @@ CFLAGS += -I$(MINILIBX_DIR)
 CFLAGS += -std=c99
 CFLAGS += -Wno-error=type-limits
 CFLAGS += -D_POSIX_C_SOURCE=200112L
-
 # CFLAGS += -I$(SDL2_INC) -I$(SDL2_MIXER_INC) -D_REENTRANT
+
 # LINKER FLAGS
 LDFLAGS += -L$(LIBFT_DIR) -lft
 LDFLAGS += -L$(MINILIBX_DIR) -lmlx
 LDFLAGS += -lX11 -lXext -lm
-# LDFLAGS += -Llib/SDL2/build/lib -Llib/SDL2_mixer/build/lib -lSDL2 -lSDL2_mixer
+# LDFLAGS += -Llib/SDL2/build/lib -Llib/SDL2_mixer/build/lib -lSDL2 -lSDL2_mixers
 
 
 # EXTRA FLAGS

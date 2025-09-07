@@ -13,6 +13,6 @@
 # define MACHINE_GUN_ATTACK_SOUND          "aplay ui/machine-gun/attack.wav > /dev/null 2>&1 &"
 # define EMPTY_GUN_SOUND                   "aplay sounds/empty-gun.wav > /dev/null 2>&1 &"
 
-# define DEATH_SOUND                    "aplay sounds/death.wav > /dev/null 2>&1 &"
+# define DEATH_SOUND                        "aplay sounds/death.wav > /dev/null 2>&1 &"
 
 #endif

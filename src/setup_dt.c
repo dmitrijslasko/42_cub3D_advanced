@@ -98,7 +98,7 @@ int	setup_dt(t_data *dt)
 		i++;
 	}
 	// if (BONUS)
-	// 	dt->background_music = init_audio();
+	// dt->background_music = init_audio();
 
 	return (EXIT_SUCCESS);
 }
