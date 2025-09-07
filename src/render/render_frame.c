@@ -35,13 +35,16 @@ int animate_weapon(t_data *dt)
 
 	weapon = dt->player.selected_weapon;
 
-	debug_print("Animating weapons...");
+	debug_print("Animating weapon...");
 	if (dt->weapon_is_animating == 1)
 	{
 		if (dt->targeted_sprite && weapon->total_ammo > 0)
 		{
-			dt->targeted_sprite->state = DYING;
-			dt->targeted_sprite->current_frame = 0;
+			if (dt->player.selected_weapon->type == WEAPON_MACHINE_GUN || dt->weapon_current_frame == 0)
+			{
+				dt->targeted_sprite->state = DYING;
+				dt->targeted_sprite->current_frame = 0;
+			}
 		}
 		now = dt->time.last_time;
 		if (now - dt->weapon_last_frame_time > (1000 / FPS) * 2)
@@ -185,6 +188,7 @@ int	render_frame(void *param)
 		return (0);
 	}
 	dt->time.last_time = current_time;
+	dt->frames_drawn_count++;
 
 	dt->sprite_pulse_coef += dt->sprite_pulse_step;
 	if (dt->sprite_pulse_coef <= -10 || dt->sprite_pulse_coef >= 10)
@@ -193,6 +197,7 @@ int	render_frame(void *param)
 	if (process_game_status(dt) != GAME_SCREEN)
 		return (dt->game_status);
 
+		
 	process_keyboard_keypresses(dt);
 
 	animate_doors(dt);
@@ -249,9 +254,6 @@ int	render_frame(void *param)
 		if (dt->weapon_current_frame == 3 && dt->rounds_fired < dt->player.selected_weapon->rounds_fired)
 			dt->weapon_current_frame--;
 	}
-
-	dt->time.last_time = get_current_time_in_ms();
-	dt->frames_drawn_count++;
 	// print_out_sprite_info(dt);
 
 	return (EXIT_SUCCESS);
