@@ -31,6 +31,9 @@ int print_out_sprite_info(t_data *dt)
 int animate_weapon(t_data *dt)
 {
 	long 	now;
+	t_weapon *weapon;
+
+	weapon = dt->player.selected_weapon;
 
 	debug_print("Animating weapons...");
 	if (dt->weapon_is_animating == 1)
@@ -39,7 +42,10 @@ int animate_weapon(t_data *dt)
 		if (now - dt->weapon_last_frame_time > (1000 / FPS) * 2)
 		{
 			if (dt->weapon_current_frame == 2)
+			{
+				dt->player.selected_weapon->total_ammo = ft_max(0, weapon->total_ammo - 1);
 				dt->rounds_fired++;
+			}
 			dt->weapon_current_frame++;
 			if (dt->weapon_current_frame == 5)
 			{
@@ -47,6 +53,8 @@ int animate_weapon(t_data *dt)
 				dt->weapon_current_frame = 0;
 				dt->rounds_fired = 0;
 			}
+			if (dt->targeted_sprite)
+				dt->targeted_sprite->state = DYING;
 			dt->weapon_last_frame_time = now;
 		}
 	}
@@ -230,10 +238,14 @@ int	render_frame(void *param)
 	}
 
 	// render weapon	
-	animate_weapon(dt);
-	put_img_to_img(dt->final_frame_img, &dt->weapon[dt->player.selected_weapon->type].frames[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
-	if (dt->weapon_current_frame == 3 && dt->rounds_fired < dt->player.selected_weapon->rounds_fired)
-		dt->weapon_current_frame--;
+	if (dt->player.selected_weapon->type != WEAPON_NO_WEAPON)
+	{
+		animate_weapon(dt);
+		put_img_to_img(dt->final_frame_img, &dt->weapon[dt->player.selected_weapon->type].frames[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
+		
+		if (dt->weapon_current_frame == 3 && dt->rounds_fired < dt->player.selected_weapon->rounds_fired)
+			dt->weapon_current_frame--;
+	}
 
 	dt->frames_drawn_count++;
 	// print_out_sprite_info(dt);

@@ -3,12 +3,12 @@ DEF         textures/default-fallback-texture.xpm
 
 SKY         textures/sky/sky_night.xpm
 
-F1          textures/shoji-64.xpm
+F1          textures/sushi-ninja/bamboo-wall.xpm
 C1          textures/floor-grey-noise.xpm
 
-W01         textures/wolfenstein/grey_stone.xpm
+W01         textures/sushi-ninja/bamboo-wall.xpm
 W02         textures/wolfenstein/red_brick.xpm
-W03 	    textures/wolfenstein/blue-wall.xpm
+W03 	    textures/sushi-ninja/brick-wall.xpm
 W04 	    textures/wall-1-64x64.xpm
 W05         textures/wall-2-64x64.xpm
 W06         textures/wolfenstein/wood.xpm
@@ -34,5 +34,27 @@ ED1    	    textures/wolf44.xpm
 1ABCD FGHI JKL    1 1
 1A                [ 1
 1A                1 1
-1      N          ] 1
-111111111111111111111
+1      S          ] 1
+1A                1 1
+1A                1 1
+1A                1 1
+1A                1 1
+1A                1 1
+1A                1 1
+1A                1 1
+1A                1 1
+111111111111121111111
+1A                1 1
+1A                  1
+1A                1 1
+1A                1 1
+1A                1 1
+1A                1 1
+1A                1 1
+1A                1 1
+1A                1 1
+1A                1 1
+1A                1 1
+1A                1 1
+1A                1 1
+111111111111121111111

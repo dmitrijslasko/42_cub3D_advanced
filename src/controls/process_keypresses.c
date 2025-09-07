@@ -120,7 +120,13 @@ void	process_keyboard_keypresses(t_data *dt)
 	if (dt->keys[XK_n])
 		dt->test_value_4 -= 0.001f;
 	if (dt->keys[XK_m])
-		dt->test_value_4 += 0.001f;
+	{
+		print_level_map(&dt->levels[dt->active_level].map);
+		printf("COLS: %zu\n", dt->levels[dt->active_level].map.map_size_cols);
+		printf("ROWS: %zu\n", dt->levels[dt->active_level].map.map_size_rows);
+
+		// dt->test_value_4 += 0.001f;
+	}
 	if (dt->keys[XK_9])
 	{
 		*dt->ambient_light = fmin(1000.0f, *dt->ambient_light * 1.1f);

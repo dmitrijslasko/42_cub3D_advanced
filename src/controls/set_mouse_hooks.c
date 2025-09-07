@@ -20,6 +20,8 @@ int play_weapon_sound(t_data *dt)
 	active_weapon = *dt->player.selected_weapon;
 	if (active_weapon.type == WEAPON_KNIFE)
 		sound = KNIFE_ATTACK_SOUND;
+	if (active_weapon.total_ammo == 0)
+		sound = EMPTY_GUN_SOUND;
 	else if (active_weapon.type == WEAPON_PISTOL)
 		sound = PISTOL_ATTACK_SOUND;
 	else if (active_weapon.type == WEAPON_RIFLE)
@@ -38,29 +40,9 @@ int	fire_gun(t_data *dt)
 	dt->mouse.lmb_is_pressed = 1;
 	dt->mouse.lmb_press_count++;
 
-	if (dt->player.selected_weapon->total_ammo > 0)
-	{
-		dt->weapon_is_animating = 1;
-		play_weapon_sound(dt);
-		dt->player.selected_weapon->total_ammo = ft_max(0, --dt->player.selected_weapon->total_ammo);
+	dt->weapon_is_animating = 1;
+	play_weapon_sound(dt);
 
-		if (dt->targeted_sprite)
-			dt->targeted_sprite->state = DYING;
-
-		for (int i = 0; i < dt->sprite_count; i++)
-		{
-			if (sprite->type != ENEMY)
-			{
-				i++;
-				continue ;
-			}
-			if (sprite->state != DYING)
-				sprite->state = SHOOTING;
-		}
-	}
-	else
-		system("aplay sounds/empty-gun.wav &");
-	// printf("🖱️  LMB is pressed! Total press count: %zu\n", dt->mouse.lmb_press_count);
 	return (EXIT_SUCCESS);
 }
 

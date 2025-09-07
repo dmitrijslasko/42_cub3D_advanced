@@ -11,5 +11,6 @@
 # define PISTOL_ATTACK_SOUND               "aplay sounds/shot.wav > /dev/null 2>&1 &"
 # define RIFLE_ATTACK_SOUND                "aplay ui/rifle/attack.wav > /dev/null 2>&1 &"
 # define MACHINE_GUN_ATTACK_SOUND          "aplay ui/machine-gun/attack.wav > /dev/null 2>&1 &"
+# define EMPTY_GUN_SOUND                   "aplay sounds/empty-gun.wav > /dev/null 2>&1 &"
 
 #endif
