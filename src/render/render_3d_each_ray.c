@@ -44,6 +44,7 @@ void	render_3d_each_ray(t_data *dt, t_ray *ray, int screen_slice_width)
 
 	texture.x = 0;
 	texture.y = 0;
+	
 	// NOTE DL: manipulating 1.0f here can be used to simulate water level
 	wall_height = 1.0f / ray->corrected_distance_to_wall * SCALING;
 	ray->wall_height = (int)wall_height;

@@ -12,8 +12,7 @@
 
 #include "cub3d.h"
 
-bool	init_2d_map(char ***array, size_t size_row,
-	size_t size_col, t_data *dt)
+bool	init_2d_map(char ***array, size_t size_row, size_t size_col, t_data *dt)
 {
 	size_t	curr_col;
 	size_t	curr_row;
@@ -25,6 +24,7 @@ bool	init_2d_map(char ***array, size_t size_row,
 	cell_count = 0;
 	curr_row = 0;
 	new = protected_malloc((size_row + 1) * sizeof(t_mapcell *), dt);
+	
 	new[size_row] = NULL;
 	while (curr_row < size_row)
 	{

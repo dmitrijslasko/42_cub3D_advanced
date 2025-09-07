@@ -57,7 +57,7 @@ bool	parse_mapfile(char *file, t_data *dt, int i)
 	if (parse_mapfile_values(&dt->levels[i].map, file))
 		return (1);
 	//print_out_texture_lookup_table(dt);
-	 if (!check_valid_player(&dt->levels[i].map))
+	if (!check_valid_player(&dt->levels[i].map))
 	 	return (1);
 	// NOTE DL: Probably can be removed for advanced part since we don't care about color / texture checks
 	// if (check_all_textures(&dt->map))

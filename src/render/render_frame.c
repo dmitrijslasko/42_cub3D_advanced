@@ -48,7 +48,8 @@ int animate_weapon(t_data *dt)
 		{
 			if (dt->weapon_current_frame == 2)
 			{
-				dt->player.selected_weapon->total_ammo = ft_max(0, weapon->total_ammo - 1);
+				if (dt->player.selected_weapon->type > 1)
+					dt->player.selected_weapon->total_ammo = ft_max(0, weapon->total_ammo - 1);
 				dt->rounds_fired++;
 			}
 			dt->weapon_current_frame++;

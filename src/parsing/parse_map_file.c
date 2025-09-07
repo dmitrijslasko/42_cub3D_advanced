@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 bool	check_and_parse_mapfile(t_data *dt, char *map_file, int map_index)
 {
 	print_separator_default();
@@ -23,12 +24,13 @@ bool	check_and_parse_mapfile(t_data *dt, char *map_file, int map_index)
 	dt->map = &dt->levels[map_index].map;
 	if (parse_mapfile(map_file, dt, map_index))
 		return (EXIT_FAILURE);
+	
 	print_level_map(dt->map);
 	if (init_player(dt->map, &dt->player))
 		return (EXIT_FAILURE);
 
-	// if (check_map_is_closed(dt->map, &dt->player, dt) == False)
-	//  	return (EXIT_FAILURE);
+	if (check_map_is_closed(dt->map, &dt->player, dt) == False)
+	 	return (EXIT_FAILURE);
 	printf("Parsing finished!\n");
 	return (EXIT_SUCCESS);
 }

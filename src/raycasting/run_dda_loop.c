@@ -34,7 +34,7 @@ int	run_dda_loop(t_data *dt, t_ray *ray, t_dda_info *dda_info)
 	}
 	debug_print("Checked door hit!\n");
 	while (dda_info->map_coor->x < dt->map->map_size_cols
-		&& dda_info->map_coor->y < dt->map->map_size_cols)
+		&& dda_info->map_coor->y < dt->map->map_size_rows)
 	{
 		step_and_set_side(dda_info);
 		ray->hit_side = *(dda_info->hit_side);

@@ -25,7 +25,13 @@ int	main(int argc, char **argv)
 	
 	init_dt(&dt);
 	check_and_parse_all_maps(&dt, argc, game_levels);
+	
+	printf("COLS: %d\n", dt.levels[0].map.map_size_cols);
+	printf("ROWS: %d\n", dt.levels[0].map.map_size_rows);
+	// printf("CELL: %c\n", dt.levels->map.map_data[30][0].map_char);
+	// exit(1);
 
+	print_level_map(&dt.levels[0].map);
 	// precalculate sin and cos lookup tables
 	precalculate_trig_tables(&dt);
 	
@@ -45,7 +51,7 @@ int	main(int argc, char **argv)
 	setup_dt(&dt);
 
 	dt.game_status = WELCOME_SCREEN;
-	dt.active_level = 1;
+	dt.active_level = 0;
 	update_current_level_pointers(&dt);
 	get_init_player_position(dt.map, &dt.player);
 	printf("Game status set!\n");
