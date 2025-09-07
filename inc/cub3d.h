@@ -46,7 +46,7 @@
 # include "messages.h"
 # include "sounds.h"
 
-//# include "sound.h"
+# include "sound.h"
 
 // structs
 
@@ -442,7 +442,7 @@ void		setup_mouse_hooks(t_data *dt);
 
 void		*protected_malloc(size_t size, t_data *dt);
 void		free_dt(t_data *dt);
-void		free_audio(void *ptr);
+// void		free_audio(void *ptr);
 
 void		put_img_to_img(t_img *dest, t_img *src, int dx, int dy);
 void		put_img_to_img_circle(t_img *dest, t_img *src, int dx, int dy);
@@ -610,7 +610,7 @@ int			draw_textured_floor(t_data *dt);
 int 		draw_textured_ceiling(t_data *dt);
 int			render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset,
 						t_coor *sprite_size);
-float		fix_fish_eye(t_ray *ray, t_player *player);
+float	fix_fish_eye(t_data *dt, t_ray *ray, t_player *player);
 int			fix_fish_eye_2(t_ray *ray, t_player *player, float *distance);
 int			load_sprite_textures(t_data *dt, int i);
 int			load_textures(t_data *dt, t_level *level);

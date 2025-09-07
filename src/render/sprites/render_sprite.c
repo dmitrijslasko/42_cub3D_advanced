@@ -52,6 +52,8 @@
 					if (sprite->current_frame == 0)
 						play_sound(DEATH_SOUND);
 					sprite->current_frame++;
+					// sprite->pos.x += sinf(dt->time.last_time - get_current_time_in_ms());
+					// sprite->pos.y += sinf(dt->time.last_time - get_current_time_in_ms());
 				}
 			}
 			else
@@ -82,6 +84,11 @@
 					if (sprite->state == SHOOTING)
 					{
 						row = 6;
+						col = sprite->current_frame;
+					}
+					if (sprite->state == HURT)
+					{
+						row = 5;
 						col = sprite->current_frame;
 					}
 					if (sprite->state == DYING)

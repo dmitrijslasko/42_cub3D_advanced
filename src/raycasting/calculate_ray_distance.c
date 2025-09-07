@@ -36,5 +36,5 @@ void	calculate_ray_distance(t_data *dt, t_ray *ray,
 
 	finish_ray_casting(dt, ray, &map_coor, door_hit);
 
-	ray->corrected_distance_to_wall = fix_fish_eye(ray, &dt->player);
+	ray->corrected_distance_to_wall = fix_fish_eye(dt, ray, &dt->player);
 }

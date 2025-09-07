@@ -28,11 +28,11 @@ typedef struct s_weapon_data
 
 
 static const t_weapon_data	g_weapon_lookup[] = {
-{WEAPON_NO_WEAPON, 		"NONE", 		0, 		1, 1.0f, 	3.0f, 	0,	 	0.0f, NULL},
+{WEAPON_NO_WEAPON, 		"NONE", 		0, 		1, 1.0f, 	3.0f, 	0,	 	1.0f, NULL},
 {WEAPON_KNIFE, 			"KNIFE", 		0, 		1, 1.0f, 	3.0f, 	1, 		1.0f, "./ui/knife/"},
-{WEAPON_PISTOL, 		"PISTOL", 		9, 		1, 1.0f, 	3.0f, 	30, 	0.0f, "./ui/pistol/"},
-{WEAPON_RIFLE, 			"RIFLE", 		30, 	1, 1.0f,  	3.0f, 	50, 	0.0f, "./ui/rifle/"},
-{WEAPON_MACHINE_GUN, 	"MACHINE GUN", 	100, 	10, 1.0f, 	3.0f, 	70, 	0.0f, "./ui/machine-gun/"},
+{WEAPON_PISTOL, 		"PISTOL", 		9, 		1, 1.0f, 	3.0f, 	30, 	0.9f, "./ui/pistol/"},
+{WEAPON_RIFLE, 			"RIFLE", 		30, 	1, 1.0f,  	3.0f, 	50, 	0.8f, "./ui/rifle/"},
+{WEAPON_MACHINE_GUN, 	"MACHINE GUN", 	100, 	10, 1.0f, 	3.0f, 	70, 	0.5f, "./ui/machine-gun/"},
 //sentinel
 {-1, 					NULL, 			-1, 	-1, -1, 	-1,		-1, 	-1, 	NULL}
 };

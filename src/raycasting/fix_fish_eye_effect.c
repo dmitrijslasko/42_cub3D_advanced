@@ -15,12 +15,12 @@
 /**
  * 	fish-eye correction - angle_cos
  */
-float	fix_fish_eye(t_ray *ray, t_player *player)
+float	fix_fish_eye(t_data *dt, t_ray *ray, t_player *player)
 {
 	float	angle_cos;
 
 	angle_cos = ray->vector.x * player->orientation_vector.x + \
-				ray->vector.y * player->orientation_vector.y;
+				ray->vector.y * player->orientation_vector.y + dt->test_value_1;
 	return (ray->distance_to_wall * angle_cos);
 }
 

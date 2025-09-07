@@ -25,9 +25,9 @@ int	move_sideways(t_data *dt, int to_the_right)
 	rotated_vector = rotate_vector(&dt->player.orientation_vector, \
 									90.0f * to_the_right, dt);
 	new_x = player_pos->x + rotated_vector.x * \
-				KEYBOARD_PLAYER_STEP_SIDE * dt->player.move_speed_multiplier;
+				KEYBOARD_PLAYER_STEP_SIDE * dt->player.move_speed_multiplier * dt->player.selected_weapon->weight;
 	new_y = player_pos->y + rotated_vector.y * \
-				KEYBOARD_PLAYER_STEP_SIDE * dt->player.move_speed_multiplier;
+				KEYBOARD_PLAYER_STEP_SIDE * dt->player.move_speed_multiplier * dt->player.selected_weapon->weight;
 	if (map_position_is_walkable(dt, &new_x, &new_y))
 	{
 		player_pos->x = new_x;

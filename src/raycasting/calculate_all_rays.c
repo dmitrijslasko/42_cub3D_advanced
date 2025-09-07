@@ -31,7 +31,7 @@ int	calculate_all_rays(t_data *dt)
 		dt->rays[i].vector = vector;
 		dt->rays[i].door = NULL;
 		update_single_ray(dt, &dt->rays[i]);
-		angle += FIELD_OF_VIEW_DEG / (CASTED_RAYS_COUNT - 1);
+		angle += (FIELD_OF_VIEW_DEG + dt->test_value_1)/ (CASTED_RAYS_COUNT - 1);
 		i++;
 	}
 	return (EXIT_SUCCESS);

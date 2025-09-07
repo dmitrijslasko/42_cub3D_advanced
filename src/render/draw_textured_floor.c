@@ -50,7 +50,7 @@ int draw_textured_floor(t_data *dt)
 
             // Get color and draw pixel
             color = texture.texture_data[TILE_SIZE * texY + texX];
-			apply_ambient_light_shading(dt->ambient_light, &color);
+			apply_ambient_light_shading(*dt->ambient_light, &color);
             apply_distance_shadow((WINDOW_H - current_row) / 4.0f, &color);
             // color = reduce_saturation(color, ((WINDOW_H - current_row) / (WINDOW_H)) * 2.0f);
             img_pix_put(dt->raycasting_scene_img, x, current_row, color);

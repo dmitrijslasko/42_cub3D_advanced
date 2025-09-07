@@ -40,8 +40,7 @@ int	draw_floor(t_data *dt)
 	// color = create_color_rgb(	dt->map->textures[FLOOR].color.r, \
 	// 							dt->map->textures[FLOOR].color.g,
 	// 							dt->map->textures[FLOOR].color.b);
-	
-								
+				
 	color = DARKGREY;
 	apply_ambient_light_shading(*dt->ambient_light, &color);
 	draw_rectangle(dt->raycasting_scene_img, top_left, bottom_right, color);

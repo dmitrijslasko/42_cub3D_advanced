@@ -56,6 +56,7 @@ CFLAGS += -g
 # CFLAGS += -fsanitize=address -fstack-protector-all
 CFLAGS += -I$(INC_DIR)
 CFLAGS += -I$(MINILIBX_DIR)
+CFLAGS += -I./lib/miniaudio
 CFLAGS += -std=c99
 CFLAGS += -Wno-error=type-limits
 CFLAGS += -D_POSIX_C_SOURCE=200112L
@@ -65,8 +66,8 @@ CFLAGS += -D_POSIX_C_SOURCE=200112L
 LDFLAGS += -L$(LIBFT_DIR) -lft
 LDFLAGS += -L$(MINILIBX_DIR) -lmlx
 LDFLAGS += -lX11 -lXext -lm
+LDFLAGS += -lpthread -ldl
 # LDFLAGS += -Llib/SDL2/build/lib -Llib/SDL2_mixer/build/lib -lSDL2 -lSDL2_mixers
-
 
 # EXTRA FLAGS
 BONUSFLAGS = -DBONUS=1

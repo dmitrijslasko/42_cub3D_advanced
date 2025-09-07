@@ -13,6 +13,31 @@
 #include "cub3d.h"
 #include "sound.h"
 
+#define MINIAUDIO_IMPLEMENTATION
+#include "miniaudio.h"
+
+ma_engine engine;
+
+int init_audio(void)
+{
+    if (ma_engine_init(NULL, &engine) != MA_SUCCESS) {
+        return -1;
+    }
+
+    // Start playing music.wav in loop (-1 = infinite)
+    if (ma_engine_play_sound(&engine, "sounds/music2.mp3", NULL) != MA_SUCCESS) {
+        return -1;
+    }
+    return 0;
+}
+
+void free_audio(void)
+{
+    ma_engine_uninit(&engine);
+}
+
+
+
 int	main(int argc, char **argv)
 {
 	t_data	dt;
@@ -65,9 +90,12 @@ int	main(int argc, char **argv)
 
 	printf("Consumables to collect in this level: %d\n", get_curr_level(&dt)->level_consumable_count);
 	print_separator(1, DEF_SEPARATOR_CHAR);
+
+	init_audio();
 	
 	mlx_loop_hook(dt.mlx_ptr, &render_frame, &dt);
 	mlx_loop(dt.mlx_ptr);
 
 	return (EXIT_SUCCESS);
 }
+

@@ -43,6 +43,8 @@ int animate_weapon(t_data *dt)
 			if (dt->player.selected_weapon->type == WEAPON_MACHINE_GUN || dt->weapon_current_frame == 0)
 			{
 				dt->targeted_sprite->state = DYING;
+				if (dt->targeted_sprite->distance_to_player < 5)
+					flash_color(dt, RED);
 				dt->targeted_sprite->current_frame = 0;
 			}
 		}
@@ -54,10 +56,13 @@ int animate_weapon(t_data *dt)
 				if (dt->player.selected_weapon->type > 1)
 					dt->player.selected_weapon->total_ammo = ft_max(0, weapon->total_ammo - 1);
 				dt->rounds_fired++;
+				if (dt->player.selected_weapon->type == WEAPON_MACHINE_GUN)
+					*dt->ambient_light = 1000 - (*dt->ambient_light == 1000.0f) * 1000.0f;
 			}
 			dt->weapon_current_frame++;
 			if (dt->weapon_current_frame == 5 || (dt->weapon_current_frame == 1 && weapon->total_ammo == 0))
 			{
+				*dt->ambient_light = 10.0f;
 				dt->weapon_is_animating = 0;
 				dt->weapon_current_frame = 0;
 				dt->rounds_fired = 0;
@@ -226,6 +231,10 @@ int	render_frame(void *param)
 		update_minimap(dt);
 	render_minimap_and_ui(dt);
 
+	if (dt->weapon_is_animating && dt->view->screen_center_y - WINDOW_H/2 < 10)
+		dt->view->screen_center_y += 1;
+	else
+		dt->view->screen_center_y = WINDOW_H / 2;
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr,dt->final_frame_img->mlx_img, 0, 0);
 	
 	show_debug_info(dt);
@@ -254,6 +263,8 @@ int	render_frame(void *param)
 		if (dt->weapon_current_frame == 3 && dt->rounds_fired < dt->player.selected_weapon->rounds_fired)
 			dt->weapon_current_frame--;
 	}
+
+	// *dt->ambient_light = 0.0f;
 	// print_out_sprite_info(dt);
 
 	return (EXIT_SUCCESS);
