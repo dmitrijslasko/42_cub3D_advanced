@@ -2,12 +2,14 @@
 
 static int	render_floor_and_ceiling(t_data *dt)
 {
-	draw_sky(dt);
+	if (dt->map->textures[SKY].texture.xpm_file_pathfile)
+		draw_sky(dt);
+	else
+		draw_textured_ceiling(dt);
 	// draw_ceiling(dt);
 	// draw_floor(dt);
-	
-	if (dt->map->textures[SKY].texture.xpm_file_pathfile == NULL)
-		draw_textured_ceiling(dt);
+
+
 
 	draw_textured_floor(dt);
 	return (EXIT_SUCCESS);

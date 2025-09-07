@@ -29,9 +29,6 @@ int	setup_dt(t_data *dt)
 	setup_player(dt);
 	
 	dt->view = protected_malloc(sizeof(t_view), dt);
-	
-	dt->sky_image = protected_malloc(sizeof(t_img), dt);
-	load_image(dt, dt->sky_image, SKY_TXT_PATHFILE);
 
 	// game menu image setup
 	dt->game_menu_img = protected_malloc(sizeof(t_img), dt);
@@ -53,9 +50,10 @@ int	setup_dt(t_data *dt)
 	
 	// weapon aka active item
 	load_weapons(dt);
-	dt->player.selected_weapon = &dt->weapon[0];
+	dt->player.selected_weapon = &dt->weapon[WEAPON_KNIFE];
 	dt->weapon_current_frame = 0;
 	dt->weapon_last_frame_time = 0;
+	dt->rounds_fired = 0;
 
 	// time
 	dt->time.start_time = get_current_time_in_ms();
@@ -77,11 +75,17 @@ int	setup_dt(t_data *dt)
 		dt->levels[i].id = i;
 
 		// wall textures
+		dt->levels[i].sky_image = NULL;
 		load_textures(dt, &dt->levels[i]);
+		if (dt->levels[i].map.textures[SKY].texture.xpm_file_pathfile)
+		{
+			dt->levels[i].sky_image = protected_malloc(sizeof(t_img), dt);
+			load_image(dt, dt->levels[i].sky_image, dt->levels[i].map.textures[SKY].texture.xpm_file_pathfile);
+		}
 
 		// doors
 		init_doors(dt, &dt->levels[i], &dt->levels[i].map);
-		// mark_all_cells_that_neighbour_doors(dt);
+		mark_all_cells_that_neighbour_doors(dt, &dt->levels[i], &dt->levels[i].map);
 		
 		// sprites - map level
 		load_sprites(dt, &dt->levels[i], &dt->levels[i].map, i);

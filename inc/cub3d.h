@@ -50,6 +50,17 @@
 
 // structs
 
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int		height;
+	int		width;
+}	t_img;
+
 typedef enum e_wall_orientation
 {
 	DEFAULT_WALL = -1,
@@ -90,15 +101,18 @@ typedef enum e_game_status {
 typedef struct 		s_weapon
 {
 	t_active_item 		type;
-	char		*description;
-	int			bullets_in_clip;
-	int			total_ammo;
-	int			clip_size;
-	float		shot_speed;
-	float		reload_speed;
-	float		weight;
-	int			max_distance;
-	int			player_has_it;
+	char				*description;
+	int					bullets_in_clip;
+	int					total_ammo;
+	int					clip_size;
+	float				shot_speed;
+	int					rounds_fired;
+	float				reload_speed;
+	float				weight;
+	int					max_distance;
+	int					player_has_it;
+
+	t_img				*frames;
 }	t_weapon;
 
 // Door structure with animation info
@@ -220,17 +234,6 @@ typedef struct s_view
 	float	crouch;
 }	t_view;
 
-typedef struct s_img
-{
-	void	*mlx_img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	int		height;
-	int		width;
-}	t_img;
-
 typedef struct s_sprite_texture
 {
 	char	*filepath;
@@ -327,7 +330,7 @@ typedef struct s_level
 	size_t				sprite_count;
 	t_sprite			*targeted_sprite;
 
-	char				*sky_pathfile;
+	t_img				*sky_image;
 
 	t_door				*doors;
 	size_t				door_count;
@@ -392,6 +395,7 @@ typedef struct s_data
 	int					weapon_current_frame;
 	int 				weapon_is_animating;
 	long				weapon_last_frame_time;
+	int					rounds_fired;
 
 	t_level				levels[NUMBER_OF_LEVELS];
 	int					active_level;
@@ -729,9 +733,7 @@ int		get_lookup_table_index(char *str);
 int		get_lookup_table_index_cell_type(int cell_type);
 int		get_lookup_table_index_cell_type_by_map_char(int map_char);
 
-int mark_all_cells_that_neighbour_doors(t_data *dt);
-
-int is_in_list(char *str, char *list);
+int 	mark_all_cells_that_neighbour_doors(t_data *dt, t_level *level, t_map *map);
 
 int		fire_gun(t_data *dt);
 

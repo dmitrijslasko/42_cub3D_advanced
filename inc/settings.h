@@ -180,8 +180,8 @@
 
 # define PLAYER_SPAWN_POINT_TYPES			"NSWE"
 # define SPRITE_TYPES     	 	            "ABCDFGHIJKLMOPQRTUVXYZabcdefghijklmnopqrstuvwxyz+$#&@"
-# define CONSUMABLE_TYPES     	 	        "ABC"
-# define DECORATION_TYPES     	 	        "MO"
+# define CONSUMABLE_TYPES     	 	        "ABCDFGHIJKLM"
+# define DECORATION_TYPES     	 	        "OP"
 # define ENEMY_SPRITES                      "abcdiq"
 # define ENEMY_SPRITE_MOVE_SPEED            0.02f
 # define EXIT_TYPES     	 	            "$"
@@ -190,9 +190,9 @@
 # define WALL_TYPES							"123456789"
 # define VERTICAL_WALL_TYPES				"v"
 # define HORIZONTAL_WALL_TYPES				"h"
-# define DOOR_TYPES							"|][]I-=*"
-# define VERTICAL_DOOR_TYPES				"|][I*"
-# define HORIZONTAL_DOOR_TYPES				"-="
+# define DOOR_TYPES							"|][]-_=*"
+# define VERTICAL_DOOR_TYPES				"|][*"
+# define HORIZONTAL_DOOR_TYPES				"-_="
 
 # define NO_OF_ROTATION                     8
 # define NO_OF_ACTION                       8

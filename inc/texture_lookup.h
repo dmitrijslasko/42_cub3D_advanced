@@ -103,9 +103,9 @@ static const t_texture_match	g_texture_lookup[] = {
 // doors
 {"DOOR_01", "door 1 texture", 			DOOR_1, 				"|-"},
 {"DOOR_01_S", "door 1 texture sides", 	DOOR_1_SIDES, 			NULL},
-{"DOOR_02", "door 2 texture", 			DOOR_2, 				"[="},
+{"DOOR_02", "door 2 texture", 			DOOR_2, 				"[_"},
 {"DOOR_02_S", "door 2 texture sides",	DOOR_2_SIDES, 			NULL},
-{"DOOR_03", "door 3 texture", 			DOOR_3, 				"]_"},
+{"DOOR_03", "door 3 texture", 			DOOR_3, 				"]="},
 {"DOOR_03_S", "door 3 texture sides ", 	DOOR_3_SIDES,			 NULL},
 
 // elevator

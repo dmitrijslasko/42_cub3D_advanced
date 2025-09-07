@@ -12,6 +12,23 @@
 
 #include "cub3d.h"
 
+int play_weapon_sound(t_data *dt)
+{
+	t_weapon active_weapon;
+	char	*sound;
+
+	active_weapon = *dt->player.selected_weapon;
+	if (active_weapon.type == WEAPON_KNIFE)
+		sound = KNIFE_ATTACK_SOUND;
+	else if (active_weapon.type == WEAPON_PISTOL)
+		sound = PISTOL_ATTACK_SOUND;
+	else if (active_weapon.type == WEAPON_RIFLE)
+		sound = RIFLE_ATTACK_SOUND;
+	else if (active_weapon.type == WEAPON_MACHINE_GUN)
+		sound = MACHINE_GUN_ATTACK_SOUND;
+	play_sound(sound);
+	return (EXIT_SUCCESS);
+}
 int	fire_gun(t_data *dt)
 {
 	t_sprite *sprite;
@@ -24,7 +41,7 @@ int	fire_gun(t_data *dt)
 	if (dt->player.selected_weapon->total_ammo > 0)
 	{
 		dt->weapon_is_animating = 1;
-		play_sound(SHOT_SOUND_SYSTEM_CALL);
+		play_weapon_sound(dt);
 		dt->player.selected_weapon->total_ammo = ft_max(0, --dt->player.selected_weapon->total_ammo);
 
 		if (dt->targeted_sprite)

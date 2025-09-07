@@ -12,37 +12,17 @@
 
 #include "cub3d.h"
 
-int	load_weapon_frame(t_data *dt, int i, const char* filename)
-{
-	int	w;
-	int	h;
-
-	dt->weapon_img[i].mlx_img = mlx_xpm_file_to_image(dt->mlx_ptr,
-			filename, &w, &h);
-	if (!dt->weapon_img[i].mlx_img)
-	{
-		fprintf(stderr, "Failed to load weapon_img\n");
-		return (EXIT_FAILURE);
-	}
-	dt->weapon_img[i].width = w;
-	dt->weapon_img[i].height = h;
-	dt->weapon_img[i].addr = mlx_get_data_addr(dt->weapon_img[i].mlx_img,
-			&dt->weapon_img[i].bpp, &dt->weapon_img[i].line_len,
-			&dt->weapon_img[i].endian);
-	printf(TXT_GREEN "Loaded frame: %s\n" TXT_RESET, filename);
-}
-
-
-
 int	load_weapons(t_data *dt)
 {
 	size_t	i;
+	size_t	j;
 
 	print_separator_default();
 	printf(TXT_YELLOW ">>> LOADING WEAPONS\n" TXT_RESET);
-	dt->weapon_img = protected_malloc(sizeof(t_img) * 5, dt);
 
+	// dt->weapon_img = protected_malloc(sizeof(t_img) * 5, dt);
 	dt->weapon = malloc(sizeof(t_weapon) * 5);
+	
 	i = 0;
 	while (g_weapon_lookup[i].type != -1)
 	{
@@ -51,23 +31,26 @@ int	load_weapons(t_data *dt)
 		dt->weapon[i].clip_size = g_weapon_lookup[i].clip_size;
 		dt->weapon[i].reload_speed = g_weapon_lookup[i].reload_speed;
 		dt->weapon[i].shot_speed = g_weapon_lookup[i].shot_speed;
+		dt->weapon[i].rounds_fired = g_weapon_lookup[i].rounds_fired;
 		dt->weapon[i].weight = g_weapon_lookup[i].weight;
 		dt->weapon[i].total_ammo = STARTING_AMMO_LEVEL;
 		dt->weapon[i].max_distance = g_weapon_lookup[i].max_distance;
 		dt->weapon[i].bullets_in_clip = 0;
 		dt->weapon[i].player_has_it = 1;
+		dt->weapon[i].frames = protected_malloc(sizeof(t_img) * 5, dt);
+		j = 0;
+		while (j < 5)
+		{
+			char path[64];
+			g_weapon_lookup[i].max_distance;
+			// snprintf(path, sizeof(path), "%s%s%d%s", g_weapon_lookup[i].frames_path, "frame", j, ".xpm");
+			snprintf(path, sizeof(path), "%sframe%d.xpm", g_weapon_lookup[i].frames_path, j);
+			load_image(dt, &dt->weapon[i].frames[j], path);
+			j++;
+		}
 		i++;
 	}
 
-	i = 0;
-	while (i < 5)
-	{
-		char path[64];
-		// snprintf(path, sizeof(path), "./ui/knife/frame%d.xpm", i);
-		snprintf(path, sizeof(path), "./ui/hands/frame.xpm", i);
-		load_weapon_frame(dt, i, path);
-		i++;
-	}
 	printf(TXT_GREEN "Done!\n" TXT_RESET);
 	return (EXIT_SUCCESS);
 }

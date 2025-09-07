@@ -30,22 +30,24 @@ int print_out_sprite_info(t_data *dt)
 
 int animate_weapon(t_data *dt)
 {
-	long now;
+	long 	now;
 
 	debug_print("Animating weapons...");
 	if (dt->weapon_is_animating == 1)
 	{
 		now = dt->time.last_time;
-
 		if (now - dt->weapon_last_frame_time > (1000 / FPS) * 2)
 		{
+			if (dt->weapon_current_frame == 2)
+				dt->rounds_fired++;
 			dt->weapon_current_frame++;
-			dt->weapon_last_frame_time = now;
 			if (dt->weapon_current_frame == 5)
 			{
 				dt->weapon_is_animating = 0;
 				dt->weapon_current_frame = 0;
+				dt->rounds_fired = 0;
 			}
+			dt->weapon_last_frame_time = now;
 		}
 	}
 	return (EXIT_SUCCESS);
@@ -179,10 +181,8 @@ int	render_frame(void *param)
 	if (process_game_status(dt) != GAME_SCREEN)
 		return (dt->game_status);
 
-	printf("SKY: %s\n", dt->map->textures[SKY].texture.xpm_file_pathfile);
 	process_keyboard_keypresses(dt);
 
-	animate_weapon(dt);
 	animate_doors(dt);
 
 	calculate_all_rays(dt);
@@ -230,8 +230,11 @@ int	render_frame(void *param)
 	}
 
 	// render weapon	
-	if (dt->player.selected_weapon->type == WEAPON_PISTOL)
-		put_img_to_img(dt->final_frame_img, &dt->weapon_img[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
+	animate_weapon(dt);
+	put_img_to_img(dt->final_frame_img, &dt->weapon[dt->player.selected_weapon->type].frames[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
+	if (dt->weapon_current_frame == 3 && dt->rounds_fired < dt->player.selected_weapon->rounds_fired)
+		dt->weapon_current_frame--;
+
 	dt->frames_drawn_count++;
 	// print_out_sprite_info(dt);
 
