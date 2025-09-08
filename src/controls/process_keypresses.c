@@ -127,8 +127,42 @@ void	process_keyboard_keypresses(t_data *dt)
 		print_level_map(&dt->levels[dt->active_level].map);
 		printf("COLS: %zu\n", dt->levels[dt->active_level].map.map_size_cols);
 		printf("ROWS: %zu\n", dt->levels[dt->active_level].map.map_size_rows);
-
-		// dt->test_value_4 += 0.001f;
+	}
+	if (dt->keys[XK_k])
+	{
+		// printf("Sprite count: %zu\n", dt->levels[dt->active_level].sprite_count);
+		// NOTE DL: Why this does not work?
+		// printf("Sprite count: %zu\n", *dt->sprite_count);
+		for (size_t i = 0; i < dt->levels[dt->active_level].sprite_count; i++)
+		{
+			if (dt->sprites[i].type == ENEMY)
+			{
+				dt->sprites[i].state = MOVING;
+				if (dt->sprites[i].distance_to_player < 10)
+					dt->player.health_level--;
+			}
+			// if (dt->player.health_level < 0)
+				// dt->game_status = LEVEL_FINISH;
+			// printf("STATE: %d\n", dt->sprites[i].type);
+		}
+	}
+		if (dt->keys[XK_l])
+	{
+		// printf("Sprite count: %zu\n", dt->levels[dt->active_level].sprite_count);
+		// NOTE DL: Why this does not work?
+		// printf("Sprite count: %zu\n", *dt->sprite_count);
+		for (size_t i = 0; i < dt->levels[dt->active_level].sprite_count; i++)
+		{
+			if (dt->sprites[i].type == ENEMY)
+			{
+				dt->sprites[i].state = IDLE;
+				if (dt->sprites[i].distance_to_player < 10)
+					dt->player.health_level--;
+			}
+			// if (dt->player.health_level < 0)
+				// dt->game_status = LEVEL_FINISH;
+			// printf("STATE: %d\n", dt->sprites[i].type);
+		}
 	}
 	if (dt->keys[XK_9])
 	{
@@ -141,7 +175,6 @@ void	process_keyboard_keypresses(t_data *dt)
 		printf("Ambient light: %.2f\n", *dt->ambient_light);
 	}
 		
-
 	dt->player.is_moving = is_moving_now;
 
 	if (dt->keys[XK_Left])

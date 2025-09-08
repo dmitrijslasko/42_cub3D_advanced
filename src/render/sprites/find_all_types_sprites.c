@@ -35,6 +35,8 @@ static void	init_sprites(t_data *dt, int index)
 				level->sprites[i].id = i;
 				level->sprites[i].map_char = sprite_type;
 				level->sprites[i].type = STATIC;
+				if (ft_strchr(CONSUMABLE_TYPES, sprite_type))
+					level->sprites[i].type = PICKUP;
 				if (ft_strchr(ENEMY_SPRITES, sprite_type))
 					level->sprites[i].type = ENEMY;
 

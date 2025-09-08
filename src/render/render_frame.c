@@ -42,10 +42,19 @@ int animate_weapon(t_data *dt)
 		{
 			if (dt->player.selected_weapon->type == WEAPON_MACHINE_GUN || dt->weapon_current_frame == 0)
 			{
-				dt->targeted_sprite->state = DYING;
-				if (dt->targeted_sprite->distance_to_player < 5)
-					flash_color(dt, RED);
-				dt->targeted_sprite->current_frame = 0;
+				if (dt->targeted_sprite->type == ENEMY)
+				{
+					dt->targeted_sprite->state = DYING;
+					if (dt->targeted_sprite->distance_to_player < 5)
+						flash_color(dt, RED);
+					dt->targeted_sprite->current_frame = 0;
+				}
+				else if (dt->targeted_sprite->type == PICKUP)
+				{
+					dt->targeted_sprite->is_hidden = 1;
+					play_sound(BUBBLE_POP_SOUND);
+					dt->levels[dt->active_level].level_consumable_count--;
+				}
 			}
 		}
 		now = dt->time.last_time;
@@ -115,12 +124,49 @@ int animate_doors(t_data *dt)
     return (EXIT_SUCCESS);
 }
 
-int animate_sprites(t_data *dt)
+int animate_moving(t_data *dt, t_sprite *sprite)
 {
-	size_t	i;
 	t_x_y	*pos;
 	float	*speed;
 	float	distance_to_wall;
+	t_x_y test_pos;
+	char cell_type;
+
+	speed = &sprite->speed;
+	pos = &sprite->pos;
+		
+	distance_to_wall = 0.5f * (1 - 2 * (*speed < 0));
+
+	test_pos.x = pos->x;
+	test_pos.y = pos->y;
+
+	if (sprite->orientation == 0.0f || sprite->orientation == 180.0f)
+		test_pos.x += *speed + distance_to_wall;
+	
+	if (sprite->orientation == 90.0f || sprite->orientation == 270.0f)
+		test_pos.y += *speed + distance_to_wall;
+
+	cell_type = get_cell_by_coordinates_float(dt->map, test_pos.y, test_pos.x)->map_char;
+
+	if (ft_strchr(WALL_TYPES, cell_type))
+	{
+		sprite->orientation += 180.0f;
+		if (sprite->orientation >= 360.0f)
+			sprite->orientation -= 360.f;
+		*speed *= -1;
+	}
+	else
+	{
+		if (sprite->orientation == 0.0f || sprite->orientation == 180.0f)
+			pos->x += *speed;
+		if (sprite->orientation == 90.0f || sprite->orientation == 270.0f)
+			pos->y += *speed;
+	}
+}
+
+int animate_sprites(t_data *dt)
+{
+	size_t	i;
 
 	i = 0;
 	while (i < dt->sprite_count)
@@ -130,40 +176,8 @@ int animate_sprites(t_data *dt)
 			i++;
 			continue ;
 		}
-
-		speed = &dt->sprites[i].speed;
-		pos = &dt->sprites[i].pos;
-			
-		dt->sprites[i].state = MOVING;
-
-		distance_to_wall = 0.5f * (1 - 2 * (*speed < 0));
-
-		t_x_y test_pos;
-		test_pos.x = pos->x;
-		test_pos.y = pos->y;
-
-		if (dt->sprites[i].orientation == 0.0f || dt->sprites[i].orientation == 180.0f)
-			test_pos.x += *speed + distance_to_wall;
-		
-		if (dt->sprites[i].orientation == 90.0f || dt->sprites[i].orientation == 270.0f)
-			test_pos.y += *speed + distance_to_wall;
-
-		char cell_type = get_cell_by_coordinates_float(dt->map, test_pos.y, test_pos.x)->map_char;
-
-		if (ft_strchr(WALL_TYPES, cell_type))
-		{
-			dt->sprites[i].orientation += 180.0f;
-			if (dt->sprites[i].orientation >= 360.0f)
-				dt->sprites[i].orientation -= 360.f;
-			*speed *= -1;
-		}
-		else
-		{
-			if (dt->sprites[i].orientation == 0.0f || dt->sprites[i].orientation == 180.0f)
-				pos->x += *speed;
-			if (dt->sprites[i].orientation == 90.0f || dt->sprites[i].orientation == 270.0f)
-				pos->y += *speed;
-		}
+		if (dt->sprites[i].state == MOVING)
+			animate_moving(dt, &dt->sprites[i]);
 		i++;
 	}
 	return (EXIT_SUCCESS);

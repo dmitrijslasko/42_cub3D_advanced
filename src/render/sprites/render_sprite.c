@@ -27,7 +27,7 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 
 	// skip if sprite is not shown
 	if (sprite->is_hidden)
-		return (0);
+		return (EXIT_SUCCESS);
 
 	set_animation_speed(sprite, &sprite_animation_speed);
 	
@@ -47,13 +47,13 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 			if (sprite->current_frame > 2)
 				sprite->current_frame = 1;
 		}
-		else if (sprite->state == HURT)
-		{
-			if (sprite->current_frame < 2)
-				sprite->current_frame++;
-			else
-				sprite->state = MOVING;
-		}
+		// else if (sprite->state == HURT)
+		// {
+		// 	if (sprite->current_frame < 2)
+		// 		sprite->current_frame++;
+		// 	else
+		// 		sprite->state = MOVING;
+		// }
 		else if (sprite->state == DYING)
 		{
 			if (sprite->current_frame < 5)
@@ -129,7 +129,7 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 		coor.y++;
 	}
 
-	if (targets_sprite && sprite->type == ENEMY)
+	if (targets_sprite && (sprite->type == ENEMY || sprite->type == PICKUP))
 		dt->targeted_sprite = sprite;
 		
 	return (EXIT_SUCCESS);
