@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_view.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:10:34 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/02 00:10:35 by fvargas          ###   ########.fr       */
+/*   Updated: 2025/09/08 16:42:06 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	setup_view(t_data *dt)
 
 	dt->view->show_door_open_message = 0;
 	dt->view->active_prompt_message = NO_MESSAGE;
-	
+
 	dt->view->show_debug_info = SHOW_DEBUG_INFO;
+	dt->view->show_targeted_sprite = SHOW_DEBUG_INFO;
 }

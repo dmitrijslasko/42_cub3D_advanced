@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:04:26 by fvargas           #+#    #+#             */
-/*   Updated: 2025/09/08 16:31:27 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/09/08 16:41:44 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	handle_keyrelease(int keycode, t_data *dt)
 	if (keycode == XK_F12)
 	{
 		toggle_setting(&dt->view->show_debug_info);
+		toggle_setting(&dt->view->show_targeted_sprite);
 	}
 	if (keycode == XK_Control_R || keycode == XK_i && dt->player.selected_weapon->type)
 		fire_gun(dt);

@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:35:51 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/23 20:15:33 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/09/08 16:40:54 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ typedef struct s_ray
 	float		distance_to_wall;
 	float		corrected_distance_to_wall;
 	int			wall_height;
-	
+
 	float		percentage_of_image;
 	t_mapcell	*hit_cell;
 	int			cell_type;
@@ -197,14 +197,14 @@ typedef struct s_player
 	float		plane_x;
 	float		plane_y;
 	char		cell_type_ahead;
-	
+
 	bool		can_move;
 	bool		is_moving;
 
 	float		move_speed_multiplier;
 	int			health_level;
 	// int			ammo_level;
-	
+
 	t_weapon	*selected_weapon;
 
 }	t_player;
@@ -229,6 +229,7 @@ typedef struct s_view
 	// int		minimap_color;
 	char	show_debug_info;
 	char	show_door_open_message;
+	char	show_targeted_sprite;
 	int		active_prompt_message;
 	float	door_open;
 	float	crouch;
@@ -239,13 +240,13 @@ typedef struct s_sprite_texture
 	char	*filepath;
 	int		texture_id;
 	char	map_char;
-	
+
 	void	*sprite_img[SPRITE_FRAMES];
 	int		*sprite_data[SPRITE_FRAMES];
 
 	// void	*sprite_img[NO_OF_ROTATION][NO_OF_ACTION];
 	// int		*sprite_data[NO_OF_ROTATION][NO_OF_ACTION];
-	
+
 	char	is_sprite_sheet;
 	float	orientation;
 	int		width;
@@ -253,7 +254,7 @@ typedef struct s_sprite_texture
 	int		bpp;
 	int		size_line;
 	int		endian;
-	
+
 }	t_sprite_texture;
 
 typedef enum e_sprite_type
@@ -281,10 +282,10 @@ typedef struct s_sprite
 	char				id;
 	char				map_char;
 	t_sprite_type		type;
-	
+
 	int					is_hidden;
 	char				is_blocking;
-	
+
 	t_x_y				pos;
 	t_coor				size;
 	float				orientation;
@@ -322,7 +323,7 @@ typedef struct s_level
 	int					consumables_collected;
 	float				score_combo;
 	char				prev_consumable;
-	
+
 	t_map				map;
 
 	t_sprite_texture	*sprite_textures;
@@ -343,7 +344,7 @@ typedef struct s_data
 {
 	void				*mlx_ptr;
 	void				*win_ptr;
-	
+
 	float				sin_table[PRECALCULATED_TRIG];
 	float				cos_table[PRECALCULATED_TRIG];
 
@@ -367,7 +368,7 @@ typedef struct s_data
 	t_ray				*rays;
 
 	t_map				*map;
-	
+
 	t_view				*view;
 
 	char				keys[TRACKED_KEYS];
@@ -380,7 +381,7 @@ typedef struct s_data
 
 	t_door				*doors;
 	size_t				*door_count;
-	
+
 	t_sprite			*targeted_sprite;
 	t_gametime			time;
 
@@ -402,7 +403,7 @@ typedef struct s_data
 	int					active_level;
 
 	int					gamescore;
-	
+
 	float				test_value_1;
 	int					test_value_2;
 	float				test_value_3;

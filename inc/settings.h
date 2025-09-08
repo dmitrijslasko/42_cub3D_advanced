@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:39:14 by fvargas           #+#    #+#             */
-/*   Updated: 2025/09/08 16:30:40 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/09/08 16:42:46 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // # ifndef M_PI
 // #  define M_PI 3.141592
 // # endif
-#define M_PI 3.14159265358979323846
+
 
 # ifndef BONUS
 #  define BONUS 0
@@ -27,13 +27,11 @@
 # endif
 
 # define DEBUG_PRINT                        0
-
 # define MIMIC_FULLSCREEN                   1
-# define CAPTURE_MOUSE                      0
-
 # define NUMBER_OF_LEVELS                   5
 
-# define SHOW_TARGETED_SPRITE               0
+//# define SHOW_TARGETED_SPRITE               0
+
 // window name
 # define WINDOW_NAME       "cub3D - dmlasko @ 42Berlin"
 # define VERSION_INFO      "cub3D project - 42 Berlin - dmlasko, v2.0"
@@ -43,9 +41,7 @@
 
 # define TILE_SIZE  						64
 
-// bonus part
-# define SKY_TXT_PATHFILE	    "./textures/sky/sky_3.xpm"
-
+// menu screens
 # define MENU_PATHFILE	        "./assets/menu/menu-screen-1.xpm"
 # define MENU2_PATHFILE	        "./assets/menu/menu-screen-2.xpm"
 # define GAME_WON_PATHFILE	    "./assets/menu/menu-game-won.xpm"
@@ -55,6 +51,7 @@
 # define WINDOW_W							640
 # define WINDOW_H							360
 
+// rendering settings
 # define CASTED_RAYS_COUNT					640
 # define FPS								60
 # define SCALING				            255
@@ -62,11 +59,14 @@
 # define STARTING_AMMO_LEVEL				999
 # define STARTING_HEALTH_LEVEL              50
 
-// 10 samples per degree
-# define TRIG_PRECISION                      20
-# define PRECALCULATED_TRIG                  7200
+
+// math
+# define TRIG_PRECISION                     20
+# define PRECALCULATED_TRIG                 7200
+# define M_PI 								3.14159265358979323846
 
 # define TRACKED_KEYS						70000
+
 
 // dummy map
 # define DUMMY_MAP_TOP						"1111111111111111111111111111111"
@@ -91,7 +91,6 @@
 # define MINIMAP_DOOR_COLOR					BLACK
 # define MINIMAP_THIN_WALL_COLOR			BLACK
 # define MINIMAP_SPRITE_COLOR				RED
-
 # define MINIMAP_DOOR_THICKNESS_PX			3
 
 # define MINIMAP_PLAYER_SIZE_PX 			5
@@ -107,6 +106,7 @@
 # define MINIMAP_RENDER_RAY_COLOR		    YELLOW
 # define MINIMAP_DRAW_EVERY_NTH_RENDER_RAY  5
 # define MINIMAP_ENABLE_ON_START            0
+
 
 // gameplay
 # define FIELD_OF_VIEW_DEG					60.0f
@@ -183,7 +183,7 @@
 # define CONSUMABLE_TYPES     	 	        "ABCDFGHIJKLM"
 # define DECORATION_TYPES     	 	        "OP"
 # define ENEMY_SPRITES                      "abcdiq"
-# define ENEMY_SPRITE_MOVE_SPEED            0.02f
+# define ENEMY_SPRITE_MOVE_SPEED            0.01f
 # define EXIT_TYPES     	 	            "$"
 # define SPRITE_FRAMES						2
 
