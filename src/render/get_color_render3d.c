@@ -48,32 +48,37 @@ int	get_color_render3d(t_data *dt, t_ray *ray, t_coor *tex_coor)
 	int			color;
 	int			tex_index;
 	int			side_texture_index;
-	t_texture  *texture = NULL;
+	t_texture *texture = NULL;
 
-	// handle door
-	if (ft_strchr(DOOR_TYPES, ray->hit_content))
-	{
-		texture = handle_door(&tex_index, ray, tex_coor, dt);
-		if (!texture)
-			texture = &dt->map->textures[ray->cell_type].texture;
-	}
-	// handle door neighbours
-	else if (ray->hit_side == 'y' && ray->door && ray->door->orientation == 1 ||
-		ray->hit_side == 'x' && ray->door && ray->door->orientation == 0)
+	if (ray->hit_cell->is_near_door && ray->hit_side == 'y' && ray->door && ray->door->orientation == 1)
 	{
 		side_texture_index = ray->door->side_texture_index;
 		texture = &dt->map->textures[side_texture_index].texture;
 		tex_coor->x = texture->width * ray->percentage_of_image;
 		tex_index = texture->width * tex_coor->y + tex_coor->x;
 	}
-	// handle everything else
+	else if (ray->hit_cell->is_near_door && ray->hit_side == 'x' && ray->door && ray->door->orientation == 0)
+	{
+		side_texture_index = ray->door->side_texture_index;
+		texture = &dt->map->textures[side_texture_index].texture;
+		tex_coor->x = texture->width * ray->percentage_of_image;
+		tex_index = texture->width * tex_coor->y + tex_coor->x;
+	}
+	else if (ft_strchr(DOOR_TYPES, ray->hit_content))
+	{
+		texture = handle_door(&tex_index, ray, tex_coor, dt);
+		if (!texture)
+			texture = &dt->map->textures[ray->cell_type].texture;
+	}
 	else
 	{
 		texture = &dt->map->textures[ray->cell_type].texture;
 		tex_coor->x = texture->width * ray->percentage_of_image;
 		tex_index = texture->width * tex_coor->y + tex_coor->x;
 	}
-	color = texture->texture_data[tex_index];
 
+	// tex_index = 20;
+	// texture = &dt->map.textures[1].texture;
+	color = texture->texture_data[tex_index];
 	return (color);
 }
