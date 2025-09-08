@@ -33,15 +33,26 @@ static const t_sprite_file	g_sprites[] = {
 {'L',	"SPRITE_05", 0, 	0, 		{"./sprites/sushi/sushi-11.xpm", "./sprites/sushi/sushi-11.xpm"}},
 {'M',	"SPRITE_05", 0, 	0, 		{"./sprites/sushi/sushi-12.xpm", "./sprites/sushi/sushi-12.xpm"}},
 
-// decorsss
+// decors / furniture / static sprites
 {'O',	"SPRITE_03", 0, 	0, 		{"./sprites/tree.xpm", "./sprites/tree.xpm"}},
 {'P',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
+{'Q',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
+{'R',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
+{'S',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
+{'T',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
+{'U',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
+{'V',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
+{'W',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
+{'X',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
+{'Y',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
+{'Z',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
 
 // enemies
 {'a',	"SPRITE_05", 1, 	0.0f, 	{"./sprites/yellow_soldier.xpm", "./sprites/yellow_soldier.xpm"}},
 {'b',	"SPRITE_05", 1, 	90.0f, 	{"./sprites/yellow_soldier.xpm", "./sprites/yellow_soldier.xpm"}},
 {'c',	"SPRITE_05", 1, 	180.0f, {"./sprites/yellow_soldier.xpm", "./sprites/yellow_soldier.xpm"}},
 {'d',	"SPRITE_05", 1, 	270.0f, {"./sprites/yellow_soldier.xpm", "./sprites/yellow_soldier.xpm"}},
+
 {'i',	"SPRITE_06", 1, 	180.0f, {"./sprites/yellow_soldier.xpm", "./sprites/yellow_soldier.xpm"}},
 {'q',	"SPRITE_07", 1, 	0, 		{"./sprites/soldier-1-sprite-sheet.xpm", "./sprites/soldier-1-sprite-sheet.xpm"}},
 

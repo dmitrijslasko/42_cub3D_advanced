@@ -1,25 +1,27 @@
 
 DEF         textures/default-fallback-texture.xpm
 
-F1          textures/test/test-texture.xpm
-C1          textures/test/test-texture.xpm
+SKY         textures/sky/sky_3.xpm
 
-W01         textures/test/test-texture.xpm
-W02         textures/test/test-texture.xpm
-W03 	    textures/test/test-texture.xpm
-W04 	    textures/test/test-texture.xpm
-W05         textures/test/test-texture.xpm
-W06         textures/test/test-texture.xpm
-W07         textures/test/test-texture.xpm
-W08         textures/test/test-texture.xpm
-W09         textures/test/test-texture.xpm
+F1          textures/wolfenstein/wood.xpm
+C1          textures/floor-grey-noise.xpm
 
-DOOR_01    	textures/test/test-texture.xpm
-DOOR_01_S   textures/test/test-texture.xpm
-DOOR_02     textures/test/test-texture.xpm
-DOOR_02_S   textures/test/test-texture.xpm
-DOOR_03     textures/test/test-texture.xpm
-DOOR_03_S   textures/test/test-texture.xpm
+W01         textures/wolfenstein/blue-wall.xpm
+W02         textures/wolfenstein/red_brick.xpm
+W03 	    textures/wolfenstein/grey_stone.xpm
+W04 	    textures/wolfenstein/grey_stone.xpm
+W05         textures/bookshelf.xpm
+W06         textures/shoji-64-sides.xpm
+W07         textures/shoji-64.xpm
+W08         textures/wolfenstein/grey_stone.xpm
+W09         textures/curtain-3.xpm
+
+DOOR_01    	textures/shoji-64.xpm
+DOOR_01_S   textures/shoji-64-sides.xpm
+DOOR_02     textures/door-orange.xpm
+DOOR_02_S   textures/door-side-orange.xpm
+DOOR_03     textures/bookshelf.xpm
+DOOR_03_S   textures/bookshelf.xpm
 
 ED1    	    textures/wolf44.xpm
 

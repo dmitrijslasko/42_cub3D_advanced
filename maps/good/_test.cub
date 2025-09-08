@@ -1,0 +1,45 @@
+
+DEF         textures/default-fallback-texture.xpm
+
+F1          textures/test/test-texture.xpm
+C1          textures/test/test-texture.xpm
+
+W01         textures/test/test-texture.xpm
+W02         textures/test/test-texture.xpm
+W03 	    textures/test/test-texture.xpm
+W04 	    textures/test/test-texture.xpm
+W05         textures/test/test-texture.xpm
+W06         textures/test/test-texture.xpm
+W07         textures/test/test-texture.xpm
+W08         textures/test/test-texture.xpm
+W09         textures/test/test-texture.xpm
+
+DOOR_01    	textures/test/test-texture.xpm
+DOOR_01_S   textures/test/test-texture.xpm
+DOOR_02     textures/test/test-texture.xpm
+DOOR_02_S   textures/test/test-texture.xpm
+DOOR_03     textures/test/test-texture.xpm
+DOOR_03_S   textures/test/test-texture.xpm
+
+ED1    	    textures/wolf44.xpm
+
+333333333311111111116
+1  $     1          O7
+1        2          6
+1        4          P7
+1        5          6
+1        1          O7
+1ABCD FGHI JKL      6
+1A                  P7
+1A                  6
+1      N            O7
+11111111111111 111111
+33333333331111-111111
+1  $     1          1
+1        2          1
+1        4          1
+1        5          1
+1        1          1
+1ABCD FGHI JKL      1
+1Aaaaaaaaaaaaaaaaaaa1
+111111134215122323333

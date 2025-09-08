@@ -55,8 +55,6 @@ int	main(int argc, char **argv)
 	
 	printf("COLS: %d\n", dt.levels[0].map.map_size_cols);
 	printf("ROWS: %d\n", dt.levels[0].map.map_size_rows);
-	// printf("CELL: %c\n", dt.levels->map.map_data[30][0].map_char);
-	// exit(1);
 
 	print_level_map(&dt.levels[0].map);
 	// precalculate sin and cos lookup tables
