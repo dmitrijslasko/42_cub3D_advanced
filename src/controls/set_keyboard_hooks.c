@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:04:26 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/23 20:29:55 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/09/08 16:31:27 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ void	setup_keyboard_hooks(t_data *dt)
 
 	mlx_do_key_autorepeatoff(dt->mlx_ptr);
 
-	if (ENABLE_MOUSE)
-		mlx_mouse_hide(dt->mlx_ptr, dt->win_ptr);
+	//if (ENABLE_MOUSE)
+	mlx_mouse_hide(dt->mlx_ptr, dt->win_ptr);
 
 	printf(" Done!\n");
 }

@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:39:14 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/24 19:56:10 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/09/08 16:30:40 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@
 # endif
 
 # ifndef LINUX_22
-# 	define LINUX_22 0
+# 	define LINUX_22 1
 # endif
 
 # define DEBUG_PRINT                        0
 
-# define MIMIC_FULLSCREEN                   0
+# define MIMIC_FULLSCREEN                   1
 # define CAPTURE_MOUSE                      0
 
 # define NUMBER_OF_LEVELS                   5
