@@ -125,20 +125,14 @@ int animate_sprites(t_data *dt)
 	i = 0;
 	while (i < dt->sprite_count)
 	{
-		if (!ft_strchr(ENEMY_SPRITES, dt->sprites[i].map_char))
+		if (!ft_strchr(ENEMY_SPRITES, dt->sprites[i].map_char) || dt->sprites[i].state == DYING)
 		{
 			i++;
 			continue ;
 		}
-		
+
 		speed = &dt->sprites[i].speed;
 		pos = &dt->sprites[i].pos;
-
-		if (dt->sprites[i].state == DYING)
-		{
-			i++;
-			continue ;
-		}
 			
 		dt->sprites[i].state = MOVING;
 
