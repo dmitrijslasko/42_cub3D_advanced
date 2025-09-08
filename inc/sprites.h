@@ -33,9 +33,9 @@ static const t_sprite_file	g_sprites[] = {
 {'L',	"SPRITE_05", 0, 	0, 		{"./sprites/sushi/sushi-11.xpm", "./sprites/sushi/sushi-11.xpm"}},
 {'M',	"SPRITE_05", 0, 	0, 		{"./sprites/sushi/sushi-12.xpm", "./sprites/sushi/sushi-12.xpm"}},
 
-// decor
+// decorsss
 {'O',	"SPRITE_03", 0, 	0, 		{"./sprites/tree.xpm", "./sprites/tree.xpm"}},
-{'P',	"SPRITE_04", 0, 	0, 		{"./sprites/plant-2-128x128.xpm", "./sprites/plant-2-128x128.xpm"}},
+{'P',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
 
 // enemies
 {'a',	"SPRITE_05", 1, 	0.0f, 	{"./sprites/yellow_soldier.xpm", "./sprites/yellow_soldier.xpm"}},
