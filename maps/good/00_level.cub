@@ -3,45 +3,50 @@ DEF         textures/default-fallback-texture.xpm
 
 SKY         textures/sky/sky_3.xpm
 
-F1          textures/wolfenstein/wood.xpm
-C1          textures/floor-grey-noise.xpm
+F1          textures/sushi-ninja/ground2.xpm
+C1          textures/sushi-ninja/pink-window-2.xpm
 
-W01         textures/wolfenstein/blue-wall.xpm
-W02         textures/wolfenstein/red_brick.xpm
-W03 	    textures/wolfenstein/grey_stone.xpm
-W04 	    textures/wolfenstein/grey_stone.xpm
-W05         textures/bookshelf.xpm
-W06         textures/shoji-64-sides.xpm
-W07         textures/shoji-64.xpm
-W08         textures/wolfenstein/grey_stone.xpm
-W09         textures/curtain-3.xpm
+W01         textures/sushi-ninja/concrete-wall.xpm
+W02         textures/sushi-ninja/brick-wall.xpm
+W03 	    textures/sushi-ninja/street-vendor-1.xpm
+W04 	    textures/sushi-ninja/street-vendor-2.xpm
+W05         textures/sushi-ninja/ground2.xpm
+W06         textures/sushi-ninja/bamboo-wall-2.xpm
+W07         textures/sushi-ninja/pink-window-1.xpm
+W08         textures/sushi-ninja/pink-window-1.xpm
+W09         textures/sushi-ninja/pink-window-1.xpm
 
-DOOR_01    	textures/shoji-64.xpm
-DOOR_01_S   textures/shoji-64-sides.xpm
-DOOR_02     textures/door-orange.xpm
-DOOR_02_S   textures/door-side-orange.xpm
-DOOR_03     textures/bookshelf.xpm
-DOOR_03_S   textures/bookshelf.xpm
+DOOR_01     textures/doors/door-orange.xpm
+DOOR_01_S   textures/doors/door-side-orange.xpm
+DOOR_02    	textures/sushi-ninja/shoji-door.xpm
+DOOR_02_S  	textures/sushi-ninja/shoji-door-sides.xpm
+DOOR_03     textures/sushi-ninja/bamboo-wall-2.xpm
+DOOR_03_S   textures/sushi-ninja/bamboo-wall-2.xpm
 
-ED1    	    textures/wolf44.xpm
+ED1    	    textures/doors/door-cyan.xpm
 
-333333333311111111116
-1  $     1          O7
-1        2          6
-1        4          P7
-1        5          6
-1        1          O7
-1ABCD FGHI JKL      6
-1A                  P7
-1A                  6
-1      N            O7
-11111111111111 111111
-33333333331111-111111
-1  $     1          1
-1        2          1
-1        4          1
-1        5          1
-1        1          1
-1ABCD FGHI JKL      1
-1Aaaaaaaaaaaaaaaaaaa1
-111111134215122323333
+
+111112111111111111112
+1S  $12    24F    2 22
+1   12B   23G       2
+1   12    222     D 2
+1   12      |      22
+11-112      2  2    2
+2           2222222 2
+2           G32 F 2A2
+2         C F42   222 
+2           222     2
+222222 222222       2
+5        5          1
+5        5          1
+5        |         A1
+5        5          1
+5        5          1
+55555555551-111-111-111
+1        1   1   1    1
+1        1   1   1    1
+111111111111111111111 1
+666666666666666666666 1
+6A]             6     1
+666666666666666   66666
+66666666666666666666666

@@ -2,7 +2,7 @@
 
 int draw_textured_ceiling(t_data *dt)
 {
-    t_texture texture = dt->map->textures[4].texture;
+    t_texture texture = dt->map->textures[CEILING].texture;
     int x;
     int y;
     float rowDistance;
