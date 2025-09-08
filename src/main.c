@@ -39,8 +39,6 @@ void free_audio(void)
     ma_engine_uninit(&engine);
 }
 
-
-
 int	main(int argc, char **argv)
 {
 	t_data	dt;

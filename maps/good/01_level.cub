@@ -24,15 +24,15 @@ DOOR_03_S   textures/bookshelf.xpm
 ED1    	    textures/wolf44.xpm
 
 333333333311111111111
-1  $     1          1
+1  $     1          O1
 1        2          1
-1        4          1
+1        4          O1
 1        5          1
-1        1          1
+1        1          O1
 1ABCD FGHI JKL      1
+1A                  O1
 1A                  1
-1A                  1
-1      N            1
+1      N            O1
 1111111111111  111111
 3333333333111  111111
 1  $     1          1

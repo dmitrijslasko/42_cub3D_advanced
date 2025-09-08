@@ -225,10 +225,12 @@ int	render_frame(void *param)
 		update_minimap(dt);
 	render_minimap_and_ui(dt);
 
+	// weapon recoil animation (basic)
 	if (dt->weapon_is_animating && dt->view->screen_center_y - WINDOW_H/2 < 10)
 		dt->view->screen_center_y += 1;
-	else
-		dt->view->screen_center_y = WINDOW_H / 2;
+	else if (dt->view->screen_center_y > WINDOW_H / 2)
+		dt->view->screen_center_y -= 4;
+	
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr,dt->final_frame_img->mlx_img, 0, 0);
 	
 	show_debug_info(dt);
