@@ -155,7 +155,7 @@ void	show_player_info(t_data *dt)
 	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, dt->player.selected_weapon->description);
 	// mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->weapon->type));
 
-	mlx_string_put(mlx, win, x += 115, WINDOW_H - 25, SILVER, "Press [1-5] to switch weapon. [I] to shoot.");
+	mlx_string_put(mlx, win, x += 115, WINDOW_H - 25, SILVER, "Press [1-5] to switch weapon. [R] to shoot.");
 	mlx_string_put(mlx, win, x += 15, WINDOW_H - 13, WHITE, "Make sure to try the machine gun! ([5])");
 	// mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, dt->player.selected_weapon->description);
 
@@ -192,7 +192,7 @@ void	show_level_info(t_data *dt)
 	mlx_string_put(mlx, win, 15, y += DBG_MN_NL, WHITE, "Summerfest total: ");
 	mlx_string_put(mlx, win, 140, y, WHITE, ft_itoa(dt->gamescore));
 
-	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Collected sushi: ");
+	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Consumed sushi: ");
 	mlx_string_put(mlx, win, 140, y, GOLD, ft_itoa(dt->levels[dt->active_level].consumables_collected));
 
 	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Still available: ");
