@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:33:06 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/23 18:44:00 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/09/09 15:20:54 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,12 +150,12 @@ void	show_player_info(t_data *dt)
 	mlx_string_put(mlx, win, 245, y, WHITE, "Eat sushi to gain points.");
 	mlx_string_put(mlx, win, 220, y += DBG_MN_NL, WHITE, "Same sushi type activates point combo!");
 	mlx_string_put(mlx, win, 200, y += DBG_MN_NL, SILVER, "Pick a \"Switch Level\" token to switch the level.");
-	
+
 	mlx_string_put(mlx, win, x, WINDOW_H - 20, GOLD, "Weapon: ");
 	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, dt->player.selected_weapon->description);
 	// mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->weapon->type));
 
-	mlx_string_put(mlx, win, x += 115, WINDOW_H - 25, SILVER, "Press [1-5] to switch weapon. [R] to shoot.");
+	mlx_string_put(mlx, win, x += 110, WINDOW_H - 25, SILVER, "[1-5] to switch weapon. [rCTRL / R] to shoot.");
 	mlx_string_put(mlx, win, x += 15, WINDOW_H - 13, WHITE, "Make sure to try the machine gun! ([5])");
 	// mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, dt->player.selected_weapon->description);
 
@@ -163,7 +163,7 @@ void	show_player_info(t_data *dt)
 	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->player.selected_weapon->total_ammo));
 
 	// mlx_string_put(mlx, win, x += 100, WINDOW_H - 20, GOLD, "Target: ");
-	
+
 	// char	buffer[32];
 	// snprintf(buffer, sizeof(buffer), "%.2f", dt->sprites[30].orientation_to_player);
 	// mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, buffer);
@@ -199,7 +199,7 @@ void	show_level_info(t_data *dt)
 	mlx_string_put(mlx, win, 140, y, GOLD, ft_itoa(dt->levels[dt->active_level].level_consumable_count - dt->levels[dt->active_level].consumables_collected));
 
 	mlx_string_put(mlx, win, 15, y += DBG_MN_NL, GOLD, "Score combo: ");
-	
+
 	char buffer[32];
 	snprintf(buffer, sizeof(buffer), "x%.2f", dt->levels[dt->active_level].score_combo);
 	mlx_string_put(mlx, win, 140, y, GOLD, buffer);

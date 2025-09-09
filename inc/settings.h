@@ -6,66 +6,59 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:39:14 by fvargas           #+#    #+#             */
-/*   Updated: 2025/09/08 16:42:46 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/09/09 15:19:39 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SETTINGS_H
 # define SETTINGS_H
 
-// # ifndef M_PI
-// #  define M_PI 3.141592
-// # endif
-
-
 # ifndef BONUS
 #  define BONUS 0
 # endif
 
 # ifndef LINUX_22
-# 	define LINUX_22     0
+# 	define LINUX_22     1
 # endif
 
 # define DEBUG_PRINT                        0
 # define MIMIC_FULLSCREEN                   1
 # define NUMBER_OF_LEVELS                   4
 
-//# define SHOW_TARGETED_SPRITE               0
-
 // window name
-# define WINDOW_NAME       "cub3D - dmlasko @ 42Berlin"
-# define VERSION_INFO      "cub3D project - 42 Berlin - dmlasko, v2.0"
+# define WINDOW_NAME       				"cub3D - dmlasko @ 42Berlin"
+# define VERSION_INFO     				"cub3D project - 42 Berlin - dmlasko, v2.0"
 
-# define SHOW_CALCULATION_LOGS				1
-# define SHOW_DEBUG_INFO 					0
+# define SHOW_CALCULATION_LOGS			1
+# define SHOW_DEBUG_INFO 				0
 
-# define TILE_SIZE  						64
+# define TILE_SIZE  					64
 
 // menu screens
-# define MENU_PATHFILE	        "./assets/menu/menu-screen-1.xpm"
-# define MENU2_PATHFILE	        "./assets/menu/menu-screen-2.xpm"
-# define GAME_WON_PATHFILE	    "./assets/menu/menu-game-won.xpm"
-# define LEVEL_CLEARED_PATHFILE "./assets/menu/menu-level-cleared.xpm"
+# define MENU_PATHFILE	        		"./assets/menu/menu-screen-1.xpm"
+# define MENU2_PATHFILE	        		"./assets/menu/menu-screen-2.xpm"
+# define GAME_WON_PATHFILE	    		"./assets/menu/menu-game-won.xpm"
+# define LEVEL_CLEARED_PATHFILE 		"./assets/menu/menu-level-cleared.xpm"
 
 // window size
-# define WINDOW_W							640
-# define WINDOW_H							360
+# define WINDOW_W						640
+# define WINDOW_H						360
 
 // rendering settings
-# define CASTED_RAYS_COUNT					640
-# define FPS								60
-# define SCALING				            255
+# define CASTED_RAYS_COUNT				640
+# define FPS							60
+# define SCALING				        255
 
-# define STARTING_AMMO_LEVEL				999999
-# define STARTING_HEALTH_LEVEL              50
+# define STARTING_AMMO_LEVEL			999999
+# define STARTING_HEALTH_LEVEL          50
 
 
 // math
-# define TRIG_PRECISION                     20
-# define PRECALCULATED_TRIG                 7200
-# define M_PI 								3.14159265358979323846
+# define TRIG_PRECISION                 20
+# define PRECALCULATED_TRIG             7200
+# define M_PI 							3.14159265358979323846
 
-# define TRACKED_KEYS						70000
+# define TRACKED_KEYS					70000
 
 
 // dummy map
