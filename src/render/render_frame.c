@@ -148,7 +148,7 @@ int animate_moving(t_data *dt, t_sprite *sprite)
 
 	cell_type = get_cell_by_coordinates_float(dt->map, test_pos.y, test_pos.x)->map_char;
 
-	if (ft_strchr(WALL_TYPES, cell_type))
+	if (ft_strchr(WALL_TYPES, cell_type) || ft_strchr(DOOR_TYPES, cell_type))
 	{
 		sprite->orientation += 180.0f;
 		if (sprite->orientation >= 360.0f)

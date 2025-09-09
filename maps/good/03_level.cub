@@ -3,44 +3,51 @@ DEF         textures/default-fallback-texture.xpm
 
 SKY         textures/sky/sky_3.xpm
 
-F1          textures/sushi-ninja/ground.xpm
+F1          textures/sushi-ninja/ground2.xpm
 C1          textures/sushi-ninja/pink-window-2.xpm
 
-W01         textures/sushi-ninja/wooden-wall-1.xpm
-W02         textures/sushi-ninja/pink-window-2.xpm
-W03 	    textures/sushi-ninja/pink-window-1.xpm
-W04 	    textures/sushi-ninja/pink-window-1.xpm
-W05         textures/sushi-ninja/pink-window-1.xpm
-W06         textures/sushi-ninja/sakura-wallpaper.xpm
+W01         textures/sushi-ninja/concrete-wall-1.xpm
+W02         textures/sushi-ninja/brick-wall.xpm
+W03 	    textures/sushi-ninja/street-vendor-1.xpm
+W04 	    textures/sushi-ninja/street-vendor-2.xpm
+W05         textures/sushi-ninja/ground2.xpm
+W06         textures/sushi-ninja/bamboo-wall-2.xpm
 W07         textures/sushi-ninja/pink-window-1.xpm
-W08         textures/sushi-ninja/pink-window-1.xpm
-W09         textures/sushi-ninja/pink-window-1.xpm
+W08         textures/sushi-ninja/brick-wall-1-1.xpm
+W09         textures/sushi-ninja/concrete-wall-1-1.xpm
+W10         textures/sushi-ninja/concrete-wall-1-2.xpm
 
-DOOR_01    	textures/sushi-ninja/shoji-door.xpm
-DOOR_01_S  	textures/sushi-ninja/shoji-door-sides.xpm
-DOOR_02     textures/doors/door-orange.xpm
-DOOR_02_S   textures/doors/door-side-orange.xpm
-DOOR_03     textures/bookshelf.xpm
-DOOR_03_S   textures/bookshelf.xpm
+DOOR_01     textures/doors/door-orange.xpm
+DOOR_01_S   textures/doors/door-side-orange.xpm
+DOOR_02    	textures/sushi-ninja/shoji-door.xpm
+DOOR_02_S  	textures/sushi-ninja/shoji-door-sides.xpm
+DOOR_03     textures/sushi-ninja/bamboo-wall-2.xpm
+DOOR_03_S   textures/sushi-ninja/bamboo-wall-2.xpm
 
 ED1    	    textures/doors/door-cyan.xpm
 
-111111111111111111111
-1  $     1          O7
-1        1          6
-1        1          P7
-1        1          6
-1        1          O7
-1ABCD FGHI JKL      6
-1A                  P7
-1A                  6
-1      N            O7
-33333333331111-111111
-1  $     1          1
-1        2          1
-1        4          1
-1        5          1
-1        1          1
-1ABCD FGHI JKL      1
-1Aaaaaaaaaaaaaaaaaaa1
-111111134215122323333
+
+119112111111111111112
+1S  $12   24F    2 22
+1   92B   23G       8
+9   12    822     D 2
+1   12      |      22
+11-!12      2  2    2
+22 282      2282222 2
+2           G32 F 2A2
+22        C F42   222 
+2P          222     2
+228282 282222    R  2
+55       5          9
+5        5   Q      1
+55       |         A1
+5        5     Q    1
+55 5 5 5 5          1
+55555555551-111-111-111
+1        1   1   1    1
+1        1   1   1    1
+111111111111111111111 1
+666666666666666666666 1
+6A         6          1
+6666666666   6666666666
+66666666666666666666666

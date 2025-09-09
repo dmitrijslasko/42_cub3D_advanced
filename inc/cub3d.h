@@ -284,7 +284,7 @@ typedef struct s_sprite
 	t_sprite_type		type;
 
 	int					is_hidden;
-	char				is_blocking;
+	int					y_offset;
 
 	t_x_y				pos;
 	t_coor				size;

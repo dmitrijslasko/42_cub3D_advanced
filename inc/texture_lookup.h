@@ -49,6 +49,7 @@ typedef enum e_texture_type
 	WALL_7,
 	WALL_8,
 	WALL_9,
+	WALL_10,
 	THIN_WALL_VERTICAL_1,
 	THIN_WALL_HORIZONTAL_1,
 	DOOR_1,
@@ -95,6 +96,7 @@ static const t_texture_match	g_texture_lookup[] = {
 {"W07", "wall 7 texture", 				WALL_7, 				"7"},
 {"W08", "wall 8 texture", 				WALL_8, 				"8"},
 {"W09", "wall 9 texture", 				WALL_9, 				"9"},
+{"W10", "wall 9 texture", 				WALL_10, 				"!"},
 
 // thin walls
 {"TWV01", "thin v wall 1 texture", 		THIN_WALL_VERTICAL_1, 	"v"},

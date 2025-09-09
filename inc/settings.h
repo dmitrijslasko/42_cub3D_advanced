@@ -56,7 +56,7 @@
 # define FPS								60
 # define SCALING				            255
 
-# define STARTING_AMMO_LEVEL				999
+# define STARTING_AMMO_LEVEL				999999
 # define STARTING_HEALTH_LEVEL              50
 
 
@@ -181,13 +181,13 @@
 # define PLAYER_SPAWN_POINT_TYPES			"NSWE"
 # define SPRITE_TYPES     	 	            "ABCDFGHIJKLMOPQRTUVXYZabcdefghijklmnopqrstuvwxyz+$#&@"
 # define CONSUMABLE_TYPES     	 	        "ABCDFGHIJKLM"
-# define DECORATION_TYPES     	 	        "OP"
-# define ENEMY_SPRITES                      "abcdiq"
+# define DECORATION_TYPES     	 	        "OPQRTUVXY"
+# define ENEMY_SPRITES                      "abcdefghiq"
 # define ENEMY_SPRITE_MOVE_SPEED            0.01f
 # define EXIT_TYPES     	 	            "$"
 # define SPRITE_FRAMES						2
 
-# define WALL_TYPES							"123456789"
+# define WALL_TYPES							"123456789!"
 # define VERTICAL_WALL_TYPES				"v"
 # define HORIZONTAL_WALL_TYPES				"h"
 # define DOOR_TYPES							"|][]-_=*"

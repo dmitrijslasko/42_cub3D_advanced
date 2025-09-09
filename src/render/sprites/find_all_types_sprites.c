@@ -44,6 +44,9 @@ static void	init_sprites(t_data *dt, int index)
 				level->sprites[i].pos.y = row + 0.5f;
 
 				level->sprites[i].is_hidden = 0;
+				level->sprites[i].y_offset = 0;
+				if (sprite_type == 'Z')
+					level->sprites[i].y_offset = 50;
 
 				level->sprites[i].state = IDLE;
 

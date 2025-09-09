@@ -23,36 +23,31 @@ int process_sprite_pickups(t_data *dt)
 		dt->levels[dt->active_level].consumables_collected++;
 		
 		// level score && total game score
-		dt->levels[dt->active_level].level_score += 100 * dt->levels[dt->active_level].score_combo;
-		dt->gamescore += 100 * dt->levels[dt->active_level].score_combo;
-
-		if (!dt->levels[dt->active_level].prev_consumable || sprite->map_char == dt->levels[dt->active_level].prev_consumable)
+		if (sprite->map_char == dt->levels[dt->active_level].prev_consumable)
 			dt->levels[dt->active_level].score_combo += 0.2f;
 		else
 			dt->levels[dt->active_level].score_combo = 1.0f;
+			
+		dt->levels[dt->active_level].level_score += 100 * dt->levels[dt->active_level].score_combo;
+		dt->gamescore += 100 * dt->levels[dt->active_level].score_combo;
+
 		dt->levels[dt->active_level].prev_consumable = sprite->map_char;
 	}
 
 	// key pickup pickup - game won!
 	if (sprite && !sprite->is_hidden && ft_strchr(EXIT_TYPES, sprite->map_char))
 	{	
-		if (dt->levels[dt->active_level].level_consumable_count > dt->levels[dt->active_level].consumables_collected)
-		{
-			// system(ALERT_SYSTEM_CALL);
-			mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, NOT_ALL_FOOD_COLLECTED);
-		}
-		else 
+		// if (dt->levels[dt->active_level].level_consumable_count > dt->levels[dt->active_level].consumables_collected)
+		// {
+		// 	// system(ALERT_SYSTEM_CALL);
+		// 	mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, NOT_ALL_FOOD_COLLECTED);
+		// }
+		// else 
 		{
 			play_sound(LEVEL_CLEARED_SYSTEM_CALL);
 			printf("Level #%d finished!\n", dt->active_level);
 			print_separator(1, DEF_SEPARATOR_CHAR);
-			if (dt->active_level == NUMBER_OF_LEVELS)
-				dt->game_status = GAME_WON_SCREEN;
-			else
-			{
-				dt->game_status = LEVEL_FINISH;
-				// update_current_level_pointers(dt);
-			}
+			dt->game_status = LEVEL_FINISH;
 		}
 	}
 	return (EXIT_SUCCESS);

@@ -47,13 +47,6 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 			if (sprite->current_frame > 2)
 				sprite->current_frame = 1;
 		}
-		// else if (sprite->state == HURT)
-		// {
-		// 	if (sprite->current_frame < 2)
-		// 		sprite->current_frame++;
-		// 	else
-		// 		sprite->state = MOVING;
-		// }
 		else if (sprite->state == DYING)
 		{
 			if (sprite->current_frame < 5)
