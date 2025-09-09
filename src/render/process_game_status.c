@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static int unhide_sprites(t_data *dt)
+static int restore_sprites(t_data *dt)
 {
 	size_t i;
 
@@ -8,10 +8,13 @@ static int unhide_sprites(t_data *dt)
 	while (i < dt->levels[dt->active_level].sprite_count)
 	{
 		dt->levels[dt->active_level].sprites[i].is_hidden = 0;
+		dt->levels[dt->active_level].sprites[i].state = IDLE;
 		i++;
 	}
 	return (EXIT_SUCCESS);
 }
+
+
 
 int process_game_status(t_data *dt)
 {
@@ -54,7 +57,7 @@ int process_game_status(t_data *dt)
 			dt->levels[dt->active_level].level_score = 0;
 			dt->levels[dt->active_level].consumables_collected = 0;
 			
-			unhide_sprites(dt);
+			restore_sprites(dt);
 
 			get_init_player_position(dt->map, &dt->player);
 			dt->game_status = GAME_SCREEN;

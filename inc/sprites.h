@@ -39,7 +39,7 @@ static const t_sprite_file	g_sprites[] = {
 {'Q',	"SPRITE_04", 0, 	0, 		{"./sprites/items/table-empty.xpm", "./sprites/items/table-empty.xpm"}},
 {'R',	"SPRITE_04", 0, 	0, 		{"./sprites/items/table-cola.xpm", "./sprites/items/table-cola.xpm"}},
 {'T',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
-{'U',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
+{'U',	"SPRITE_04", 0, 	0, 		{"./sprites/items/mask_1.xpm", "./sprites/items/mask_1.xpm"}},
 {'V',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
 {'X',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
 {'Y',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
