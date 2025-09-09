@@ -28,7 +28,7 @@
 
 # define DEBUG_PRINT                        0
 # define MIMIC_FULLSCREEN                   1
-# define NUMBER_OF_LEVELS                   5
+# define NUMBER_OF_LEVELS                   4
 
 //# define SHOW_TARGETED_SPRITE               0
 
@@ -157,7 +157,7 @@
 # define DEF_SEPARATOR_COUNT				1
 
 // menu & UI
-# define DBG_MN_NL	 					10
+# define DBG_MN_NL	 					12
 # define DBG_MN_NL_2					20
 # define UI_CLR_1    	    			WHITE
 # define UI_CLR_2    	    			GOLD
@@ -166,11 +166,8 @@
 # define DBG_FIELD_OFFST_Y				20
 # define UI_MESSAGE_OFFSET_Y			700
 
-// welcome screens
+// maps
 # define REQUIRED_MAP_EXTENSION				".cub"
-
-# define WELCOME_IMAGE       				"./assets/images/intro.xpm"
-# define SHOW_WELCOME_IMAGE  				0
 
 // all printable ASCII characters + fallback texture
 // maximum

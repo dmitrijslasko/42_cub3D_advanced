@@ -16,7 +16,7 @@ typedef struct s_sprite_file
 static const t_sprite_file	g_sprites[] = {
 // pickups
 {'+',	"SPRITE_01", 0, 	0, 		{"./sprites/heart.xpm", "./sprites/heart.xpm"}},
-{'$',	"SPRITE_02", 0, 	0, 		{"./sprites/sushi/sushi-12.xpm", "./sprites/sushi/sushi-12.xpm"}},
+{'$',	"SPRITE_02", 0, 	0, 		{"./sprites/items/switch-level-2.xpm", "./sprites/items/switch-level-2.xpm"}},
 
 {'A',	"SPRITE_03", 0, 	0, 		{"./sprites/sushi/sushi-1.xpm", "./sprites/sushi/sushi-1.xpm"}},
 {'B',	"SPRITE_04", 0, 	0, 		{"./sprites/sushi/sushi-2.xpm", "./sprites/sushi/sushi-2.xpm"}},
@@ -38,8 +38,8 @@ static const t_sprite_file	g_sprites[] = {
 {'P',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
 {'Q',	"SPRITE_04", 0, 	0, 		{"./sprites/items/table-empty.xpm", "./sprites/items/table-empty.xpm"}},
 {'R',	"SPRITE_04", 0, 	0, 		{"./sprites/items/table-cola.xpm", "./sprites/items/table-cola.xpm"}},
-{'T',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
-{'U',	"SPRITE_04", 0, 	0, 		{"./sprites/items/mask_1.xpm", "./sprites/items/mask_1.xpm"}},
+{'T',	"SPRITE_04", 0, 	0, 		{"./sprites/items/table-mate-2.xpm", "./sprites/items/table-mate.xpm"}},
+{'U',	"SPRITE_04", 0, 	0, 		{"./sprites/items/lucky-cat.xpm", "./sprites/items/lucky-cat.xpm"}},
 {'V',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
 {'X',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},
 {'Y',	"SPRITE_04", 0, 	0, 		{"./sprites/sakura.xpm", "./sprites/sakura.xpm"}},

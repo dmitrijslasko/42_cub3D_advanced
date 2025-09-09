@@ -57,13 +57,13 @@ int	handle_keyrelease(int keycode, t_data *dt)
 		switch_weapon(dt, WEAPON_RIFLE);
 	if (dt->keys[XK_5])
 		switch_weapon(dt, WEAPON_MACHINE_GUN);
-	if (dt->keys[XK_7])
-	{
-		puts("Switching level!");
-		print_level_map(dt->map);
-		dt->active_level += 1;
-		dt->active_level %= NUMBER_OF_LEVELS;
-	}
+	// if (dt->keys[XK_7])
+	// {
+	// 	puts("Switching level!");
+	// 	print_level_map(dt->map);
+	// 	dt->active_level += 1;
+	// 	dt->active_level %= NUMBER_OF_LEVELS;
+	// }
 	if (dt->keys[XK_8])
 	{
 		float prev_value = *dt->ambient_light;
@@ -72,8 +72,8 @@ int	handle_keyrelease(int keycode, t_data *dt)
 		else
 			*dt->ambient_light = 1000.0f;
 	}
-	if (keycode == XK_Tab)
-		toggle_setting(&dt->view->show_minimap);
+	// if (keycode == XK_Tab)
+	// 	toggle_setting(&dt->view->show_minimap);
 	if (keycode == XK_F12)
 	{
 		toggle_setting(&dt->view->show_debug_info);

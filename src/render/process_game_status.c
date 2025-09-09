@@ -18,12 +18,9 @@ static int restore_sprites(t_data *dt)
 
 int process_game_status(t_data *dt)
 {
-
 	dt->player.plane_x = dt->player.orientation_vector.y * (FIELD_OF_VIEW_SCALE);
 	dt->player.plane_y = dt->player.orientation_vector.x * (FIELD_OF_VIEW_SCALE);
 
-	// game menu
-	// printf("Current game status == %d\n", dt->game_status);
 	if (dt->game_status == WELCOME_SCREEN)
 	{
 		mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr, dt->game_menu_img->mlx_img, 0, 0);
@@ -58,6 +55,8 @@ int process_game_status(t_data *dt)
 			dt->levels[dt->active_level].consumables_collected = 0;
 			
 			restore_sprites(dt);
+			if (dt->active_level == 2 || dt->active_level == 4)
+				trigger_all_enemies(dt, MOVING);
 
 			get_init_player_position(dt->map, &dt->player);
 			dt->game_status = GAME_SCREEN;

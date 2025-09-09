@@ -135,24 +135,34 @@ void	show_debug_info(t_data *dt)
 void	show_player_info(t_data *dt)
 {
 	int		x;
+	int		y;
 	void	*mlx;
 	void	*win;
 	//int		(*f)(void*, void*, int, int, int, char*);
 
 	x = 20;
+	y = 20;
 	mlx = dt->mlx_ptr;
 	win = dt->win_ptr;
-	mlx_string_put(mlx, win, x, WINDOW_H - 20, GOLD, "Health: ");
-	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->player.health_level));
+	// mlx_string_put(mlx, win, x, WINDOW_H - 20, GOLD, "Health: ");
+	// mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->player.health_level));
 
-	mlx_string_put(mlx, win, x += 100, WINDOW_H - 20, GOLD, "Weapon: ");
+	mlx_string_put(mlx, win, 245, y, WHITE, "Eat sushi to gain points.");
+	mlx_string_put(mlx, win, 220, y += DBG_MN_NL, WHITE, "Same sushi type activates point combo!");
+	mlx_string_put(mlx, win, 200, y += DBG_MN_NL, SILVER, "Pick a \"Switch Level\" token to switch the level.");
+	
+	mlx_string_put(mlx, win, x, WINDOW_H - 20, GOLD, "Weapon: ");
 	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, dt->player.selected_weapon->description);
-	//mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->weapon->type));
+	// mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->weapon->type));
 
-	mlx_string_put(mlx, win, x += 100, WINDOW_H - 20, GOLD, "Ammo: ");
+	mlx_string_put(mlx, win, x += 115, WINDOW_H - 25, SILVER, "Press [1-5] to switch weapon. [I] to shoot.");
+	mlx_string_put(mlx, win, x += 15, WINDOW_H - 13, WHITE, "Make sure to try the machine gun! ([5])");
+	// mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, dt->player.selected_weapon->description);
+
+	mlx_string_put(mlx, win, x += 290, WINDOW_H - 20, GOLD, "Ammo: ");
 	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->player.selected_weapon->total_ammo));
 
-	mlx_string_put(mlx, win, x += 100, WINDOW_H - 20, GOLD, "Target: ");
+	// mlx_string_put(mlx, win, x += 100, WINDOW_H - 20, GOLD, "Target: ");
 	
 	// char	buffer[32];
 	// snprintf(buffer, sizeof(buffer), "%.2f", dt->sprites[30].orientation_to_player);
@@ -160,8 +170,8 @@ void	show_player_info(t_data *dt)
 
 	// mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->sprites[30].current_frame));
 
-	if (dt->targeted_sprite)
-		mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->targeted_sprite->id));
+// 	if (dt->targeted_sprite)
+// 		mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->targeted_sprite->id));
 }
 
 void	show_level_info(t_data *dt)
@@ -179,16 +189,16 @@ void	show_level_info(t_data *dt)
 	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Level score: ");
 	mlx_string_put(mlx, win, 140, y, GOLD, ft_itoa(dt->levels[dt->active_level].level_score));
 
-	mlx_string_put(mlx, win, 15, y += DBG_MN_NL, GOLD, "Total score: ");
-	mlx_string_put(mlx, win, 140, y, GOLD, ft_itoa(dt->gamescore));
+	mlx_string_put(mlx, win, 15, y += DBG_MN_NL, WHITE, "Summerfest score: ");
+	mlx_string_put(mlx, win, 140, y, WHITE, ft_itoa(dt->gamescore));
 
-	mlx_string_put(mlx, win, 15, y += DBG_MN_NL, GOLD, "Collected goodies: ");
+	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Collected sushi: ");
 	mlx_string_put(mlx, win, 140, y, GOLD, ft_itoa(dt->levels[dt->active_level].consumables_collected));
 
-	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Available goodies: ");
+	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Still available: ");
 	mlx_string_put(mlx, win, 140, y, GOLD, ft_itoa(dt->levels[dt->active_level].level_consumable_count - dt->levels[dt->active_level].consumables_collected));
 
-	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Score combo: ");
+	mlx_string_put(mlx, win, 15, y += DBG_MN_NL, GOLD, "Score combo: ");
 	
 	char buffer[32];
 	snprintf(buffer, sizeof(buffer), "x%.2f", dt->levels[dt->active_level].score_combo);

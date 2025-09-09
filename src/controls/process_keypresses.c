@@ -102,74 +102,41 @@ void	process_keyboard_keypresses(t_data *dt)
 		move_sideways(dt, 1);
 		is_moving_now = 1;
 	}
-
-	if (dt->keys[XK_f])
-	{
-		// dt->test_value_1 -= 10.0f;
-		printf("%f\n", dt->test_value_1);
-	}
-	if (dt->keys[XK_g])
-	{
-		dt->test_value_1 += 0.001f;
-		printf("%f\n", dt->test_value_1);
-	}
-	if (dt->keys[XK_h])
-	{
-		dt->test_value_1 -= 0.001f;
-		printf("%f\n", dt->test_value_1);
-	}
-	if (dt->keys[XK_j])
-	{
-		dt->test_value_2 += 1;
-		printf("%d\n", dt->test_value_2);
-	}
-	if (dt->keys[XK_n])
-	{
-		dt->test_value_2 -= 1;
-		printf("%d\n", dt->test_value_2);
-	}
+	// if (dt->keys[XK_f])
+	// {
+	// 	// dt->test_value_1 -= 10.0f;
+	// 	printf("%f\n", dt->test_value_1);
+	// }
+	// if (dt->keys[XK_g])
+	// {
+	// 	dt->test_value_1 += 0.001f;
+	// 	printf("%f\n", dt->test_value_1);
+	// }
+	// if (dt->keys[XK_h])
+	// {
+	// 	dt->test_value_1 -= 0.001f;
+	// 	printf("%f\n", dt->test_value_1);
+	// }
+	// if (dt->keys[XK_j])
+	// {
+	// 	dt->test_value_2 += 1;
+	// 	printf("%d\n", dt->test_value_2);
+	// }
+	// if (dt->keys[XK_n])
+	// {
+	// 	dt->test_value_2 -= 1;
+	// 	printf("%d\n", dt->test_value_2);
+	// }
 	if (dt->keys[XK_m])
 	{
 		print_level_map(&dt->levels[dt->active_level].map);
 		printf("COLS: %zu\n", dt->levels[dt->active_level].map.map_size_cols);
 		printf("ROWS: %zu\n", dt->levels[dt->active_level].map.map_size_rows);
 	}
-	if (dt->keys[XK_k])
-	{
-		// printf("Sprite count: %zu\n", dt->levels[dt->active_level].sprite_count);
-		// NOTE DL: Why this does not work?
-		// printf("Sprite count: %zu\n", *dt->sprite_count);
-		for (size_t i = 0; i < dt->levels[dt->active_level].sprite_count; i++)
-		{
-			if (dt->sprites[i].type == ENEMY)
-			{
-				dt->sprites[i].state = MOVING;
-				if (dt->sprites[i].distance_to_player < 10)
-					dt->player.health_level--;
-			}
-			// if (dt->player.health_level < 0)
-				// dt->game_status = LEVEL_FINISH;
-			// printf("STATE: %d\n", dt->sprites[i].type);
-		}
-	}
-		if (dt->keys[XK_l])
-	{
-		// printf("Sprite count: %zu\n", dt->levels[dt->active_level].sprite_count);
-		// NOTE DL: Why this does not work?
-		// printf("Sprite count: %zu\n", *dt->sprite_count);
-		for (size_t i = 0; i < dt->levels[dt->active_level].sprite_count; i++)
-		{
-			if (dt->sprites[i].type == ENEMY)
-			{
-				dt->sprites[i].state = IDLE;
-				if (dt->sprites[i].distance_to_player < 10)
-					dt->player.health_level--;
-			}
-			// if (dt->player.health_level < 0)
-				// dt->game_status = LEVEL_FINISH;
-			// printf("STATE: %d\n", dt->sprites[i].type);
-		}
-	}
+	// if (dt->keys[XK_k])
+	// 	trigger_all_enemies(dt, MOVING);
+	// if (dt->keys[XK_l])
+	// 	trigger_all_enemies(dt, IDLE);
 	if (dt->keys[XK_9])
 	{
 		*dt->ambient_light = fmin(1000.0f, *dt->ambient_light * 1.1f);

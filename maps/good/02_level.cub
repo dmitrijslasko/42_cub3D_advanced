@@ -1,14 +1,14 @@
 
 DEF         textures/default-fallback-texture.xpm
 
-SKY         textures/sky/sky_3.xpm
+SKY         textures/sky/sky_night.xpm
 
-F1          textures/sushi-ninja/ground2.xpm
+F1          textures/wolfenstein/color_stone.xpm
 C1          textures/sushi-ninja/pink-window-2.xpm
 
-W01         textures/sushi-ninja/concrete-wall-1.xpm
+W01         textures/sushi-ninja/pink-window-2.xpm
 W02         textures/sushi-ninja/pink-window-1.xpm
-W03 	    textures/sushi-ninja/street-vendor-1.xpm
+W03 	    textures/sushi-ninja/sakura-wallpaper.xpm
 W04 	    textures/sushi-ninja/street-vendor-2.xpm
 W05         textures/sushi-ninja/ground2.xpm
 W06         textures/sushi-ninja/bamboo-wall-2.xpm
@@ -17,8 +17,8 @@ W08         textures/sushi-ninja/brick-wall-1-1.xpm
 W09         textures/sushi-ninja/concrete-wall-1-1.xpm
 W10         textures/sushi-ninja/concrete-wall-1-2.xpm
 
-DOOR_01     textures/doors/door-orange.xpm
-DOOR_01_S   textures/doors/door-side-orange.xpm
+DOOR_01     textures/doors/door-cyan.xpm
+DOOR_01_S   textures/doors/door-side-cyan.xpm
 DOOR_02    	textures/sushi-ninja/shoji-door.xpm
 DOOR_02_S  	textures/sushi-ninja/shoji-door-sides.xpm
 DOOR_03     textures/sushi-ninja/bamboo-wall-2.xpm
@@ -27,23 +27,24 @@ DOOR_03_S   textures/sushi-ninja/bamboo-wall-2.xpm
 ED1    	    textures/doors/door-cyan.xpm
 
 
-119112111111111111112
-1  $12   24F    2 22
-1   92B   23G       8
-9   12    822     D 2
-1   12      |      22
-11-!12      2  2    2
-22 282      2282222 2
-2           G32 F 2A2
-22        C F42   222 
-2P          222     2
-228282 282222    R  2
-55       5          9
-5        5   Q      1
-55       |         A1
-5        5     Q    1
-55 5 5 5 5         N1
-55555555551-111-111-111
-1        1   1   1    1
-1        1   1   1    1
-11111111111111111111111
+221212121212121212122
+2      P2P         B2
+1 2    2    g222222 1
+2 222-222         2h2
+1 2A          222 2 1
+2 222222e    22F2 2 2
+1         $   2H  2 1 333
+2 2           22222 2 3 333333
+1 2  222            1 3     P3
+2 2 G C2    g222-22 223 333 3
+1 22-222              | 3 3 P3
+2G    C22   2222222 22333 3 3
+1e  2222P2 2 2      13A |   $3
+2     $2 2 2 2 2222 23A3333 3
+1  22222 2D2 2 2F22 13A33   P3
+2     P2 2 2 2 2H 2 2333  3 3
+1 222222 2 2 2 22 2 1    3  P3
+2 2B2C2  2 2 2    2 2223333 3
+1 2 2 2  2 2 222222  |      P3
+2e       2N2       g222333333
+221212121212121212122

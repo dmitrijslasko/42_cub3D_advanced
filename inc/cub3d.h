@@ -771,5 +771,7 @@ int flash_color(t_data *dt, int color);
 
 uint32_t reduce_saturation(uint32_t color, float factor);
 
+int trigger_all_enemies(t_data *dt, int new_state);
+
 
 #endif

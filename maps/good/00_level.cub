@@ -21,18 +21,18 @@ DOOR_01     textures/doors/door-orange.xpm
 DOOR_01_S   textures/doors/door-side-orange.xpm
 DOOR_02    	textures/sushi-ninja/shoji-door.xpm
 DOOR_02_S  	textures/sushi-ninja/shoji-door-sides.xpm
-DOOR_03     textures/sushi-ninja/bamboo-wall-2.xpm
-DOOR_03_S   textures/sushi-ninja/bamboo-wall-2.xpm
+DOOR_03     textures/doors/door-grey.xpm
+DOOR_03_S   textures/doors/door-side-grey.xpm
 
 ED1    	    textures/doors/door-cyan.xpm
 
 
-119112111111111111112
-1S  $12   24F    2 22
-1   92B   23G       8
-9   12    822     D 2
-1   12      |      22
-11-!12      2  2    2
+11911211111111!111112
+1S  $12   24F  $ 2 22
+1   92B   23G    Q  8
+9   12    822 Q  D 2
+1   12      ]      22
+11=!12      2  2    2
 22 282      2282222 2
 2O          G32 F 2A2
 22        C F42   222 
@@ -40,14 +40,14 @@ ED1    	    textures/doors/door-cyan.xpm
 228282 282222    R  2
 55       5          9
 5O       5   Q      1
-55       |         A1
-5O       5     Q    1
-55P5P5P5P5          1
-55555555551-111-111-111
-1        1   1   1    1
-1        1 U 1   1    1
-111111111111111111111 1
-666666666666666666666 1
-6A         6          1
-6666666666   6666666666
+55       ]         A1
+5O       5    T     !
+55P5$5P5P5          1
+55555555551=111=111-111
+1TRTTQ   1   1   1    1
+!     B  ]   1   1    1
+11111111111U1111!1111 1
+666666666661666666666 1
+6$A   6               1
+6666     66666666666666
 66666666666666666666666

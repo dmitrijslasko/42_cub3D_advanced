@@ -210,7 +210,6 @@ int	render_frame(void *param)
 	if (process_game_status(dt) != GAME_SCREEN)
 		return (dt->game_status);
 
-		
 	process_keyboard_keypresses(dt);
 
 	animate_doors(dt);
