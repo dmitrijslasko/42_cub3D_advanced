@@ -18,9 +18,9 @@ int	precalculate_trig_tables(t_data *dt)
 	float	angle_rad;
 	size_t	i;
 
+	print_separator_default();
+	printf("Precalculating trig tables (%d values)...", PRECALCULATED_TRIG);
 	i = 0;
-	printf("Precalculating sin and cos tables (%d values)...", \
-			PRECALCULATED_TRIG);
 	while (i < PRECALCULATED_TRIG)
 	{
 		angle_deg = (float)i / TRIG_PRECISION;

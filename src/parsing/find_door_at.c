@@ -15,12 +15,27 @@
 t_door	*find_door_at(t_data *dt, int x, int y)
 {
 	size_t	i;
+	t_door *doors = dt->doors;
 
 	i = 0;
 	while (i < dt->door_count)
 	{
-		if (dt->doors[i].cell_x == x && dt->doors[i].cell_y == y)
-			return (&dt->doors[i]);
+		if (doors[i].cell_x == x && doors[i].cell_y == y)
+			return (&doors[i]);
+		i++;
+	}
+	return (NULL);
+}
+
+t_sprite	*find_sprite_at(t_data *dt, int x, int y)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < dt->sprite_count)
+	{
+		if ((int)dt->sprites[i].pos.x == x && (int)dt->sprites[i].pos.y == y)
+			return (&dt->sprites[i]);
 		i++;
 	}
 	return (NULL);

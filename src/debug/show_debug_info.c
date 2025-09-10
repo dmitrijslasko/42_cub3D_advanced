@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:33:06 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/23 18:44:00 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/09/09 15:20:54 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,15 @@ void	print_time_stats(t_data *dt, void *mlx, void *win, int *y)
 	int		(*f)(void*, void*, int, int, int, char*);
 
 	f = mlx_string_put;
-	snprintf(buffer, sizeof(buffer), "%ld", dt->time.last_time);
+	snprintf(buffer, sizeof(buffer), "%ld", dt->runtime_stats.last_time);
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL_2, UI_CLR_1, "Current time:");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
 	snprintf(buffer, sizeof(buffer), "%ld",
-		(dt->time.last_time - dt->time.start_time) / 1000);
+		(dt->runtime_stats.last_time - dt->runtime_stats.start_time) / 1000);
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL_2, UI_CLR_1, "Elapsed time (s):");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_2, "Frames drawn:");
-	f(mlx, win, DBG_2_X, *y, UI_CLR_2, ft_itoa(dt->frames_drawn_count));
+	f(mlx, win, DBG_2_X, *y, UI_CLR_2, ft_itoa(dt->runtime_stats.frames_drawn_count));
 }
 
 void	print_plane_stats(t_data *dt, void *mlx, void *win, int *y)
@@ -120,8 +120,8 @@ void	show_debug_info(t_data *dt)
 	y = 0;
 	mlx = dt->mlx_ptr;
 	win = dt->win_ptr;
-	// print_window_info(dt, mlx, win, &y);
-	// print_plane_stats(dt, mlx, win, &y);
+	print_window_info(dt, mlx, win, &y);
+	print_plane_stats(dt, mlx, win, &y);
 	print_player_position(dt, mlx, win, &y);
 	print_obstacle_info(dt, mlx, win, &y);
 	print_cell_info(dt, mlx, win, &y);
@@ -135,23 +135,73 @@ void	show_debug_info(t_data *dt)
 void	show_player_info(t_data *dt)
 {
 	int		x;
+	int		y;
 	void	*mlx;
 	void	*win;
 	//int		(*f)(void*, void*, int, int, int, char*);
 
 	x = 20;
+	y = 20;
 	mlx = dt->mlx_ptr;
 	win = dt->win_ptr;
-	mlx_string_put(mlx, win, x, WINDOW_H - 20, GOLD, "Health: ");
-	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->player.health_level));
+	// mlx_string_put(mlx, win, x, WINDOW_H - 20, GOLD, "Health: ");
+	// mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->player.health_level));
 
-	mlx_string_put(mlx, win, x += 100, WINDOW_H - 20, GOLD, "Weapon: ");
+	mlx_string_put(mlx, win, 245, y, WHITE, "Eat sushi to gain points.");
+	mlx_string_put(mlx, win, 220, y += DBG_MN_NL, WHITE, "Same sushi type activates point combo!");
+	mlx_string_put(mlx, win, 200, y += DBG_MN_NL, SILVER, "Pick a \"Switch Level\" token to switch the level.");
+
+	mlx_string_put(mlx, win, x, WINDOW_H - 20, GOLD, "Weapon: ");
 	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, dt->player.selected_weapon->description);
-	//mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->weapon->type));
+	// mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->weapon->type));
 
-	mlx_string_put(mlx, win, x += 100, WINDOW_H - 20, GOLD, "Ammo: ");
+	mlx_string_put(mlx, win, x += 110, WINDOW_H - 25, SILVER, "[1-5] to switch weapon. [rCTRL / R] to shoot.");
+	mlx_string_put(mlx, win, x += 15, WINDOW_H - 13, WHITE, "Make sure to try the machine gun! ([5])");
+	// mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, dt->player.selected_weapon->description);
+
+	mlx_string_put(mlx, win, x += 290, WINDOW_H - 20, GOLD, "Ammo: ");
 	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->player.selected_weapon->total_ammo));
 
-	mlx_string_put(mlx, win, x += 100, WINDOW_H - 20, GOLD, "Is moving: ");
-	mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->player.is_moving));
+	// mlx_string_put(mlx, win, x += 100, WINDOW_H - 20, GOLD, "Target: ");
+
+	// char	buffer[32];
+	// snprintf(buffer, sizeof(buffer), "%.2f", dt->sprites[30].orientation_to_player);
+	// mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, buffer);
+
+	// mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->sprites[30].current_frame));
+
+// 	if (dt->targeted_sprite)
+// 		mlx_string_put(mlx, win, x += 65, WINDOW_H - 20, GOLD, ft_itoa(dt->targeted_sprite->id));
+}
+
+void	show_level_info(t_data *dt)
+{
+	void	*mlx;
+	void	*win;
+
+	mlx = dt->mlx_ptr;
+	win = dt->win_ptr;
+	size_t y = 20;
+
+	mlx_string_put(mlx, win, 15, y, GOLD, "Active level: ");
+	mlx_string_put(mlx, win, 140, y, GOLD, ft_itoa(dt->active_level + 1));
+
+	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Level score: ");
+	mlx_string_put(mlx, win, 140, y, GOLD, ft_itoa(dt->levels[dt->active_level].level_score));
+
+	mlx_string_put(mlx, win, 15, y += DBG_MN_NL, WHITE, "Game total: ");
+	mlx_string_put(mlx, win, 140, y, WHITE, ft_itoa(dt->gamescore));
+
+	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Consumed sushi: ");
+	mlx_string_put(mlx, win, 140, y, GOLD, ft_itoa(dt->levels[dt->active_level].consumables_collected));
+
+	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Still available: ");
+	mlx_string_put(mlx, win, 140, y, GOLD, ft_itoa(dt->levels[dt->active_level].level_consumable_count));
+
+	mlx_string_put(mlx, win, 15, y += DBG_MN_NL, GOLD, "Score combo: ");
+
+	char buffer[32];
+	snprintf(buffer, sizeof(buffer), "x%.2f", dt->levels[dt->active_level].score_combo);
+	mlx_string_put(mlx, win, 140, y, GOLD, buffer);
+
 }

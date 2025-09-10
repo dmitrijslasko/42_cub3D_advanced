@@ -17,6 +17,7 @@ bool	check_mapfile_extension(char *file, char *file_type)
 	size_t	len_file;
 	size_t	len_type;
 
+	printf("Checking mapfile extension...\n");
 	len_file = ft_strlen(file);
 	len_type = ft_strlen(file_type);
 	if (len_file < len_type || \

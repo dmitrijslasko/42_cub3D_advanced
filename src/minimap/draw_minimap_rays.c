@@ -21,7 +21,7 @@ int	draw_minimap_rays(t_data *dt, int is_direction_vector)
 		dt->minimap_img->width / 2,
 		dt->minimap_img->height / 2);
 	if (is_direction_vector)
-		draw_minimap_ray(dt, player_coor, dt->player.direction_vector,
+		draw_minimap_ray(dt, player_coor, dt->player.orientation_vector,
 			MINIMAP_DIRECTION_RAY_COLOR);
 	else
 	{

@@ -33,7 +33,7 @@ bool	copy_map_row(t_map *map, int row, char *line)
 		c = line[col];
 		 if (!check_valid_character_map(c))
 		 	return (EXIT_FAILURE);
-		map->map_data[row][col].cell_char = c;
+		map->map_data[row][col].map_char = c;
 		col++;
 	}
 	return (EXIT_SUCCESS);
@@ -44,12 +44,12 @@ void	parse_map(t_map *map, int fd, char **line)
 	size_t	count_row;
 
 	count_row = 0;
-	//printf("NEXT LINE: %s\n", *line);
+
 	while (*line && line_is_empty(*line) == false)
 	{
 		copy_map_row(map, count_row, *line);
 		*line = free_line_get_next(*line, fd);
-		//printf("NEXT LINE: %s\n", *line);
+		printf("NEXT LINE: %s\n", *line);
 		count_row++;
 	}
 	free_line_get_next(*line, -1);

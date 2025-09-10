@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:05:46 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/16 19:19:13 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 19:29:23 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ int	draw_minimap_elements(t_data *dt)
 	t_draw_func	draw;
 
 	row = 0;
-	while (row < dt->map.map_size_rows)
+	while (row < dt->map->map_size_rows)
 	{
 		col = 0;
-		while (col < dt->map.map_size_cols)
+		while (col < dt->map->map_size_cols)
 		{
-			tile = dt->map.map_data[row][col].cell_char;
+			tile = dt->map->map_data[row][col].map_char;
 			draw = get_draw_func_for_tile(tile);
 			if (draw)
 				draw(dt, col, row);
@@ -59,18 +59,24 @@ int	draw_minimap_base_img(t_data *dt)
 	t_coor	bottom_right;
 
 	printf(TXT_YELLOW ">>> PREPARING MINIMAP BASE MAP\n" TXT_RESET);
+	
 	dt->minimap_base_img = protected_malloc(sizeof(t_img), dt);
+
 	setup_img(dt, dt->minimap_base_img,
-		dt->map.map_size_cols * MINIMAP_GRID_SIZE,
-		dt->map.map_size_rows * MINIMAP_GRID_SIZE);
+		dt->map->map_size_cols * MINIMAP_GRID_SIZE,
+		dt->map->map_size_rows * MINIMAP_GRID_SIZE);
+	
 	set_coor_values(&top_left, 0, 0);
 	set_coor_values(&bottom_right, dt->minimap_base_img->width,
 		dt->minimap_base_img->height);
+
 	draw_rectangle(dt->minimap_base_img, top_left, bottom_right,
 		MINIMAP_BACKGROUND_COLOR);
 	draw_minimap_elements(dt);
+	
 	if (MINIMAP_GRID_ENABLE)
 		draw_minimap_grid(dt);
 	printf("Finished rendering the minimap base image!\n");
+
 	return (EXIT_SUCCESS);
 }

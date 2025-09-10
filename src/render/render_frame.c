@@ -6,62 +6,11 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:09:21 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/23 18:33:57 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/24 18:59:38 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	update_prompt_message(t_data *dt)
-{
-	t_coor	cell_ahead;
-
-	cell_ahead = get_cell_ahead(dt);
-	dt->player.cell_type_ahead = get_cell_type(&dt->map, &cell_ahead);
-	if (ft_strchr(DOOR_TYPES, dt->player.cell_type_ahead))
-		dt->view->show_door_open_message = 1;
-	else
-		dt->view->show_door_open_message = 0;
-	return (EXIT_SUCCESS);
-}
-
-static int	render_minimap_and_ui(t_data *dt)
-{
-	if (dt->view->show_minimap)
-		put_img_to_img(dt->final_frame_img, dt->minimap_img, MINIMAP_OFFSET_X, MINIMAP_OFFSET_Y);
-	render_ui(dt);
-	return (EXIT_SUCCESS);
-}
-
-void	bob_walls(t_data *dt)
-{
-		float speed;
-		float amplitude;
-		int y_offset;
-		if (dt->player.is_moving == 1)
-		{
-			amplitude = 2.0f;
-			speed = 0.008f;
-			y_offset = amplitude * sin((dt->time.last_time - dt->time.start_time) * speed); // total_time in seconds, or use a step counter
-			dt->view->screen_center_y += y_offset;
-		}
-
-}
-
-int	bob_weapon(t_data *dt)
-{
-	float speed;
-	int amplitude;
-	int y_offset;
-
-	speed = 0.004f; // higher = faster oscillation (tweak to taste)
-	if (dt->player.move_speed_multiplier == 1)
-		amplitude = 10;
-	else
-		amplitude = 2;
-	y_offset = amplitude * sin((dt->time.last_time - dt->time.start_time) * speed); // total_time in seconds, or use a step counter;
-	return (y_offset);
-}
 
 int print_out_sprite_info(t_data *dt)
 {
@@ -79,67 +28,253 @@ int print_out_sprite_info(t_data *dt)
 	}
 }
 
+int animate_weapon(t_data *dt)
+{
+	long 	now;
+	t_weapon *weapon;
+
+	weapon = dt->player.selected_weapon;
+
+	debug_print("Animating weapon...");
+	if (dt->weapon_is_animating == 1)
+	{
+		if (dt->targeted_sprite && weapon->total_ammo > 0)
+		{
+			if (dt->player.selected_weapon->type == WEAPON_MACHINE_GUN || dt->weapon_current_frame == 0)
+			{
+				if (dt->targeted_sprite->type == ENEMY)
+				{
+					dt->targeted_sprite->state = DYING;
+					if (dt->targeted_sprite->distance_to_player < 5)
+						flash_color(dt, RED);
+					dt->targeted_sprite->current_frame = 0;
+				}
+				else if (dt->targeted_sprite->type == PICKUP)
+				{
+					dt->targeted_sprite->is_hidden = 1;
+					play_sound(BUBBLE_POP_SOUND);
+					dt->levels[dt->active_level].level_consumable_count--;
+				}
+			}
+		}
+		now = dt->runtime_stats.last_time;
+		if (now - dt->weapon_last_frame_time > (1000 / FPS) * 2)
+		{
+			if (dt->weapon_current_frame == 2)
+			{
+				if (dt->player.selected_weapon->type > 1)
+					dt->player.selected_weapon->total_ammo = ft_max(0, weapon->total_ammo - 1);
+				dt->rounds_fired++;
+				if (dt->player.selected_weapon->type == WEAPON_MACHINE_GUN)
+					*dt->ambient_light = 1000 - (*dt->ambient_light == 1000.0f) * 1000.0f;
+			}
+			dt->weapon_current_frame++;
+			if (dt->weapon_current_frame == 5 || (dt->weapon_current_frame == 1 && weapon->total_ammo == 0))
+			{
+				*dt->ambient_light = 10.0f;
+				dt->weapon_is_animating = 0;
+				dt->weapon_current_frame = 0;
+				dt->rounds_fired = 0;
+			}
+			dt->weapon_last_frame_time = now;
+		}
+	}
+	return (EXIT_SUCCESS);
+}
+
+int animate_doors(t_data *dt)
+{
+    int i;
+    t_door *door;
+	int		door_count;
+
+	debug_print("Animating doors...\n");
+    i = 0;
+    while (i < dt->door_count)
+    {
+		door = &dt->doors[i];
+
+        if (door->is_opening)
+        {
+            door->open_progress += door->speed;
+            if (door->open_progress >= 1.0f)
+            {
+                door->open_progress = 1.0f;
+                door->is_opening = 0;
+                door->opening_finish_time = dt->runtime_stats.last_time;
+            }
+        }
+        else if (dt->runtime_stats.last_time - door->opening_finish_time > DOOR_AUTOCLOSURE_TIME_MS)
+        {
+			if (door->cell_x == (int) dt->player.pos.x && door->cell_y == (int) dt->player.pos.y)
+			{
+				i++;
+				continue ;
+			}
+            if (door->open_progress > 0.0f)
+            {
+                door->open_progress -= door->speed;
+                if (door->open_progress < 0.0f)
+                    door->open_progress = 0.0f;
+            }
+        }
+        i++;
+    }
+	// printf("Finished animating doors...\n");
+    return (EXIT_SUCCESS);
+}
+
+int animate_moving(t_data *dt, t_sprite *sprite)
+{
+	t_x_y	*pos;
+	float	*speed;
+	float	distance_to_wall;
+	t_x_y test_pos;
+	char cell_type;
+
+	speed = &sprite->speed;
+	pos = &sprite->pos;
+		
+	distance_to_wall = 0.5f * (1 - 2 * (*speed < 0));
+
+	test_pos.x = pos->x;
+	test_pos.y = pos->y;
+
+	if (sprite->orientation == 0.0f || sprite->orientation == 180.0f)
+		test_pos.x += *speed + distance_to_wall;
+	
+	if (sprite->orientation == 90.0f || sprite->orientation == 270.0f)
+		test_pos.y += *speed + distance_to_wall;
+
+	cell_type = get_cell_by_coordinates_float(dt->map, test_pos.y, test_pos.x)->map_char;
+
+	if (ft_strchr(WALL_TYPES, cell_type) || ft_strchr(DOOR_TYPES, cell_type))
+	{
+		sprite->orientation += 180.0f;
+		if (sprite->orientation >= 360.0f)
+			sprite->orientation -= 360.f;
+		*speed *= -1;
+	}
+	else
+	{
+		if (sprite->orientation == 0.0f || sprite->orientation == 180.0f)
+			pos->x += *speed;
+		if (sprite->orientation == 90.0f || sprite->orientation == 270.0f)
+			pos->y += *speed;
+	}
+}
+
+int animate_sprites(t_data *dt)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < dt->sprite_count)
+	{
+		if (!ft_strchr(ENEMY_SPRITES, dt->sprites[i].map_char) || dt->sprites[i].state == DYING)
+		{
+			i++;
+			continue ;
+		}
+		if (dt->sprites[i].state == MOVING)
+			animate_moving(dt, &dt->sprites[i]);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	render_frame(void *param)
 {
 	t_data		*dt;
 	long		current_time;
 	int 		y_offset;
 
-	dt = (t_data *)param;
+	dt = (t_data *) param;
 
 	reset_mouse_position(dt);
+
 	current_time = get_current_time_in_ms();
-	dt->time.delta_time = current_time - dt->time.last_time;
-	if (dt->time.delta_time < (1000 / FPS))
+	dt->runtime_stats.delta_time = current_time - dt->runtime_stats.last_time;
+	if (dt->runtime_stats.delta_time < (1000 / FPS))
 	{
 		my_sleep();
 		return (0);
 	}
-	dt->time.last_time = current_time;
-	if (dt->weapon_is_animating == 1)
-	{
-		long now = get_current_time_in_ms();
-		if (now - dt->weapon_last_frame_time > (1000 / FPS) * 4)
-		{
-			dt->weapon_current_frame++;
-			dt->weapon_last_frame_time = now;
-			if (dt->weapon_current_frame == 5)
-			{
-				dt->weapon_is_animating = 0;
-				dt->weapon_current_frame = 0;
-			}
-		}
-	}
+	dt->runtime_stats.last_time = current_time;
+	dt->runtime_stats.frames_drawn_count++;
 
-	process_keypresses(dt);
+	dt->sprite_pulse_coef += dt->sprite_pulse_step;
+	if (dt->sprite_pulse_coef <= -10 || dt->sprite_pulse_coef >= 10)
+		dt->sprite_pulse_step *= -1;
+	
+	if (process_game_status(dt) != GAME_SCREEN)
+		return (dt->game_status);
+
+	process_keyboard_keypresses(dt);
+
+	animate_doors(dt);
+
 	calculate_all_rays(dt);
+
 	render_3d_scene(dt);
+	
+	// for (int i = 0; i < 4; i++)
+	// {
+	// 	for (int j = 0; j < dt->levels[i].sprite_count; j++)
+	// 		printf("%f\n", dt->levels[i].sprites[i].speed);
+	// 	print_separator_default();
+	// }
+
 	put_img_to_img(dt->final_frame_img, dt->raycasting_scene_img, 0, 0);
+
 	if (RENDER_SPRITES)
+	{
+		animate_sprites(dt);
 		render_all_sprites(dt);
+	}
+	
+	// show minimap
 	if (dt->view->show_minimap)
 		update_minimap(dt);
-	update_prompt_message(dt);
-	// put_img_to_img(dt->final_frame_img, dt->ui_img, 100, 100);
 	render_minimap_and_ui(dt);
+
+	// weapon recoil animation (basic)
+	if (dt->weapon_is_animating && dt->view->screen_center_y - WINDOW_H/2 < 10)
+		dt->view->screen_center_y += 1;
+	else if (dt->view->screen_center_y > WINDOW_H / 2)
+		dt->view->screen_center_y -= 4;
+	
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr,dt->final_frame_img->mlx_img, 0, 0);
+	
 	show_debug_info(dt);
  	show_player_info(dt);
-	if (dt->view->show_door_open_message)
-	{
-		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, "Press [ / ] to open the door");
-		// render_ui_message(dt);
-	}
+	show_level_info(dt);
 
+	process_sprite_pickups(dt);
+
+	// render_ui_message(dt);
+	update_prompt_message(dt);
+	if (dt->view->show_door_open_message)
+		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, OPEN_DOOR_PROMPT);
+	
 	y_offset = 0;
 	if (ENABLE_BOBBING)
 	{
 		bob_walls(dt);
 		y_offset = bob_weapon(dt);
 	}
-	// render weapon
-	put_img_to_img(dt->final_frame_img, &dt->weapon_img[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
-	dt->frames_drawn_count++;
-	print_out_sprite_info(dt);
+
+	// render weapon	
+	if (dt->player.selected_weapon->type != WEAPON_NO_WEAPON)
+	{
+		animate_weapon(dt);
+		put_img_to_img(dt->final_frame_img, &dt->weapon[dt->player.selected_weapon->type].frames[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
+		if (dt->weapon_current_frame == 3 && dt->rounds_fired < dt->player.selected_weapon->rounds_fired)
+			dt->weapon_current_frame--;
+	}
+
+	// *dt->ambient_light = 0.0f;
+	// print_out_sprite_info(dt);
+
 	return (EXIT_SUCCESS);
 }

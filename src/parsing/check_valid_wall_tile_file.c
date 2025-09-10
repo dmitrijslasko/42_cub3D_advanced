@@ -58,7 +58,8 @@ bool	check_textures_are_valid(char *file)
 {
 	int	fd;
 	int	ret;
-
+	
+	printf("Checking mapfile textures...\n");
 	fd = ft_open(file);
 	if (fd <= 0)
 		return (1);

@@ -39,6 +39,9 @@
 		"vector": "c",
 		"iterator": "c",
 		"format": "c",
-		"cstdint": "c"
+		"cstdint": "c",
+		"variant": "c",
+		"messages.h": "c",
+		"sprites.h": "c"
 	}
 }

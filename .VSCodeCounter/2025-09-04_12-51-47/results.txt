@@ -1,0 +1,180 @@
+Date : 2025-09-04 12:51:47
+Directory : /home/parallels/Desktop/cub3D_advanced/src
+Total : 142 files,  4682 codes, 1854 comments, 1046 blanks, all 7582 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C        |        142 |      4,682 |      1,854 |      1,046 |      7,582 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                   | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                      |        142 |      4,682 |      1,854 |      1,046 |      7,582 |
+| . (Files)                                                                              |          5 |        245 |         74 |         76 |        395 |
+| controls                                                                               |          9 |        500 |        135 |         75 |        710 |
+| debug                                                                                  |          2 |        208 |         31 |         39 |        278 |
+| drawing                                                                                |          9 |        355 |        201 |         68 |        624 |
+| free                                                                                   |          8 |        120 |         98 |         32 |        250 |
+| minimap                                                                                |          6 |        192 |         72 |         38 |        302 |
+| parsing                                                                                |         27 |        823 |        332 |        154 |      1,309 |
+| raycasting                                                                             |         20 |        411 |        229 |         93 |        733 |
+| render                                                                                 |         24 |      1,044 |        289 |        256 |      1,589 |
+| render (Files)                                                                         |         13 |        672 |        166 |        159 |        997 |
+| render/sprites                                                                         |         10 |        339 |        112 |         91 |        542 |
+| render/wall_shading                                                                    |          1 |         33 |         11 |          6 |         50 |
+| setup                                                                                  |         19 |        600 |        250 |        156 |      1,006 |
+| utils                                                                                  |         13 |        184 |        143 |         59 |        386 |
++----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                               | language | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| /home/parallels/Desktop/cub3D_advanced/src/check_and_parse_args.c                      | C        |         19 |         24 |          5 |         48 |
+| /home/parallels/Desktop/cub3D_advanced/src/controls/map_position_is_walkable.c         | C        |         88 |         15 |         11 |        114 |
+| /home/parallels/Desktop/cub3D_advanced/src/controls/move_forward_backward.c            | C        |         26 |         11 |          4 |         41 |
+| /home/parallels/Desktop/cub3D_advanced/src/controls/move_sideways.c                    | C        |         26 |         12 |          4 |         42 |
+| /home/parallels/Desktop/cub3D_advanced/src/controls/process_keypresses.c               | C        |        120 |         20 |         16 |        156 |
+| /home/parallels/Desktop/cub3D_advanced/src/controls/reset_mouse_position.c             | C        |         28 |         20 |          5 |         53 |
+| /home/parallels/Desktop/cub3D_advanced/src/controls/rotate_player.c                    | C        |         21 |         14 |          6 |         41 |
+| /home/parallels/Desktop/cub3D_advanced/src/controls/rotate_vector.c                    | C        |         31 |         15 |          6 |         52 |
+| /home/parallels/Desktop/cub3D_advanced/src/controls/set_keyboard_hooks.c               | C        |         72 |         11 |          9 |         92 |
+| /home/parallels/Desktop/cub3D_advanced/src/controls/set_mouse_hooks.c                  | C        |         88 |         17 |         14 |        119 |
+| /home/parallels/Desktop/cub3D_advanced/src/debug/show_debug_info.c                     | C        |        148 |         20 |         29 |        197 |
+| /home/parallels/Desktop/cub3D_advanced/src/debug/show_debug_info_aux.c                 | C        |         60 |         11 |         10 |         81 |
+| /home/parallels/Desktop/cub3D_advanced/src/drawing/draw_background.c                   | C        |         21 |         11 |          4 |         36 |
+| /home/parallels/Desktop/cub3D_advanced/src/drawing/draw_circle.c                       | C        |        104 |         12 |         17 |        133 |
+| /home/parallels/Desktop/cub3D_advanced/src/drawing/draw_grid.c                         | C        |         22 |         11 |          6 |         39 |
+| /home/parallels/Desktop/cub3D_advanced/src/drawing/draw_lines.c                        | C        |         51 |         65 |         10 |        126 |
+| /home/parallels/Desktop/cub3D_advanced/src/drawing/draw_rectangle.c                    | C        |         13 |         11 |          4 |         28 |
+| /home/parallels/Desktop/cub3D_advanced/src/drawing/draw_square.c                       | C        |         33 |         11 |          6 |         50 |
+| /home/parallels/Desktop/cub3D_advanced/src/drawing/draw_vector.c                       | C        |         25 |         11 |          4 |         40 |
+| /home/parallels/Desktop/cub3D_advanced/src/drawing/img_pix_put.c                       | C        |          7 |         58 |          9 |         74 |
+| /home/parallels/Desktop/cub3D_advanced/src/drawing/put_img_to_img.c                    | C        |         79 |         11 |          8 |         98 |
+| /home/parallels/Desktop/cub3D_advanced/src/free/free.c                                 | C        |         19 |         11 |          5 |         35 |
+| /home/parallels/Desktop/cub3D_advanced/src/free/free_dt.c                              | C        |          4 |         21 |          5 |         30 |
+| /home/parallels/Desktop/cub3D_advanced/src/free/free_graphic.c                         | C        |         22 |         11 |          4 |         37 |
+| /home/parallels/Desktop/cub3D_advanced/src/free/free_img.c                             | C        |          9 |         11 |          3 |         23 |
+| /home/parallels/Desktop/cub3D_advanced/src/free/free_texture.c                         | C        |         16 |         11 |          3 |         30 |
+| /home/parallels/Desktop/cub3D_advanced/src/free/free_texture_sprite.c                  | C        |         21 |         11 |          4 |         36 |
+| /home/parallels/Desktop/cub3D_advanced/src/free/free_wall_tile_texture.c               | C        |         12 |         11 |          4 |         27 |
+| /home/parallels/Desktop/cub3D_advanced/src/free/protected_malloc.c                     | C        |         17 |         11 |          4 |         32 |
+| /home/parallels/Desktop/cub3D_advanced/src/main.c                                      | C        |        124 |         36 |         43 |        203 |
+| /home/parallels/Desktop/cub3D_advanced/src/mimic_fullscreen.c                          | C        |         20 |          0 |          4 |         24 |
+| /home/parallels/Desktop/cub3D_advanced/src/minimap/draw_minimap_base_img.c             | C        |         58 |         11 |         10 |         79 |
+| /home/parallels/Desktop/cub3D_advanced/src/minimap/draw_minimap_elements.c             | C        |         57 |         11 |         12 |         80 |
+| /home/parallels/Desktop/cub3D_advanced/src/minimap/draw_minimap_player.c               | C        |         19 |         17 |          5 |         41 |
+| /home/parallels/Desktop/cub3D_advanced/src/minimap/draw_minimap_rays.c                 | C        |         24 |         11 |          4 |         39 |
+| /home/parallels/Desktop/cub3D_advanced/src/minimap/set_coor_values.c                   | C        |          7 |         11 |          3 |         21 |
+| /home/parallels/Desktop/cub3D_advanced/src/minimap/update_minimap.c                    | C        |         27 |         11 |          4 |         42 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/check_all_wall_tile.c               | C        |         24 |         13 |          4 |         41 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/check_color.c                       | C        |         11 |         11 |          4 |         26 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/check_only_number.c                 | C        |         12 |         11 |          4 |         27 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/check_type_file.c                   | C        |         13 |         11 |          4 |         28 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/check_valid_color.c                 | C        |         25 |         11 |          4 |         40 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/check_valid_color_or_texture.c      | C        |         17 |         11 |          4 |         32 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/check_valid_identifier_texture.c    | C        |         32 |         11 |          6 |         49 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/check_valid_map.c                   | C        |         37 |         11 |          7 |         55 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/check_valid_player.c                | C        |         11 |         11 |          4 |         26 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/check_valid_wall_tile_file.c        | C        |         51 |         11 |          8 |         70 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/count_elements.c                    | C        |         58 |         11 |          9 |         78 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/create_map_data.c                   | C        |         37 |         11 |          5 |         53 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/find_door_at.c                      | C        |         26 |         13 |          5 |         44 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/free_get_next_line.c                | C        |         12 |         11 |          4 |         27 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/ft_open.c                           | C        |          9 |         11 |          4 |         24 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/get_init_position.c                 | C        |         50 |         11 |          6 |         67 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/get_value_file.c                    | C        |         91 |         26 |         13 |        130 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/get_value_map_data.c                | C        |         37 |         13 |          7 |         57 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/is_empty_line.c                     | C        |         14 |         11 |          4 |         29 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/parse_map_file.c                    | C        |         17 |         13 |          5 |         35 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/print_map.c                         | C        |         23 |         11 |          4 |         38 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/remove_new_line.c                   | C        |         10 |         11 |          4 |         25 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/set_color.c                         | C        |         44 |         11 |          7 |         62 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/set_color_or_texture.c              | C        |         28 |         18 |          5 |         51 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/set_texture.c                       | C        |          0 |         16 |          4 |         20 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/size_map_data.c                     | C        |         62 |         11 |          9 |         82 |
+| /home/parallels/Desktop/cub3D_advanced/src/parsing/split_special.c                     | C        |         72 |         11 |         10 |         93 |
+| /home/parallels/Desktop/cub3D_advanced/src/print_out_texture_lookup_table.c            | C        |         19 |          0 |          2 |         21 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/calculate_all_rays.c             | C        |         23 |         11 |          4 |         38 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/calculate_ray_distance.c         | C        |         21 |         11 |          7 |         39 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/check_hit_wall.c                 | C        |         33 |         13 |          7 |         53 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/finish_ray_casting.c             | C        |         10 |         12 |          3 |         25 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/fix_fish_eye_effect.c            | C        |         16 |         17 |          6 |         39 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/get_dist_wall.c                  | C        |         40 |         11 |          6 |         57 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/get_wall_percentage.c            | C        |         13 |         11 |          4 |         28 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/handle_door_hit.c                | C        |         20 |         11 |          4 |         35 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/init_raycasting.c                | C        |          8 |         11 |          3 |         22 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/init_rays.c                      | C        |         28 |         11 |          4 |         43 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/print_single_ray_info.c          | C        |         15 |         11 |          3 |         29 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/ray_hits_door.c                  | C        |         48 |         11 |          7 |         66 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/run_dda_loop.c                   | C        |         38 |         11 |          6 |         55 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/set_delt_dist.c                  | C        |          6 |         11 |          3 |         20 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/set_side_dist.c                  | C        |         16 |         11 |          4 |         31 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/set_step.c                       | C        |         12 |         11 |          3 |         26 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/step_and_set_side.c              | C        |         16 |         11 |          3 |         30 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/type_wall.c                      | C        |         16 |         11 |          4 |         31 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/update_ray_hit_point.c           | C        |         23 |         11 |          8 |         42 |
+| /home/parallels/Desktop/cub3D_advanced/src/raycasting/update_single_ray.c              | C        |          9 |         11 |          4 |         24 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/calc_texture_coor.c                  | C        |         13 |         11 |          4 |         28 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/create_color_rgb.c                   | C        |          9 |         12 |          4 |         25 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/draw_ceiling_floor.c                 | C        |         40 |         17 |         14 |         71 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/draw_sky.c                           | C        |         78 |         11 |         17 |        106 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/draw_textured_ceiling.c              | C        |         41 |          6 |         13 |         60 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/draw_textured_floor.c                | C        |         44 |          6 |         14 |         64 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/get_color_render3d.c                 | C        |        110 |         13 |         17 |        140 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/render_3d_each_ray.c                 | C        |         45 |         15 |          8 |         68 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/render_3d_scene.c                    | C        |         24 |          4 |          8 |         36 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/render_frame.c                       | C        |        224 |         31 |         48 |        303 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/render_ui.c                          | C        |         16 |         11 |          5 |         32 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/render_ui_message.c                  | C        |         27 |         11 |          4 |         42 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/show_welcome_img.c                   | C        |          1 |         18 |          3 |         22 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/sprites/calc_tex_x_y.c               | C        |         19 |         13 |          7 |         39 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/sprites/check_sprite_closer_wall.c   | C        |         10 |         11 |          4 |         25 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/sprites/find_all_types_sprites.c     | C        |         51 |         11 |         10 |         72 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/sprites/get_pos_render_sprites.c     | C        |         28 |         13 |         15 |         56 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/sprites/render_all_sprites.c         | C        |         27 |         13 |         11 |         51 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/sprites/render_sprite.c              | C        |        105 |          1 |         19 |        125 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/sprites/set_texture_sprites.c        | C        |         28 |         11 |          7 |         46 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/sprites/sort_sprite_by_distance.c    | C        |         17 |         11 |          4 |         32 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/sprites/sort_sprites.c               | C        |         28 |         11 |          6 |         45 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/sprites/sprite_put_color.c           | C        |         26 |         17 |          8 |         51 |
+| /home/parallels/Desktop/cub3D_advanced/src/render/wall_shading/apply_distance_shadow.c | C        |         33 |         11 |          6 |         50 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/init_audio.c                          | C        |          0 |         38 |          6 |         44 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/init_default_map.c                    | C        |         40 |         11 |          8 |         59 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/init_default_player.c                 | C        |         22 |         14 |          4 |         40 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/init_doors.c                          | C        |         58 |         11 |         12 |         81 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/init_dt.c                             | C        |         49 |         11 |         10 |         70 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/init_grafic.c                         | C        |         12 |         11 |          4 |         27 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/init_keys.c                           | C        |         12 |         11 |          4 |         27 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/init_texture_sprites.c                | C        |         12 |         11 |          4 |         27 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/init_value_map.c                      | C        |         41 |         18 |          7 |         66 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/load_messages.c                       | C        |         23 |         11 |          4 |         38 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/load_sky_image.c                      | C        |         87 |         11 |         27 |        125 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/load_sprite_texture.c                 | C        |         22 |         13 |         10 |         45 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/load_sprites.c                        | C        |         70 |         11 |         19 |        100 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/load_textures.c                       | C        |         42 |         12 |         10 |         64 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/load_weapons.c                        | C        |         52 |         12 |         10 |         74 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/precalculate_trig_tables.c            | C        |         20 |         11 |          4 |         35 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/setup_img.c                           | C        |         13 |         11 |          3 |         27 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/setup_mlx_and_win.c                   | C        |         15 |         11 |          3 |         29 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup/setup_view.c                          | C        |         10 |         11 |          7 |         28 |
+| /home/parallels/Desktop/cub3D_advanced/src/setup_dt.c                                  | C        |         63 |         14 |         22 |         99 |
+| /home/parallels/Desktop/cub3D_advanced/src/utils/clamp.c                               | C        |          9 |         11 |          3 |         23 |
+| /home/parallels/Desktop/cub3D_advanced/src/utils/deg_to_rad.c                          | C        |          9 |         11 |          4 |         24 |
+| /home/parallels/Desktop/cub3D_advanced/src/utils/error_messages.c                      | C        |         19 |         11 |          5 |         35 |
+| /home/parallels/Desktop/cub3D_advanced/src/utils/error_messages2.c                     | C        |         22 |         11 |          5 |         38 |
+| /home/parallels/Desktop/cub3D_advanced/src/utils/get_current_time_in_ms.c              | C        |         16 |         11 |          6 |         33 |
+| /home/parallels/Desktop/cub3D_advanced/src/utils/min_max.c                             | C        |         13 |         11 |          4 |         28 |
+| /home/parallels/Desktop/cub3D_advanced/src/utils/print_separator.c                     | C        |         29 |         11 |          6 |         46 |
+| /home/parallels/Desktop/cub3D_advanced/src/utils/sign.c                                | C        |          5 |         11 |          3 |         19 |
+| /home/parallels/Desktop/cub3D_advanced/src/utils/size_array.c                          | C        |          9 |         11 |          4 |         24 |
+| /home/parallels/Desktop/cub3D_advanced/src/utils/swap.c                                | C        |         12 |         11 |          4 |         27 |
+| /home/parallels/Desktop/cub3D_advanced/src/utils/toggle_setting.c                      | C        |          5 |         11 |          3 |         19 |
+| /home/parallels/Desktop/cub3D_advanced/src/utils/update_max_value.c                    | C        |          6 |         11 |          3 |         20 |
+| /home/parallels/Desktop/cub3D_advanced/src/utils/x_y.c                                 | C        |         30 |         11 |          9 |         50 |
+| Total                                                                                  |          |      4,682 |      1,854 |      1,046 |      7,582 |
++----------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

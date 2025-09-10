@@ -18,7 +18,7 @@ void	free_sprites(t_data *dt)
 	size_t	j;
 
 	i = 0;
-	while (i < dt->sprite_texture_count)
+	while (i < *dt->sprite_texture_count)
 	{
 		j = 0;
 		while (j < SPRITE_FRAMES)

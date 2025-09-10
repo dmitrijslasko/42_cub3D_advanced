@@ -13,217 +13,88 @@
 #include "cub3d.h"
 #include "sound.h"
 
-static int	setup_keyboard_and_mouse_controls(t_data *dt)
+#define MINIAUDIO_IMPLEMENTATION
+#include "miniaudio.h"
+
+ma_engine engine;
+ma_sound sound;
+
+int init_audio(void)
 {
-	setup_keyboard_hooks(dt);
-	if (BONUS && ENABLE_MOUSE)
-		setup_mouse_hooks(dt);
-	return (EXIT_SUCCESS);
+    if (ma_engine_init(NULL, &engine) != MA_SUCCESS) {
+        return -1;
+    }
+    if (ma_sound_init_from_file(&engine, "sounds/music2.mp3", 0, NULL, NULL, &sound) != MA_SUCCESS) {
+        ma_engine_uninit(&engine);
+        return -1;
+    }
+    // Enable infinite looping
+    ma_sound_set_looping(&sound, MA_TRUE);
+    ma_sound_start(&sound);
+    return 0;
 }
 
-static int setup_player(t_data *dt)
+void free_audio(void)
 {
-	dt->player.ammo_level = STARTING_AMMO_LEVEL;
-	dt->player.health_level = STARTING_HEALTH_LEVEL;
-	return (EXIT_SUCCESS);
-}
-
-static int	setup_dt(t_data *dt)
-{
-	init_rays(dt);
-	init_keys(dt);
-	dt->raycasting_scene_img = protected_malloc(sizeof(t_img), dt);
-	dt->final_frame_img = protected_malloc(sizeof(t_img), dt);
-	dt->minimap_img = protected_malloc(sizeof(t_img), dt);
-	dt->ui_img = protected_malloc(sizeof(t_img), dt);
-	dt->view = protected_malloc(sizeof(t_view), dt);
-	load_textures(dt);
-	load_sky_image(dt);
-	load_messages(dt);
-	load_weapons(dt);
-	init_doors(dt);
-	mark_all_cells_that_neighbour_doors(dt);
-	load_sprites(dt);
-	setup_view(dt);
-	setup_player(dt);
-
-	dt->player.selected_weapon = &dt->weapon[0];
-	dt->weapon_current_frame = 0;
-	dt->weapon_last_frame_time = 0;
-
-	setup_img(dt, dt->final_frame_img, WINDOW_W, WINDOW_H);
-	setup_img(dt, dt->raycasting_scene_img, WINDOW_W, WINDOW_H);
-	setup_img(dt, dt->minimap_img, MINIMAP_SIZE, MINIMAP_SIZE);
-	setup_img(dt, dt->ui_img, WINDOW_W, WINDOW_H);
-	dt->time.start_time = get_current_time_in_ms();
-	dt->time.last_time = 0;
-
-	dt->test_value_1 = 0.0f;
-	dt->test_value_2 = 0.0f;
-	dt->test_value_3 = 0.0f;
-	dt->test_value_4 = 0.0f;
-
-	dt->ambient_light = 10.0f;
-	// if (BONUS)
-	// 	dt->background_music = init_audio();
-	return (EXIT_SUCCESS);
-}
-unsigned long get_focused_window_id() {
-	FILE *fp;
-	char buffer[128];
-	unsigned long window_id = 0;
-
-	fp = popen("xdotool getwindowfocus", "r");
-	if (fp == NULL) {
-		perror("popen failed");
-		return 0;
-	}
-
-	if (fgets(buffer, sizeof(buffer), fp) != NULL) {
-		window_id = strtoul(buffer, NULL, 10);
-	} else {
-		fprintf(stderr, "Failed to read window ID\n");
-	}
-
-	pclose(fp);
-	return window_id;
-}
-
-int move_active_window_to_mouse_position_with_xdotool() {
-	FILE *fp = popen("xdotool getmouselocation --shell", "r");
-	if (!fp) {
-		perror("Failed to run xdotool");
-		return 1;
-	}
-
-	int x = -1;
-	int y = -1;
-
-	char line[128];
-	while (fgets(line, sizeof(line), fp)) {
-		if (sscanf(line, "X=%d", &x) == 1) continue;
-		if (sscanf(line, "Y=%d", &y) == 1) continue;
-	}
-	pclose(fp);
-	printf("X Y: %d %d\n", x, y);
-
-	if (x < 0 || y < 0) {
-		fprintf(stderr, "Could not get mouse coordinates\n");
-		return 1;
-	}
-
-	// Get active window
-	fp = popen("xdotool getactivewindow", "r");
-	if (!fp) {
-		perror("Failed to get active window");
-		return 1;
-	}
-
-	char win_id[32];
-	if (!fgets(win_id, sizeof(win_id), fp)) {
-		fprintf(stderr, "Could not read window ID\n");
-		pclose(fp);
-		return 1;
-	}
-	pclose(fp);
-	win_id[strcspn(win_id, "\n")] = 0;  // strip newline
-
-	// Build and run move command
-	char cmd[128];
-	snprintf(cmd, sizeof(cmd), "xdotool windowmove %s %d %d", win_id, x - WINDOW_W/2, y - WINDOW_H/2 - 38);
-	int result = system(cmd);
-	return result == 0 ? 0 : 1;
-}
-
-int print_out_texture_lookup_table(t_data *dt)
-{
-	int	i;
-
-	i = 0;
-	printf(TXT_CYAN">>> Printing out the texture lookup table!\n"TXT_RESET);
-	while (g_texture_lookup[i].mapfile_key)
-	{
-		printf("%25s [%4s, %2d] : %s\n",
-			g_texture_lookup[i].description,
-			g_texture_lookup[i].mapfile_key,
-			g_texture_lookup[i].texture_type,
-			dt->map.textures[i].texture.xpm_file
-			);
-		i++;
-	}
-	print_separator_default();
-	return (EXIT_SUCCESS);
+    ma_engine_uninit(&engine);
 }
 
 int	main(int argc, char **argv)
 {
 	t_data	dt;
 
-	check_and_parse_args(&dt, argc, argv);
-	print_level_map(&dt.map);
+	const char *game_levels[] = {	"./maps/good/00_level.cub",
+									"./maps/good/01_level.cub",
+									"./maps/good/02_level.cub",
+									"./maps/good/03_level.cub",
+									NULL}; 
+	
+	init_dt(&dt);
+	check_and_parse_all_maps(&dt, argc, game_levels);
+	
+	printf("COLS: %d\n", dt.levels[0].map.map_size_cols);
+	printf("ROWS: %d\n", dt.levels[0].map.map_size_rows);
 
+	print_level_map(&dt.levels[0].map);
+	// precalculate sin and cos lookup tables
 	precalculate_trig_tables(&dt);
-
+	
+	// setup minilibx stuff
 	if (setup_mlx_and_win(&dt))
 		return (MLX_ERROR);
-	setup_dt(&dt);
-
-	draw_minimap_base_img(&dt);
-	setup_keyboard_and_mouse_controls(&dt);
-	print_separator(3, DEF_SEPARATOR_CHAR);
-
+		
+	// mimic full screen for immersive gameplay
 	system("gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false");
 	mimic_fullscreen();
 
+	move_mouse_to_center_of_active_window();
+
+	setup_keyboard_and_mouse_controls(&dt);
+
+	// setup dt - sets up the whole game structure and data
+	setup_dt(&dt);
+
+	dt.game_status = WELCOME_SCREEN;
+	dt.active_level = 0;
+	update_current_level_pointers(&dt);
+	get_init_player_position(dt.map, &dt.player);
+	printf("Game status set!\n");
+
+	draw_minimap_base_img(&dt);
+
+	print_separator(3, DEF_SEPARATOR_CHAR);
+
+	printf("Current level: %d\n", dt.active_level);
 	printf("🎮 Starting game!\n");
 
+	printf("Consumables to collect in this level: %d\n", get_curr_level(&dt)->starting_level_consumable_count);
+	print_separator(1, DEF_SEPARATOR_CHAR);
+
+	init_audio();
+	
 	mlx_loop_hook(dt.mlx_ptr, &render_frame, &dt);
 	mlx_loop(dt.mlx_ptr);
-	free_dt(&dt);
+
 	return (EXIT_SUCCESS);
 }
 
-
-// int move_mouse_to_center_of_active_window() {
-// 	Display *dpy = XOpenDisplay(NULL);
-// 	if (!dpy) {
-// 		fprintf(stderr, "Unable to open X display\n");
-// 		return 1;
-// 	}
-
-// 	Window root = DefaultRootWindow(dpy);
-// 	Atom activeAtom = XInternAtom(dpy, "_NET_ACTIVE_WINDOW", True);
-// 	Atom actualType;
-// 	int actualFormat;
-// 	unsigned long nItems, bytesAfter;
-// 	unsigned char *prop = NULL;
-
-// 	if (XGetWindowProperty(dpy, root, activeAtom, 0, (~0L), False, AnyPropertyType,
-// 						   &actualType, &actualFormat, &nItems, &bytesAfter, &prop) != Success || !prop) {
-// 		fprintf(stderr, "Unable to get _NET_ACTIVE_WINDOW\n");
-// 		XCloseDisplay(dpy);
-// 		return 1;
-// 	}
-
-// 	Window activeWindow = *(Window *)prop;
-// 	XFree(prop);
-
-// 	XWindowAttributes attr;
-// 	if (!XGetWindowAttributes(dpy, activeWindow, &attr)) {
-// 		fprintf(stderr, "Failed to get window attributes\n");
-// 		XCloseDisplay(dpy);
-// 		return 1;
-// 	}
-
-// 	int x, y;
-// 	Window child;
-// 	XTranslateCoordinates(dpy, activeWindow, root, 0, 0, &x, &y, &child);
-
-// 	int center_x = x + attr.width / 2;
-// 	int center_y = y + attr.height / 2;
-
-// 	XWarpPointer(dpy, None, root, 0, 0, 0, 0, center_x, center_y);
-// 	XFlush(dpy);
-// 	XCloseDisplay(dpy);
-// 	return 0;
-// }

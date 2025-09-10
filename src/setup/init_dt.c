@@ -28,15 +28,17 @@ void	init_texture(t_texture *texture)
 		return ;
 	texture->texture_img = NULL;
 	texture->texture_data = NULL;
-	texture->xpm_file = NULL;
+	texture->xpm_file_pathfile = NULL;
 }
 
 void	init_map(t_map	*map)
 {
 	size_t	i;
 
+	printf("Initialising map...\n");
 	map->map_data = NULL;
 	i = 0;
+	
 	while (i < NUMBER_TEXTURES)
 	{
 		init_texture(&map->textures[i].texture);
@@ -54,18 +56,16 @@ void	init_img(t_img *img)
 
 void	init_dt(t_data *dt)
 {
-	dt->doors = NULL;
+	printf("Initializing data struct...\n");
+	
+	dt->map = NULL;
 	dt->rays = NULL;
-	dt->sprites = NULL;
-	dt->sprite_textures = NULL;
-	dt->sprite_count = 0;
-	dt->sprite_texture_count = 0;
+	dt->doors = NULL;
 	dt->view = NULL;
-	dt->welcome_img = NULL;
-	dt->background_music = NULL;
-	dt->frames_drawn_count = 0;
-	dt->has_changed = 1;
 	init_mouse(&dt->mouse);
-	init_map(&dt->map);
 	init_graphic(dt);
+	dt->runtime_stats.frames_drawn_count = 0;
+	dt->background_music = NULL;
+	dt->sprite_pulse_coef = 0;
+	dt->sprite_pulse_step = 1;
 }

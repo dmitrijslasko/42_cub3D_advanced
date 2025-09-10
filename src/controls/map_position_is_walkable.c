@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:04:23 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/16 19:18:56 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/07/23 19:32:16 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_coor	get_cell_ahead(t_data *dt)
 
 	player_pos.x = (int) dt->player.pos.x;
 	player_pos.y = (int) dt->player.pos.y;
-	set_step(&step, &dt->player.direction_vector);
-	if (fabs(dt->player.direction_vector.x) > fabs(dt->player.direction_vector.y))
+	set_step(&step, &dt->player.orientation_vector);
+	if (fabs(dt->player.orientation_vector.x) > fabs(dt->player.orientation_vector.y))
 	{
 		cell_ahead.x = player_pos.x + step.x;
 		cell_ahead.y = player_pos.y + 0;
@@ -44,10 +44,10 @@ static int	handle_wall(t_data *dt, float *new_x, float *new_y)
 	max.x = (int)(*new_x + MIN_DISTANCE_TO_WALL);
 	min.y = (int)(*new_y - MIN_DISTANCE_TO_WALL);
 	max.y = (int)(*new_y + MIN_DISTANCE_TO_WALL);
-	if (ft_strchr(WALL_TYPES, dt->map.map_data[min.y][min.x].cell_char) ||
-	ft_strchr(WALL_TYPES, dt->map.map_data[min.y][max.x].cell_char) ||
-	ft_strchr(WALL_TYPES, dt->map.map_data[max.y][min.x].cell_char) ||
-	ft_strchr(WALL_TYPES, dt->map.map_data[max.y][max.x].cell_char))
+	if (ft_strchr(WALL_TYPES, dt->map->map_data[min.y][min.x].map_char) ||
+	ft_strchr(WALL_TYPES, dt->map->map_data[min.y][max.x].map_char) ||
+	ft_strchr(WALL_TYPES, dt->map->map_data[max.y][min.x].map_char) ||
+	ft_strchr(WALL_TYPES, dt->map->map_data[max.y][max.x].map_char))
 		return (0);
 	return (1);
 }
@@ -57,14 +57,15 @@ static int	handle_sprites(t_data *dt, float *new_x, float *new_y)
 	t_coor	min;
 	t_coor	max;
 
-	min.x = (int)(*new_x - MIN_DISTANCE_TO_WALL / 2);
-	max.x = (int)(*new_x + MIN_DISTANCE_TO_WALL / 2);
-	min.y = (int)(*new_y - MIN_DISTANCE_TO_WALL / 2);
-	max.y = (int)(*new_y + MIN_DISTANCE_TO_WALL / 2);
-	if (ft_strchr(SPRITE_TYPES, dt->map.map_data[min.y][min.x].cell_char) ||
-	ft_strchr(SPRITE_TYPES, dt->map.map_data[min.y][max.x].cell_char) ||
-	ft_strchr(SPRITE_TYPES, dt->map.map_data[max.y][min.x].cell_char) ||
-	ft_strchr(SPRITE_TYPES, dt->map.map_data[max.y][max.x].cell_char))
+	min.x = (int)(*new_x - MIN_DISTANCE_TO_SPRITE / 2);
+	max.x = (int)(*new_x + MIN_DISTANCE_TO_SPRITE / 2);
+	min.y = (int)(*new_y - MIN_DISTANCE_TO_SPRITE / 2);
+	max.y = (int)(*new_y + MIN_DISTANCE_TO_SPRITE / 2);
+	
+	if (ft_strchr(DECORATION_TYPES, dt->map->map_data[min.y][min.x].map_char) ||
+	ft_strchr(DECORATION_TYPES, dt->map->map_data[min.y][max.x].map_char) ||
+	ft_strchr(DECORATION_TYPES, dt->map->map_data[max.y][min.x].map_char) ||
+	ft_strchr(DECORATION_TYPES, dt->map->map_data[max.y][max.x].map_char))
 	{
 		return (0);
 	}
@@ -84,10 +85,10 @@ static int	handle_door2(t_data *dt, float *new_x, float *new_y)
 	max.y = (int)(*new_y + MIN_DISTANCE_TO_WALL);
 	set_coor_values(&new_pos, (int)*new_x, (int)*new_y);
 	door = find_door_at(dt, new_pos.x, new_pos.y);
-	if (ft_strchr(DOOR_TYPES, dt->map.map_data[min.y][min.x].cell_char) ||
-	ft_strchr(DOOR_TYPES, dt->map.map_data[min.y][max.x].cell_char) ||
-	ft_strchr(DOOR_TYPES, dt->map.map_data[max.y][min.x].cell_char) ||
-	ft_strchr(DOOR_TYPES, dt->map.map_data[max.y][max.x].cell_char))
+	if (ft_strchr(DOOR_TYPES, dt->map->map_data[min.y][min.x].map_char) ||
+	ft_strchr(DOOR_TYPES, dt->map->map_data[min.y][max.x].map_char) ||
+	ft_strchr(DOOR_TYPES, dt->map->map_data[max.y][min.x].map_char) ||
+	ft_strchr(DOOR_TYPES, dt->map->map_data[max.y][max.x].map_char))
 	{
 		if (door && door->open_progress < DOOR_OPEN_VALUE)
 			return (0);

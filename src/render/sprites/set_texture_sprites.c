@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_texture_sprites.c                              :+:      :+:    :+:   */
+/*   set_sprite_textures.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,27 +12,44 @@
 
 #include "cub3d.h"
 
-bool	set_texture_sprites(t_data *dt)
+bool	set_sprite_textures(t_data *dt, int index)
 {
 	size_t	i;
 	size_t	j;
 
-	if (!dt->sprites || !dt->sprite_textures)
+	t_sprite *sprites;
+	t_sprite_texture *sprite_textures;
+
+	int sprite_count = dt->levels[index].sprite_count;
+	int texture_count = dt->levels[index].sprite_texture_count;
+
+	sprites = dt->levels[index].sprites;
+	sprite_textures = dt->levels[index].sprite_textures;
+
+	print_separator_default();
+	printf(TXT_YELLOW">>> SETTING SPRITE TEXTURES!\n" TXT_RESET);
+	
+	if (!sprites || !sprite_textures)
 		return (0);
+
 	i = 0;
-	while (i < dt->sprite_count)
+	while (i < sprite_count)
 	{
 		j = 0;
-		while (j < dt->sprite_texture_count)
+		while (j < texture_count)
 		{
-			if (dt->sprites[i].type == dt->sprite_textures[j].type)
+			if (dt->levels[index].sprites[i].map_char == dt->levels[index].sprite_textures[j].map_char)
 			{
-				dt->sprites[i].texture = &dt->sprite_textures[j];
+				dt->levels[index].sprites[i].orientation = dt->levels[index].sprite_textures[j].orientation;
+				dt->levels[index].sprites[i].texture = &dt->levels[index].sprite_textures[j];
+								dt->levels[index].sprites[i].speed = ENEMY_SPRITE_MOVE_SPEED;
+				if (dt->levels[index].sprites[i].orientation == 180.0f || dt->levels[index].sprites[i].orientation == 270.0f)
+					dt->levels[index].sprites[i].speed = -ENEMY_SPRITE_MOVE_SPEED;
 				break ;
 			}
 			j++;
 		}
 		i++;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }

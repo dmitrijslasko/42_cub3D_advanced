@@ -15,6 +15,7 @@
 void	finish_ray_casting(t_data *dt, t_ray *ray,
 			t_coor *map_coor, int door_hit)
 {
+	// printf("Finishing ray casting...\n");
 	set_cell_type(dt, ray, map_coor);
 	if (door_hit == 1)
 		ray->distance_to_wall += ray->distance_to_door;

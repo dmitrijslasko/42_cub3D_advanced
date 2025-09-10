@@ -17,8 +17,7 @@ void	apply_wall_orientation_shading(t_ray *ray, int *color)
 {
 	if (ray->wall_orientation == EAST || ray->wall_orientation == WEST)
 	{
-		apply_shadow(ray, &color, WALL_ORIENTATION_SHADOW_STRENGTH);
-		// *color = YELLOW;
+		apply_shadow(ray, color, WALL_ORIENTATION_SHADOW_STRENGTH);
 	}
 }
 void	put_pix_img(t_data *dt, t_ray *ray, t_coor *texture, t_coor *coor)
@@ -29,8 +28,8 @@ void	put_pix_img(t_data *dt, t_ray *ray, t_coor *texture, t_coor *coor)
 	if (ENABLE_SHADERS)
 	{
 		apply_wall_orientation_shading(ray, &color);
-		apply_distance_shadow_distance(dt->ambient_light, &color);
-		apply_distance_shadow(ray, &color);
+		apply_distance_shadow(ray->distance_to_wall * 2, &color);
+		apply_ambient_light_shading(*dt->ambient_light, &color);
 	}
 	img_pix_put(dt->raycasting_scene_img, coor->x, coor->y, color);
 }
@@ -45,12 +44,14 @@ void	render_3d_each_ray(t_data *dt, t_ray *ray, int screen_slice_width)
 
 	texture.x = 0;
 	texture.y = 0;
+	
 	// NOTE DL: manipulating 1.0f here can be used to simulate water level
 	wall_height = 1.0f / ray->corrected_distance_to_wall * SCALING;
 	ray->wall_height = (int)wall_height;
+	
 	top_y = dt->view->screen_center_y - wall_height - dt->test_value_1;
-	coor.y = ft_max(top_y, 0);
 	bottom_y = ft_min(WINDOW_H, dt->view->screen_center_y + wall_height);
+	coor.y = ft_max(top_y, 0);
 	while (coor.y < bottom_y)
 	{
 		calc_texture_coor(dt, &texture.y, &ray->corrected_distance_to_wall, coor.y - top_y);

@@ -39,14 +39,13 @@ OBJ_DIR = ./obj
 OBJ_DIR_BONUS = ./obj_bonus
 
 
-
 # LIBRARIES
 LIBDIRS = ./lib
 LIBFT_DIR = $(LIBDIRS)/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SDL2_INC := lib/SDL2/build/include/SDL2
-SDL2_MIXER_INC := lib/SDL2_mixer/build/include
+# SDL2_INC := ./lib/SDL2/build/include/SDL2
+# SDL2_MIXER_INC := ./lib/SDL2_mixer/build/include
 
 MINILIBX = $(MINILIBX_DIR)libmlx.a
 MINILIBX_DIR = $(LIBDIRS)/minilibx/
@@ -54,19 +53,21 @@ MINILIBX_DIR = $(LIBDIRS)/minilibx/
 # COMPILATION FLAGS
 # CFLAGS = -Wall -Wextra -Werror
 CFLAGS += -g
+# CFLAGS += -fsanitize=address -fstack-protector-all
 CFLAGS += -I$(INC_DIR)
 CFLAGS += -I$(MINILIBX_DIR)
+CFLAGS += -I./lib/miniaudio
 CFLAGS += -std=c99
 CFLAGS += -Wno-error=type-limits
 CFLAGS += -D_POSIX_C_SOURCE=200112L
-
 # CFLAGS += -I$(SDL2_INC) -I$(SDL2_MIXER_INC) -D_REENTRANT
+
 # LINKER FLAGS
 LDFLAGS += -L$(LIBFT_DIR) -lft
 LDFLAGS += -L$(MINILIBX_DIR) -lmlx
 LDFLAGS += -lX11 -lXext -lm
-# LDFLAGS += -Llib/SDL2/build/lib -Llib/SDL2_mixer/build/lib -lSDL2 -lSDL2_mixer
-
+LDFLAGS += -lpthread -ldl
+# LDFLAGS += -Llib/SDL2/build/lib -Llib/SDL2_mixer/build/lib -lSDL2 -lSDL2_mixers
 
 # EXTRA FLAGS
 BONUSFLAGS = -DBONUS=1
@@ -78,7 +79,7 @@ SRC := $(shell find $(SRC_DIR) -name "*.c")
 # SRC =	./src/controls/map_position_is_walkable.c \
 # 		./src/controls/move_forward_backward.c \
 # 		./src/controls/move_sideways.c \
-# 		./src/controls/process_keypresses.c \
+# 		./src/controls/process_keyboard_keypresses.c \
 # 		./src/controls/reset_mouse_position.c \
 # 		./src/controls/rotate_player.c \
 # 		./src/controls/rotate_vector.c \
@@ -174,7 +175,7 @@ SRC := $(shell find $(SRC_DIR) -name "*.c")
 # 		./src/render/sprites/get_pos_render_sprites.c \
 # 		./src/render/sprites/render_all_sprites.c \
 # 		./src/render/sprites/render_sprite.c \
-# 		./src/render/sprites/set_texture_sprites.c \
+# 		./src/render/sprites/set_sprite_textures.c \
 # 		./src/render/sprites/sort_sprite_by_distance.c \
 # 		./src/render/sprites/sort_sprites.c \
 # 		./src/render/sprites/sprit_put_color.c \
@@ -188,7 +189,7 @@ SRC := $(shell find $(SRC_DIR) -name "*.c")
 # 		./src/setup/init_keys.c \
 # 		./src/setup/init_texture_sprites.c \
 # 		./src/setup/init_value_map.c \
-# 		./src/setup/load_messages.c \
+# 		./src/setup/load_ui_messages.c \
 # 		./src/setup/load_sky_image.c \
 # 		./src/setup/load_sprites.c \
 # 		./src/setup/load_sprite_texture.c \
@@ -226,7 +227,7 @@ OBJ_BONUS = $(patsubst $(SRC_DIR)/%, $(OBJ_DIR_BONUS)/%, $(SRC:.c=.o))
 test: fclean bonus
 	@if [ -f "${NAME_BONUS}" ]; then \
 		echo "Running bonus: ${NAME_BONUS}"; \
-		./${NAME_BONUS} ./maps/good/bonus1.cub; \
+		./${NAME_BONUS} ./maps/good/01_level.cub; \
 	else \
 		echo "Running regular: ${NAME}"; \
 		./${NAME} ./maps/good/creepy.cub; \
@@ -294,4 +295,4 @@ ubuntu:
 
 # ------------------------------------------------------------------------------
 
-.PHONY: all bonus clean fclean re minilibx %
+.PHONY: all bonus clean fclean re minilibx ubuntu %

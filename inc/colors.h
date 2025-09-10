@@ -27,7 +27,6 @@
 // colors
 # define BLACK 	0xFF000000
 
-# define BLACK				0xFF000000
 # define WHITE				0xFFFFFFFF
 # define GREY				0xFF444444
 # define DARKGREY			0x0f0f0f

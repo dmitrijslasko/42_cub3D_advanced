@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:35:51 by fvargas           #+#    #+#             */
-/*   Updated: 2025/07/23 18:43:11 by dmlasko          ###   ########.fr       */
+/*   Updated: 2025/09/08 16:40:54 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,25 @@
 # include "keys.h"
 # include "settings.h"
 # include "texture_lookup.h"
-//# include "sound.h"
+# include "weapons.h"
+# include "sprites.h"
+# include "messages.h"
+# include "sounds.h"
+
+# include "sound.h"
 
 // structs
+
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		height;
+	int		width;
+	int		line_len;
+	int		bpp;
+	int		endian;
+}	t_img;
 
 typedef enum e_wall_orientation
 {
@@ -62,8 +78,6 @@ typedef enum e_active_message
 	ENJOY_THE_GAME,
 }	t_active_message;
 
-
-
 // typedef enum e_sprite_type {
 //     SPRITE_ENEMY,
 //     SPRITE_HEART,
@@ -72,25 +86,33 @@ typedef enum e_active_message
 //     // etc
 // } t_sprite_type;
 
-typedef enum e_active_item
-{
-	WEAPON_NO_WEAPON = 0,
-	WEAPON_KNIFE,
-	WEAPON_PISTOL,
-	WEAPON_AUTOMATIC_GUN,
-	WEAPON_MACHINE_GUN
-}	t_active_item;
+typedef enum e_game_status {
+	WELCOME_SCREEN = 1,
+	MENU_SCREEN,
+	PAUSE_SCREEN,
+	LEVEL_START,
+	LEVEL_GAME,
+	LEVEL_FINISH,
+	GAME_SCREEN,
+	GAME_WON_SCREEN,
+}	t_game_status;
+
 
 typedef struct 		s_weapon
 {
-	int 			type;
-	char			*description;
-	int				bullets_in_clip;
-	int				total_ammo;
-	int			clip_size;
-	float		shot_speed;
-	float		reload_speed;
-	float		weight;
+	t_active_item 		type;
+	char				*description;
+	int					bullets_in_clip;
+	int					total_ammo;
+	int					clip_size;
+	float				shot_speed;
+	int					rounds_fired;
+	float				reload_speed;
+	float				weight;
+	int					max_distance;
+	int					player_has_it;
+
+	t_img				*frames;
 }	t_weapon;
 
 // Door structure with animation info
@@ -105,6 +127,8 @@ typedef struct s_door
 	int		state;
 	int		orientation;
 	float	open_progress;
+	char	is_opening;
+	long	opening_finish_time;
 	float	speed;
 }	t_door;
 
@@ -131,7 +155,7 @@ typedef struct s_dda_info
 
 typedef struct s_mapcell
 {
-	char		cell_char;
+	char		map_char;
 	int			is_near_door;
 	t_door		*door;
 }	t_mapcell;
@@ -142,6 +166,7 @@ typedef struct s_ray
 	float		distance_to_wall;
 	float		corrected_distance_to_wall;
 	int			wall_height;
+
 	float		percentage_of_image;
 	t_mapcell	*hit_cell;
 	int			cell_type;
@@ -157,7 +182,6 @@ typedef struct s_ray
 
 typedef struct s_map
 {
-	//char		**map_data;
 	t_mapcell	**map_data;
 	int			map_size_rows;
 	int			map_size_cols;
@@ -167,17 +191,20 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	t_x_y	pos;
-	t_x_y	direction_vector;
-	float	direction_vector_deg;
-	float	plane_x;
-	float	plane_y;
-	char	cell_type_ahead;
-	bool	can_move;
-	bool	is_moving;
-	float	move_speed_multiplier;
-	int		health_level;
-	int		ammo_level;
+	t_x_y		pos;
+	t_x_y		orientation_vector;
+	float		orientation;
+	float		plane_x;
+	float		plane_y;
+	char		cell_type_ahead;
+
+	bool		can_move;
+	bool		is_moving;
+
+	float		move_speed_multiplier;
+	int			health_level;
+	// int			ammo_level;
+
 	t_weapon	*selected_weapon;
 
 }	t_player;
@@ -202,108 +229,170 @@ typedef struct s_view
 	// int		minimap_color;
 	char	show_debug_info;
 	char	show_door_open_message;
+	char	show_targeted_sprite;
 	int		active_prompt_message;
 	float	door_open;
 	float	crouch;
 }	t_view;
 
-typedef struct s_img
-{
-	void	*mlx_img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	int		height;
-	int		width;
-}	t_img;
-
 typedef struct s_sprite_texture
 {
+	char	*filepath;
 	int		texture_id;
+	char	map_char;
+
 	void	*sprite_img[SPRITE_FRAMES];
 	int		*sprite_data[SPRITE_FRAMES];
+
+	// void	*sprite_img[NO_OF_ROTATION][NO_OF_ACTION];
+	// int		*sprite_data[NO_OF_ROTATION][NO_OF_ACTION];
+
+	char	is_sprite_sheet;
+	float	orientation;
 	int		width;
 	int		height;
 	int		bpp;
 	int		size_line;
 	int		endian;
-	char	type;
-	char	*filepath;
+
 }	t_sprite_texture;
 
 typedef enum e_sprite_type
 {
 	STATIC,
-	DYNAMIC
+	DYNAMIC,
+	ENEMY,
+	PICKUP,
 }	t_sprite_type;
+
+typedef enum e_sprite_status
+{
+	IDLE,
+	MOVING,
+	SHOOTING,
+	HURT,
+	DYING,
+	DEAD
+}	t_sprite_state;
 
 typedef struct s_sprite
 {
-	char				id;
-	t_sprite_type		type;
-	int					active;
-	char				*path;
-	float				width;
-	float				height;
-	int					frame_count;
 	t_sprite_texture	*texture;
+
+	char				id;
+	char				map_char;
+	t_sprite_type		type;
+
+	int					is_hidden;
+	int					y_offset;
+
 	t_x_y				pos;
+	t_coor				size;
+	float				orientation;
 	float				distance_to_player;
-	int					time;
+	float				orientation_to_player;
+
+	float				speed;
+	int					health_level;
+	t_sprite_state		state;
+
+	// int				total_frame_count;
+	int					starting_frame;
+	int					current_frame;
+	long				last_frame_time;
+
+	int					start_x;
+	int					center_x;
+	int					aim;
+
 }	t_sprite;
 
-typedef struct s_gametime
+typedef struct s_stats
 {
 	long				last_time;
 	long				delta_time;
 	long				start_time;
-}	t_gametime;
+	int					frames_drawn_count;
+}	t_stats;
 
-// typedef struct s_item
-// {
-// 	int	is_weapon;
-// 	int ammo_level;
-// 	int frame_count;
-// }	t_item;
+
+typedef struct s_level
+{
+	int					id;
+	int					level_score;
+	int					starting_level_consumable_count;
+	float				score_combo;
+
+	int					level_consumable_count;
+	int					consumables_collected;
+	char				prev_consumable;
+
+	t_map				map;
+
+	t_sprite_texture	*sprite_textures;
+	size_t				sprite_texture_count;
+	t_sprite			*sprites;
+	size_t				sprite_count;
+	t_sprite			*targeted_sprite;
+
+	t_img				*sky_image;
+
+	t_door				*doors;
+	size_t				door_count;
+
+	float				ambient_light;
+}	t_level;
 
 typedef struct s_data
 {
 	void				*mlx_ptr;
 	void				*win_ptr;
+
+	float				sin_table[PRECALCULATED_TRIG];
+	float				cos_table[PRECALCULATED_TRIG];
+
+	t_player			player;
+	float				*ambient_light;
+
+	t_game_status		game_status;
+
+	t_img				*game_menu_img;
+	t_img				*game_menu_img2;
+	t_img				*game_level_cleared_img;
+	t_img				*game_won_img;
+	t_img				*noise_img;
+
 	t_img				*raycasting_scene_img;
 	t_img				*final_frame_img;
+
 	t_img				*minimap_base_img;
 	t_img				*minimap_img;
 	t_img				*ui_img;
 
 	t_ray				*rays;
 
-	t_map				map;
-	t_door				*doors;
-	size_t				door_count;
+	t_map				*map;
 
-	t_player			player;
 	t_view				*view;
+
 	char				keys[TRACKED_KEYS];
 	t_mouse				mouse;
-	float				sin_table[PRECALCULATED_TRIG];
-	float				cos_table[PRECALCULATED_TRIG];
 
 	t_sprite			*sprites;
+	size_t				*sprite_count;
 	t_sprite_texture	*sprite_textures;
-	size_t				sprite_count;
-	size_t				sprite_texture_count;
+	size_t				*sprite_texture_count;
 
+	t_door				*doors;
+	size_t				*door_count;
 
-	void				*welcome_img;
-	t_gametime			time;
-	t_img				*sky_image;
+	t_sprite			*targeted_sprite;
+	t_stats				runtime_stats;
+
 	t_img				*message_img;
 
-	float				ambient_light;
 	void				*background_music;
-	int					has_changed;
+
 	int					frames_drawn_count;
 
 	t_weapon			*weapon;
@@ -311,12 +400,23 @@ typedef struct s_data
 	int					weapon_current_frame;
 	int 				weapon_is_animating;
 	long				weapon_last_frame_time;
+	int					rounds_fired;
 
+	t_level				levels[NUMBER_OF_LEVELS];
+	int					active_level;
+	int					gamescore;
+	
 	float				test_value_1;
-	float				test_value_2;
+	int					test_value_2;
 	float				test_value_3;
 	float				test_value_4;
+
+	int					sprite_pulse_coef;
+	int					sprite_pulse_step;
+
 }	t_data;
+
+int	debug_print(char *str);
 
 static inline int	pixel_is_in_window(int x, int y)
 {
@@ -345,13 +445,16 @@ void		setup_mouse_hooks(t_data *dt);
 
 void		*protected_malloc(size_t size, t_data *dt);
 void		free_dt(t_data *dt);
-void		free_audio(void *ptr);
+// void		free_audio(void *ptr);
 
 void		put_img_to_img(t_img *dest, t_img *src, int dx, int dy);
 void		put_img_to_img_circle(t_img *dest, t_img *src, int dx, int dy);
 //parsing
 char		*free_line_get_next(char *line, int fd);
-bool		check_and_parse_mapfile(t_data *dt, char *file);
+bool	check_and_parse_mapfile(t_data *dt, char *map_file, int map_index);
+
+void	check_and_parse_all_maps(t_data *dt, int argc, char *mapfiles[]);
+
 bool		check_valid_identifier_texture(char *identifier);
 bool		check_color(char *one_color);
 bool		check_valid_color(char **color);
@@ -369,7 +472,7 @@ bool		init_2d_map(char ***array, size_t max_row,
 bool		check_mapfile_extension(char *file, char *type);
 void		remove_new_line(char *str);
 char		*remove_space_beginner(char *str);
-bool		parse_mapfile(char *file, t_data *dt);
+bool		parse_mapfile(char *file, t_data *dt, int i);
 bool		init_default_map(t_map *map);
 bool		init_player(t_map *map, t_player *player);
 int			ft_open(char *file);
@@ -379,12 +482,14 @@ bool		parse_mapfile_values(t_map *map, char *file);
 void		parse_map(t_map *map, int fd, char **line);
 void		get_init_player_position(t_map *map, t_player *player);
 bool		set_color_or_texture(t_map *map, char *identifier, char **value);
-//bool		set_texture(t_map *map, char *identifier, char *texture_file);
 bool		set_color(char *identifier, char **color, t_map *map);
 bool		check_map_is_closed(t_map *map, t_player *player, t_data *dt);
+
 char		get_cell_type(t_map *map, t_coor *coord);
-char		get_cell_type_by_coordinates(t_map *map, size_t y, size_t x);
 t_mapcell	*get_cell_by_coordinates(t_map *map, size_t y, size_t x);
+t_mapcell	*get_cell_by_coordinates_float(t_map *map, float y, float x);
+
+
 char		**ft_split_by_multiple_delimiters(const char *s, char *c);
 
 // player movements
@@ -434,6 +539,7 @@ void		draw_line(t_img *img, t_coor pt_1, t_coor pt_2, int clr);
 void		draw_vertical_line(t_img *img, t_coor pt_1, t_coor pt_2, int color);
 
 void		draw_circle(t_img *img, t_coor *coor, int radius, int clr);
+void	draw_lighter_circle(t_img *img, t_coor *coor, int radius, int clr);
 void		draw_rectangle(t_img *img, t_coor top_left,
 						t_coor bottom_right, int clr);
 
@@ -497,37 +603,36 @@ int			draw_minimap_wall_cell(t_data *dt, size_t curr_col,
 						size_t curr_row);
 
 // 3d render
-int			load_sky_image(t_data *dt);
+int			load_image(t_data *dt, t_img *img, char *filepath);
 int			draw_sky(t_data *dt);
 void		render_3d_scene(t_data *dt);
 int			draw_ceiling(t_data *dt);
 int			draw_floor(t_data *dt);
 int			draw_textured_floor(t_data *dt);
-int			draw_textured_floor2(t_data *dt);
+// int			draw_textured_floor2(t_data *dt);
 int 		draw_textured_ceiling(t_data *dt);
 int			render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset,
 						t_coor *sprite_size);
-float		fix_fish_eye(t_ray *ray, t_player *player);
+float	fix_fish_eye(t_data *dt, t_ray *ray, t_player *player);
 int			fix_fish_eye_2(t_ray *ray, t_player *player, float *distance);
-int			load_sprite_textures(t_data *dt);
-int			load_textures(t_data *dt);
-int			load_sprites(t_data *dt);
+int			load_sprite_textures(t_data *dt, int i);
+int			load_textures(t_data *dt, t_level *level);
+int			load_sprites(t_data *dt, t_level *level, t_map *map, int i);
 int			precalculate_trig_tables(t_data *dt);
 
-int			render_all_sprites(t_data *dt);
 void		render_3d_each_ray(t_data *dt, t_ray *ray, int screen_slice_width);
 
-int			apply_distance_shadow(t_ray *ray, int *color);
+int			apply_distance_shadow(float distance, int *color);
 int			apply_shadow(t_ray *ray, int *color, float strength);
 
 int			reset_mouse_position(t_data *dt);
-void		process_keypresses(t_data *dt);
+void		process_keyboard_keypresses(t_data *dt);
 int			get_color_render3d(t_data *dt, t_ray *ray, t_coor *tex_coor);
 void		calc_texture_coor(t_data *dt, int *texture_y, \
 							float *distance_to_wall, int d);
 
 // inits
-void		init_doors(t_data *dt);
+void		init_doors(t_data *dt, t_level *level, t_map *map);
 
 // controls
 int			set_mouse_to_screen_center(t_data *dt);
@@ -547,45 +652,44 @@ void		set_cell_type(t_data *dt, t_ray *ray, t_coor *map_coor);
 
 int			ray_hits_door(t_data *dt, t_coor *map_coor, t_ray *ray);
 t_door		*find_door_at(t_data *dt, int x, int y);
+t_sprite	*find_sprite_at(t_data *dt, int x, int y);
 
 //sprites
-void		find_all_sprites(t_data *dt);
+void		find_all_sprites(t_data *dt, t_map *map, int i);
 void		sort_sprites(t_sprite *sprites, size_t num_sprites);
 void		sort_sprites_by_distance(t_data *dt);
 void		sort_sprites(t_sprite *sprites, size_t num_sprites);
 int			render_all_sprites(t_data *dt);
 int			get_position_and_render_sprite(t_data *dt, t_sprite *sprite);
-bool		set_texture_sprites(t_data *dt);
+bool		set_sprite_textures(t_data *dt, int i);
 void		sprite_put_color(t_data *dt, t_sprite *sprite, \
 										t_coor *coor, t_coor *tex_coor);
 t_coor		calculate_tex_x_y(t_sprite_texture *texture, t_coor *coor, \
-									t_coor *offset, t_coor *sprite_size);
-bool		check_if_sprite_is_closer_than_wall(t_data *dt, t_coor *coor, \
+									t_coor *offset, t_sprite *sprite, int row, int col);
+bool		sprite_is_closer_than_wall(t_data *dt, t_coor *coor, \
 															t_sprite *spr);
 int			init_keys(t_data *dt);
 void		init_graphic(t_data *dt);
 void		init_text_sprites(t_sprite_texture *texture);
-int			load_messages(t_data *dt);
+int			load_ui_messages(t_data *dt);
 void		setup_view(t_data *dt);
 
 int			create_color_rgba(int r, int g, int b, int a);
 int			create_color_rgb(int r, int g, int b);
-
-void		show_debug_info(t_data *dt);
 
 int			move_sideways(t_data *dt, int to_the_right);
 int			move_forward_backward(t_data *dt, int direction);
 int			map_position_is_walkable(t_data *dt, float *new_x, float *new_y);
 
 int			render_ui_message(t_data *dt);
-void		free_graphic(t_data *dt);
+void		free_graphic_images(t_data *dt);
 void	free_mlx(t_data *dt);
 void		free_wall_tile_texture(t_data *dt);
 void		free_texture(t_data *dt, t_texture *texture);
 void		free_img(t_img *img, void *mlx_ptr);
 void		free_sprites(t_data *dt);
 void		ft_free(void *ptr);
-int			count_sprite_textures(t_data *dt);
+// int			count_sprite_textures(t_data *dt);
 size_t		count_if_there_is_others_elements(t_map *map, char *element);
 
 //dda
@@ -614,12 +718,12 @@ void		print_obstacle_info(t_data *dt, void *mlx, void *win, int *y);
 void		print_player_position(t_data *dt, void *mlx, void *win, int *y);
 void		print_enemy_info(t_data *dt, void *mlx, void *win, int *y);
 
-int			load_sprite_images(t_data *dt);
+int	load_sprite_images(t_data *dt, int i);
 int			load_weapons(t_data *dt);
 
 void		show_player_info(t_data *dt);
 
-int	apply_distance_shadow_distance(int distance, int *color);
+int	apply_ambient_light_shading(int distance, int *color);
 
 int	mimic_fullscreen(void);
 
@@ -633,8 +737,43 @@ int		get_lookup_table_index(char *str);
 int		get_lookup_table_index_cell_type(int cell_type);
 int		get_lookup_table_index_cell_type_by_map_char(int map_char);
 
-int mark_all_cells_that_neighbour_doors(t_data *dt);
+int 	mark_all_cells_that_neighbour_doors(t_data *dt, t_level *level, t_map *map);
 
-int is_in_list(char *str, char *list);
+int		fire_gun(t_data *dt);
+
+int		print_out_texture_lookup_table(t_data *dt);
+
+int		setup_dt(t_data *dt);
+
+void	draw_flashlight(t_data *dt, t_img *img, int radius, int clr);
+
+void	show_level_info(t_data *dt);
+
+int		keypress_exit(t_data *dt);
+
+t_level *get_curr_level(t_data *dt);
+
+int				debug_print(char *str);
+unsigned long	get_focused_window_id(void);;
+int				move_active_window_to_mouse_position_with_xdotool(void);
+int				move_mouse_to_center_of_active_window(void);
+int				setup_keyboard_and_mouse_controls(t_data *dt);
+
+int 		process_sprite_pickups(t_data *dt);
+int process_game_status(t_data *dt);
+int	bob_weapon(t_data *dt);
+void	bob_walls(t_data *dt);
+int	update_prompt_message(t_data *dt);
+
+int update_current_level_pointers(t_data *dt);
+
+int play_sound(char *system_call);
+
+int flash_color(t_data *dt, int color);
+
+uint32_t reduce_saturation(uint32_t color, float factor);
+
+int trigger_all_enemies(t_data *dt, int new_state);
+
 
 #endif

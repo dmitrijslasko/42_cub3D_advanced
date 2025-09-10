@@ -44,7 +44,7 @@ bool	set_color_or_texture(t_map *map, char *identifier, char **xpm_filename)
 	// if (map->textures[wall_orientation].wall_orientation != DEFAULT_WALL)
 	// 	return (error_msg("Error: set texture: duplicated wall/door/floor.", 1));
 	map->textures[cell_type].wall_orientation = cell_type;
-	map->textures[cell_type].texture.xpm_file = ft_strdup(*xpm_filename);
+	map->textures[cell_type].texture.xpm_file_pathfile = ft_strdup(*xpm_filename);
 	map->textures[cell_type].texture.mapfile_repr = ft_strdup(identifier);
 	return (EXIT_SUCCESS);
 }

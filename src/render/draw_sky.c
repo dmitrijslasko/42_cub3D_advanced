@@ -20,7 +20,7 @@ void	ft_texture_coor(t_data *dt, float screen_x, int *texture_x, \
 
 	view_ratio = screen_x / (float)WINDOW_W;
 	tex_ratio = fmodf(view_ratio + angle_offset, 1.0f);
-	*texture_x = (int)(tex_ratio * dt->sky_image->width);
+	*texture_x = (int)(tex_ratio * dt->levels[dt->active_level].sky_image->width);
 }
 
 float	calculate_angle_offset(t_data *dt)
@@ -28,7 +28,7 @@ float	calculate_angle_offset(t_data *dt)
 	float	angle_offset;
 	float	angle_rad;
 
-	angle_rad = dt->player.direction_vector_deg * (M_PI / 180.0f);
+	angle_rad = dt->player.orientation * (M_PI / 180.0f);
 	angle_offset = fmodf((angle_rad * 6.0f) / (2 * M_PI), 1.0f);
 	if (angle_offset < 0)
 		angle_offset += 1.0f;
@@ -39,7 +39,7 @@ int	calc_texture_start_y(t_data *dt)
 {
 	int texture_start_y;
 
-	texture_start_y = dt->sky_image->height - dt->view->screen_center_y;
+	texture_start_y = dt->levels[dt->active_level].sky_image->height - dt->view->screen_center_y;
 	return (texture_start_y);
 }
 
@@ -73,6 +73,7 @@ int	render_sky(t_data *dt, float angle_offset, int texture_start_y)
 	uint32_t	color;
 	int			max_sky_y;
 	float		wall_height;
+	// t_img		*sky_image;
 
 	screen.x = 0;
 	while (screen.x < WINDOW_W)
@@ -83,7 +84,7 @@ int	render_sky(t_data *dt, float angle_offset, int texture_start_y)
 		while (screen.y < max_sky_y)
 		{
 			ft_texture_coor(dt, screen.x, &texture_x, angle_offset);
-			color = get_pixel_color_from_img(dt->sky_image, texture_x, screen.y + texture_start_y);
+			color = get_pixel_color_from_img(dt->levels[dt->active_level].sky_image, texture_x, screen.y + texture_start_y);
 			img_pix_put(dt->raycasting_scene_img, screen.x, screen.y, color);
 			screen.y++;
 		}
@@ -98,8 +99,9 @@ int	draw_sky(t_data *dt)
 	int		texture_start_y;
 
 	angle_offset = calculate_angle_offset(dt);
-	angle_offset += (dt->time.last_time - dt->time.start_time) * 0.00001f;
+	angle_offset += (dt->runtime_stats.last_time - dt->runtime_stats.start_time) * 0.00001f;
 	texture_start_y = calc_texture_start_y(dt);
+
 	render_sky(dt, angle_offset, texture_start_y);
 	return (EXIT_SUCCESS);
 }

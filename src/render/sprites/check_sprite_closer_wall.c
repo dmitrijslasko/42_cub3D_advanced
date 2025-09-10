@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-bool	check_if_sprite_is_closer_than_wall(t_data *dt, t_coor *coor, t_sprite *spr)
+bool	sprite_is_closer_than_wall(t_data *dt, t_coor *coor, t_sprite *spr)
 {
 	float	distance_to_wall;
 

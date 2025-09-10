@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_messages.c                                    :+:      :+:    :+:   */
+/*   load_ui_messages.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	load_messages(t_data *dt)
+int	load_ui_messages(t_data *dt)
 {
 	int	w;
 	int	h;

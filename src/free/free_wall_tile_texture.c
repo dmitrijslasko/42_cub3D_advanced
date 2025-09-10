@@ -19,8 +19,8 @@ void	free_wall_tile_texture(t_data *dt)
 	i = 0;
 	while (i < NUMBER_TEXTURES)
 	{
-		if (!dt->map.textures[i].is_color)
-			free_texture(dt, &dt->map.textures[i].texture);
+		if (!dt->map[0].textures[i].is_color)
+			free_texture(dt, &dt->map->textures[i].texture);
 		i++;
 	}
 }

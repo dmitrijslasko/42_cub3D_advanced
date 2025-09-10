@@ -2,32 +2,32 @@
 
 int draw_textured_floor(t_data *dt)
 {
-    t_texture texture;
+    t_texture texture = dt->map->textures[FLOOR].texture;
     int x;
     int current_row;
     char type;
     uint32_t color;
 
-    current_row = dt->view->screen_center_y;
-
     float plane_x = dt->player.plane_x;
     float plane_y = dt->player.plane_y;
 
     // Calculate ray position relative to camera plane
-    float rayDirX0 = dt->player.direction_vector.x + plane_x;
-    float rayDirY0 = dt->player.direction_vector.y - plane_y;
-    float rayDirX1 = dt->player.direction_vector.x - plane_x;
-    float rayDirY1 = dt->player.direction_vector.y + plane_y;
+    float rayDirX0 = dt->player.orientation_vector.x + plane_x;
+    float rayDirY0 = dt->player.orientation_vector.y - plane_y;
+    float rayDirX1 = dt->player.orientation_vector.x - plane_x;
+    float rayDirY1 = dt->player.orientation_vector.y + plane_y;
+
+    current_row = dt->view->screen_center_y;
+
+    double adjustment = 0.6355f;
+    double fov_factor = tanf((FIELD_OF_VIEW_DEG * adjustment) * (M_PI / 180.0f));
+    // fov_factor = FIELD_OF_VIEW_SCALE;
+    // printf("fov_factor: %f\n", fov_factor);
 
     while (current_row < WINDOW_H)
-    {
-        float adjustment;
-
-        adjustment = 0.6354f;
-		float fov_factor = tanf((FIELD_OF_VIEW_DEG * adjustment) * (M_PI / 180.0f));
-
+    {	
         int p = current_row - dt->view->screen_center_y;
-        float rowDistance = ((0.5f * WINDOW_H) / p) / fov_factor - dt->test_value_2;
+        float rowDistance = ((0.5f * WINDOW_H) / p) / fov_factor;
 
         // Calculate step size for each screen pixel
         float floorStepX = rowDistance * (rayDirX1 - rayDirX0) / WINDOW_W;
@@ -48,11 +48,11 @@ int draw_textured_floor(t_data *dt)
             int texX = (int)(TILE_SIZE * (floorX - cellX)) & (TILE_SIZE - 1);
             int texY = (int)(TILE_SIZE * (floorY - cellY)) & (TILE_SIZE - 1);
 
-            texture = dt->map.textures[FLOOR].texture;
-
             // Get color and draw pixel
             color = texture.texture_data[TILE_SIZE * texY + texX];
-			apply_distance_shadow_distance(dt->ambient_light, &color);
+			apply_ambient_light_shading(*dt->ambient_light, &color);
+            apply_distance_shadow((WINDOW_H - current_row) / 4.0f, &color);
+            // color = reduce_saturation(color, ((WINDOW_H - current_row) / (WINDOW_H)) * 2.0f);
             img_pix_put(dt->raycasting_scene_img, x, current_row, color);
 
             floorX += floorStepX;
