@@ -43,7 +43,7 @@ void	open_close_door(t_data *dt, int dir)
 		if (dir == 1)
 		{
 			door->open_progress = fmax(0.0f, door->open_progress - door->speed);
-			door->opening_finish_time = dt->time.last_time;
+			door->opening_finish_time = dt->runtime_stats.last_time;
 		}
 		else
 			door->open_progress = fmin(1.0f, door->open_progress + door->speed);

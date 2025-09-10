@@ -14,14 +14,14 @@ typedef struct s_color
 typedef struct s_texture
 {
 	char		*xpm_file_pathfile;
+	int			type;
 	void		*texture_img;
 	int			*texture_data;
-	int			width;
 	int			height;
-	int			bpp;
+	int			width;
 	int			size_line;
+	int			bpp; 
 	int			endian;
-	int			type;
 	char 		*mapfile_repr;
 }	t_texture;
 

@@ -18,7 +18,7 @@
 # endif
 
 # ifndef LINUX_22
-# 	define LINUX_22     1
+# 	define LINUX_22     0
 # endif
 
 # define DEBUG_PRINT                        0

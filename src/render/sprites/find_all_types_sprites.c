@@ -77,6 +77,7 @@ void	find_all_sprites(t_data *dt, t_map *map, int i)
 	init_sprites(dt, i);
 
 	consumable_count = count_elements_in_the_map(map, CONSUMABLE_TYPES);
-	printf("CONSUMABLES: %ld\n", consumable_count);
+	printf("CONSUMABLES IN THE LEVEL: %ld\n", consumable_count);
+	dt->levels[i].starting_level_consumable_count = consumable_count;
 	dt->levels[i].level_consumable_count = consumable_count;
 }

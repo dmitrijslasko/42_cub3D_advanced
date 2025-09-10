@@ -57,7 +57,7 @@ int animate_weapon(t_data *dt)
 				}
 			}
 		}
-		now = dt->time.last_time;
+		now = dt->runtime_stats.last_time;
 		if (now - dt->weapon_last_frame_time > (1000 / FPS) * 2)
 		{
 			if (dt->weapon_current_frame == 2)
@@ -101,10 +101,10 @@ int animate_doors(t_data *dt)
             {
                 door->open_progress = 1.0f;
                 door->is_opening = 0;
-                door->opening_finish_time = dt->time.last_time;
+                door->opening_finish_time = dt->runtime_stats.last_time;
             }
         }
-        else if (dt->time.last_time - door->opening_finish_time > DOOR_AUTOCLOSURE_TIME_MS)
+        else if (dt->runtime_stats.last_time - door->opening_finish_time > DOOR_AUTOCLOSURE_TIME_MS)
         {
 			if (door->cell_x == (int) dt->player.pos.x && door->cell_y == (int) dt->player.pos.y)
 			{
@@ -194,14 +194,14 @@ int	render_frame(void *param)
 	reset_mouse_position(dt);
 
 	current_time = get_current_time_in_ms();
-	dt->time.delta_time = current_time - dt->time.last_time;
-	if (dt->time.delta_time < (1000 / FPS))
+	dt->runtime_stats.delta_time = current_time - dt->runtime_stats.last_time;
+	if (dt->runtime_stats.delta_time < (1000 / FPS))
 	{
 		my_sleep();
 		return (0);
 	}
-	dt->time.last_time = current_time;
-	dt->frames_drawn_count++;
+	dt->runtime_stats.last_time = current_time;
+	dt->runtime_stats.frames_drawn_count++;
 
 	dt->sprite_pulse_coef += dt->sprite_pulse_step;
 	if (dt->sprite_pulse_coef <= -10 || dt->sprite_pulse_coef >= 10)

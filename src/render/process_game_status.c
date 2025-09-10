@@ -59,6 +59,7 @@ int process_game_status(t_data *dt)
 				trigger_all_enemies(dt, MOVING);
 
 			get_init_player_position(dt->map, &dt->player);
+			dt->levels[dt->active_level].level_consumable_count = dt->levels[dt->active_level].starting_level_consumable_count;
 			dt->game_status = GAME_SCREEN;
 		}
 	}

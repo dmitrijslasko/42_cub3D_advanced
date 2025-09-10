@@ -35,11 +35,13 @@ int	setup_dt(t_data *dt)
 	dt->game_menu_img2 = protected_malloc(sizeof(t_img), dt);
 	dt->game_level_cleared_img = protected_malloc(sizeof(t_img), dt);
 	dt->game_won_img = protected_malloc(sizeof(t_img), dt);
+	dt->noise_img = protected_malloc(sizeof(t_img), dt);
 
 	load_image(dt, dt->game_menu_img, MENU_PATHFILE);
 	load_image(dt, dt->game_menu_img2, MENU2_PATHFILE);
 	load_image(dt, dt->game_level_cleared_img, LEVEL_CLEARED_PATHFILE);
 	load_image(dt, dt->game_won_img, GAME_WON_PATHFILE);
+	load_image(dt, dt->noise_img, "./textures/noise.xpm");
 	
 	load_ui_messages(dt);
 	
@@ -56,8 +58,8 @@ int	setup_dt(t_data *dt)
 	dt->rounds_fired = 0;
 
 	// time
-	dt->time.start_time = get_current_time_in_ms();
-	dt->time.last_time = 0;
+	dt->runtime_stats.start_time = get_current_time_in_ms();
+	dt->runtime_stats.last_time = 0;
 
 	// test value for in-game tests
 	dt->test_value_1 = 0.0f;

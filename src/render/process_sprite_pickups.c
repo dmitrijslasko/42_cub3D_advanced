@@ -37,18 +37,10 @@ int process_sprite_pickups(t_data *dt)
 	// key pickup pickup - game won!
 	if (sprite && !sprite->is_hidden && ft_strchr(EXIT_TYPES, sprite->map_char))
 	{	
-		// if (dt->levels[dt->active_level].level_consumable_count > dt->levels[dt->active_level].consumables_collected)
-		// {
-		// 	// system(ALERT_SYSTEM_CALL);
-		// 	mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, NOT_ALL_FOOD_COLLECTED);
-		// }
-		// else 
-		{
-			play_sound(LEVEL_CLEARED_SYSTEM_CALL);
-			printf("Level #%d finished!\n", dt->active_level);
-			print_separator(1, DEF_SEPARATOR_CHAR);
-			dt->game_status = LEVEL_FINISH;
-		}
+		play_sound(LEVEL_CLEARED_SYSTEM_CALL);
+		printf("Level #%d finished!\n", dt->active_level);
+		print_separator(1, DEF_SEPARATOR_CHAR);
+		dt->game_status = LEVEL_FINISH;
 	}
 	return (EXIT_SUCCESS);
 }

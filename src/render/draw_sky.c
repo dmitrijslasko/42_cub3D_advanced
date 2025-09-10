@@ -76,8 +76,6 @@ int	render_sky(t_data *dt, float angle_offset, int texture_start_y)
 	// t_img		*sky_image;
 
 	screen.x = 0;
-	// sky_image = dt->map->textures[0].texture.texture_img;
-	// printf("%d\n", sky_image->width);
 	while (screen.x < WINDOW_W)
 	{
 		wall_height = ft_min_float(dt->rays[screen.x * CASTED_RAYS_COUNT / WINDOW_W].wall_height, (float)WINDOW_H);
@@ -101,7 +99,7 @@ int	draw_sky(t_data *dt)
 	int		texture_start_y;
 
 	angle_offset = calculate_angle_offset(dt);
-	angle_offset += (dt->time.last_time - dt->time.start_time) * 0.00001f;
+	angle_offset += (dt->runtime_stats.last_time - dt->runtime_stats.start_time) * 0.00001f;
 	texture_start_y = calc_texture_start_y(dt);
 
 	render_sky(dt, angle_offset, texture_start_y);

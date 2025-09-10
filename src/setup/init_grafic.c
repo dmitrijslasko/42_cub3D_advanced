@@ -21,6 +21,5 @@ void	init_graphic(t_data *dt)
 	dt->raycasting_scene_img = NULL;
 	dt->minimap_base_img = NULL;
 	dt->minimap_img = NULL;
-	// dt->sky_image = NULL;
 	dt->message_img = NULL;
 }

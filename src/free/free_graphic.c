@@ -18,7 +18,6 @@ void	free_graphic_images(t_data *dt)
 	free_img(dt->final_frame_img, dt->mlx_ptr);
 	free_img(dt->minimap_base_img, dt->mlx_ptr);
 	free_img(dt->minimap_img, dt->mlx_ptr);
-	// free_img(dt->sky_image, dt->mlx_ptr);
 	free_img(dt->message_img, dt->mlx_ptr);
 }
 

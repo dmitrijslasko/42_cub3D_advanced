@@ -54,11 +54,11 @@ typedef struct s_img
 {
 	void	*mlx_img;
 	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
 	int		height;
 	int		width;
+	int		line_len;
+	int		bpp;
+	int		endian;
 }	t_img;
 
 typedef enum e_wall_orientation
@@ -307,21 +307,24 @@ typedef struct s_sprite
 
 }	t_sprite;
 
-typedef struct s_gametime
+typedef struct s_stats
 {
 	long				last_time;
 	long				delta_time;
 	long				start_time;
-}	t_gametime;
+	int					frames_drawn_count;
+}	t_stats;
 
 
 typedef struct s_level
 {
 	int					id;
 	int					level_score;
+	int					starting_level_consumable_count;
+	float				score_combo;
+
 	int					level_consumable_count;
 	int					consumables_collected;
-	float				score_combo;
 	char				prev_consumable;
 
 	t_map				map;
@@ -357,6 +360,7 @@ typedef struct s_data
 	t_img				*game_menu_img2;
 	t_img				*game_level_cleared_img;
 	t_img				*game_won_img;
+	t_img				*noise_img;
 
 	t_img				*raycasting_scene_img;
 	t_img				*final_frame_img;
@@ -383,9 +387,8 @@ typedef struct s_data
 	size_t				*door_count;
 
 	t_sprite			*targeted_sprite;
-	t_gametime			time;
+	t_stats				runtime_stats;
 
-	t_img				*sky_image;
 	t_img				*message_img;
 
 	void				*background_music;
@@ -401,9 +404,8 @@ typedef struct s_data
 
 	t_level				levels[NUMBER_OF_LEVELS];
 	int					active_level;
-
 	int					gamescore;
-
+	
 	float				test_value_1;
 	int					test_value_2;
 	float				test_value_3;

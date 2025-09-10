@@ -80,15 +80,15 @@ void	print_time_stats(t_data *dt, void *mlx, void *win, int *y)
 	int		(*f)(void*, void*, int, int, int, char*);
 
 	f = mlx_string_put;
-	snprintf(buffer, sizeof(buffer), "%ld", dt->time.last_time);
+	snprintf(buffer, sizeof(buffer), "%ld", dt->runtime_stats.last_time);
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL_2, UI_CLR_1, "Current time:");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
 	snprintf(buffer, sizeof(buffer), "%ld",
-		(dt->time.last_time - dt->time.start_time) / 1000);
+		(dt->runtime_stats.last_time - dt->runtime_stats.start_time) / 1000);
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL_2, UI_CLR_1, "Elapsed time (s):");
 	f(mlx, win, DBG_2_X, *y, UI_CLR_1, buffer);
 	f(mlx, win, DBG_1_X, *y += DBG_MN_NL, UI_CLR_2, "Frames drawn:");
-	f(mlx, win, DBG_2_X, *y, UI_CLR_2, ft_itoa(dt->frames_drawn_count));
+	f(mlx, win, DBG_2_X, *y, UI_CLR_2, ft_itoa(dt->runtime_stats.frames_drawn_count));
 }
 
 void	print_plane_stats(t_data *dt, void *mlx, void *win, int *y)
@@ -189,14 +189,14 @@ void	show_level_info(t_data *dt)
 	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Level score: ");
 	mlx_string_put(mlx, win, 140, y, GOLD, ft_itoa(dt->levels[dt->active_level].level_score));
 
-	mlx_string_put(mlx, win, 15, y += DBG_MN_NL, WHITE, "Summerfest total: ");
+	mlx_string_put(mlx, win, 15, y += DBG_MN_NL, WHITE, "Game total: ");
 	mlx_string_put(mlx, win, 140, y, WHITE, ft_itoa(dt->gamescore));
 
 	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Consumed sushi: ");
 	mlx_string_put(mlx, win, 140, y, GOLD, ft_itoa(dt->levels[dt->active_level].consumables_collected));
 
 	mlx_string_put(mlx, win, 15, y += DBG_MN_NL_2, GOLD, "Still available: ");
-	mlx_string_put(mlx, win, 140, y, GOLD, ft_itoa(dt->levels[dt->active_level].level_consumable_count - dt->levels[dt->active_level].consumables_collected));
+	mlx_string_put(mlx, win, 140, y, GOLD, ft_itoa(dt->levels[dt->active_level].level_consumable_count));
 
 	mlx_string_put(mlx, win, 15, y += DBG_MN_NL, GOLD, "Score combo: ");
 

@@ -11,6 +11,6 @@ int	bob_weapon(t_data *dt)
 		amplitude = 10;
 	else
 		amplitude = 2;
-	y_offset = amplitude * sin((dt->time.last_time - dt->time.start_time) * speed); // total_time in seconds, or use a step counter;
+	y_offset = amplitude * sin((dt->runtime_stats.last_time - dt->runtime_stats.start_time) * speed); // total_time in seconds, or use a step counter;
 	return (y_offset);
 }

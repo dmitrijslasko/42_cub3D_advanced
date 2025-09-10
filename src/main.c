@@ -87,7 +87,7 @@ int	main(int argc, char **argv)
 	printf("Current level: %d\n", dt.active_level);
 	printf("🎮 Starting game!\n");
 
-	printf("Consumables to collect in this level: %d\n", get_curr_level(&dt)->level_consumable_count);
+	printf("Consumables to collect in this level: %d\n", get_curr_level(&dt)->starting_level_consumable_count);
 	print_separator(1, DEF_SEPARATOR_CHAR);
 
 	init_audio();

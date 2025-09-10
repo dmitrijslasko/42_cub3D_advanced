@@ -33,7 +33,7 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 	
 	int frame_time = (1000 / FPS) * sprite_animation_speed;
 	
-	if (dt->time.last_time - sprite->last_frame_time > frame_time)
+	if (dt->runtime_stats.last_time - sprite->last_frame_time > frame_time)
 	{
 		if (sprite->state == MOVING)
 		{	
@@ -58,7 +58,7 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 		}
 		else
 			sprite->current_frame = 0;
-		sprite->last_frame_time = dt->time.last_time;
+		sprite->last_frame_time = dt->runtime_stats.last_time;
 	}
 
 	coor.y = ft_max(offset->y, 0);

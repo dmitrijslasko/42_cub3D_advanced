@@ -64,7 +64,7 @@ void	init_dt(t_data *dt)
 	dt->view = NULL;
 	init_mouse(&dt->mouse);
 	init_graphic(dt);
-	dt->frames_drawn_count = 0;
+	dt->runtime_stats.frames_drawn_count = 0;
 	dt->background_music = NULL;
 	dt->sprite_pulse_coef = 0;
 	dt->sprite_pulse_step = 1;
