@@ -63,8 +63,8 @@ int	draw_minimap_base_img(t_data *dt)
 	dt->minimap_base_img = protected_malloc(sizeof(t_img), dt);
 
 	setup_img(dt, dt->minimap_base_img,
-		dt->map->map_size_cols * MINIMAP_GRID_SIZE,
-		dt->map->map_size_rows * MINIMAP_GRID_SIZE);
+		dt->map->map_size_cols * MINIMAP_GRID_SIZE + 1,
+		dt->map->map_size_rows * MINIMAP_GRID_SIZE + 1);
 	
 	set_coor_values(&top_left, 0, 0);
 	set_coor_values(&bottom_right, dt->minimap_base_img->width,

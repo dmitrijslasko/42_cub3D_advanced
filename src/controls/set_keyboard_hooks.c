@@ -72,8 +72,8 @@ int	handle_keyrelease(int keycode, t_data *dt)
 		else
 			*dt->ambient_light = 1000.0f;
 	}
-	// if (keycode == XK_Tab)
-	// 	toggle_setting(&dt->view->show_minimap);
+	if (keycode == XK_Tab)
+		toggle_setting(&dt->view->show_minimap);
 	if (keycode == XK_F12)
 	{
 		toggle_setting(&dt->view->show_debug_info);

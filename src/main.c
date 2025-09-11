@@ -80,6 +80,7 @@ int	main(int argc, char **argv)
 	get_init_player_position(dt.map, &dt.player);
 	printf("Game status set!\n");
 
+	
 	draw_minimap_base_img(&dt);
 
 	print_separator(3, DEF_SEPARATOR_CHAR);

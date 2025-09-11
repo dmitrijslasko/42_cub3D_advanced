@@ -68,23 +68,24 @@
 # define DUMMY_MAP_PLAYER					"10N0000000000000000000000000001"
 
 // Minimap settings
-# define MINIMAP_OFFSET_X					20
+# define MINIMAP_OFFSET_X					WINDOW_W - MINIMAP_SIZE - 20
 # define MINIMAP_OFFSET_Y					20
 
 # define MINIMAP_BACKGROUND_COLOR			ORANGE
 
 # define MINIMAP_STYLE                      0   // 0 - square, 1 - circle
-# define MINIMAP_SIZE                       200
-# define MINIMAP_GRID_SIZE					20
-# define MINIMAP_GRID_COLOR					0xFF8800
+# define MINIMAP_SIZE                       120
+# define MINIMAP_GRID_SIZE					10
+# define MINIMAP_GRID_COLOR					SILVER
 # define MINIMAP_GRID_ENABLE				1
 
 # define MINIMAP_WALL_CELL_COLOR			DARKGREY
 # define MINIMAP_PLAYER_SPAWN_CELL_COLOR	0xFFBB00
 # define MINIMAP_DOOR_COLOR					BLACK
 # define MINIMAP_THIN_WALL_COLOR			BLACK
+# define MINIMAP_SPRITE_ENABLE      		0
 # define MINIMAP_SPRITE_COLOR				RED
-# define MINIMAP_DOOR_THICKNESS_PX			3
+# define MINIMAP_DOOR_THICKNESS_PX			2
 
 # define MINIMAP_PLAYER_SIZE_PX 			5
 # define MINIMAP_PLAYER_DISPLAY_STYLE 		CIRCLE

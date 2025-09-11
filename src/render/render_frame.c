@@ -273,8 +273,8 @@ int	render_frame(void *param)
 			dt->weapon_current_frame--;
 	}
 
-	// *dt->ambient_light = 0.0f;
-	// print_out_sprite_info(dt);
-
+	// test image
+	// put_img_to_img(dt->final_frame_img, dt->noise_img, WINDOW_W / 2, WINDOW_H / 2);
+		
 	return (EXIT_SUCCESS);
 }

@@ -447,7 +447,7 @@ void		*protected_malloc(size_t size, t_data *dt);
 void		free_dt(t_data *dt);
 // void		free_audio(void *ptr);
 
-void		put_img_to_img(t_img *dest, t_img *src, int dx, int dy);
+void	put_img_to_img(t_img *dest_img, t_img *src_img, int dx, int dy);
 void		put_img_to_img_circle(t_img *dest, t_img *src, int dx, int dy);
 //parsing
 char		*free_line_get_next(char *line, int fd);

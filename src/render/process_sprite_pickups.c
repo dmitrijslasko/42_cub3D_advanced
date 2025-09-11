@@ -21,6 +21,7 @@ int process_sprite_pickups(t_data *dt)
 		sprite->is_hidden = 1;
 		system(EATING_SOUND_SYSTEM_CALL);
 		dt->levels[dt->active_level].consumables_collected++;
+		dt->levels[dt->active_level].level_consumable_count--;
 		
 		// level score && total game score
 		if (sprite->map_char == dt->levels[dt->active_level].prev_consumable)
