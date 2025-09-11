@@ -17,7 +17,7 @@
  */
 bool	init_default_player_values(t_player *player)
 {
-	player->can_move = true;
+	player->can_move = 1;
 	player->is_moving = 0;
 	player->move_speed_multiplier = 1;
 	player->orientation = 0.0f;

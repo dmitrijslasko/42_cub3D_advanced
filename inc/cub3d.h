@@ -200,6 +200,7 @@ typedef struct s_player
 
 	bool		can_move;
 	bool		is_moving;
+	float		crouch;
 
 	float		move_speed_multiplier;
 	int			health_level;
@@ -230,9 +231,10 @@ typedef struct s_view
 	char	show_debug_info;
 	char	show_door_open_message;
 	char	show_targeted_sprite;
+	char	flashlight_on;
+
 	int		active_prompt_message;
 	float	door_open;
-	float	crouch;
 }	t_view;
 
 typedef struct s_sprite_texture
@@ -620,16 +622,16 @@ int			load_textures(t_data *dt, t_level *level);
 int			load_sprites(t_data *dt, t_level *level, t_map *map, int i);
 int			precalculate_trig_tables(t_data *dt);
 
-void		render_3d_each_ray(t_data *dt, t_ray *ray, int screen_slice_width);
+void		render_3d_each_ray(t_data *dt, t_ray *ray);
 
+// shadows
 int			apply_distance_shadow(float distance, int *color);
 int			apply_shadow(t_ray *ray, int *color, float strength);
 
 int			reset_mouse_position(t_data *dt);
 void		process_keyboard_keypresses(t_data *dt);
 int			get_color_render3d(t_data *dt, t_ray *ray, t_coor *tex_coor);
-void		calc_texture_coor(t_data *dt, int *texture_y, \
-							float *distance_to_wall, int d);
+void		calc_texture_coor(t_data *dt, int *texture_y, t_ray *ray, int d);
 
 // inits
 void		init_doors(t_data *dt, t_level *level, t_map *map);

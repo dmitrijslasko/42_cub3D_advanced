@@ -34,7 +34,7 @@ void	put_pix_img(t_data *dt, t_ray *ray, t_coor *texture, t_coor *coor)
 	img_pix_put(dt->raycasting_scene_img, coor->x, coor->y, color);
 }
 
-void	render_3d_each_ray(t_data *dt, t_ray *ray, int screen_slice_width)
+void	render_3d_each_ray(t_data *dt, t_ray *ray)
 {
 	float	wall_height;
 	int		top_y;
@@ -45,18 +45,18 @@ void	render_3d_each_ray(t_data *dt, t_ray *ray, int screen_slice_width)
 	texture.x = 0;
 	texture.y = 0;
 	
-	// NOTE DL: manipulating 1.0f here can be used to simulate water level
 	wall_height = 1.0f / ray->corrected_distance_to_wall * SCALING;
-	ray->wall_height = (int)wall_height;
+	ray->wall_height = (int) wall_height;
 	
-	top_y = dt->view->screen_center_y - wall_height - dt->test_value_1;
+	top_y = dt->view->screen_center_y - wall_height;
 	bottom_y = ft_min(WINDOW_H, dt->view->screen_center_y + wall_height);
+	
 	coor.y = ft_max(top_y, 0);
 	while (coor.y < bottom_y)
 	{
-		calc_texture_coor(dt, &texture.y, &ray->corrected_distance_to_wall, coor.y - top_y);
-		coor.x = ft_max(ray->id * screen_slice_width, 0);
-		while (coor.x < (ray->id + 1) * screen_slice_width && coor.x < WINDOW_W)
+		calc_texture_coor(dt, &texture.y, ray, coor.y - top_y);
+		coor.x = ft_max(ray->id * (WINDOW_W / CASTED_RAYS_COUNT), 0);
+		while (coor.x < (ray->id + 1) * (WINDOW_W / CASTED_RAYS_COUNT) && coor.x < WINDOW_W)
 		{
 			put_pix_img(dt, ray, &texture, &coor);
 			coor.x++;

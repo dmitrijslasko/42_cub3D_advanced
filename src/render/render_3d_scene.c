@@ -25,10 +25,11 @@ void	render_3d_scene(t_data *dt)
 	while (i < CASTED_RAYS_COUNT)
 	{
 		dt->rays[i].id = i;
-		render_3d_each_ray(dt, &dt->rays[i], WINDOW_W / CASTED_RAYS_COUNT);
+		render_3d_each_ray(dt, &dt->rays[i]);
 		i++;
 	}
 
 	// flashlight
-	// draw_flashlight(dt, dt->raycasting_scene_img, 150, 0XAAFFFFFF);
+	if (dt->view->flashlight_on)
+		draw_flashlight(dt, dt->raycasting_scene_img, 150, 0XAAFFFFFF);
 }

@@ -25,4 +25,6 @@ void	setup_view(t_data *dt)
 
 	dt->view->show_debug_info = SHOW_DEBUG_INFO;
 	dt->view->show_targeted_sprite = SHOW_DEBUG_INFO;
+
+	dt->view->flashlight_on = 0;
 }

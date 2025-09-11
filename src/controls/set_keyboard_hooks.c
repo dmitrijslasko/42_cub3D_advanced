@@ -81,8 +81,10 @@ int	handle_keyrelease(int keycode, t_data *dt)
 	}
 	if (keycode == XK_Control_R || keycode == XK_r && dt->player.selected_weapon->type)
 		fire_gun(dt);
-	else if (keycode >= 0 && keycode < TRACKED_KEYS)
+	if (keycode >= 0 && keycode < TRACKED_KEYS)
 		dt->keys[keycode] = 0;
+	// if (keycode == XK_f)
+	// 	toggle_setting(&dt->view->flashlight_on);
 	return (EXIT_SUCCESS);
 }
 

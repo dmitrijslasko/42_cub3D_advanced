@@ -23,7 +23,7 @@ static int	set_sprite_img(t_data *dt, t_sprite_texture *texture,
 	char	*filepath;
 
 	filepath = get_filepath(i, frame);
-	printf("%s\n", filepath);
+	// printf("%s\n", filepath);
 	texture[i].sprite_img[frame] = mlx_xpm_file_to_image(\
 		dt->mlx_ptr, \
 		filepath, \
@@ -60,7 +60,7 @@ int	load_sprite_images(t_data *dt, int level_index)
 	while (i < dt->levels[level_index].sprite_texture_count)
 	{
 		print_separator(1, "-");
-		printf("Loading sprite texture for map_char %c\n", g_sprites[i].map_char);
+		// printf("Loading sprite texture for map_char %c\n", g_sprites[i].map_char);
 		
 		sprite_textures[i].map_char = g_sprites[i].map_char;
 		sprite_textures[i].orientation = g_sprites[i].orientation;
