@@ -47,9 +47,11 @@ void	render_3d_each_ray(t_data *dt, t_ray *ray)
 	
 	wall_height = 1.0f / ray->corrected_distance_to_wall * SCALING;
 	ray->wall_height = (int) wall_height;
-	
-	top_y = dt->view->screen_center_y - wall_height;
-	bottom_y = ft_min(WINDOW_H, dt->view->screen_center_y + wall_height);
+
+	int vertical_offset = (int)(dt->z_offset * wall_height);
+
+	top_y = dt->view->screen_center_y - wall_height - vertical_offset;
+	bottom_y = ft_min(WINDOW_H, dt->view->screen_center_y + wall_height - vertical_offset);
 	
 	coor.y = ft_max(top_y, 0);
 	while (coor.y < bottom_y)

@@ -11,6 +11,8 @@ static int setup_player(t_data *dt)
 
 int	setup_dt(t_data *dt)
 {
+	// dt->fov = FIELD_OF_VIEW_DEG;
+
 	printf("Setting up data struct!\n");
 	init_rays(dt);
 	init_keys(dt);
@@ -19,6 +21,8 @@ int	setup_dt(t_data *dt)
 	dt->raycasting_scene_img = protected_malloc(sizeof(t_img), dt);
 	dt->minimap_img = protected_malloc(sizeof(t_img), dt);
 	dt->ui_img = protected_malloc(sizeof(t_img), dt);
+
+	dt->jump_dir = 0;
 
 	setup_img(dt, dt->final_frame_img, WINDOW_W, WINDOW_H);
 	setup_img(dt, dt->raycasting_scene_img, WINDOW_W, WINDOW_H);
@@ -46,6 +50,8 @@ int	setup_dt(t_data *dt)
 	load_ui_messages(dt);
 	
 	dt->targeted_sprite = NULL;
+
+	dt->water_level = 0;
 	
 	// view
 	setup_view(dt);
@@ -62,7 +68,10 @@ int	setup_dt(t_data *dt)
 	dt->runtime_stats.last_time = 0;
 
 	// test value for in-game tests
-	dt->test_value_1 = 0.0f;
+
+	dt->z_offset = 0.0f;
+
+	dt->test_value_1 = 0;
 	dt->test_value_2 = 0.0f;
 	dt->test_value_3 = 0.0f;
 	dt->test_value_4 = 0.0f;

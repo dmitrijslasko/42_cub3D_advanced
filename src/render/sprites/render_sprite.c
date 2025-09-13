@@ -16,7 +16,7 @@ static int set_animation_speed(t_sprite *sprite, int *sprite_animation_speed)
 	return (EXIT_SUCCESS);
 }
 
-int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_size)
+int render_sprite(t_data *dt, t_sprite *sprite, t_coor *position_on_screen, t_coor *sprite_size)
 {
 	t_coor  coor;
 	t_coor  sprite_texture_coor;
@@ -61,11 +61,17 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 		sprite->last_frame_time = dt->runtime_stats.last_time;
 	}
 
-	coor.y = ft_max(offset->y, 0);
-	while (coor.y < sprite_size->y + offset->y && coor.y < WINDOW_H)
+	// coor.y = ft_max(position_on_screen->y, 0);
+
+	// subtract: positive z_position_on_screen = jump (sprites appear lower), negative = crouch (sprites appear higher)
+
+	coor.y = ft_max(position_on_screen->y, 0);
+	
+	// while (coor.y < sprite_size->y + position_on_screen->y && coor.y < WINDOW_H)
+	while (coor.y < sprite_size->y + position_on_screen->y && coor.y < WINDOW_H)
 	{
-		coor.x = ft_max(offset->x, 0);
-		while (coor.x < sprite_size->x + offset->x && coor.x < WINDOW_W)
+		coor.x = ft_max(position_on_screen->x, 0);
+		while (coor.x < sprite_size->x + position_on_screen->x && coor.x < WINDOW_W)
 		{
 			if (sprite_is_closer_than_wall(dt, &coor, sprite))
 			{
@@ -97,7 +103,7 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 					col = (int)lroundf(angle / 45.0f);		
 				}
 				
-				sprite_texture_coor = calculate_tex_x_y(sprite->texture, &coor, offset, sprite, row, col);
+				sprite_texture_coor = calculate_tex_x_y(sprite->texture, &coor, position_on_screen, sprite, row, col);
 				sprite_put_color(dt, sprite, &coor, &sprite_texture_coor);
 				
 				if (sprite->start_x == -1)

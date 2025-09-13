@@ -112,16 +112,16 @@ void	process_keyboard_keypresses(t_data *dt)
 	// 	dt->test_value_1 += 0.001f;
 	// 	printf("%f\n", dt->test_value_1);
 	// }
-	// if (dt->keys[XK_h])
-	// {
-	// 	dt->test_value_1 -= 0.001f;
-	// 	printf("%f\n", dt->test_value_1);
-	// }
-	// if (dt->keys[XK_j])
-	// {
-	// 	dt->test_value_2 += 1;
-	// 	printf("%d\n", dt->test_value_2);
-	// }
+	if (dt->keys[XK_h])
+	{
+		dt->test_value_1 -= 1;
+		printf("%f\n", dt->test_value_1);
+	}
+	if (dt->keys[XK_j])
+	{
+		dt->test_value_1 += 1;
+		printf("%d\n", dt->test_value_1);
+	}
 	// if (dt->keys[XK_n])
 	// {
 	// 	dt->test_value_2 -= 1;
@@ -133,10 +133,6 @@ void	process_keyboard_keypresses(t_data *dt)
 		printf("COLS: %zu\n", dt->levels[dt->active_level].map.map_size_cols);
 		printf("ROWS: %zu\n", dt->levels[dt->active_level].map.map_size_rows);
 	}
-	// if (dt->keys[XK_k])
-	// 	trigger_all_enemies(dt, MOVING);
-	// if (dt->keys[XK_l])
-	// 	trigger_all_enemies(dt, IDLE);
 	if (dt->keys[XK_9])
 	{
 		*dt->ambient_light = fmin(1000.0f, *dt->ambient_light * 1.1f);
@@ -156,15 +152,23 @@ void	process_keyboard_keypresses(t_data *dt)
 		rotate_player(dt, KEYBOARD_PLAYER_ROTATION_STEP, -1);
 	if (dt->keys[XK_Shift_L])
 		dt->player.move_speed_multiplier = MOVE_SPEED_MULTIPLIER_SLOW;
-	// if (dt->keys[XK_Control_L])
-	// {
-	// 	dt->player.move_speed_multiplier = 0.4f;
-	// 	dt->view->crouch = 1.5f;
-	// }
 	else
 	{
-		dt->player.move_speed_multiplier = 1;
-		dt->view->crouch = 1.0f;
+		dt->player.move_speed_multiplier = 1.0f; 
+	}
+	if (dt->keys[XK_space])
+	{
+		if (dt->jump_dir == 0)
+			dt->jump_dir = 1;
+	}
+	else if (dt->keys[XK_Control_L])
+	{
+		dt->player.crouch = 1;
+		dt->test_value_1 = 0.5f;
+	}
+	else
+	{
+		dt->player.crouch = 0;
 	}
 
 	process_door(dt);

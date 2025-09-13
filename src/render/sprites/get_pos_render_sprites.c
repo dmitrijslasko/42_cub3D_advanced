@@ -19,7 +19,7 @@ int	get_position_and_render_sprite(t_data *dt, t_sprite *sprite)
 	t_x_y	transform;
 	int		sprite_screen_x;
 	t_coor	sprite_size;
-	t_coor	offset;
+	t_coor	position_on_screen;
 
 	distance_to_player.x = sprite->pos.x - dt->player.pos.x;
 	distance_to_player.y = sprite->pos.y - dt->player.pos.y;
@@ -49,14 +49,11 @@ int	get_position_and_render_sprite(t_data *dt, t_sprite *sprite)
 
 	sprite_screen_x = (WINDOW_W / 2) * (1 + transform.x / transform.y);
 	
-	offset.x = sprite_screen_x - sprite_size.x / 2;
-	offset.y = dt->view->screen_center_y - (sprite_size.y + sprite->y_offset) / 3;
-	// offset.y = dt->view->screen_center_y - (sprite_size.y + dt->test_value_2 + sprite->y_offset) / 3;
+	position_on_screen.x = sprite_screen_x - sprite_size.x / 2;
 
-	// print_separator_default();
-	// printf("SIZE: %d %d\n", sprite_size.x, sprite_size.y);
-	// printf("OFFSET: %d %d\n", offset.x, offset.y);
-	// printf("SPRITE CHAR: %c\n", sprite->map_char);
-	render_sprite(dt, sprite, &offset, &sprite_size);
+	int off = sprite_size.y * dt->z_offset * 0.5f;
+	position_on_screen.y = dt->view->screen_center_y - off - (sprite_size.y / 3) - sprite->y_offset;
+
+	render_sprite(dt, sprite, &position_on_screen, &sprite_size);
 	return (EXIT_SUCCESS);
 }

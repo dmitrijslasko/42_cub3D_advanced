@@ -183,6 +183,33 @@ int animate_sprites(t_data *dt)
 	return (EXIT_SUCCESS);
 }
 
+int process_z_offset(t_data *dt)
+{
+	float jump_speed = 0.05f;
+	if (dt->jump_dir == 1 && dt->z_offset >= -0.5f)
+	{		
+		dt->z_offset -= jump_speed;
+		if (dt->z_offset <= -0.5f)
+		{
+			dt->z_offset = -0.5f;
+			dt->jump_dir = -1;
+		}
+		return 0;
+	}
+	else if (dt->jump_dir == -1)
+	{
+		dt->z_offset += jump_speed;
+		if (dt->z_offset >= 0.0f)
+		{
+			dt->z_offset = 0.0f;
+			dt->jump_dir = 0;
+		}
+	}
+	// else if (dt->test_value_1 == 0.0f)
+	// 	dt->jump_dir = 0;
+	return 0;
+}
+
 int	render_frame(void *param)
 {
 	t_data		*dt;
@@ -209,6 +236,8 @@ int	render_frame(void *param)
 	
 	if (process_game_status(dt) != GAME_SCREEN)
 		return (dt->game_status);
+
+	process_z_offset(dt);
 
 	process_keyboard_keypresses(dt);
 

@@ -200,7 +200,7 @@ typedef struct s_player
 
 	bool		can_move;
 	bool		is_moving;
-	float		crouch;
+	char		crouch;
 
 	float		move_speed_multiplier;
 	int			health_level;
@@ -408,13 +408,20 @@ typedef struct s_data
 	int					active_level;
 	int					gamescore;
 	
-	float				test_value_1;
+	int				test_value_1;
 	int					test_value_2;
 	float				test_value_3;
 	float				test_value_4;
 
 	int					sprite_pulse_coef;
 	int					sprite_pulse_step;
+
+	int					water_level;
+
+	float				fov;
+	int					in_jump;
+	float				z_offset;
+	int					jump_dir;
 
 }	t_data;
 
