@@ -1,8 +1,6 @@
 
 DEF         textures/default-fallback-texture.xpm
 
-SKY         textures/sky/sky_3.xpm
-
 F1          textures/sushi-ninja/ground2.xpm
 C1          textures/sushi-ninja/pink-window-2.xpm
 
@@ -26,28 +24,14 @@ DOOR_03_S   textures/doors/door-side-grey.xpm
 
 ED1    	    textures/doors/door-cyan.xpm
 
-
 11911211111111!111112
-1   $12UUU24F  $ 2J22
-1   92B   23G    Q  8
-9   12    822 Q  D 2
-1   12      ]       22
-11=!12      2F 2  2  2
-22 282      2282432 P2
-2O          G32 F22A22
-22        C F42   222 
-2P          222     2
-228282 282222    R  2
-55       5          9
-5O       5   Q      1
-55       ]         A1
-5O       5    T     !
-55P5$5P5P5          1
-55555555551=111=111-111
-1TRTTQ   1   1A  1    1
-!     B  ]  D1  J1B   1
-11111111111U1111!1111 1
-666666666661666666666 1
-6$ A  6     6        N1
-6666     6    666666666
-66666666666666666666666
+1191121111M-111111112
+1                   1
+1      Z            1
+1                   1
+1      Z            1
+1                   1
+1      Z  N         1
+1                   1
+1      Z            1
+11911211111111!111112
