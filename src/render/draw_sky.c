@@ -79,7 +79,7 @@ int	render_sky(t_data *dt, float angle_offset, int texture_start_y)
 	while (screen.x < WINDOW_W)
 	{
 		wall_height = ft_min_float(dt->rays[screen.x * CASTED_RAYS_COUNT / WINDOW_W].wall_height, (float)WINDOW_H);
-		max_sky_y = dt->view->screen_center_y - (int)wall_height / 2;
+		max_sky_y = dt->view->screen_center_y;
 		screen.y = 0;
 		while (screen.y < max_sky_y)
 		{

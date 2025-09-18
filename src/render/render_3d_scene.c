@@ -19,6 +19,7 @@ void	render_3d_scene(t_data *dt)
 	int	i;
 
 	i = 0;
+	draw_background(dt->raycasting_scene_img, BLACK);
 	render_floor_and_ceiling(dt);
 
 	while (i < CASTED_RAYS_COUNT)

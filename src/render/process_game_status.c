@@ -21,6 +21,8 @@ int process_game_status(t_data *dt)
 	dt->player.plane_x = dt->player.orientation_vector.y * (FIELD_OF_VIEW_SCALE);
 	dt->player.plane_y = dt->player.orientation_vector.x * (FIELD_OF_VIEW_SCALE);
 
+	dt->player.can_move = 0;
+
 	if (dt->game_status == WELCOME_SCREEN)
 	{
 		mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr, dt->game_menu_img->mlx_img, 0, 0);
@@ -37,7 +39,10 @@ int process_game_status(t_data *dt)
 		if (dt->keys[XK_space] == 0)	
 			return (dt->game_status);
 		else 
+		{
+			dt->keys[XK_space] = 0;
 			dt->game_status = GAME_SCREEN;
+		}
 	}
 
 	if (dt->game_status == LEVEL_FINISH)
@@ -47,6 +52,7 @@ int process_game_status(t_data *dt)
 			return (dt->game_status);
 		else 
 		{
+			dt->keys[XK_space] = 0;
 			dt->active_level++;
 			dt->active_level %= NUMBER_OF_LEVELS;
 			update_current_level_pointers(dt);

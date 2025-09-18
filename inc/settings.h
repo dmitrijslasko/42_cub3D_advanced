@@ -135,8 +135,8 @@
 # define VERTICAL_LOOK_LOCK_DOWN			100
 
 // mouse sensitivity
-# define ENABLE_MOUSE       				0
-# define MOUSE_SENS_ROTATE 					2.0f
+# define ENABLE_MOUSE       				1
+# define MOUSE_SENS_ROTATE 					1.0f
 //# define MOUSE_SENS_DRAG					0.05f
 # define MOUSE_SENS_SCROLL 					0.1f
 # define MOUSE_CENTER_TOLERANCE_PX			20

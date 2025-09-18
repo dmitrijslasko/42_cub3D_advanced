@@ -41,8 +41,8 @@ static void	init_sprites(t_data *dt, int index)
 				if (ft_strchr(ENEMY_SPRITES, sprite_type))
 					level->sprites[i].type = ENEMY;
 
-				level->sprites[i].pos.x = col + 0.5f;
-				level->sprites[i].pos.y = row + 0.5f;
+				level->sprites[i].pos.x = col + 0.5f + (rand() % 5) / 50.0f;
+				level->sprites[i].pos.y = row + 0.5f + (rand() % 5) / 50.0f;
 
 				level->sprites[i].is_hidden = 0;
 

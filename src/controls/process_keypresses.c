@@ -116,11 +116,13 @@ void	process_keyboard_keypresses(t_data *dt)
 	if (dt->keys[XK_h])
 	{
 		dt->test_value_1 -= 1;
+		dt->test_value_3 -= 0.05f;
 		printf("%f\n", dt->test_value_1);
 	}
 	if (dt->keys[XK_j])
 	{
 		dt->test_value_1 += 1;
+		dt->test_value_3 += 0.05f;
 		printf("%d\n", dt->test_value_1);
 	}
 	// if (dt->keys[XK_n])

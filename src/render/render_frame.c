@@ -222,6 +222,7 @@ int process_z_offset(t_data *dt)
             dt->z_offset   = target_baseline;
             dt->velocity_z = 0.0f;
             dt->jump_dir   = 0; // landed
+			dt->keys[XK_space] = 0;
         }
     }
     else
@@ -240,7 +241,6 @@ int process_z_offset(t_data *dt)
                 dt->z_offset = target_baseline;
         }
     }
-
     return (EXIT_SUCCESS);
 }
 
@@ -266,30 +266,19 @@ int	render_frame(void *param)
 	dt->runtime_stats.last_time = current_time;
 	dt->runtime_stats.frames_drawn_count++;
 
-	dt->sprite_pulse_coef += dt->sprite_pulse_step;
-	if (dt->sprite_pulse_coef <= -10 || dt->sprite_pulse_coef >= 10)
-		dt->sprite_pulse_step *= -1;
+	// dt->sprite_pulse_coef += dt->sprite_pulse_step;
+	// if (dt->sprite_pulse_coef <= -10 || dt->sprite_pulse_coef >= 10)
+	// 	dt->sprite_pulse_step *= -1;
 	
 	if (process_game_status(dt) != GAME_SCREEN)
 		return (dt->game_status);
 
 	process_z_offset(dt);
-
 	process_keyboard_keypresses(dt);
-
 	animate_doors(dt);
-
 	calculate_all_rays(dt);
-
 	render_3d_scene(dt);
 	
-	// for (int i = 0; i < 4; i++)
-	// {
-	// 	for (int j = 0; j < dt->levels[i].sprite_count; j++)
-	// 		printf("%f\n", dt->levels[i].sprites[i].speed);
-	// 	print_separator_default();
-	// }
-
 	put_img_to_img(dt->final_frame_img, dt->raycasting_scene_img, 0, 0);
 
 	if (RENDER_SPRITES)

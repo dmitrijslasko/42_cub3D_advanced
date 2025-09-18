@@ -2,18 +2,22 @@
 
 static int set_animation_speed(t_sprite *sprite, int *sprite_animation_speed)
 {
-	if (sprite->state == MOVING)
-		*sprite_animation_speed = 15;
-	else if (sprite->state == HURT)
-		*sprite_animation_speed = 10;
-	else if (sprite->state == DYING)
-		*sprite_animation_speed = 10;
-	else if (sprite->state == SHOOTING)
-		*sprite_animation_speed = 5;
-	else
-		*sprite_animation_speed = 15;
+    if (sprite->state == MOVING)
+        *sprite_animation_speed = 15;
+    else if (sprite->state == HURT)
+        *sprite_animation_speed = 10;
+    else if (sprite->state == DYING)
+    {
+        int base = 6;
+        int variation = rand() % 6; // 0..5
+        *sprite_animation_speed = base + variation; // 10–15
+    }
+    else if (sprite->state == SHOOTING)
+        *sprite_animation_speed = 5;
+    else
+        *sprite_animation_speed = 15;
 
-	return (EXIT_SUCCESS);
+    return (EXIT_SUCCESS);
 }
 
 int render_sprite(t_data *dt, t_sprite *sprite, t_coor *position_on_screen, t_coor *sprite_size)
@@ -59,11 +63,7 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *position_on_screen, t_co
 		sprite->last_frame_time = dt->runtime_stats.last_time;
 	}
 
-	// coor.y = ft_max(position_on_screen->y, 0);
-	// subtract: positive z_position_on_screen = jump (sprites appear lower), negative = crouch (sprites appear higher)
-
 	coor.y = ft_max(position_on_screen->y, 0);
-	
 	// while (coor.y < sprite_size->y + position_on_screen->y && coor.y < WINDOW_H)
 	while (coor.y < sprite_size->y + position_on_screen->y && coor.y < WINDOW_H)
 	{
@@ -103,6 +103,7 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *position_on_screen, t_co
 				sprite_texture_coor = calculate_tex_x_y(sprite->texture, &coor, position_on_screen, sprite, row, col);
 				sprite_put_color(dt, sprite, &coor, &sprite_texture_coor);
 				
+				// this will trigger on the first run (vertical line) only
 				if (sprite->start_x == -1)
 				{
 					sprite->start_x = coor.x;
@@ -113,11 +114,15 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *position_on_screen, t_co
 				float distance;
 					
 				distance = sprite->distance_to_player;
-				aim = ft_max(10, 100 - distance * 20);
+				// aim = ft_max(10, 100 - distance * 20);
+				aim = sprite->size.x / 4;
 				sprite->aim = aim;
-				if (distance > dt->player.selected_weapon->max_distance)
+				if (distance > dt->player.selected_weapon->max_distance || sprite->state == DYING)
 					;
-				else if (sprite->center_x >= WINDOW_W / 2 - aim && sprite->center_x <= WINDOW_W / 2 + aim && sprite->state != DYING)
+				else if (distance < 0.5)
+					targets_sprite = 1;
+				else if (	sprite->center_x >= WINDOW_W / 2 - aim && 
+							sprite->center_x <= WINDOW_W / 2 + aim)
 					targets_sprite = 1;
 			}
 			coor.x++;

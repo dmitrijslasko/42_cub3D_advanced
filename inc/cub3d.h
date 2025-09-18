@@ -408,7 +408,7 @@ typedef struct s_data
 	int					active_level;
 	int					gamescore;
 	
-	int				test_value_1;
+	int					test_value_1;
 	int					test_value_2;
 	float				test_value_3;
 	float				test_value_4;
