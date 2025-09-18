@@ -186,35 +186,64 @@ int animate_sprites(t_data *dt)
 int process_z_offset(t_data *dt)
 {
     // physics constants
-    float gravity = 0.0035f;     // how strongly player is pulled down
-    float jump_strength = 0.07f; // initial velocity when jumping
+    float gravity       = 0.0035f;
+    // float jump_strength = 0.07f;
+    float crouch_speed  = 0.05f;
+    float crouch_offset = 0.5f; // how deep crouch is
 
-	jump_strength *= dt->player.selected_weapon->weight;
-    // start jump if triggered
-    if (dt->jump_dir == 1) // "jump key pressed"
-    {	
-        dt->velocity_z = -jump_strength; // give upward impulse
-        dt->jump_dir = 2;                // mark as "in air"
-		dt->player.move_speed_multiplier = 0.1f;
+	float jump_strength = dt->jump_strength;
+    jump_strength *= dt->player.selected_weapon->weight;
+
+    // ------------------
+    // standing/crouch baseline
+    // ------------------
+    float target_baseline = (dt->crouch ? crouch_offset : 0.0f);
+
+    // ------------------
+    // jumping
+    // ------------------
+    if (dt->jump_dir == 1) // jump triggered
+    {
+		if (dt->player.is_moving)
+			dt->player.jump_start_speed_multiplier = dt->player.move_speed_multiplier;
+		else
+			dt->player.jump_start_speed_multiplier = 0.4f;
+        dt->velocity_z = -jump_strength;
+        dt->jump_dir   = 2; // airborne
     }
 
-    // apply gravity if in air
-    if (dt->jump_dir == 2)
+    if (dt->jump_dir == 2) // in air
     {
-        dt->velocity_z += gravity;   // gravity pulls down (positive z is downward here)
-        dt->z_offset += dt->velocity_z;
-
-        // hit ground
-        if (dt->z_offset >= 0.1f)
+        dt->velocity_z += gravity;
+        dt->z_offset   += dt->velocity_z;
+        // hit "ground" = target baseline
+        if (dt->z_offset >= 0.0f)
         {
-            dt->z_offset = 0.0f;
+            dt->z_offset   = target_baseline;
             dt->velocity_z = 0.0f;
-            dt->jump_dir = 0; // landed
+            dt->jump_dir   = 0; // landed
+        }
+    }
+    else
+    {
+        // smoothly move toward crouch/stand baseline when not jumping
+        if (dt->z_offset < target_baseline)
+        {
+            dt->z_offset += crouch_speed;
+            if (dt->z_offset >= target_baseline)
+                dt->z_offset = target_baseline;
+        }
+        else if (dt->z_offset >= target_baseline)
+        {
+            dt->z_offset -= crouch_speed;
+            if (dt->z_offset <= target_baseline)
+                dt->z_offset = target_baseline;
         }
     }
 
     return (EXIT_SUCCESS);
 }
+
 
 
 int	render_frame(void *param)

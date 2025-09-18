@@ -60,7 +60,6 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *position_on_screen, t_co
 	}
 
 	// coor.y = ft_max(position_on_screen->y, 0);
-
 	// subtract: positive z_position_on_screen = jump (sprites appear lower), negative = crouch (sprites appear higher)
 
 	coor.y = ft_max(position_on_screen->y, 0);

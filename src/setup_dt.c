@@ -76,6 +76,8 @@ int	setup_dt(t_data *dt)
 	dt->test_value_3 = 0.0f;
 	dt->test_value_4 = 0.0f;
 
+	dt->jump_strength = 0.07f;
+
 	// gamescore
 	dt->gamescore = 0;
 	

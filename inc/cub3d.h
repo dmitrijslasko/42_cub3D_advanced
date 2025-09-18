@@ -203,8 +203,8 @@ typedef struct s_player
 	char		crouch;
 
 	float		move_speed_multiplier;
+	float		jump_start_speed_multiplier;
 	int			health_level;
-	// int			ammo_level;
 
 	t_weapon	*selected_weapon;
 
@@ -423,6 +423,8 @@ typedef struct s_data
 	float				z_offset;
 	int					jump_dir;
 	float				velocity_z;
+	int					crouch;
+	float				jump_strength;
 
 }	t_data;
 

@@ -102,6 +102,7 @@ void	process_keyboard_keypresses(t_data *dt)
 		move_sideways(dt, 1);
 		is_moving_now = 1;
 	}
+	dt->player.is_moving = is_moving_now;
 	// if (dt->keys[XK_f])
 	// {
 	// 	// dt->test_value_1 -= 10.0f;
@@ -143,18 +144,20 @@ void	process_keyboard_keypresses(t_data *dt)
 		*dt->ambient_light = fmax(1.0f, *dt->ambient_light / 1.1f);
 		printf("Ambient light: %.2f\n", *dt->ambient_light);
 	}
-		
-	dt->player.is_moving = is_moving_now;
-
+	
 	if (dt->keys[XK_Left])
 		rotate_player(dt, KEYBOARD_PLAYER_ROTATION_STEP, 1);
 	if (dt->keys[XK_Right])
 		rotate_player(dt, KEYBOARD_PLAYER_ROTATION_STEP, -1);
-	if (dt->keys[XK_Shift_L] && dt->jump_dir != 2)
-		dt->player.move_speed_multiplier = MOVE_SPEED_MULTIPLIER_SLOW;
+	if (dt->keys[XK_Shift_L])
+	{
+		dt->player.move_speed_multiplier = MOVE_SPEED_MULTIPLIER_FAST;
+		dt->jump_strength = 0.06f;
+	}
 	else
 	{
 		dt->player.move_speed_multiplier = 1.0f; 
+		dt->jump_strength = 0.07f;
 	}
 	if (dt->keys[XK_space])
 	{
@@ -163,8 +166,8 @@ void	process_keyboard_keypresses(t_data *dt)
 	}
 	else if (dt->keys[XK_c] && dt->jump_dir == 0)
 	{
-		dt->player.crouch = 1;
-		dt->z_offset = 0.5f;
+		dt->crouch = 1;
+		dt->player.move_speed_multiplier = 0.5f;
 	}
 	else if (dt->jump_dir == 0)
 	{
