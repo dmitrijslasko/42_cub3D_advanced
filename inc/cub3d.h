@@ -422,6 +422,7 @@ typedef struct s_data
 	int					in_jump;
 	float				z_offset;
 	int					jump_dir;
+	float				velocity_z;
 
 }	t_data;
 

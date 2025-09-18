@@ -47,9 +47,11 @@ int	get_position_and_render_sprite(t_data *dt, t_sprite *sprite)
 
 	sprite_screen_x = (WINDOW_W / 2) * (1 + transform.x / transform.y);
 	
+	t_coor offset;
+
 	offset.x = sprite_screen_x - sprite_size.x / 2;
-	offset.y = dt->view->screen_center_y - (sprite_size.y) / 2;
-	// offset.y = dt->view->screen_center_y - (sprite_size.y + dt->test_value_2 + sprite->y_offset) / 3;
+	offset.y = dt->view->screen_center_y - (sprite_size.y + sprite_size.y * dt->z_offset) / 2;
+	// offset.y = dt->view->screen_center_y - (sprite_size.y + xdt->test_value_2 + sprite->y_offset) / 3;
 
 	// print_separator_default();
 	// printf("SIZE: %d %d\n", sprite_size.x, sprite_size.y);

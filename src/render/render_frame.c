@@ -185,30 +185,37 @@ int animate_sprites(t_data *dt)
 
 int process_z_offset(t_data *dt)
 {
-	float jump_speed = 0.05f;
-	if (dt->jump_dir == 1 && dt->z_offset >= -0.5f)
-	{		
-		dt->z_offset -= jump_speed;
-		if (dt->z_offset <= -0.5f)
-		{
-			dt->z_offset = -0.5f;
-			dt->jump_dir = -1;
-		}
-		return 0;
-	}
-	else if (dt->jump_dir == -1)
-	{
-		dt->z_offset += jump_speed;
-		if (dt->z_offset >= 0.0f)
-		{
-			dt->z_offset = 0.0f;
-			dt->jump_dir = 0;
-		}
-	}
-	// else if (dt->test_value_1 == 0.0f)
-	// 	dt->jump_dir = 0;
-	return 0;
+    // physics constants
+    float gravity = 0.0035f;     // how strongly player is pulled down
+    float jump_strength = 0.07f; // initial velocity when jumping
+
+	jump_strength *= dt->player.selected_weapon->weight;
+    // start jump if triggered
+    if (dt->jump_dir == 1) // "jump key pressed"
+    {	
+        dt->velocity_z = -jump_strength; // give upward impulse
+        dt->jump_dir = 2;                // mark as "in air"
+		dt->player.move_speed_multiplier = 0.1f;
+    }
+
+    // apply gravity if in air
+    if (dt->jump_dir == 2)
+    {
+        dt->velocity_z += gravity;   // gravity pulls down (positive z is downward here)
+        dt->z_offset += dt->velocity_z;
+
+        // hit ground
+        if (dt->z_offset >= 0.1f)
+        {
+            dt->z_offset = 0.0f;
+            dt->velocity_z = 0.0f;
+            dt->jump_dir = 0; // landed
+        }
+    }
+
+    return (EXIT_SUCCESS);
 }
+
 
 int	render_frame(void *param)
 {

@@ -150,7 +150,7 @@ void	process_keyboard_keypresses(t_data *dt)
 		rotate_player(dt, KEYBOARD_PLAYER_ROTATION_STEP, 1);
 	if (dt->keys[XK_Right])
 		rotate_player(dt, KEYBOARD_PLAYER_ROTATION_STEP, -1);
-	if (dt->keys[XK_Shift_L])
+	if (dt->keys[XK_Shift_L] && dt->jump_dir != 2)
 		dt->player.move_speed_multiplier = MOVE_SPEED_MULTIPLIER_SLOW;
 	else
 	{
@@ -161,17 +161,15 @@ void	process_keyboard_keypresses(t_data *dt)
 		if (dt->jump_dir == 0)
 			dt->jump_dir = 1;
 	}
-	else if (dt->keys[XK_Control_L])
+	else if (dt->keys[XK_c] && dt->jump_dir == 0)
 	{
 		dt->player.crouch = 1;
-		dt->test_value_1 = 0.5f;
+		dt->z_offset = 0.5f;
 	}
-	else
+	else if (dt->jump_dir == 0)
 	{
-		dt->player.move_speed_multiplier = 1;
-		// dt->view->crouch = 1.0f;
+		dt->z_offset = 0.0f;
 	}
-
 	process_door(dt);
 	process_vertical_look(dt);
 }
