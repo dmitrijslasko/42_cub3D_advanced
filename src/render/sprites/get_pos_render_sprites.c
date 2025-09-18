@@ -24,36 +24,37 @@ int	get_position_and_render_sprite(t_data *dt, t_sprite *sprite)
 	distance_to_player.x = sprite->pos.x - dt->player.pos.x;
 	distance_to_player.y = sprite->pos.y - dt->player.pos.y;
 
+	// relative orientation to player
 	relative_orientation = fmodf(dt->player.orientation - sprite->orientation, 360.0f);
-
 	if (relative_orientation < 0)
 		relative_orientation += 360.0f;
-	
 	sprite->orientation_to_player = relative_orientation;
 
-	transform.y = (dt->player.orientation_vector.x * distance_to_player.x + \
-					dt->player.orientation_vector.y * distance_to_player.y);
-
+	transform.y = (dt->player.orientation_vector.x * distance_to_player.x + dt->player.orientation_vector.y * distance_to_player.y);
+	// transform.y = (distance_to_player.x * distance_to_player.x + distance_to_player.y * distance_to_player.y);
+	// transform.y = 1;
 	if (transform.y <= 0.1f)
-		return (EXIT_SUCCESS);
+		return (0);
 
 	transform.x = (-1.0f / FIELD_OF_VIEW_SCALE) * \
 					(dt->player.orientation_vector.y * distance_to_player.x - \
 								dt->player.orientation_vector.x * distance_to_player.y);
 
-	sprite_size.y = fmin(WINDOW_H * 4, WINDOW_H / transform.y);
-	sprite_size.x = fmin(WINDOW_W * 4, sprite_size.y);
+	sprite_size.y = (TILE_SIZE / transform.y) * 8.5f;
+	sprite_size.x = sprite_size.y;
 
-	// sprite_size.y += dt->sprite_pulse_coef;
-	// sprite_size.x += dt->sprite_pulse_coef;
+	// sprite_size.x = sprite_size.y;
 
 	sprite_screen_x = (WINDOW_W / 2) * (1 + transform.x / transform.y);
 	
-	position_on_screen.x = sprite_screen_x - sprite_size.x / 2;
+	offset.x = sprite_screen_x - sprite_size.x / 2;
+	offset.y = dt->view->screen_center_y - (sprite_size.y) / 2;
+	// offset.y = dt->view->screen_center_y - (sprite_size.y + dt->test_value_2 + sprite->y_offset) / 3;
 
-	int off = sprite_size.y * dt->z_offset * 0.5f;
-	position_on_screen.y = dt->view->screen_center_y - off - (sprite_size.y / 3) - sprite->y_offset;
-
-	render_sprite(dt, sprite, &position_on_screen, &sprite_size);
+	// print_separator_default();
+	// printf("SIZE: %d %d\n", sprite_size.x, sprite_size.y);
+	// printf("OFFSET: %d %d\n", offset.x, offset.y);
+	// printf("SPRITE CHAR: %c\n", sprite->map_char);
+	render_sprite(dt, sprite, &offset, &sprite_size);
 	return (EXIT_SUCCESS);
 }
