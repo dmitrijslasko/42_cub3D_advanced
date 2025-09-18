@@ -27,7 +27,9 @@ int draw_textured_floor(t_data *dt)
     while (current_row < WINDOW_H)
     {	
         int p = current_row - dt->view->screen_center_y;
-        float rowDistance = ((0.5f * WINDOW_H) / p) / fov_factor;
+        // printf("%f\n", dt->z_offset);
+        float camera_height = ((0.5f - dt->z_offset / 2) * WINDOW_H);
+        float rowDistance = (camera_height / p) / fov_factor;
 
         // Calculate step size for each screen pixel
         float floorStepX = rowDistance * (rayDirX1 - rayDirX0) / WINDOW_W;
@@ -51,7 +53,7 @@ int draw_textured_floor(t_data *dt)
             // Get color and draw pixel
             color = texture.texture_data[TILE_SIZE * texY + texX];
 			apply_ambient_light_shading(*dt->ambient_light, &color);
-            apply_distance_shadow((WINDOW_H - current_row) / 4.0f, &color);
+            // apply_distance_shadow((WINDOW_H - current_row) / 4.0f, &color);
             // color = reduce_saturation(color, ((WINDOW_H - current_row) / (WINDOW_H)) * 2.0f);
             img_pix_put(dt->raycasting_scene_img, x, current_row, color);
 

@@ -19,7 +19,7 @@ int	get_position_and_render_sprite(t_data *dt, t_sprite *sprite)
 	t_x_y	transform;
 	int		sprite_screen_x;
 	t_coor	sprite_size;
-	t_coor	offset;
+	t_coor	position_on_screen;
 
 	distance_to_player.x = sprite->pos.x - dt->player.pos.x;
 	distance_to_player.y = sprite->pos.y - dt->player.pos.y;

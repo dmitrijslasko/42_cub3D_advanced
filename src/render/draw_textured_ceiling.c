@@ -23,7 +23,8 @@ int draw_textured_ceiling(t_data *dt)
         float rayDirY1 = dt->player.orientation_vector.y + plane_y;
 
         int p = y - dt->view->screen_center_y;
-        rowDistance = ((0.5f * WINDOW_H) / p) / fov_factor;
+        float camera_height = ((0.5f + dt->z_offset / 2) * WINDOW_H);
+        rowDistance = (camera_height / p) / fov_factor;
 
         // Calculate step size for each screen pixel
         float floorStepX = rowDistance * (rayDirX1 - rayDirX0) / WINDOW_W;
