@@ -40,10 +40,6 @@ int	get_position_and_render_sprite(t_data *dt, t_sprite *sprite)
 					(dt->player.orientation_vector.y * distance_to_player.x - \
 								dt->player.orientation_vector.x * distance_to_player.y);
 
-	// sprite_size.y = fmin(WINDOW_H * 4, WINDOW_H / transform.y);
-	// sprite_size.x = fmin(WINDOW_W * 4, sprite_size.y);
-
-
 	sprite_size.y = (TILE_SIZE / transform.y) * 8.5f;
 	sprite_size.x = sprite_size.y;
 

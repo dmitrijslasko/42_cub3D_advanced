@@ -1,8 +1,8 @@
 
 DEF         textures/default-fallback-texture.xpm
 
-F1          textures/sushi-ninja/ground2.xpm
-C1          textures/sushi-ninja/pink-window-2.xpm
+F1          ./sprites/test-texture.xpm
+C1          ./sprites/test-texture.xpm
 
 W01         textures/sushi-ninja/concrete-wall-1.xpm
 W02         textures/sushi-ninja/brick-wall.xpm
@@ -27,7 +27,7 @@ ED1    	    textures/doors/door-cyan.xpm
 11911211111111!111112
 1191121111M-111111112
 1                   1
-1      Z            1
+1      Z          $ 1
 1                   1
 1      Z            1
 1                   1
