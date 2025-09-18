@@ -164,7 +164,7 @@ void	process_keyboard_keypresses(t_data *dt)
 	else
 	{
 		dt->player.move_speed_multiplier = 1;
-		dt->view->crouch = 1.0f;
+		// dt->view->crouch = 1.0f;
 	}
 
 	process_door(dt);

@@ -31,7 +31,7 @@ static const t_sprite_file	g_sprites[] = {
 {'J',	"SPRITE_05", 0, 	0, 		{"./sprites/sushi/sushi-9.xpm", "./sprites/sushi/sushi-9.xpm"}},
 {'K',	"SPRITE_05", 0, 	0, 		{"./sprites/sushi/sushi-10.xpm", "./sprites/sushi/sushi-10.xpm"}},
 {'L',	"SPRITE_05", 0, 	0, 		{"./sprites/sushi/sushi-11.xpm", "./sprites/sushi/sushi-11.xpm"}},
-{'M',	"SPRITE_05", 0, 	0, 		{"./sprites/sushi/sushi-12.xpm", "./sprites/sushi/sushi-12.xpm"}},
+{'M',	"SPRITE_05", 0, 	0, 		{"./sprites/test-texture.xpm", "./sprites/test-texture.xpm"}},
 
 // decors / furniture / static sprites
 {'O',	"SPRITE_03", 0, 	0, 		{"./sprites/tree.xpm", "./sprites/tree.xpm"}},

@@ -30,9 +30,7 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *offset, t_coor *sprite_s
 		return (EXIT_SUCCESS);
 
 	set_animation_speed(sprite, &sprite_animation_speed);
-	
 	int frame_time = (1000 / FPS) * sprite_animation_speed;
-	
 	if (dt->runtime_stats.last_time - sprite->last_frame_time > frame_time)
 	{
 		if (sprite->state == MOVING)
