@@ -21,7 +21,7 @@ int	load_ui_messages(t_data *dt)
 	printf(TXT_YELLOW ">>> LOADING UI MESSAGES\n" TXT_RESET);
 	dt->message_img = protected_malloc(sizeof(t_img), dt);
 	dt->message_img->mlx_img = mlx_xpm_file_to_image(dt->mlx_ptr,
-			"./ui/open-close-door.xpm", &w, &h);
+			"./assets/ui/open-close-door.xpm", &w, &h);
 	if (!dt->message_img->mlx_img)
 	{
 		fprintf(stderr, "Failed to load message_img\n");

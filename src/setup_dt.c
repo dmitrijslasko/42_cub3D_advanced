@@ -45,7 +45,7 @@ int	setup_dt(t_data *dt)
 	load_image(dt, dt->game_menu_img2, MENU2_PATHFILE);
 	load_image(dt, dt->game_level_cleared_img, LEVEL_CLEARED_PATHFILE);
 	load_image(dt, dt->game_won_img, GAME_WON_PATHFILE);
-	load_image(dt, dt->noise_img, "./textures/noise.xpm");
+	load_image(dt, dt->noise_img, "./assets/textures/noise.xpm");
 	
 	load_ui_messages(dt);
 	

@@ -1,8 +1,8 @@
 
 DEF         textures/default-fallback-texture.xpm
 
-F1          ./sprites/test-texture.xpm
-C1          ./sprites/test-texture.xpm
+F1          ./assets/sprites/test-texture.xpm
+C1          ./assets/sprites/test-texture.xpm
 
 W01         textures/sushi-ninja/concrete-wall-1.xpm
 W02         textures/sushi-ninja/brick-wall.xpm

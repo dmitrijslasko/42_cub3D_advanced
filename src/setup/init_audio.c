@@ -36,7 +36,7 @@
 // 	printf(TXT_YELLOW ">>> LOADING BACKGROUND MUSIC\n" TXT_RESET);
 // 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 // 	Mix_VolumeMusic(BACKGROUND_MUSIC_VOLUME);
-// 	background_music = Mix_LoadMUS("./sounds/music.wav");
+// 	background_music = Mix_LoadMUS("./assets/sounds/music.wav");
 // 	Mix_PlayMusic(background_music, -1);
 // 	printf(TXT_GREEN "Done!\n" TXT_RESET);
 // 	return (background_music);

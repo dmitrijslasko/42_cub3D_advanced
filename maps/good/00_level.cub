@@ -1,30 +1,30 @@
 
-DEF         textures/default-fallback-texture.xpm
+DEF         ./assets/textures/default-fallback-texture.xpm
 
-SKY         textures/sky/sky_3.xpm
+SKY         ./assets/textures/sky/sky_3.xpm
 
-F1          textures/sushi-ninja/ground2.xpm
-C1          textures/sushi-ninja/pink-window-2.xpm
+F1          ./assets/textures/sushi-ninja/ground2.xpm
+C1          ./assets/textures/sushi-ninja/pink-window-2.xpm
 
-W01         textures/sushi-ninja/concrete-wall-1.xpm
-W02         textures/sushi-ninja/brick-wall.xpm
-W03 	    textures/sushi-ninja/street-vendor-1.xpm
-W04 	    textures/sushi-ninja/street-vendor-2.xpm
-W05         textures/sushi-ninja/ground2.xpm
-W06         textures/sushi-ninja/bamboo-wall-2.xpm
-W07         textures/sushi-ninja/pink-window-1.xpm
-W08         textures/sushi-ninja/brick-wall-1-1.xpm
-W09         textures/sushi-ninja/concrete-wall-1-1.xpm
-W10         textures/sushi-ninja/concrete-wall-1-2.xpm
+W01         ./assets/textures/sushi-ninja/concrete-wall-1.xpm
+W02         ./assets/textures/sushi-ninja/brick-wall.xpm
+W03 	    ./assets/textures/sushi-ninja/street-vendor-1.xpm
+W04 	    ./assets/textures/sushi-ninja/street-vendor-2.xpm
+W05         ./assets/textures/sushi-ninja/ground2.xpm
+W06         ./assets/textures/sushi-ninja/bamboo-wall-2.xpm
+W07         ./assets/textures/sushi-ninja/pink-window-1.xpm
+W08         ./assets/textures/sushi-ninja/brick-wall-1-1.xpm
+W09         ./assets/textures/sushi-ninja/concrete-wall-1-1.xpm
+W10         ./assets/textures/sushi-ninja/concrete-wall-1-2.xpm
 
-DOOR_01     textures/doors/door-orange.xpm
-DOOR_01_S   textures/doors/door-side-orange.xpm
-DOOR_02    	textures/sushi-ninja/shoji-door.xpm
-DOOR_02_S  	textures/sushi-ninja/shoji-door-sides.xpm
-DOOR_03     textures/doors/door-grey.xpm
-DOOR_03_S   textures/doors/door-side-grey.xpm
+DOOR_01     ./assets/textures/doors/door-orange.xpm
+DOOR_01_S   ./assets/textures/doors/door-side-orange.xpm
+DOOR_02    	./assets/textures/sushi-ninja/shoji-door.xpm
+DOOR_02_S  	./assets/textures/sushi-ninja/shoji-door-sides.xpm
+DOOR_03     ./assets/textures/doors/door-grey.xpm
+DOOR_03_S   ./assets/textures/doors/door-side-grey.xpm
 
-ED1    	    textures/doors/door-cyan.xpm
+ED1    	    ./assets/textures/doors/door-cyan.xpm
 
 
 11911211111111!111112

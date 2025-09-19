@@ -1,8 +1,5 @@
 *.o
+obj
 cub3D
+cub3D_bonus
 .pdf
-#README.md
-
-# ⛳ Keep local SDL builds
-!lib/SDL2/build/**
-!lib/SDL2_mixer/build/**
