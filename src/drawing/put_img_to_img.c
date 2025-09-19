@@ -17,9 +17,9 @@ static unsigned int	get_pixel(t_img *img, int x, int y)
 	return (*(unsigned int *)(img->addr + (y * img->line_len + x * (img->bpp / 8))));
 }
 
-static void	put_pixel(t_img *img, int x, int y, unsigned int color)
+static void	put_pixel(t_img *img, int x, int y, unsigned int src_color)
 {
-	*(unsigned int *)(img->addr + (y * img->line_len + x * (img->bpp / 8))) = color;
+	*(unsigned int *)(img->addr + (y * img->line_len + x * (img->bpp / 8))) = src_color;
 }
 
 void	put_img_to_img_circle(t_img *dest, t_img *src, int dx, int dy)
@@ -28,7 +28,7 @@ void	put_img_to_img_circle(t_img *dest, t_img *src, int dx, int dy)
 	size_t			y;
 	int				src_x;
 	int				src_y;
-	unsigned int	color;
+	unsigned int	src_color;
 	size_t				dist_x;
 	size_t				dist_y;
 
@@ -56,8 +56,8 @@ void	put_img_to_img_circle(t_img *dest, t_img *src, int dx, int dy)
 			if (src_x >= 0 && src_y >= 0 && src_x <= \
 				(int)src->width && src_y <= (int)src->height)
 			{
-				color = get_pixel(src, src_x, src_y);
-				put_pixel(dest, x, y, color);
+				src_color = get_pixel(src, src_x, src_y);
+				put_pixel(dest, x, y, src_color);
 			}
 			x++;
 		}
@@ -65,11 +65,29 @@ void	put_img_to_img_circle(t_img *dest, t_img *src, int dx, int dy)
 	}
 }
 
+static unsigned int blend_50(unsigned int src, unsigned int dest)
+{
+	unsigned char sr = (src >> 16) & 0xFF;
+	unsigned char sg = (src >> 8) & 0xFF;
+	unsigned char sb = src & 0xFF;
+
+	unsigned char dr = (dest >> 16) & 0xFF;
+	unsigned char dg = (dest >> 8) & 0xFF;
+	unsigned char db = dest & 0xFF;
+
+	unsigned char r = (sr + dr) / 2;
+	unsigned char g = (sg + dg) / 2;
+	unsigned char b = (sb + db) / 2;
+
+	return (r << 16) | (g << 8) | b;
+}
+
 void	put_img_to_img(t_img *dest_img, t_img *src_img, int dx, int dy)
 {
-	int			x;
-	int			y;
-	unsigned int	color;
+	int				x;
+	int				y;
+	unsigned int	src_color;
+	unsigned int	dest_color;
 
 	y = 0;
 	while (y < src_img->height)
@@ -77,15 +95,16 @@ void	put_img_to_img(t_img *dest_img, t_img *src_img, int dx, int dy)
 		x = 0;
 		while (x < src_img->width)
 		{
-			if (x + dx < 0 || y + dy < 0)
-				;
-			else if (x + dx >= dest_img->width || y + dy >= dest_img->height)
-				;
-			else
+			if (x + dx >= 0 && y + dy >= 0
+				&& x + dx < dest_img->width && y + dy < dest_img->height)
 			{
-				color = get_pixel(src_img, x, y);
-				if (color != BLACK)
-					put_pixel(dest_img, dx + x, dy + y, color);
+				src_color = get_pixel(src_img, x, y);
+				if (src_color != BLACK)
+				{
+					dest_color = get_pixel(dest_img, dx + x, dy + y);
+					// put_pixel(dest_img, dx + x, dy + y, blend_50(src_color, dest_color));
+					put_pixel(dest_img, dx + x, dy + y, src_color);
+				}
 			}
 			x++;
 		}

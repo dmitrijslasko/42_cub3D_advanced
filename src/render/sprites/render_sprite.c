@@ -51,12 +51,10 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *position_on_screen, t_co
 		}
 		else if (sprite->state == DYING)
 		{
+			if (sprite->current_frame == 0)
+				play_sound(DEATH_SOUND);
 			if (sprite->current_frame < 5)
-			{
-				if (sprite->current_frame == 0)
-					play_sound(DEATH_SOUND);
 				sprite->current_frame++;
-			}
 		}
 		else
 			sprite->current_frame = 0;
@@ -64,7 +62,6 @@ int render_sprite(t_data *dt, t_sprite *sprite, t_coor *position_on_screen, t_co
 	}
 
 	coor.y = ft_max(position_on_screen->y, 0);
-	// while (coor.y < sprite_size->y + position_on_screen->y && coor.y < WINDOW_H)
 	while (coor.y < sprite_size->y + position_on_screen->y && coor.y < WINDOW_H)
 	{
 		coor.x = ft_max(position_on_screen->x, 0);

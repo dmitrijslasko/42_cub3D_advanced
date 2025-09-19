@@ -99,7 +99,7 @@
 # define MINIMAP_RENDER_RAYS_ENABLE         1
 # define MINIMAP_RENDER_RAY_COLOR		    YELLOW
 # define MINIMAP_DRAW_EVERY_NTH_RENDER_RAY  5
-# define MINIMAP_ENABLE_ON_START            0
+# define MINIMAP_ENABLE_ON_START            1
 
 
 // gameplay

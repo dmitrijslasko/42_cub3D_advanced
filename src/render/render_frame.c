@@ -187,7 +187,6 @@ int process_z_offset(t_data *dt)
 {
     // physics constants
     float gravity       = 0.0035f;
-    // float jump_strength = 0.07f;
     float crouch_speed  = 0.05f;
     float crouch_offset = 0.5f; // how deep crouch is
 
@@ -209,10 +208,10 @@ int process_z_offset(t_data *dt)
 		else
 			dt->player.jump_start_speed_multiplier = 0.4f;
         dt->velocity_z = -jump_strength;
-        dt->jump_dir   = 2; // airborne
+        dt->jump_dir = 2; // airborne
     }
 
-    if (dt->jump_dir == 2) // in air
+    if (dt->jump_dir == 2) // mid air
     {
         dt->velocity_z += gravity;
         dt->z_offset   += dt->velocity_z;

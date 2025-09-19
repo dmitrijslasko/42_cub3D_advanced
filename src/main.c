@@ -80,7 +80,6 @@ int	main(int argc, char **argv)
 	get_init_player_position(dt.map, &dt.player);
 	printf("Game status set!\n");
 
-	
 	draw_minimap_base_img(&dt);
 
 	print_separator(3, DEF_SEPARATOR_CHAR);
@@ -91,7 +90,7 @@ int	main(int argc, char **argv)
 	printf("Consumables to collect in this level: %d\n", get_curr_level(&dt)->starting_level_consumable_count);
 	print_separator(1, DEF_SEPARATOR_CHAR);
 
-	// init_audio();
+	init_audio();
 	
 	mlx_loop_hook(dt.mlx_ptr, &render_frame, &dt);
 	mlx_loop(dt.mlx_ptr);

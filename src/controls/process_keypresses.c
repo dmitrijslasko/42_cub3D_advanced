@@ -151,10 +151,10 @@ void	process_keyboard_keypresses(t_data *dt)
 		rotate_player(dt, KEYBOARD_PLAYER_ROTATION_STEP, 1);
 	if (dt->keys[XK_Right])
 		rotate_player(dt, KEYBOARD_PLAYER_ROTATION_STEP, -1);
-	if (dt->keys[XK_Shift_L])
+	if (dt->keys[XK_Shift_L] && dt->player.is_moving)
 	{
 		dt->player.move_speed_multiplier = MOVE_SPEED_MULTIPLIER_FAST;
-		dt->jump_strength = 0.06f;
+		dt->jump_strength = 0.04f;
 	}
 	else
 	{

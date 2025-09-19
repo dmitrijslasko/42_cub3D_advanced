@@ -51,7 +51,7 @@ int	setup_dt(t_data *dt)
 	
 	dt->targeted_sprite = NULL;
 
-	dt->water_level = 0;
+	dt->water_level = 0;	// experimental
 	
 	// view
 	setup_view(dt);
@@ -70,13 +70,15 @@ int	setup_dt(t_data *dt)
 	// test value for in-game tests
 
 	dt->z_offset = 0.0f;
+	dt->jump_dir = 0; 
+	dt->velocity_z = 0;
+	dt->crouch = 0;
+	dt->jump_strength = 0.07f;
 
 	dt->test_value_1 = 0;
 	dt->test_value_2 = 0.0f;
 	dt->test_value_3 = 0.0f;
 	dt->test_value_4 = 0.0f;
-
-	dt->jump_strength = 0.07f;
 
 	// gamescore
 	dt->gamescore = 0;
