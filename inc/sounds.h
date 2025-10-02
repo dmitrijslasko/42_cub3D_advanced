@@ -16,6 +16,6 @@
 
 # define BUBBLE_POP_SOUND                   "aplay assets/sounds/bubble-pop.wav > /dev/null 2>&1 &"
 
-# define DEATH_SOUND                        "aplay assets/ssounds/death.wav > /dev/null 2>&1 &"
+# define DEATH_SOUND                        "aplay assets/sounds/death.wav > /dev/null 2>&1 &"
 
 #endif

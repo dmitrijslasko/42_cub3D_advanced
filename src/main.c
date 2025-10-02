@@ -24,7 +24,7 @@ int init_audio(void)
     if (ma_engine_init(NULL, &engine) != MA_SUCCESS) {
         return -1;
     }
-    if (ma_sound_init_from_file(&engine, "sounds/music2.mp3", 0, NULL, NULL, &sound) != MA_SUCCESS) {
+    if (ma_sound_init_from_file(&engine, "./assets/sounds/music2.mp3", 0, NULL, NULL, &sound) != MA_SUCCESS) {
         ma_engine_uninit(&engine);
         return -1;
     }
