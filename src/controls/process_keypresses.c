@@ -139,33 +139,38 @@ void	process_keyboard_keypresses(t_data *dt)
 	if (dt->keys[XK_9])
 	{
 		*dt->ambient_light = fmin(1000.0f, *dt->ambient_light * 1.1f);
-		printf("Ambient light: %.2f\n", *dt->ambient_light);
+		// printf("Ambient light: %.2f\n", *dt->ambient_light);
 	}
 	if (dt->keys[XK_0])
 	{
 		*dt->ambient_light = fmax(1.0f, *dt->ambient_light / 1.1f);
-		printf("Ambient light: %.2f\n", *dt->ambient_light);
+		// printf("Ambient light: %.2f\n", *dt->ambient_light);
 	}
 	
+	// turn left
 	if (dt->keys[XK_Left])
 		rotate_player(dt, KEYBOARD_PLAYER_ROTATION_STEP, 1);
+	// turn right
 	if (dt->keys[XK_Right])
 		rotate_player(dt, KEYBOARD_PLAYER_ROTATION_STEP, -1);
 	if (dt->keys[XK_Shift_L] && dt->player.is_moving)
 	{
 		dt->player.move_speed_multiplier = MOVE_SPEED_MULTIPLIER_FAST;
-		dt->jump_strength = 0.04f;
+		dt->jump_strength = 0.06f;
 	}
 	else
 	{
 		dt->player.move_speed_multiplier = 1.0f; 
-		dt->jump_strength = 0.07f;
+		dt->jump_strength = 0.06f;
 	}
+
+	// jump
 	if (dt->keys[XK_space])
 	{
 		if (dt->jump_dir == 0)
 			dt->jump_dir = 1;
 	}
+	// crouch
 	else if (dt->keys[XK_c] && dt->jump_dir == 0)
 	{
 		dt->crouch = 1;
