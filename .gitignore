@@ -1,0 +1,5 @@
+*.o
+obj
+cub3D
+cub3D_bonus
+.pdf

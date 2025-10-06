@@ -1,0 +1,19 @@
+F  10, 10, 10
+C  10, 10, 10
+
+W1     	textures/simonkraft/bookshelf_02.xpm
+W2      textures/wolfenstein/red_brick.xpm
+W3 		textures/blue-wall.xpm
+W4 		textures/blue-wall-skeleton.xpm
+W5      textures/bookshelf.xpm
+W6      textures/simonkraft/respawn_anchor_side3.xpm
+W7      textures/ceiling.xpm
+W8      textures/simonkraft/bookshelf_01.xpm
+W9      textures/test_floor.xpm
+
+
+11111
+10001
+10S01
+10001
+19991

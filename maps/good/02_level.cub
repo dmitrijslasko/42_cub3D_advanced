@@ -1,0 +1,50 @@
+
+DEF         ./assets/textures/default-fallback-texture.xpm
+
+SKY         ./assets/textures/sky/sky_night.xpm
+
+F1          ./assets/textures/wolfenstein/color_stone.xpm
+C1          ./assets/textures/sushi-ninja/pink-window-2.xpm
+
+W01         ./assets/textures/sushi-ninja/pink-window-2.xpm
+W02         ./assets/textures/sushi-ninja/pink-window-1.xpm
+W03 	    ./assets/textures/sushi-ninja/sakura-wallpaper.xpm
+W04 	    ./assets/textures/sushi-ninja/street-vendor-2.xpm
+W05         ./assets/textures/sushi-ninja/ground2.xpm
+W06         ./assets/textures/sushi-ninja/bamboo-wall-2.xpm
+W07         ./assets/textures/sushi-ninja/pink-window-1.xpm
+W08         ./assets/textures/sushi-ninja/brick-wall-1-1.xpm
+W09         ./assets/textures/sushi-ninja/concrete-wall-1-1.xpm
+W10         ./assets/textures/sushi-ninja/concrete-wall-1-2.xpm
+
+DOOR_01     ./assets/textures/doors/door-cyan.xpm
+DOOR_01_S   ./assets/textures/doors/door-side-cyan.xpm
+DOOR_02    	./assets/textures/sushi-ninja/shoji-door.xpm
+DOOR_02_S  	./assets/textures/sushi-ninja/shoji-door-sides.xpm
+DOOR_03     ./assets/textures/sushi-ninja/bamboo-wall-2.xpm
+DOOR_03_S   ./assets/textures/sushi-ninja/bamboo-wall-2.xpm
+
+ED1    	    ./assets/textures/doors/door-cyan.xpm
+
+
+221212121212121212122
+2      P2P         B2
+1 2    2    g222222 1
+2 222-222         2h2
+1 2A          222 2 1
+2 222222e    22F2 2 2
+1         $   2H  2 1 333
+2 2           22222 2 3 333333
+1 2  222            1 3     P3
+2 2 G C2    g222-22 223 333 3
+1 22-222              | 3 3 P3
+2G    C22   2222222 22333 3 3
+1e  2222P2 2 2      13A |   $3
+2     $2 2 2 2 2222 23A3333 3
+1  22222 2D2 2 2F22 13A33   P3
+2     P2 2 2 2 2H 2 2333  3 3
+1 222222 2 2 2 22 2 1    3  P3
+2 2B2C2  2 2 2    2 2223333 3
+1 2 2 2  2 2 222222  |      P3
+2e       2N2       g222333333
+221212121212121212122

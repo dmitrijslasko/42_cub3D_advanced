@@ -1,0 +1,48 @@
+
+DEF         ./assets/textures/default-fallback-texture.xpm
+
+F1          ./assets/textures/sushi-ninja/ground2.xpm
+C1          ./assets/textures/sushi-ninja/ground2.xpm
+
+W01         ./assets/textures/sushi-ninja/ground2.xpm
+W02         ./assets/textures/sushi-ninja/brick-wall.xpm
+W03 	    ./assets/textures/sushi-ninja/street-vendor-1.xpm
+W04 	    ./assets/textures/sushi-ninja/street-vendor-2.xpm
+W05         ./assets/textures/sushi-ninja/ground2.xpm
+W06         ./assets/textures/sushi-ninja/bamboo-wall-2.xpm
+W07         ./assets/textures/sushi-ninja/pink-window-1.xpm
+W08         ./assets/textures/sushi-ninja/brick-wall-1-1.xpm
+W09         ./assets/textures/sushi-ninja/concrete-wall-1-1.xpm
+W10         ./assets/textures/sushi-ninja/concrete-wall-1-2.xpm
+
+DOOR_01     ./assets/textures/doors/door-orange.xpm
+DOOR_01_S   ./assets/textures/doors/door-side-orange.xpm
+DOOR_02    	./assets/textures/sushi-ninja/ground2.xpm
+DOOR_02_S  ./assets/textures/sushi-ninja/ground2.xpm
+DOOR_03     ./assets/textures/sushi-ninja/bamboo-wall-2.xpm
+DOOR_03_S   ./assets/textures/sushi-ninja/bamboo-wall-2.xpm
+
+ED1    	    ./assets/textures/doors/door-cyan.xpm
+
+
+11111111111111111
+1               1
+1 fffffffffffff 1
+1 fffBffAffffff 1
+1 fffffffffffff 1
+1 ffff$ffffNfff 1
+1 fAffffffffBff 1
+1 fffffffffffff 1
+1 ffffffNffffff 1
+1 fffffffffffff 1
+1 fffDffffffffH 1
+1 fffffffffffff 1
+1 fffffffffffff 1
+1 ffffffffffCff 1
+1 fFfffffffffff 1
+1 fffffffEfffff 1
+1               1
+111111 1 1_11-111
+1   1 1 1   1   1
+1AAA[       1  $1
+11111111111111111

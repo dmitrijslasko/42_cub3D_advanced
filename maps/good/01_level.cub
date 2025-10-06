@@ -1,0 +1,51 @@
+
+DEF         ./assets/textures/default-fallback-texture.xpm
+
+F1          ./assets/textures/sushi-ninja/wooden-wall-2.xpm
+C1          ./assets/textures/sushi-ninja/wooden-wall-1.xpm
+
+W01         ./assets/textures/sushi-ninja/shoji-door-2.xpm
+W02         ./assets/textures/sushi-ninja/brick-wall.xpm
+W03 	    ./assets/textures/sushi-ninja/street-vendor-1.xpm
+W04 	    ./assets/textures/sushi-ninja/street-vendor-2.xpm
+W05         ./assets/textures/sushi-ninja/ground2.xpm
+W06         ./assets/textures/sushi-ninja/bamboo-wall-2.xpm
+W07         ./assets/textures/sushi-ninja/pink-window-1.xpm
+W08         ./assets/textures/sushi-ninja/pink-window-1.xpm
+W09         ./assets/textures/sushi-ninja/pink-window-1.xpm
+
+DOOR_01    	./assets/textures/sushi-ninja/shoji-door.xpm
+DOOR_01_S  	./assets/textures/sushi-ninja/shoji-door-sides.xpm
+DOOR_02     ./assets/textures/doors/door-orange.xpm
+DOOR_02_S   ./assets/textures/doors/door-side-orange.xpm
+DOOR_03     ./assets/textures/sushi-ninja/bamboo-wall-2.xpm
+DOOR_03_S   ./assets/textures/sushi-ninja/bamboo-wall-2.xpm
+
+ED1    	    ./assets/textures/doors/door-cyan.xpm
+
+
+11111111111111111111111111111
+1   1   1   1   1   1  T1   1
+1   1 U 1 D 1 B 1 A 1 $ 1   1
+1   1   1   1   1   1   1   1
+111111-111-111-111-111-111111
+1   1b                 c1   1
+1 A |   Z   Z   Z   Z   | H 1
+1   1     b   b   b     1   1
+11111   Z   Z   Z   Z   11111
+1   1    $f   f   f     1   1
+1 A |   Z   Z   Z   Z   | F 1
+1   1     b   b   b     1   1
+11111   Z   Z   Z   Z   11111
+1   1     f   f   f     1   1
+1 C |   Z   Z   Z   Z   | J 1
+1   1     b   b   b     1   1
+11111   Z   Z   Z   Z   11111
+1   1     f   f   f     1   1
+1 F |   Z   Z   Z   Z   | F 1
+1   1a                 d1   1
+111111-111-111-111-111-111111
+1   1   1   1   1   1   1   1
+1   1 G 1 J 1   1 N 1   1   1
+1   1$  1   1   1   1R  1   1
+11111111111111111111111111111
