@@ -1,7 +1,6 @@
 # 🧊 Cub3D Advanced (Sushi Ninja)
 
-This version of cub3D is built upon  **basis for a more advanced raycasting engine** with many additional features:  
-[Cub3D] https://github.com/dmitrijslasko/42_cub3D
+This project is an expanded and enhanced version of Cub3D, featuring a reworked raycasting engine with additional gameplay mechanics, lighting, and multilevel design.
 
 ---
 
