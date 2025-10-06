@@ -1,25 +1,23 @@
-# 🧊 Cub3D
+# 🧊 Cub3D Advanced (Sushi Ninja)
 
-## Score:
-✅ 125/125 (with bonus)
-⚠️ Fully compliant with 42 Norm code style rules  
-🧹 No memory leaks  
-
-This version was used as a **basis for a more advanced raycasting engine** with many additional features:  
-[Sushi Ninja 3D – Cub3D Advanced] https://github.com/dmitrijslasko/42_cub3D_advanced
+This version of cub3D is built upon  **basis for a more advanced raycasting engine** with many additional features:  
+[Cub3D] https://github.com/dmitrijslasko/42_cub3D
 
 ---
 
 ## 🚀 Features
-
-- 🕹️ First-person 3D view built from a 2D map  
-- 🔦 Raycasting algorithm for wall rendering  
-- 🎨 Textured walls with distance shadows, single-color floor and ceiling
-- Open-air moving sky
-- 🚪 Doors (opening and closing on button press)  
-- 🐈 Animated sprites (simple animation with 2 frames)
-- 🎵 Smooth player movement and rotation
-- Audio implemented with SDL2 library
+- 🕹️ First-person 3D view built from a 2D map
+- 🔦 Raycasting algorithm for wall rendering (DDA)
+- 🎨 Textured walls, textured floor, and distance-based lighting (ambient light system)
+- ☁️ Open-air moving sky with parallax effect
+- 🚪 Doors that automatically close after a delay
+- 🧭 Multilevel world system — different areas with unique textures and lighting
+- 🐈 Animated sprites with 8-directional rotation and complex animation states
+- ⚔️ Four unique weapons, each with individual physics and attack behavior
+- 💎 Token collection system with in-game score tracking
+- 🎵 Sound design powered by Miniaudio and Linux system calls
+- 🕹️ Smooth player movement, rotation, jumping, and crouching
+- 🧭 Game menu
 
 ---
 
@@ -36,36 +34,11 @@ This version was used as a **basis for a more advanced raycasting engine** with 
 Clone the repository:
 
 ```bash
-git clone https://github.com/dmitrijslasko/42_cub3d.git
-cd cub3d
+git clone https://github.com/dmitrijslasko/42_cub3D_advanced.git
+cd 42_cub3D_advanced
 ```
 
 ---
-
-## 🗺️ Map Format
-Maps are defined in .cub files. Each map includes:  
-Textures for each wall (North, South, East, West)  
-Floor and ceiling colors  
-2D layout with:  
-
-1 → Wall
-0 → Empty space
-N, S, E, W → Player spawn + orientation
-
-Example:
-```bash
-NO ./textures/north.xpm
-SO ./textures/south.xpm
-WE ./textures/west.xpm
-EA ./textures/east.xpm
-F 220,100,0
-C 225,30,0
-
-111111
-100001
-1000N1
-111111
-```
 
 ## 🎯 Goals of the Project
 Understand the math behind raycasting (DDA algorithm)  
@@ -74,13 +47,12 @@ Strengthen skills in C, memory management, and clean coding
 Discover how a simple 2D grid can be transformed into a 3D world  
 
 ## 📚 Resources
-Lode's Raycasting Tutorial  
-MinilibX Documentation  
-Wolfenstein 3D (Wikipedia)  
+[Lode’s Raycasting Tutorial](https://lodev.org/cgtutor/raycasting.html)  
+[MinilibX Documentation](https://harm-smits.github.io/42docs/libs/minilibx)  
+[Wolfenstein 3D (Wikipedia)](https://en.wikipedia.org/wiki/Wolfenstein_3D)
 
 ## 👨‍💻 Authors
-Dmitrijs Lasko  
-Fernanda Vargas  
+Dmitrijs Lasko
 
 ## Questions? 🤔
 **Feel free to contact me:**
