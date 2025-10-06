@@ -1,6 +1,7 @@
 # 🧊 Cub3D Advanced (Sushi Ninja)
 
 This project is an expanded and enhanced version of Cub3D, featuring a reworked raycasting engine with additional gameplay mechanics, lighting, and multilevel design.
+🧩 **Note:** This project is designed to run on **Linux**.
 
 ---
 
