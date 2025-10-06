@@ -40,10 +40,10 @@ cd 42_cub3D_advanced
 ---
 
 ## 🎯 Goals of the Project
-Understand the math behind raycasting (DDA algorithm)  
-Work with MinilibX for window management and graphics  
-Strengthen skills in C, memory management, and clean coding  
-Discover how a simple 2D grid can be transformed into a 3D world  
+- Understand the math behind raycasting (DDA algorithm)  
+- Work with MinilibX for window management and graphics  
+- Strengthen skills in C, memory management, and clean coding  
+- Discover how a simple 2D grid can be transformed into a 3D world  
 
 ## 📚 Resources
 [Lode’s Raycasting Tutorial](https://lodev.org/cgtutor/raycasting.html)  
