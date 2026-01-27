@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:12:07 by fvargas           #+#    #+#             */
-/*   Updated: 2026/01/27 23:20:35 by dmlasko          ###   ########.fr       */
+/*   Updated: 2026/01/27 23:23:44 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,48 +21,50 @@ ma_sound sound;
 
 int init_audio(void)
 {
-    if (ma_engine_init(NULL, &engine) != MA_SUCCESS) {
-        return -1;
-    }
-    if (ma_sound_init_from_file(&engine, "./wassets/sounds/music2.mp3", 0, NULL, NULL, &sound) != MA_SUCCESS) {
-        ma_engine_uninit(&engine);
-        return -1;
-    }
-    // Enable infinite looping
-    ma_sound_set_looping(&sound, MA_TRUE);
-    ma_sound_start(&sound);
-    return 0;
+	if (ma_engine_init(NULL, &engine) != MA_SUCCESS)
+	{
+		return -1;
+	}
+	if (ma_sound_init_from_file(&engine, "./wassets/sounds/music2.mp3", 0, NULL, NULL, &sound) != MA_SUCCESS)
+	{
+		ma_engine_uninit(&engine);
+		return -1;
+	}
+	// Enable infinite looping
+	ma_sound_set_looping(&sound, MA_TRUE);
+	ma_sound_start(&sound);
+	return 0;
 }
 
 void free_audio(void)
 {
-    ma_engine_uninit(&engine);
+	ma_engine_uninit(&engine);
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_data	dt;
+	t_data dt;
 
-	const char *game_levels[] = {	"./maps/good/00_level.cub",
-									"./maps/good/01_level.cub",
-									"./maps/good/02_level.cub",
-									"./maps/good/03_level.cub",
-									NULL}; 
-	
+	const char *game_levels[] = {"./maps/good/00_level.cub",
+								 "./maps/good/01_level.cub",
+								 "./maps/good/02_level.cub",
+								 "./maps/good/03_level.cub",
+								 NULL};
+
 	init_dt(&dt);
 	check_and_parse_all_maps(&dt, argc, game_levels);
-	
+
 	printf("COLS: %d\n", dt.levels[0].map.map_size_cols);
 	printf("ROWS: %d\n", dt.levels[0].map.map_size_rows);
 
 	print_level_map(&dt.levels[0].map);
 	// precalculate sin and cos lookup tables
 	precalculate_trig_tables(&dt);
-	
+
 	// setup minilibx stuff
 	if (setup_mlx_and_win(&dt))
 		return (MLX_ERROR);
-		
+
 	// mimic full screen for immersive gameplay
 	// system("gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false");
 	// mimic_fullscreen();
@@ -90,10 +92,9 @@ int	main(int argc, char **argv)
 	// print_separator(1, DEF_SEPARATOR_CHAR);
 
 	// init_audio();
-	
+
 	mlx_loop_hook(dt.mlx_ptr, &render_frame, &dt);
 	mlx_loop(dt.mlx_ptr);
 
 	return (EXIT_SUCCESS);
 }
-

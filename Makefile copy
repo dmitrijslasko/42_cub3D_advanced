@@ -1,0 +1,7 @@
+all:
+	emcc main.c \
+	-O2 \
+	-s WASM=1 \
+	-s EXPORTED_FUNCTIONS='["_game_step", "_get_framebuffer", "_set_color", "_set_texture", "_grow_rect", "_shrink_rect", "_move_rect", "_malloc", "_free"]' \
+	-s EXPORTED_RUNTIME_METHODS='["cwrap"]' \
+	-o demo.js

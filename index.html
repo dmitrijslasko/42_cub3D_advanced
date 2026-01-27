@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>cub3D WASM Demo</title>
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    canvas {
+      /* upscale without blurring */
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      /* optional: make it bigger on screen */
+      width: 960px;
+      height: 600px;
+    }
+    .instructions {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      color: #eee;
+      font: 14px/1.2 system-ui, sans-serif;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 6px 8px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MUST match your C WIDTH/HEIGHT -->
+  <div class="instructions">arrows - to move; +/- to increase the square</div>
+  <canvas id="game" width="320" height="200"></canvas>
+
+  <script>
+    // Define Module BEFORE loading demo.js
+    var Module = {
+      onRuntimeInitialized() {
+        start();
+      }
+    };
+
+    function start() {
+      console.log("WASM ready");
+
+      const canvas = document.getElementById("game");
+      const ctx = canvas.getContext("2d", { alpha: false });
+
+      // MUST match canvas width/height
+      const W = canvas.width;
+      const H = canvas.height;
+
+      const img = ctx.createImageData(W, H);
+
+      const gameStep = Module.cwrap("game_step", null, ["number"]);
+      const getFB    = Module.cwrap("get_framebuffer", "number");
+      const setColor = Module.cwrap("set_color", null, ["number", "number", "number", "number"]);
+      const setTexture = Module.cwrap("set_texture", null, ["number", "number", "number"]);
+      const growRect = Module.cwrap("grow_rect", null, []);
+      const shrinkRect = Module.cwrap("shrink_rect", null, []);
+      const moveRect = Module.cwrap("move_rect", null, ["number", "number"]);
+
+      let last = performance.now();
+      const keys = new Set();
+
+      function loop(now) {
+        // Clamp dt so tab-switch doesn't explode your movement
+        let dt = (now - last) / 1000.0;
+        last = now;
+        if (dt > 0.05) dt = 0.05;
+
+        const step = 120 * dt;
+        if (keys.has("ArrowLeft")) moveRect(-step, 0);
+        if (keys.has("ArrowRight")) moveRect(step, 0);
+        if (keys.has("ArrowUp")) moveRect(0, -step);
+        if (keys.has("ArrowDown")) moveRect(0, step);
+
+        gameStep(dt);
+
+      const ptr = getFB();
+      const heap = Module.HEAPU8 || HEAPU8;
+      const pixels = new Uint8ClampedArray(
+        heap.buffer,
+        ptr,
+        img.data.length
+      );
+
+        img.data.set(pixels);
+        ctx.putImageData(img, 0, 0);
+
+        requestAnimationFrame(loop);
+      }
+
+      let texturePtr = 0;
+
+      function loadTexture(url) {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.onload = () => {
+          const off = document.createElement("canvas");
+          off.width = img.width;
+          off.height = img.height;
+          const octx = off.getContext("2d");
+          octx.drawImage(img, 0, 0);
+          const data = octx.getImageData(0, 0, off.width, off.height).data;
+          if (texturePtr) Module._free(texturePtr);
+          texturePtr = Module._malloc(data.length);
+          const heap = Module.HEAPU8 || HEAPU8;
+          heap.set(data, texturePtr);
+          setTexture(texturePtr, off.width, off.height);
+        };
+        img.onerror = () => console.warn("Failed to load texture:", url);
+        img.src = url;
+      }
+
+      setColor(255, 0, 255, 255);
+      loadTexture("texture.png");
+
+      document.addEventListener("keydown", (e) => {
+        if (e.code === "Equal") {
+          e.preventDefault();
+          growRect();
+          return;
+        }
+        if (e.code === "Minus") {
+          e.preventDefault();
+          shrinkRect();
+          return;
+        }
+        if (e.code.startsWith("Arrow")) {
+          e.preventDefault();
+          keys.add(e.code);
+        }
+      });
+
+      document.addEventListener("keyup", (e) => {
+        if (e.code.startsWith("Arrow")) {
+          e.preventDefault();
+          keys.delete(e.code);
+        }
+      });
+
+      requestAnimationFrame(loop);
+    }
+  </script>
+
+  <!-- Emscripten output -->
+  <script src="demo.js"></script>
+
+</body>
+</html>
