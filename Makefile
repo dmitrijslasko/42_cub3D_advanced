@@ -6,7 +6,7 @@
 #    By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/02 14:55:41 by fvargas           #+#    #+#              #
-#    Updated: 2025/07/16 19:12:59 by dmlasko          ###   ########.fr        #
+#    Updated: 2026/01/28 00:38:40 by dmlasko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ NAME_BONUS = cub3D_bonus
 
 # COMPILER
 CC = gcc
+EMCC = emcc
 
 # DIRECTORIES
 INC_DIR = ./inc
@@ -71,6 +72,10 @@ LDFLAGS += -lpthread -ldl
 
 # EXTRA FLAGS
 BONUSFLAGS = -DBONUS=1
+WASM_CFLAGS = -O2 -D__EMSCRIPTEN__
+WASM_LDFLAGS = -s WASM=1 -s ALLOW_MEMORY_GROWTH=1 -s ERROR_ON_UNDEFINED_SYMBOLS=0
+WASM_PRELOAD = --preload-file maps@/maps --preload-file assets@/assets
+WASM_OUT = cub3d.js
 
 # ------------------------------------------------------------------------------
 
@@ -295,12 +300,10 @@ ubuntu:
 
 
 wasm:
-	emcc main.c \
-	-O2 \
-	-s WASM=1 \
-	-s EXPORTED_FUNCTIONS='["_game_step", "_get_framebuffer"]' \
-	-s EXPORTED_RUNTIME_METHODS='["cwrap"]' \
-	-o demo.js
+	@$(MAKE) -s -C $(LIBFT_DIR) CC=$(EMCC)
+	@$(EMCC) $(SRC) $(LIBFT) $(CFLAGS) $(WASM_CFLAGS) $(WASM_LDFLAGS) \
+		$(WASM_PRELOAD) -o $(WASM_OUT)
+	@echo "$(B_CYAN)✅ wasm build: $(WASM_OUT)$(RST)"
 
 # ------------------------------------------------------------------------------
 

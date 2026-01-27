@@ -6,7 +6,7 @@
 /*   By: dmlasko <dmlasko@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 00:12:07 by fvargas           #+#    #+#             */
-/*   Updated: 2026/01/27 23:23:44 by dmlasko          ###   ########.fr       */
+/*   Updated: 2026/01/28 00:36:07 by dmlasko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int main(int argc, char **argv)
 {
 	t_data dt;
 
-	const char *game_levels[] = {"./maps/good/00_level.cub",
-								 "./maps/good/01_level.cub",
-								 "./maps/good/02_level.cub",
-								 "./maps/good/03_level.cub",
+	const char *game_levels[] = {"/maps/good/00_level.cub",
+								//  "./maps/good/01_level.cub",
+								//  "./maps/good/02_level.cub",
+								//  "./maps/good/03_level.cub",
 								 NULL};
 
 	init_dt(&dt);
