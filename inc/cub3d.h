@@ -347,6 +347,8 @@ typedef struct s_level
 
 typedef struct s_data
 {
+	uint32_t 			framebuffer[WINDOW_W * WINDOW_H];
+
 	void				*mlx_ptr;
 	void				*win_ptr;
 

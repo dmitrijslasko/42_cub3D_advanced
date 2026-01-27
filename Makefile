@@ -293,6 +293,15 @@ ubuntu:
 	@echo Detected Ubuntu version: $(UBUNTU_VERSION)
 	@echo Using OS tag: $(OS_VERSION_TAG)
 
+
+wasm:
+	emcc main.c \
+	-O2 \
+	-s WASM=1 \
+	-s EXPORTED_FUNCTIONS='["_game_step", "_get_framebuffer"]' \
+	-s EXPORTED_RUNTIME_METHODS='["cwrap"]' \
+	-o demo.js
+
 # ------------------------------------------------------------------------------
 
 .PHONY: all bonus clean fclean re minilibx ubuntu %
