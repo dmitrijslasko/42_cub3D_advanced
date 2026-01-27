@@ -144,7 +144,7 @@ void	process_keyboard_keypresses(t_data *dt)
 	if (dt->keys[XK_0])
 	{
 		*dt->ambient_light = fmax(1.0f, *dt->ambient_light / 1.1f);
-		// printf("Ambient light: %.2f\n", *dt->ambient_light);
+		// printf("Ambient light: %.2f\n", *dt->ambient_light);ww
 	}
 	
 	// turn left

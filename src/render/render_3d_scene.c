@@ -2,14 +2,14 @@
 
 static int	render_floor_and_ceiling(t_data *dt)
 {
-	if (dt->map->textures[SKY].texture.xpm_file_pathfile)
-		draw_sky(dt);
-	else
-		draw_textured_ceiling(dt);
-	draw_textured_floor(dt);
+	// if (dt->map->textures[SKY].texture.xpm_file_pathfile)
+	// 	draw_sky(dt);
+	// else
+	// 	draw_textured_ceiling(dt);
+	// draw_textured_floor(dt);
 
-	// draw_ceiling(dt);
-	// draw_floor(dt);
+	draw_ceiling(dt);
+	draw_floor(dt);
 
 	return (EXIT_SUCCESS);
 }
@@ -19,7 +19,7 @@ void	render_3d_scene(t_data *dt)
 	int	i;
 
 	i = 0;
-	draw_background(dt->raycasting_scene_img, BLACK);
+	// draw_background(dt->raycasting_scene_img, BLACK);
 	render_floor_and_ceiling(dt);
 
 	while (i < CASTED_RAYS_COUNT)
@@ -30,6 +30,6 @@ void	render_3d_scene(t_data *dt)
 	}
 
 	// flashlight
-	if (dt->view->flashlight_on)
-		draw_flashlight(dt, dt->raycasting_scene_img, 150, 0XAAFFFFFF);
+	// if (dt->view->flashlight_on)
+	// 	draw_flashlight(dt, dt->raycasting_scene_img, 150, 0XAAFFFFFF);
 }

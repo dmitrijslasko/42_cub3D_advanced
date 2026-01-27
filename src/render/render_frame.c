@@ -253,7 +253,7 @@ int	render_frame(void *param)
 
 	dt = (t_data *) param;
 
-	reset_mouse_position(dt);
+	// reset_mouse_position(dt);
 
 	current_time = get_current_time_in_ms();
 	dt->runtime_stats.delta_time = current_time - dt->runtime_stats.last_time;
@@ -262,69 +262,72 @@ int	render_frame(void *param)
 		my_sleep();
 		return (0);
 	}
-	dt->runtime_stats.last_time = current_time;
-	dt->runtime_stats.frames_drawn_count++;
+
+	// dt->runtime_stats.last_time = current_time;
+	// dt->runtime_stats.frames_drawn_count++;
 
 	// dt->sprite_pulse_coef += dt->sprite_pulse_step;
 	// if (dt->sprite_pulse_coef <= -10 || dt->sprite_pulse_coef >= 10)
 	// 	dt->sprite_pulse_step *= -1;
 	
-	if (process_game_status(dt) != GAME_SCREEN)
-		return (dt->game_status);
+	// if (process_game_status(dt) != GAME_SCREEN)
+	// 	return (dt->game_status);
 
 	process_z_offset(dt);
 	process_keyboard_keypresses(dt);
 	animate_doors(dt);
+
 	calculate_all_rays(dt);
 	render_3d_scene(dt);
 	
 	put_img_to_img(dt->final_frame_img, dt->raycasting_scene_img, 0, 0);
 
-	if (RENDER_SPRITES)
-	{
-		animate_sprites(dt);
-		render_all_sprites(dt);
-	}
+	// if (RENDER_SPRITES)
+	// {
+	// 	animate_sprites(dt);
+	// 	render_all_sprites(dt);
+	// }
 	
-	// show minimap
-	if (dt->view->show_minimap)
-		update_minimap(dt);
-	render_minimap_and_ui(dt);
+	// // show minimap
+	// if (dt->view->show_minimap)
+	// 	update_minimap(dt);
+	// render_minimap_and_ui(dt);
 
-	// weapon recoil animation (basic)
-	if (dt->weapon_is_animating && dt->view->screen_center_y - WINDOW_H/2 < 10)
-		dt->view->screen_center_y += 1;
-	else if (dt->view->screen_center_y > WINDOW_H / 2)
-		dt->view->screen_center_y -= 4;
+	// // weapon recoil animation (basic)
+	// if (dt->weapon_is_animating && dt->view->screen_center_y - WINDOW_H/2 < 10)
+	// 	dt->view->screen_center_y += 1;
+	// else if (dt->view->screen_center_y > WINDOW_H / 2)
+	// 	dt->view->screen_center_y -= 4;
 	
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr,dt->final_frame_img->mlx_img, 0, 0);
 	
-	show_debug_info(dt);
- 	show_player_info(dt);
-	show_level_info(dt);
+	// show_debug_info(dt);
+ 	// show_player_info(dt);
+	// show_level_info(dt);
 
-	process_sprite_pickups(dt);
+	// process_sprite_pickups(dt);
 
 	// render_ui_message(dt);
-	update_prompt_message(dt);
-	if (dt->view->show_door_open_message)
-		mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, OPEN_DOOR_PROMPT);
+	// update_prompt_message(dt);
+	// if (dt->view->show_door_open_message)
+	// 	mlx_string_put(dt->mlx_ptr, dt->win_ptr, 240, 300, WHITE, OPEN_DOOR_PROMPT);
 	
-	y_offset = 0;
-	if (ENABLE_BOBBING)
-	{
-		bob_walls(dt);
-		y_offset = bob_weapon(dt);
-	}
+	// head bobbing
+	// y_offset = 0;
+	// if (ENABLE_BOBBING)
+	// {
+	// 	bob_walls(dt);
+	// 	y_offset = bob_weapon(dt);
+	// }
 
 	// render weapon	
-	if (dt->player.selected_weapon->type != WEAPON_NO_WEAPON)
-	{
-		animate_weapon(dt);
-		put_img_to_img(dt->final_frame_img, &dt->weapon[dt->player.selected_weapon->type].frames[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
-		if (dt->weapon_current_frame == 3 && dt->rounds_fired < dt->player.selected_weapon->rounds_fired)
-			dt->weapon_current_frame--;
-	}
+	// if (dt->player.selected_weapon->type != WEAPON_NO_WEAPON)
+	// {
+	// 	animate_weapon(dt);
+	// 	put_img_to_img(dt->final_frame_img, &dt->weapon[dt->player.selected_weapon->type].frames[dt->weapon_current_frame], (WINDOW_W - 360) / 2 + y_offset / 4, 20 + y_offset);
+	// 	if (dt->weapon_current_frame == 3 && dt->rounds_fired < dt->player.selected_weapon->rounds_fired)
+	// 		dt->weapon_current_frame--;
+	// }
 
 	// test image
 	// put_img_to_img(dt->final_frame_img, dt->noise_img, WINDOW_W / 2, WINDOW_H / 2);

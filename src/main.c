@@ -24,7 +24,7 @@ int init_audio(void)
     if (ma_engine_init(NULL, &engine) != MA_SUCCESS) {
         return -1;
     }
-    if (ma_sound_init_from_file(&engine, "./assets/sounds/music2.mp3", 0, NULL, NULL, &sound) != MA_SUCCESS) {
+    if (ma_sound_init_from_file(&engine, "./wassets/sounds/music2.mp3", 0, NULL, NULL, &sound) != MA_SUCCESS) {
         ma_engine_uninit(&engine);
         return -1;
     }
@@ -64,11 +64,10 @@ int	main(int argc, char **argv)
 		return (MLX_ERROR);
 		
 	// mimic full screen for immersive gameplay
-	system("gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false");
-	mimic_fullscreen();
+	// system("gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false");
+	// mimic_fullscreen();
 
-	move_mouse_to_center_of_active_window();
-
+	// move_mouse_to_center_of_active_window();
 	setup_keyboard_and_mouse_controls(&dt);
 
 	// setup dt - sets up the whole game structure and data

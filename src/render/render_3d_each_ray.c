@@ -24,7 +24,8 @@ void	put_pix_img(t_data *dt, t_ray *ray, t_coor *texture, t_coor *coor)
 {
 	int		color;
 
-	color = get_color_render3d(dt, ray, texture);
+	color = BLUE;
+	// color = get_color_render3d(dt, ray, texture);
 	if (ENABLE_SHADERS)
 	{
 		apply_wall_orientation_shading(ray, &color);
@@ -56,7 +57,7 @@ void	render_3d_each_ray(t_data *dt, t_ray *ray)
 	coor.y = ft_max(top_y, 0);
 	while (coor.y < bottom_y)
 	{
-		calc_texture_coor(dt, &texture.y, ray, coor.y - top_y);
+		// calc_texture_coor(dt, &texture.y, ray, coor.y - top_y);
 		coor.x = ft_max(ray->id * (WINDOW_W / CASTED_RAYS_COUNT), 0);
 		while (coor.x < (ray->id + 1) * (WINDOW_W / CASTED_RAYS_COUNT) && coor.x < WINDOW_W)
 		{
