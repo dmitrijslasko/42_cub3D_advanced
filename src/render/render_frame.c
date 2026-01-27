@@ -278,6 +278,7 @@ int	render_frame(void *param)
 	animate_doors(dt);
 
 	calculate_all_rays(dt);
+	
 	render_3d_scene(dt);
 	
 	put_img_to_img(dt->final_frame_img, dt->raycasting_scene_img, 0, 0);
