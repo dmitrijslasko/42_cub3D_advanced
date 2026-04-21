@@ -3,3 +3,6 @@ obj
 cub3D
 cub3D_bonus
 .pdf
+lib/SDL2*
+*.a
+*.so

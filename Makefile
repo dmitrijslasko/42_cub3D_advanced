@@ -47,8 +47,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 # SDL2_INC := ./lib/SDL2/build/include/SDL2
 # SDL2_MIXER_INC := ./lib/SDL2_mixer/build/include
 
-MINILIBX = $(MINILIBX_DIR)libmlx.a
 MINILIBX_DIR = $(LIBDIRS)/minilibx/
+MINILIBX = $(MINILIBX_DIR)libmlx.a
 
 # COMPILATION FLAGS
 # CFLAGS = -Wall -Wextra -Werror
@@ -235,7 +235,7 @@ test: fclean bonus
 
 all: $(NAME) $(HEADER_FILE_M)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(MINILIBX)
 	@$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $@
 	@echo "$(B_CYAN)✅ $@ successfully compiled.$(RST)"
 	@echo "🚩 $(CYAN)Flags: \n$(CFLAGS)\n$(LDFLAGS)$(RST)"
@@ -251,7 +251,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 bonus: $(LIBFT) $(NAME_BONUS) $(HEADER_FILE_B)
 
-$(NAME_BONUS): $(OBJ_BONUS)
+$(NAME_BONUS): $(OBJ_BONUS) $(MINILIBX)
 	@$(CC) $(CFLAGS) $(BONUSFLAGS) $(OBJ_BONUS) $(LDFLAGS) $(OS_FLAGS) -o $@
 	@echo "$(B_MAGENTA)✅ $@ successfully compiled.$(RST)"
 	@echo "🚩 $(MAGENTA)Bonus Flags:\n$(CFLAGS)\n$(LDFLAGS)\n$(BONUSFLAGS)$(RST)"
